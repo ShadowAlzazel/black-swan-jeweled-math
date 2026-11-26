@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.DS_Store
+Thumbs.db
+*.o
+*.exe
+experiments/**/sweep_engine
+experiments/**/engine_input.txt
+experiments/**/stress_input_*.txt
+experiments/**/stress_runs_*.csv
+experiments/**/progress.log
+build/
+dist/

@@ -1,0 +1,3272 @@
+{
+  "configuration": {
+    "n": 4,
+    "maxUpdates": 100,
+    "phi": 1.618033988749895,
+    "indexing": "Clause/tile/variable indices are zero-based; signed literals are +/-1..4; integer bit j is variable x_(j+1).",
+    "ties": "Choose the smallest variable index among minimum-energy neighbors; identical across methods.",
+    "phase": "First trap uses updateIndex r=0; phase=2*pi*r/phi^2."
+  },
+  "tiling": {
+    "source": "https://github.com/isohedral/hatviz",
+    "license": "BSD-3-Clause",
+    "patchIteration": 1,
+    "metatile": "H",
+    "sourceFileVerified": true,
+    "role": "Clause j uses rotation of tile j. Reflections are recorded but do not change the update rule. Geometry neither adds clauses nor certifies SAT.",
+    "tiles": [
+      {
+        "tileIndex": 0,
+        "orientationDegrees": 240,
+        "reflected": false,
+        "address": [
+          0,
+          0
+        ]
+      },
+      {
+        "tileIndex": 1,
+        "orientationDegrees": 240,
+        "reflected": false,
+        "address": [
+          0,
+          1
+        ]
+      },
+      {
+        "tileIndex": 2,
+        "orientationDegrees": 120,
+        "reflected": false,
+        "address": [
+          0,
+          2
+        ]
+      },
+      {
+        "tileIndex": 3,
+        "orientationDegrees": 120,
+        "reflected": true,
+        "address": [
+          0,
+          3
+        ]
+      },
+      {
+        "tileIndex": 4,
+        "orientationDegrees": 240,
+        "reflected": false,
+        "address": [
+          1,
+          0
+        ]
+      },
+      {
+        "tileIndex": 5,
+        "orientationDegrees": 240,
+        "reflected": false,
+        "address": [
+          1,
+          1
+        ]
+      },
+      {
+        "tileIndex": 6,
+        "orientationDegrees": 120,
+        "reflected": false,
+        "address": [
+          1,
+          2
+        ]
+      },
+      {
+        "tileIndex": 7,
+        "orientationDegrees": 120,
+        "reflected": true,
+        "address": [
+          1,
+          3
+        ]
+      },
+      {
+        "tileIndex": 8,
+        "orientationDegrees": 120,
+        "reflected": false,
+        "address": [
+          2,
+          0
+        ]
+      },
+      {
+        "tileIndex": 9,
+        "orientationDegrees": 120,
+        "reflected": false,
+        "address": [
+          2,
+          1
+        ]
+      },
+      {
+        "tileIndex": 10,
+        "orientationDegrees": 0,
+        "reflected": false,
+        "address": [
+          2,
+          2
+        ]
+      },
+      {
+        "tileIndex": 11,
+        "orientationDegrees": 0,
+        "reflected": true,
+        "address": [
+          2,
+          3
+        ]
+      },
+      {
+        "tileIndex": 12,
+        "orientationDegrees": 180,
+        "reflected": false,
+        "address": [
+          3,
+          0
+        ]
+      },
+      {
+        "tileIndex": 13,
+        "orientationDegrees": 240,
+        "reflected": false,
+        "address": [
+          4,
+          0
+        ]
+      },
+      {
+        "tileIndex": 14,
+        "orientationDegrees": 180,
+        "reflected": false,
+        "address": [
+          4,
+          1
+        ]
+      },
+      {
+        "tileIndex": 15,
+        "orientationDegrees": 240,
+        "reflected": false,
+        "address": [
+          5,
+          0
+        ]
+      },
+      {
+        "tileIndex": 16,
+        "orientationDegrees": 180,
+        "reflected": false,
+        "address": [
+          5,
+          1
+        ]
+      },
+      {
+        "tileIndex": 17,
+        "orientationDegrees": 0,
+        "reflected": false,
+        "address": [
+          6,
+          0
+        ]
+      },
+      {
+        "tileIndex": 18,
+        "orientationDegrees": 300,
+        "reflected": false,
+        "address": [
+          6,
+          1
+        ]
+      },
+      {
+        "tileIndex": 19,
+        "orientationDegrees": 0,
+        "reflected": false,
+        "address": [
+          7,
+          0
+        ]
+      },
+      {
+        "tileIndex": 20,
+        "orientationDegrees": 300,
+        "reflected": false,
+        "address": [
+          7,
+          1
+        ]
+      },
+      {
+        "tileIndex": 21,
+        "orientationDegrees": 300,
+        "reflected": false,
+        "address": [
+          8,
+          0
+        ]
+      },
+      {
+        "tileIndex": 22,
+        "orientationDegrees": 240,
+        "reflected": false,
+        "address": [
+          8,
+          1
+        ]
+      },
+      {
+        "tileIndex": 23,
+        "orientationDegrees": 120,
+        "reflected": false,
+        "address": [
+          9,
+          0
+        ]
+      },
+      {
+        "tileIndex": 24,
+        "orientationDegrees": 60,
+        "reflected": false,
+        "address": [
+          9,
+          1
+        ]
+      }
+    ]
+  },
+  "methods": {
+    "uniform": "Strict descent; stop on a non-solution trap.",
+    "breakout": "At a trap add 1 to each currently violated clause weight.",
+    "orientation_cos": "At a trap add 1+0.5*cos(theta_j-2*pi*r/phi^2) to violated clause j only.",
+    "orientation_341": "At a trap add .25+g(theta_j-2*pi*r/phi^2) to violated clause j only, with g(a)=3+4*cos(a)+cos(2*a)=2*(1+cos(a))^2; compute the squared form."
+  },
+  "interpretation": "Two deliberately selected tiny examples, not a performance benchmark. Each method uses different boost magnitudes. Energy decreases only between weight updates; total energy need not decrease across updates. All positive weights preserve exactly the SAT zero set.",
+  "cases": {
+    "single_plateau14": {
+      "start": 14,
+      "clauses": [
+        [
+          -1,
+          -3,
+          4
+        ],
+        [
+          -1,
+          3,
+          -4
+        ],
+        [
+          -1,
+          -3,
+          -4
+        ],
+        [
+          1,
+          -2,
+          4
+        ],
+        [
+          -1,
+          2,
+          -3
+        ],
+        [
+          -1,
+          -2,
+          3
+        ],
+        [
+          1,
+          2,
+          -4
+        ],
+        [
+          1,
+          -2,
+          -4
+        ],
+        [
+          -1,
+          -2,
+          -4
+        ],
+        [
+          1,
+          2,
+          3
+        ],
+        [
+          -2,
+          3,
+          4
+        ],
+        [
+          1,
+          -2,
+          3
+        ],
+        [
+          -1,
+          -2,
+          4
+        ],
+        [
+          -1,
+          -2,
+          -3
+        ]
+      ],
+      "n": 4,
+      "m": 14,
+      "orientationTileIndices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "runs": {
+        "uniform": {
+          "success": false,
+          "reason": "trap",
+          "updates": 0,
+          "flips": 0,
+          "path": [
+            14
+          ],
+          "events": [
+            {
+              "state": 14,
+              "stateLabel": "0111",
+              "weights": [
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "violatedClauses": [
+                7
+              ],
+              "kind": "start",
+              "updateCount": 0,
+              "flipCount": 0,
+              "energy": 1.0
+            }
+          ],
+          "finalState": 14
+        },
+        "breakout": {
+          "success": true,
+          "reason": "sat",
+          "updates": 1,
+          "flips": 2,
+          "path": [
+            14,
+            12,
+            4
+          ],
+          "events": [
+            {
+              "state": 14,
+              "stateLabel": "0111",
+              "weights": [
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "violatedClauses": [
+                7
+              ],
+              "kind": "start",
+              "updateCount": 0,
+              "flipCount": 0,
+              "energy": 1.0
+            },
+            {
+              "state": 14,
+              "stateLabel": "0111",
+              "weights": [
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                2.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "violatedClauses": [
+                7
+              ],
+              "kind": "boost",
+              "updateCount": 1,
+              "flipCount": 0,
+              "energy": 2.0,
+              "updateIndex": 0,
+              "updatePhase": 0.0,
+              "deltaWeights": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            {
+              "state": 12,
+              "stateLabel": "0011",
+              "weights": [
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                2.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "violatedClauses": [
+                6
+              ],
+              "kind": "flip",
+              "updateCount": 1,
+              "flipCount": 1,
+              "energy": 1.0,
+              "flippedVariable": 1
+            },
+            {
+              "state": 4,
+              "stateLabel": "0010",
+              "weights": [
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                2.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "violatedClauses": [],
+              "kind": "flip",
+              "updateCount": 1,
+              "flipCount": 2,
+              "energy": 0,
+              "flippedVariable": 3
+            }
+          ],
+          "finalState": 4
+        },
+        "orientation_cos": {
+          "success": true,
+          "reason": "sat",
+          "updates": 1,
+          "flips": 2,
+          "path": [
+            14,
+            12,
+            4
+          ],
+          "events": [
+            {
+              "state": 14,
+              "stateLabel": "0111",
+              "weights": [
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "violatedClauses": [
+                7
+              ],
+              "kind": "start",
+              "updateCount": 0,
+              "flipCount": 0,
+              "energy": 1.0
+            },
+            {
+              "state": 14,
+              "stateLabel": "0111",
+              "weights": [
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.75,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "violatedClauses": [
+                7
+              ],
+              "kind": "boost",
+              "updateCount": 1,
+              "flipCount": 0,
+              "energy": 1.75,
+              "updateIndex": 0,
+              "updatePhase": 0.0,
+              "deltaWeights": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.7500000000000001,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            {
+              "state": 12,
+              "stateLabel": "0011",
+              "weights": [
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.75,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "violatedClauses": [
+                6
+              ],
+              "kind": "flip",
+              "updateCount": 1,
+              "flipCount": 1,
+              "energy": 1.0,
+              "flippedVariable": 1
+            },
+            {
+              "state": 4,
+              "stateLabel": "0010",
+              "weights": [
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.75,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "violatedClauses": [],
+              "kind": "flip",
+              "updateCount": 1,
+              "flipCount": 2,
+              "energy": 0,
+              "flippedVariable": 3
+            }
+          ],
+          "finalState": 4
+        },
+        "orientation_341": {
+          "success": true,
+          "reason": "sat",
+          "updates": 1,
+          "flips": 2,
+          "path": [
+            14,
+            12,
+            4
+          ],
+          "events": [
+            {
+              "state": 14,
+              "stateLabel": "0111",
+              "weights": [
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "violatedClauses": [
+                7
+              ],
+              "kind": "start",
+              "updateCount": 0,
+              "flipCount": 0,
+              "energy": 1.0
+            },
+            {
+              "state": 14,
+              "stateLabel": "0111",
+              "weights": [
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.7500000000000004,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "violatedClauses": [
+                7
+              ],
+              "kind": "boost",
+              "updateCount": 1,
+              "flipCount": 0,
+              "energy": 1.7500000000000004,
+              "updateIndex": 0,
+              "updatePhase": 0.0,
+              "deltaWeights": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.7500000000000004,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            {
+              "state": 12,
+              "stateLabel": "0011",
+              "weights": [
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.7500000000000004,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "violatedClauses": [
+                6
+              ],
+              "kind": "flip",
+              "updateCount": 1,
+              "flipCount": 1,
+              "energy": 1.0,
+              "flippedVariable": 1
+            },
+            {
+              "state": 4,
+              "stateLabel": "0010",
+              "weights": [
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.7500000000000004,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "violatedClauses": [],
+              "kind": "flip",
+              "updateCount": 1,
+              "flipCount": 2,
+              "energy": 0,
+              "flippedVariable": 3
+            }
+          ],
+          "finalState": 4
+        }
+      }
+    },
+    "rich17": {
+      "start": 0,
+      "clauses": [
+        [
+          -1,
+          2,
+          -3
+        ],
+        [
+          -1,
+          -2,
+          -3
+        ],
+        [
+          1,
+          -2,
+          4
+        ],
+        [
+          -1,
+          3,
+          4
+        ],
+        [
+          2,
+          -3,
+          -4
+        ],
+        [
+          2,
+          3,
+          -4
+        ],
+        [
+          -1,
+          -3,
+          -4
+        ],
+        [
+          1,
+          -2,
+          3
+        ],
+        [
+          1,
+          3,
+          -4
+        ],
+        [
+          -1,
+          2,
+          -4
+        ],
+        [
+          -1,
+          2,
+          3
+        ],
+        [
+          1,
+          2,
+          -4
+        ],
+        [
+          -2,
+          3,
+          -4
+        ],
+        [
+          1,
+          -3,
+          4
+        ],
+        [
+          -1,
+          3,
+          -4
+        ],
+        [
+          -1,
+          -3,
+          4
+        ],
+        [
+          1,
+          2,
+          3
+        ]
+      ],
+      "n": 4,
+      "m": 17,
+      "orientationTileIndices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16
+      ],
+      "runs": {
+        "uniform": {
+          "success": false,
+          "reason": "trap",
+          "updates": 0,
+          "flips": 0,
+          "path": [
+            0
+          ],
+          "events": [
+            {
+              "state": 0,
+              "stateLabel": "0000",
+              "weights": [
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "violatedClauses": [
+                16
+              ],
+              "kind": "start",
+              "updateCount": 0,
+              "flipCount": 0,
+              "energy": 1.0
+            }
+          ],
+          "finalState": 0
+        },
+        "breakout": {
+          "success": true,
+          "reason": "sat",
+          "updates": 9,
+          "flips": 9,
+          "path": [
+            0,
+            4,
+            5,
+            1,
+            3,
+            2,
+            0,
+            4,
+            12,
+            14
+          ],
+          "events": [
+            {
+              "state": 0,
+              "stateLabel": "0000",
+              "weights": [
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "violatedClauses": [
+                16
+              ],
+              "kind": "start",
+              "updateCount": 0,
+              "flipCount": 0,
+              "energy": 1.0
+            },
+            {
+              "state": 0,
+              "stateLabel": "0000",
+              "weights": [
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                2.0
+              ],
+              "violatedClauses": [
+                16
+              ],
+              "kind": "boost",
+              "updateCount": 1,
+              "flipCount": 0,
+              "energy": 2.0,
+              "updateIndex": 0,
+              "updatePhase": 0.0,
+              "deltaWeights": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            {
+              "state": 4,
+              "stateLabel": "0010",
+              "weights": [
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                2.0
+              ],
+              "violatedClauses": [
+                13
+              ],
+              "kind": "flip",
+              "updateCount": 1,
+              "flipCount": 1,
+              "energy": 1.0,
+              "flippedVariable": 2
+            },
+            {
+              "state": 4,
+              "stateLabel": "0010",
+              "weights": [
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                2.0,
+                1.0,
+                1.0,
+                2.0
+              ],
+              "violatedClauses": [
+                13
+              ],
+              "kind": "boost",
+              "updateCount": 2,
+              "flipCount": 1,
+              "energy": 2.0,
+              "updateIndex": 1,
+              "updatePhase": 2.399963229728653,
+              "deltaWeights": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            {
+              "state": 4,
+              "stateLabel": "0010",
+              "weights": [
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                3.0,
+                1.0,
+                1.0,
+                2.0
+              ],
+              "violatedClauses": [
+                13
+              ],
+              "kind": "boost",
+              "updateCount": 3,
+              "flipCount": 1,
+              "energy": 3.0,
+              "updateIndex": 2,
+              "updatePhase": 4.799926459457306,
+              "deltaWeights": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            {
+              "state": 5,
+              "stateLabel": "1010",
+              "weights": [
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                3.0,
+                1.0,
+                1.0,
+                2.0
+              ],
+              "violatedClauses": [
+                0,
+                15
+              ],
+              "kind": "flip",
+              "updateCount": 3,
+              "flipCount": 2,
+              "energy": 2.0,
+              "flippedVariable": 0
+            },
+            {
+              "state": 5,
+              "stateLabel": "1010",
+              "weights": [
+                2.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                3.0,
+                1.0,
+                2.0,
+                2.0
+              ],
+              "violatedClauses": [
+                0,
+                15
+              ],
+              "kind": "boost",
+              "updateCount": 4,
+              "flipCount": 2,
+              "energy": 4.0,
+              "updateIndex": 3,
+              "updatePhase": 7.19988968918596,
+              "deltaWeights": [
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0
+              ]
+            },
+            {
+              "state": 1,
+              "stateLabel": "1000",
+              "weights": [
+                2.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                3.0,
+                1.0,
+                2.0,
+                2.0
+              ],
+              "violatedClauses": [
+                3,
+                10
+              ],
+              "kind": "flip",
+              "updateCount": 4,
+              "flipCount": 3,
+              "energy": 2.0,
+              "flippedVariable": 2
+            },
+            {
+              "state": 3,
+              "stateLabel": "1100",
+              "weights": [
+                2.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                3.0,
+                1.0,
+                2.0,
+                2.0
+              ],
+              "violatedClauses": [
+                3
+              ],
+              "kind": "flip",
+              "updateCount": 4,
+              "flipCount": 4,
+              "energy": 1.0,
+              "flippedVariable": 1
+            },
+            {
+              "state": 3,
+              "stateLabel": "1100",
+              "weights": [
+                2.0,
+                1.0,
+                1.0,
+                2.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                3.0,
+                1.0,
+                2.0,
+                2.0
+              ],
+              "violatedClauses": [
+                3
+              ],
+              "kind": "boost",
+              "updateCount": 5,
+              "flipCount": 4,
+              "energy": 2.0,
+              "updateIndex": 4,
+              "updatePhase": 9.599852918914612,
+              "deltaWeights": [
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            {
+              "state": 3,
+              "stateLabel": "1100",
+              "weights": [
+                2.0,
+                1.0,
+                1.0,
+                3.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                3.0,
+                1.0,
+                2.0,
+                2.0
+              ],
+              "violatedClauses": [
+                3
+              ],
+              "kind": "boost",
+              "updateCount": 6,
+              "flipCount": 4,
+              "energy": 3.0,
+              "updateIndex": 5,
+              "updatePhase": 11.999816148643266,
+              "deltaWeights": [
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            {
+              "state": 2,
+              "stateLabel": "0100",
+              "weights": [
+                2.0,
+                1.0,
+                1.0,
+                3.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                3.0,
+                1.0,
+                2.0,
+                2.0
+              ],
+              "violatedClauses": [
+                2,
+                7
+              ],
+              "kind": "flip",
+              "updateCount": 6,
+              "flipCount": 5,
+              "energy": 2.0,
+              "flippedVariable": 0
+            },
+            {
+              "state": 2,
+              "stateLabel": "0100",
+              "weights": [
+                2.0,
+                1.0,
+                2.0,
+                3.0,
+                1.0,
+                1.0,
+                1.0,
+                2.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                3.0,
+                1.0,
+                2.0,
+                2.0
+              ],
+              "violatedClauses": [
+                2,
+                7
+              ],
+              "kind": "boost",
+              "updateCount": 7,
+              "flipCount": 5,
+              "energy": 4.0,
+              "updateIndex": 6,
+              "updatePhase": 14.39977937837192,
+              "deltaWeights": [
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            {
+              "state": 0,
+              "stateLabel": "0000",
+              "weights": [
+                2.0,
+                1.0,
+                2.0,
+                3.0,
+                1.0,
+                1.0,
+                1.0,
+                2.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                3.0,
+                1.0,
+                2.0,
+                2.0
+              ],
+              "violatedClauses": [
+                16
+              ],
+              "kind": "flip",
+              "updateCount": 7,
+              "flipCount": 6,
+              "energy": 2.0,
+              "flippedVariable": 1
+            },
+            {
+              "state": 0,
+              "stateLabel": "0000",
+              "weights": [
+                2.0,
+                1.0,
+                2.0,
+                3.0,
+                1.0,
+                1.0,
+                1.0,
+                2.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                3.0,
+                1.0,
+                2.0,
+                3.0
+              ],
+              "violatedClauses": [
+                16
+              ],
+              "kind": "boost",
+              "updateCount": 8,
+              "flipCount": 6,
+              "energy": 3.0,
+              "updateIndex": 7,
+              "updatePhase": 16.799742608100573,
+              "deltaWeights": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            {
+              "state": 0,
+              "stateLabel": "0000",
+              "weights": [
+                2.0,
+                1.0,
+                2.0,
+                3.0,
+                1.0,
+                1.0,
+                1.0,
+                2.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                3.0,
+                1.0,
+                2.0,
+                4.0
+              ],
+              "violatedClauses": [
+                16
+              ],
+              "kind": "boost",
+              "updateCount": 9,
+              "flipCount": 6,
+              "energy": 4.0,
+              "updateIndex": 8,
+              "updatePhase": 19.199705837829224,
+              "deltaWeights": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            {
+              "state": 4,
+              "stateLabel": "0010",
+              "weights": [
+                2.0,
+                1.0,
+                2.0,
+                3.0,
+                1.0,
+                1.0,
+                1.0,
+                2.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                3.0,
+                1.0,
+                2.0,
+                4.0
+              ],
+              "violatedClauses": [
+                13
+              ],
+              "kind": "flip",
+              "updateCount": 9,
+              "flipCount": 7,
+              "energy": 3.0,
+              "flippedVariable": 2
+            },
+            {
+              "state": 12,
+              "stateLabel": "0011",
+              "weights": [
+                2.0,
+                1.0,
+                2.0,
+                3.0,
+                1.0,
+                1.0,
+                1.0,
+                2.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                3.0,
+                1.0,
+                2.0,
+                4.0
+              ],
+              "violatedClauses": [
+                4,
+                11
+              ],
+              "kind": "flip",
+              "updateCount": 9,
+              "flipCount": 8,
+              "energy": 2.0,
+              "flippedVariable": 3
+            },
+            {
+              "state": 14,
+              "stateLabel": "0111",
+              "weights": [
+                2.0,
+                1.0,
+                2.0,
+                3.0,
+                1.0,
+                1.0,
+                1.0,
+                2.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                3.0,
+                1.0,
+                2.0,
+                4.0
+              ],
+              "violatedClauses": [],
+              "kind": "flip",
+              "updateCount": 9,
+              "flipCount": 9,
+              "energy": 0,
+              "flippedVariable": 1
+            }
+          ],
+          "finalState": 14
+        },
+        "orientation_cos": {
+          "success": true,
+          "reason": "sat",
+          "updates": 8,
+          "flips": 11,
+          "path": [
+            0,
+            4,
+            0,
+            4,
+            5,
+            1,
+            3,
+            2,
+            0,
+            4,
+            12,
+            14
+          ],
+          "events": [
+            {
+              "state": 0,
+              "stateLabel": "0000",
+              "weights": [
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "violatedClauses": [
+                16
+              ],
+              "kind": "start",
+              "updateCount": 0,
+              "flipCount": 0,
+              "energy": 1.0
+            },
+            {
+              "state": 0,
+              "stateLabel": "0000",
+              "weights": [
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.5
+              ],
+              "violatedClauses": [
+                16
+              ],
+              "kind": "boost",
+              "updateCount": 1,
+              "flipCount": 0,
+              "energy": 1.5,
+              "updateIndex": 0,
+              "updatePhase": 0.0,
+              "deltaWeights": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.5
+              ]
+            },
+            {
+              "state": 4,
+              "stateLabel": "0010",
+              "weights": [
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.5
+              ],
+              "violatedClauses": [
+                13
+              ],
+              "kind": "flip",
+              "updateCount": 1,
+              "flipCount": 1,
+              "energy": 1.0,
+              "flippedVariable": 2
+            },
+            {
+              "state": 4,
+              "stateLabel": "0010",
+              "weights": [
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.8918463420994274,
+                1.0,
+                1.0,
+                1.5
+              ],
+              "violatedClauses": [
+                13
+              ],
+              "kind": "boost",
+              "updateCount": 2,
+              "flipCount": 1,
+              "energy": 1.8918463420994274,
+              "updateIndex": 1,
+              "updatePhase": 2.399963229728653,
+              "deltaWeights": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.8918463420994274,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            {
+              "state": 0,
+              "stateLabel": "0000",
+              "weights": [
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.8918463420994274,
+                1.0,
+                1.0,
+                1.5
+              ],
+              "violatedClauses": [
+                16
+              ],
+              "kind": "flip",
+              "updateCount": 2,
+              "flipCount": 2,
+              "energy": 1.5,
+              "flippedVariable": 2
+            },
+            {
+              "state": 0,
+              "stateLabel": "0000",
+              "weights": [
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.8918463420994274,
+                1.0,
+                1.0,
+                2.45628713764152
+              ],
+              "violatedClauses": [
+                16
+              ],
+              "kind": "boost",
+              "updateCount": 3,
+              "flipCount": 2,
+              "energy": 2.45628713764152,
+              "updateIndex": 2,
+              "updatePhase": 4.799926459457306,
+              "deltaWeights": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.95628713764152
+              ]
+            },
+            {
+              "state": 4,
+              "stateLabel": "0010",
+              "weights": [
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.8918463420994274,
+                1.0,
+                1.0,
+                2.45628713764152
+              ],
+              "violatedClauses": [
+                13
+              ],
+              "kind": "flip",
+              "updateCount": 3,
+              "flipCount": 3,
+              "energy": 1.8918463420994274,
+              "flippedVariable": 2
+            },
+            {
+              "state": 4,
+              "stateLabel": "0010",
+              "weights": [
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                2.3960974213141992,
+                1.0,
+                1.0,
+                2.45628713764152
+              ],
+              "violatedClauses": [
+                13
+              ],
+              "kind": "boost",
+              "updateCount": 4,
+              "flipCount": 3,
+              "energy": 2.3960974213141992,
+              "updateIndex": 3,
+              "updatePhase": 7.19988968918596,
+              "deltaWeights": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.5042510792147719,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            {
+              "state": 5,
+              "stateLabel": "1010",
+              "weights": [
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                2.3960974213141992,
+                1.0,
+                1.0,
+                2.45628713764152
+              ],
+              "violatedClauses": [
+                0,
+                15
+              ],
+              "kind": "flip",
+              "updateCount": 4,
+              "flipCount": 4,
+              "energy": 2.0,
+              "flippedVariable": 0
+            },
+            {
+              "state": 5,
+              "stateLabel": "1010",
+              "weights": [
+                2.3216013682834595,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                2.3960974213141992,
+                1.0,
+                2.3216013682834595,
+                2.45628713764152
+              ],
+              "violatedClauses": [
+                0,
+                15
+              ],
+              "kind": "boost",
+              "updateCount": 5,
+              "flipCount": 4,
+              "energy": 4.643202736566919,
+              "updateIndex": 4,
+              "updatePhase": 9.599852918914612,
+              "deltaWeights": [
+                1.3216013682834595,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.3216013682834595,
+                0.0
+              ]
+            },
+            {
+              "state": 1,
+              "stateLabel": "1000",
+              "weights": [
+                2.3216013682834595,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                2.3960974213141992,
+                1.0,
+                2.3216013682834595,
+                2.45628713764152
+              ],
+              "violatedClauses": [
+                3,
+                10
+              ],
+              "kind": "flip",
+              "updateCount": 5,
+              "flipCount": 5,
+              "energy": 2.0,
+              "flippedVariable": 2
+            },
+            {
+              "state": 3,
+              "stateLabel": "1100",
+              "weights": [
+                2.3216013682834595,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                2.3960974213141992,
+                1.0,
+                2.3216013682834595,
+                2.45628713764152
+              ],
+              "violatedClauses": [
+                3
+              ],
+              "kind": "flip",
+              "updateCount": 5,
+              "flipCount": 6,
+              "energy": 1.0,
+              "flippedVariable": 1
+            },
+            {
+              "state": 3,
+              "stateLabel": "1100",
+              "weights": [
+                2.3216013682834595,
+                1.0,
+                1.0,
+                1.5566511120478275,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                2.3960974213141992,
+                1.0,
+                2.3216013682834595,
+                2.45628713764152
+              ],
+              "violatedClauses": [
+                3
+              ],
+              "kind": "boost",
+              "updateCount": 6,
+              "flipCount": 6,
+              "energy": 1.5566511120478275,
+              "updateIndex": 5,
+              "updatePhase": 11.999816148643266,
+              "deltaWeights": [
+                0.0,
+                0.0,
+                0.0,
+                0.5566511120478276,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            {
+              "state": 3,
+              "stateLabel": "1100",
+              "weights": [
+                2.3216013682834595,
+                1.0,
+                1.0,
+                3.0397190818867013,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                2.3960974213141992,
+                1.0,
+                2.3216013682834595,
+                2.45628713764152
+              ],
+              "violatedClauses": [
+                3
+              ],
+              "kind": "boost",
+              "updateCount": 7,
+              "flipCount": 6,
+              "energy": 3.0397190818867013,
+              "updateIndex": 6,
+              "updatePhase": 14.39977937837192,
+              "deltaWeights": [
+                0.0,
+                0.0,
+                0.0,
+                1.4830679698388738,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            {
+              "state": 2,
+              "stateLabel": "0100",
+              "weights": [
+                2.3216013682834595,
+                1.0,
+                1.0,
+                3.0397190818867013,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                2.3960974213141992,
+                1.0,
+                2.3216013682834595,
+                2.45628713764152
+              ],
+              "violatedClauses": [
+                2,
+                7
+              ],
+              "kind": "flip",
+              "updateCount": 7,
+              "flipCount": 7,
+              "energy": 2.0,
+              "flippedVariable": 0
+            },
+            {
+              "state": 2,
+              "stateLabel": "0100",
+              "weights": [
+                2.3216013682834595,
+                1.0,
+                1.7309503140408484,
+                3.0397190818867013,
+                1.0,
+                1.0,
+                1.0,
+                1.7309503140408484,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                2.3960974213141992,
+                1.0,
+                2.3216013682834595,
+                2.45628713764152
+              ],
+              "violatedClauses": [
+                2,
+                7
+              ],
+              "kind": "boost",
+              "updateCount": 8,
+              "flipCount": 7,
+              "energy": 3.461900628081697,
+              "updateIndex": 7,
+              "updatePhase": 16.799742608100573,
+              "deltaWeights": [
+                0.0,
+                0.0,
+                0.7309503140408483,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.7309503140408483,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            {
+              "state": 0,
+              "stateLabel": "0000",
+              "weights": [
+                2.3216013682834595,
+                1.0,
+                1.7309503140408484,
+                3.0397190818867013,
+                1.0,
+                1.0,
+                1.0,
+                1.7309503140408484,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                2.3960974213141992,
+                1.0,
+                2.3216013682834595,
+                2.45628713764152
+              ],
+              "violatedClauses": [
+                16
+              ],
+              "kind": "flip",
+              "updateCount": 8,
+              "flipCount": 8,
+              "energy": 2.45628713764152,
+              "flippedVariable": 1
+            },
+            {
+              "state": 4,
+              "stateLabel": "0010",
+              "weights": [
+                2.3216013682834595,
+                1.0,
+                1.7309503140408484,
+                3.0397190818867013,
+                1.0,
+                1.0,
+                1.0,
+                1.7309503140408484,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                2.3960974213141992,
+                1.0,
+                2.3216013682834595,
+                2.45628713764152
+              ],
+              "violatedClauses": [
+                13
+              ],
+              "kind": "flip",
+              "updateCount": 8,
+              "flipCount": 9,
+              "energy": 2.3960974213141992,
+              "flippedVariable": 2
+            },
+            {
+              "state": 12,
+              "stateLabel": "0011",
+              "weights": [
+                2.3216013682834595,
+                1.0,
+                1.7309503140408484,
+                3.0397190818867013,
+                1.0,
+                1.0,
+                1.0,
+                1.7309503140408484,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                2.3960974213141992,
+                1.0,
+                2.3216013682834595,
+                2.45628713764152
+              ],
+              "violatedClauses": [
+                4,
+                11
+              ],
+              "kind": "flip",
+              "updateCount": 8,
+              "flipCount": 10,
+              "energy": 2.0,
+              "flippedVariable": 3
+            },
+            {
+              "state": 14,
+              "stateLabel": "0111",
+              "weights": [
+                2.3216013682834595,
+                1.0,
+                1.7309503140408484,
+                3.0397190818867013,
+                1.0,
+                1.0,
+                1.0,
+                1.7309503140408484,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                2.3960974213141992,
+                1.0,
+                2.3216013682834595,
+                2.45628713764152
+              ],
+              "violatedClauses": [],
+              "kind": "flip",
+              "updateCount": 8,
+              "flipCount": 11,
+              "energy": 0,
+              "flippedVariable": 1
+            }
+          ],
+          "finalState": 14
+        },
+        "orientation_341": {
+          "success": true,
+          "reason": "sat",
+          "updates": 6,
+          "flips": 11,
+          "path": [
+            0,
+            4,
+            0,
+            1,
+            3,
+            2,
+            0,
+            4,
+            5,
+            4,
+            12,
+            14
+          ],
+          "events": [
+            {
+              "state": 0,
+              "stateLabel": "0000",
+              "weights": [
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "violatedClauses": [
+                16
+              ],
+              "kind": "start",
+              "updateCount": 0,
+              "flipCount": 0,
+              "energy": 1.0
+            },
+            {
+              "state": 0,
+              "stateLabel": "0000",
+              "weights": [
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.25
+              ],
+              "violatedClauses": [
+                16
+              ],
+              "kind": "boost",
+              "updateCount": 1,
+              "flipCount": 0,
+              "energy": 1.25,
+              "updateIndex": 0,
+              "updatePhase": 0.0,
+              "deltaWeights": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.25
+              ]
+            },
+            {
+              "state": 4,
+              "stateLabel": "0010",
+              "weights": [
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.25
+              ],
+              "violatedClauses": [
+                13
+              ],
+              "kind": "flip",
+              "updateCount": 1,
+              "flipCount": 1,
+              "energy": 1.0,
+              "flippedVariable": 2
+            },
+            {
+              "state": 4,
+              "stateLabel": "0010",
+              "weights": [
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                2.4783484465336123,
+                1.0,
+                1.0,
+                1.25
+              ],
+              "violatedClauses": [
+                13
+              ],
+              "kind": "boost",
+              "updateCount": 2,
+              "flipCount": 1,
+              "energy": 2.4783484465336123,
+              "updateIndex": 1,
+              "updatePhase": 2.399963229728653,
+              "deltaWeights": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.478348446533612,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            {
+              "state": 0,
+              "stateLabel": "0000",
+              "weights": [
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                2.4783484465336123,
+                1.0,
+                1.0,
+                1.25
+              ],
+              "violatedClauses": [
+                16
+              ],
+              "kind": "flip",
+              "updateCount": 2,
+              "flipCount": 2,
+              "energy": 1.25,
+              "flippedVariable": 2
+            },
+            {
+              "state": 0,
+              "stateLabel": "0000",
+              "weights": [
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                2.4783484465336123,
+                1.0,
+                1.0,
+                3.1655836158167316
+              ],
+              "violatedClauses": [
+                16
+              ],
+              "kind": "boost",
+              "updateCount": 3,
+              "flipCount": 2,
+              "energy": 3.1655836158167316,
+              "updateIndex": 2,
+              "updatePhase": 4.799926459457306,
+              "deltaWeights": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.9155836158167314
+              ]
+            },
+            {
+              "state": 1,
+              "stateLabel": "1000",
+              "weights": [
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                2.4783484465336123,
+                1.0,
+                1.0,
+                3.1655836158167316
+              ],
+              "violatedClauses": [
+                3,
+                10
+              ],
+              "kind": "flip",
+              "updateCount": 3,
+              "flipCount": 3,
+              "energy": 2.0,
+              "flippedVariable": 0
+            },
+            {
+              "state": 3,
+              "stateLabel": "1100",
+              "weights": [
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                2.4783484465336123,
+                1.0,
+                1.0,
+                3.1655836158167316
+              ],
+              "violatedClauses": [
+                3
+              ],
+              "kind": "flip",
+              "updateCount": 3,
+              "flipCount": 4,
+              "energy": 1.0,
+              "flippedVariable": 1
+            },
+            {
+              "state": 3,
+              "stateLabel": "1100",
+              "weights": [
+                1.0,
+                1.0,
+                1.0,
+                5.07570428759012,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                2.4783484465336123,
+                1.0,
+                1.0,
+                3.1655836158167316
+              ],
+              "violatedClauses": [
+                3
+              ],
+              "kind": "boost",
+              "updateCount": 4,
+              "flipCount": 4,
+              "energy": 5.07570428759012,
+              "updateIndex": 3,
+              "updatePhase": 7.19988968918596,
+              "deltaWeights": [
+                0.0,
+                0.0,
+                0.0,
+                4.07570428759012,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            {
+              "state": 2,
+              "stateLabel": "0100",
+              "weights": [
+                1.0,
+                1.0,
+                1.0,
+                5.07570428759012,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                2.4783484465336123,
+                1.0,
+                1.0,
+                3.1655836158167316
+              ],
+              "violatedClauses": [
+                2,
+                7
+              ],
+              "kind": "flip",
+              "updateCount": 4,
+              "flipCount": 5,
+              "energy": 2.0,
+              "flippedVariable": 0
+            },
+            {
+              "state": 2,
+              "stateLabel": "0100",
+              "weights": [
+                1.0,
+                1.0,
+                4.849302178015573,
+                5.07570428759012,
+                1.0,
+                1.0,
+                1.0,
+                4.849302178015573,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                2.4783484465336123,
+                1.0,
+                1.0,
+                3.1655836158167316
+              ],
+              "violatedClauses": [
+                2,
+                7
+              ],
+              "kind": "boost",
+              "updateCount": 5,
+              "flipCount": 5,
+              "energy": 9.698604356031145,
+              "updateIndex": 4,
+              "updatePhase": 9.599852918914612,
+              "deltaWeights": [
+                0.0,
+                0.0,
+                3.8493021780155727,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                3.8493021780155727,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            {
+              "state": 0,
+              "stateLabel": "0000",
+              "weights": [
+                1.0,
+                1.0,
+                4.849302178015573,
+                5.07570428759012,
+                1.0,
+                1.0,
+                1.0,
+                4.849302178015573,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                2.4783484465336123,
+                1.0,
+                1.0,
+                3.1655836158167316
+              ],
+              "violatedClauses": [
+                16
+              ],
+              "kind": "flip",
+              "updateCount": 5,
+              "flipCount": 6,
+              "energy": 3.1655836158167316,
+              "flippedVariable": 1
+            },
+            {
+              "state": 4,
+              "stateLabel": "0010",
+              "weights": [
+                1.0,
+                1.0,
+                4.849302178015573,
+                5.07570428759012,
+                1.0,
+                1.0,
+                1.0,
+                4.849302178015573,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                2.4783484465336123,
+                1.0,
+                1.0,
+                3.1655836158167316
+              ],
+              "violatedClauses": [
+                13
+              ],
+              "kind": "flip",
+              "updateCount": 5,
+              "flipCount": 7,
+              "energy": 2.4783484465336123,
+              "flippedVariable": 2
+            },
+            {
+              "state": 5,
+              "stateLabel": "1010",
+              "weights": [
+                1.0,
+                1.0,
+                4.849302178015573,
+                5.07570428759012,
+                1.0,
+                1.0,
+                1.0,
+                4.849302178015573,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                2.4783484465336123,
+                1.0,
+                1.0,
+                3.1655836158167316
+              ],
+              "violatedClauses": [
+                0,
+                15
+              ],
+              "kind": "flip",
+              "updateCount": 5,
+              "flipCount": 8,
+              "energy": 2.0,
+              "flippedVariable": 0
+            },
+            {
+              "state": 5,
+              "stateLabel": "1010",
+              "weights": [
+                3.4254580377324544,
+                1.0,
+                4.849302178015573,
+                5.07570428759012,
+                1.0,
+                1.0,
+                1.0,
+                4.849302178015573,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                2.4783484465336123,
+                1.0,
+                3.4254580377324544,
+                3.1655836158167316
+              ],
+              "violatedClauses": [
+                0,
+                15
+              ],
+              "kind": "boost",
+              "updateCount": 6,
+              "flipCount": 8,
+              "energy": 6.850916075464909,
+              "updateIndex": 5,
+              "updatePhase": 11.999816148643266,
+              "deltaWeights": [
+                2.4254580377324544,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                2.4254580377324544,
+                0.0
+              ]
+            },
+            {
+              "state": 4,
+              "stateLabel": "0010",
+              "weights": [
+                3.4254580377324544,
+                1.0,
+                4.849302178015573,
+                5.07570428759012,
+                1.0,
+                1.0,
+                1.0,
+                4.849302178015573,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                2.4783484465336123,
+                1.0,
+                3.4254580377324544,
+                3.1655836158167316
+              ],
+              "violatedClauses": [
+                13
+              ],
+              "kind": "flip",
+              "updateCount": 6,
+              "flipCount": 9,
+              "energy": 2.4783484465336123,
+              "flippedVariable": 0
+            },
+            {
+              "state": 12,
+              "stateLabel": "0011",
+              "weights": [
+                3.4254580377324544,
+                1.0,
+                4.849302178015573,
+                5.07570428759012,
+                1.0,
+                1.0,
+                1.0,
+                4.849302178015573,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                2.4783484465336123,
+                1.0,
+                3.4254580377324544,
+                3.1655836158167316
+              ],
+              "violatedClauses": [
+                4,
+                11
+              ],
+              "kind": "flip",
+              "updateCount": 6,
+              "flipCount": 10,
+              "energy": 2.0,
+              "flippedVariable": 3
+            },
+            {
+              "state": 14,
+              "stateLabel": "0111",
+              "weights": [
+                3.4254580377324544,
+                1.0,
+                4.849302178015573,
+                5.07570428759012,
+                1.0,
+                1.0,
+                1.0,
+                4.849302178015573,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                2.4783484465336123,
+                1.0,
+                3.4254580377324544,
+                3.1655836158167316
+              ],
+              "violatedClauses": [],
+              "kind": "flip",
+              "updateCount": 6,
+              "flipCount": 11,
+              "energy": 0,
+              "flippedVariable": 1
+            }
+          ],
+          "finalState": 14
+        }
+      }
+    }
+  },
+  "tests": [
+    "Exact SAT zero sets checked for all16 assignments at every recorded event.",
+    "All flips change exactly one bit and strictly decrease the current fixed weighted energy.",
+    "Every boost changes only violated clause weights, with strictly positive increments.",
+    "All reported final success states satisfy every original clause."
+  ]
+}

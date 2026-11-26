@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A mathematical playground for SAT jewels, tilings, quasicrystals, golden-ratio transformations, and adaptive search.">
+  <title>Black Swan Jeweled Math</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --paper: light-dark(#f8f7f3, #151719);
+      --surface: light-dark(#fffefa, #1e2124);
+      --ink: light-dark(#23282a, #ecebe5);
+      --muted: light-dark(#59615f, #b0b5af);
+      --line: light-dark(#d9d9ce, #3b403e);
+      --gold: light-dark(#87661c, #e3c271);
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 16px/1.6 system-ui, sans-serif; }
+    main { width: min(100% - 40px, 1000px); margin: 0 auto; padding: 64px 0 40px; }
+    header { max-width: 760px; margin-bottom: 36px; }
+    .eyebrow { margin: 0 0 12px; color: var(--gold); font-size: 13px; letter-spacing: .12em; text-transform: uppercase; }
+    h1 { margin: 0 0 20px; font-size: clamp(2.4rem, 7vw, 4.4rem); line-height: 1.08; letter-spacing: -.04em; font-weight: 600; }
+    header p { margin: 0; color: var(--muted); font-size: 18px; }
+    .labs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+    .lab { display: block; padding: 24px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; color: inherit; text-decoration: none; }
+    .lab:hover { border-color: var(--gold); }
+    .lab:focus-visible { outline: 3px solid var(--gold); outline-offset: 4px; }
+    .number { color: var(--gold); font-variant-numeric: tabular-nums; }
+    h2 { margin: 12px 0 10px; font-size: 23px; line-height: 1.25; font-weight: 500; }
+    .lab p { margin: 0 0 18px; color: var(--muted); }
+    .open { color: var(--gold); }
+    footer { margin-top: 36px; padding-top: 20px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+    footer p { margin: 6px 0; }
+    footer a { color: var(--gold); }
+    @media (max-width: 620px) { main { width: min(100% - 28px, 1000px); padding-top: 36px; } .labs { grid-template-columns: 1fr; } .lab { padding: 20px; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">A mathematical playground</p>
+      <h1>Black Swan<br>Jeweled Math</h1>
+      <p>Logical constraints become jewels. Explore their complex-plane drawings, tiling patterns, and changing energy landscapes.</p>
+    </header>
+    <section class="labs" aria-label="Interactive experiments">
+      <a class="lab" href="01_3sat_jewel.html">
+        <span class="number">01</span>
+        <h2>The first 3SAT jewel</h2>
+        <p>Eight Boolean assignments, clauses that remove solutions, and a Hamiltonian walk through the search space.</p>
+        <span class="open">Open experiment →</span>
+      </a>
+      <a class="lab" href="02_quasicrystal_lab.html">
+        <span class="number">02</span>
+        <h2>Quasicrystals and search</h2>
+        <p>An octagonal cut-and-project patch, plus golden-ratio and zeta-inspired search paths that can help or hurt.</p>
+        <span class="open">Open experiment →</span>
+      </a>
+      <a class="lab" href="03_tiling_lab.html">
+        <span class="number">03</span>
+        <h2>Tilings and adaptive weights</h2>
+        <p>Refine hats and pinwheels, follow changing clause penalties, and see the lattice connection to ζ(2).</p>
+        <span class="open">Open experiment →</span>
+      </a>
+      <a class="lab" href="04_sweep_results.html">
+        <span class="number">04</span>
+        <h2>The golden-ratio sweep</h2>
+        <p>Compare held-out results across constants and tilings, then explore a fixed-weight trap and its adaptive escape.</p>
+        <span class="open">Open experiment →</span>
+      </a>
+    </section>
+    <footer>
+      <p>All four labs run locally in your browser, with their data included and no external services required.</p>
+      <p>These are finite experiments and mathematical observations. They make no claim to resolve P versus NP.</p>
+      <p><a href="../README.md">Project notes and reproduction instructions</a></p>
+    </footer>
+  </main>
+</body>
+</html>

@@ -1,0 +1,283 @@
+{
+  "format_version": 1,
+  "project": "Black Swan Jeweled Math",
+  "description": "Consolidation of three experiment deliverables. Archive members retain their experiment directories; any compatibility changes are recorded under modifications.",
+  "archives": [
+    {
+      "source_archive": "Black_Swan_Jewel_Lab.zip",
+      "archive_sha256": "bdbdc9e020eabe0df927e7b5727093a73a641e63c349d87a8e4bee50effffebe",
+      "destination": "experiments/01_initial_jewel",
+      "file_count": 5,
+      "files": [
+        {
+          "path": "experiments/01_initial_jewel/BLACK_SWAN_README.md",
+          "size_bytes": 11485,
+          "sha256": "71822539efa0affe8c9f14cabf69b47690b4ec689b37a0e19b9df0122230516a",
+          "repository_sha256": "71822539efa0affe8c9f14cabf69b47690b4ec689b37a0e19b9df0122230516a"
+        },
+        {
+          "path": "experiments/01_initial_jewel/black_swan_experiments.py",
+          "size_bytes": 13540,
+          "sha256": "d4d679db15a2ec13dd249579c26b16c8377accc84122dd2af2c27db1d4ce1710",
+          "repository_sha256": "d4d679db15a2ec13dd249579c26b16c8377accc84122dd2af2c27db1d4ce1710"
+        },
+        {
+          "path": "experiments/01_initial_jewel/black_swan_results.json",
+          "size_bytes": 1451712,
+          "sha256": "f07acd522e08762da70a38ecea3b54f764c3f83fecea9f383e8df09db2c6a9b5",
+          "repository_sha256": "f07acd522e08762da70a38ecea3b54f764c3f83fecea9f383e8df09db2c6a9b5"
+        },
+        {
+          "path": "experiments/01_initial_jewel/quasicrystal_geometry.py",
+          "size_bytes": 9494,
+          "sha256": "71d10838834f7d921194d1354095cd305ef1c9a2c49647bbc28603e051b569d2",
+          "repository_sha256": "71d10838834f7d921194d1354095cd305ef1c9a2c49647bbc28603e051b569d2"
+        },
+        {
+          "path": "experiments/01_initial_jewel/jewel_geometry.json",
+          "size_bytes": 108947,
+          "sha256": "c67aaae4f837654bcec777f23143d79bb1010d06ceead976796a33b18eb07c90",
+          "repository_sha256": "c67aaae4f837654bcec777f23143d79bb1010d06ceead976796a33b18eb07c90"
+        }
+      ]
+    },
+    {
+      "source_archive": "Fleurdelys_Tiling_Jewels.zip",
+      "archive_sha256": "e983cb02c6d60d76e96b651b9bb19136d3a101bccca8d235b0cd185cbf1f59e1",
+      "destination": "experiments/02_tiling_jewels",
+      "file_count": 12,
+      "files": [
+        {
+          "path": "experiments/02_tiling_jewels/TILING_JEWELS_README.md",
+          "size_bytes": 6378,
+          "sha256": "a2cec5520eee8a8d83ce4f85c23adf62bd2649f759ee873fe9fd3e9f4c0af3b1",
+          "repository_sha256": "a2cec5520eee8a8d83ce4f85c23adf62bd2649f759ee873fe9fd3e9f4c0af3b1"
+        },
+        {
+          "path": "experiments/02_tiling_jewels/tiling_adaptive.py",
+          "size_bytes": 7832,
+          "sha256": "62c6e4874f0e531ba482b3e17b0a73376064dadb34d746b764d23260a62e95db",
+          "repository_sha256": "62c6e4874f0e531ba482b3e17b0a73376064dadb34d746b764d23260a62e95db"
+        },
+        {
+          "path": "experiments/02_tiling_jewels/tiling_adaptive_results.json",
+          "size_bytes": 74911,
+          "sha256": "4ce15b09a098908798fba9803bee243ebf85d97dfab06ffc1aba3df99e7bffd8",
+          "repository_sha256": "4ce15b09a098908798fba9803bee243ebf85d97dfab06ffc1aba3df99e7bffd8"
+        },
+        {
+          "path": "experiments/02_tiling_jewels/tiling_research/LICENSE",
+          "size_bytes": 1503,
+          "sha256": "ac59f30b5a2bbee371645b82f5dee333bb9de76e61176d197e02f9208e054218",
+          "repository_sha256": "ac59f30b5a2bbee371645b82f5dee333bb9de76e61176d197e02f9208e054218"
+        },
+        {
+          "path": "experiments/02_tiling_jewels/tiling_research/README.md",
+          "size_bytes": 3604,
+          "sha256": "c8a81094afee76330e461f920d46612e38f87071d0d0938cf86881034bb76f8f",
+          "repository_sha256": "c8a81094afee76330e461f920d46612e38f87071d0d0938cf86881034bb76f8f"
+        },
+        {
+          "path": "experiments/02_tiling_jewels/tiling_research/generate_hat_patch.js",
+          "size_bytes": 1737,
+          "sha256": "90d755362ec8c6e9a3b6d81f8766289afe0dcdfd7b8f852c6acdbefd9174aa6a",
+          "repository_sha256": "90d755362ec8c6e9a3b6d81f8766289afe0dcdfd7b8f852c6acdbefd9174aa6a"
+        },
+        {
+          "path": "experiments/02_tiling_jewels/tiling_research/generate_pinwheel.py",
+          "size_bytes": 4758,
+          "sha256": "d01a0afe011342b2956b656fff8537bd6556509104a9a214ff3d833cc7212ee4",
+          "repository_sha256": "d01a0afe011342b2956b656fff8537bd6556509104a9a214ff3d833cc7212ee4"
+        },
+        {
+          "path": "experiments/02_tiling_jewels/tiling_research/geometry.js",
+          "size_bytes": 2123,
+          "sha256": "d006ba02cc1e153a47153243e73dac861e11f7416cc362f2d214bc51b012a4f0",
+          "repository_sha256": "d006ba02cc1e153a47153243e73dac861e11f7416cc362f2d214bc51b012a4f0"
+        },
+        {
+          "path": "experiments/02_tiling_jewels/tiling_research/hat.js",
+          "size_bytes": 15022,
+          "sha256": "292263e82a7dd1d1edc717ca712650ae3ef9aeee44c7790fdb61b31f044f4f15",
+          "repository_sha256": "292263e82a7dd1d1edc717ca712650ae3ef9aeee44c7790fdb61b31f044f4f15"
+        },
+        {
+          "path": "experiments/02_tiling_jewels/tiling_research/hat_patches.json",
+          "size_bytes": 144079,
+          "sha256": "e76ca3379502fabded627b8b7dde032caf25da1924755233832974d7a66b1f6f",
+          "repository_sha256": "e76ca3379502fabded627b8b7dde032caf25da1924755233832974d7a66b1f6f"
+        },
+        {
+          "path": "experiments/02_tiling_jewels/tiling_research/pinwheel_patches.json",
+          "size_bytes": 231469,
+          "sha256": "490d4980882ca00c52afdb4259945b8ac31e6a68fc555736870b6732deb562d0",
+          "repository_sha256": "490d4980882ca00c52afdb4259945b8ac31e6a68fc555736870b6732deb562d0"
+        },
+        {
+          "path": "experiments/02_tiling_jewels/tiling_research/validate_hat_patches.py",
+          "size_bytes": 3129,
+          "sha256": "ba3afd8f702023180745954a1b291126a74700165507f9950dcef04f8a4ae5e4",
+          "repository_sha256": "ba3afd8f702023180745954a1b291126a74700165507f9950dcef04f8a4ae5e4"
+        }
+      ]
+    },
+    {
+      "source_archive": "Golden_Jewel_Sweep.zip",
+      "archive_sha256": "374adb2f518cac98560dcd572973aaaa120bb37bb94f56c56ec7885496eb46c4",
+      "destination": "experiments/03_golden_sweep",
+      "file_count": 21,
+      "files": [
+        {
+          "path": "experiments/03_golden_sweep/START_HERE.md",
+          "size_bytes": 6803,
+          "sha256": "257e35607df2d404a488d22e4fe16148aa59af02a2a782a71a5cd30224fc2df6",
+          "repository_sha256": "257e35607df2d404a488d22e4fe16148aa59af02a2a782a71a5cd30224fc2df6"
+        },
+        {
+          "path": "experiments/03_golden_sweep/ENGINE_README.md",
+          "size_bytes": 7795,
+          "sha256": "430a6b54972c6c087130164ddb223bdd0be9a48114d2f6acb03b5cb29ab8e501",
+          "repository_sha256": "430a6b54972c6c087130164ddb223bdd0be9a48114d2f6acb03b5cb29ab8e501"
+        },
+        {
+          "path": "experiments/03_golden_sweep/run_sweep.py",
+          "size_bytes": 11539,
+          "sha256": "ea20aafe305b1522525bfaddeb120e188da67c8405dde0af602b2185148a4b9e",
+          "repository_sha256": "f2be9542faf0ac08f618ee46042620da7ae444d57f440d3002c212875ae0ab85"
+        },
+        {
+          "path": "experiments/03_golden_sweep/sweep_engine.cpp",
+          "size_bytes": 5837,
+          "sha256": "010d7fa3eeca08b7e9ee8c6e29530fba2965a27a5fe511c0971e8672d8dd2942",
+          "repository_sha256": "010d7fa3eeca08b7e9ee8c6e29530fba2965a27a5fe511c0971e8672d8dd2942"
+        },
+        {
+          "path": "experiments/03_golden_sweep/permutation_stress.py",
+          "size_bytes": 4661,
+          "sha256": "602702c4c3f57a6232d29c28f959f0a744295b5079c1f108373b56ed7211f336",
+          "repository_sha256": "602702c4c3f57a6232d29c28f959f0a744295b5079c1f108373b56ed7211f336"
+        },
+        {
+          "path": "experiments/03_golden_sweep/exhaustive_small.py",
+          "size_bytes": 5934,
+          "sha256": "0230a90dc8334d8ce3bba15a221fa2515c2e7b7ac5feb7540e80745b4ce31c61",
+          "repository_sha256": "0230a90dc8334d8ce3bba15a221fa2515c2e7b7ac5feb7540e80745b4ce31c61"
+        },
+        {
+          "path": "experiments/03_golden_sweep/audit_checks.py",
+          "size_bytes": 20809,
+          "sha256": "dc92c48833f887c9a587161ca735ef0a98f3368a68e241d3e90c9de63c6bf4c2",
+          "repository_sha256": "dc92c48833f887c9a587161ca735ef0a98f3368a68e241d3e90c9de63c6bf4c2"
+        },
+        {
+          "path": "experiments/03_golden_sweep/dataset.json",
+          "size_bytes": 1138429,
+          "sha256": "5011e08125288dea519a1bac52007daaa6eaa83a601570bbc64ad5a10167ba88",
+          "repository_sha256": "5011e08125288dea519a1bac52007daaa6eaa83a601570bbc64ad5a10167ba88"
+        },
+        {
+          "path": "experiments/03_golden_sweep/tiling_templates.json",
+          "size_bytes": 466529,
+          "sha256": "d32b806cc0f0856b3b2cc722d6ae6a86366a3a47250672eb6f9ee846fb24dec9",
+          "repository_sha256": "d32b806cc0f0856b3b2cc722d6ae6a86366a3a47250672eb6f9ee846fb24dec9"
+        },
+        {
+          "path": "experiments/03_golden_sweep/HAT_SOURCE_LICENSE",
+          "size_bytes": 1503,
+          "sha256": "ac59f30b5a2bbee371645b82f5dee333bb9de76e61176d197e02f9208e054218",
+          "repository_sha256": "ac59f30b5a2bbee371645b82f5dee333bb9de76e61176d197e02f9208e054218"
+        },
+        {
+          "path": "experiments/03_golden_sweep/raw_runs.csv",
+          "size_bytes": 2051858,
+          "sha256": "acd81e0df159edf985e4603842ca13c3cf5187a199981a64213640b31a6432a6",
+          "repository_sha256": "acd81e0df159edf985e4603842ca13c3cf5187a199981a64213640b31a6432a6"
+        },
+        {
+          "path": "experiments/03_golden_sweep/summary.json",
+          "size_bytes": 2147865,
+          "sha256": "aa119ff169140714260af4202c0b1b062dbbe310f03147e7f894afcaa29233b1",
+          "repository_sha256": "aa119ff169140714260af4202c0b1b062dbbe310f03147e7f894afcaa29233b1"
+        },
+        {
+          "path": "experiments/03_golden_sweep/permutation_stress_summary.json",
+          "size_bytes": 304435,
+          "sha256": "918aa1dd07e406d827171625b6ae42a1ca51d0ca25d8e935c12ed95de89af7b9",
+          "repository_sha256": "918aa1dd07e406d827171625b6ae42a1ca51d0ca25d8e935c12ed95de89af7b9"
+        },
+        {
+          "path": "experiments/03_golden_sweep/permutation_stress_runs.csv.gz",
+          "size_bytes": 14395,
+          "sha256": "c51162d8f722009a1222bc553504c5090ddcf586103d083e1c2c473d01928e1e",
+          "repository_sha256": "c51162d8f722009a1222bc553504c5090ddcf586103d083e1c2c473d01928e1e"
+        },
+        {
+          "path": "experiments/03_golden_sweep/exhaustive_small.json",
+          "size_bytes": 97924,
+          "sha256": "ee7a028d2d9986d772658c7925fadceb38a43fbceb73e1511208dc5f2abf96e8",
+          "repository_sha256": "ee7a028d2d9986d772658c7925fadceb38a43fbceb73e1511208dc5f2abf96e8"
+        },
+        {
+          "path": "experiments/03_golden_sweep/audit_report.json",
+          "size_bytes": 20240,
+          "sha256": "357cc11c63a771aa1000a30a38047011161b121eb23a321d2af14e40f6238e83",
+          "repository_sha256": "357cc11c63a771aa1000a30a38047011161b121eb23a321d2af14e40f6238e83"
+        },
+        {
+          "path": "experiments/03_golden_sweep/missed_sat_instance_35.cnf",
+          "size_bytes": 988,
+          "sha256": "4099662ea352276514aa1e5bf6c8e45310c2e0ce4a533a96ebb038f16828419e",
+          "repository_sha256": "4099662ea352276514aa1e5bf6c8e45310c2e0ce4a533a96ebb038f16828419e"
+        },
+        {
+          "path": "experiments/03_golden_sweep/missed_sat_instance_35.witness",
+          "size_bytes": 80,
+          "sha256": "6a6bfda3861c48321a31fc64a12f0b62ea718ceb984f4233f8f44240ead54a29",
+          "repository_sha256": "6a6bfda3861c48321a31fc64a12f0b62ea718ceb984f4233f8f44240ead54a29"
+        },
+        {
+          "path": "experiments/03_golden_sweep/tiling_research/hat_patches.json",
+          "size_bytes": 144079,
+          "sha256": "e76ca3379502fabded627b8b7dde032caf25da1924755233832974d7a66b1f6f",
+          "repository_sha256": "e76ca3379502fabded627b8b7dde032caf25da1924755233832974d7a66b1f6f"
+        },
+        {
+          "path": "experiments/03_golden_sweep/tiling_research/pinwheel_patches.json",
+          "size_bytes": 231469,
+          "sha256": "490d4980882ca00c52afdb4259945b8ac31e6a68fc555736870b6732deb562d0",
+          "repository_sha256": "490d4980882ca00c52afdb4259945b8ac31e6a68fc555736870b6732deb562d0"
+        },
+        {
+          "path": "experiments/03_golden_sweep/tiling_research/LICENSE",
+          "size_bytes": 1503,
+          "sha256": "ac59f30b5a2bbee371645b82f5dee333bb9de76e61176d197e02f9208e054218",
+          "repository_sha256": "ac59f30b5a2bbee371645b82f5dee333bb9de76e61176d197e02f9208e054218"
+        }
+      ]
+    }
+  ],
+  "total_files": 38,
+  "modifications": [
+    {
+      "path": "experiments/03_golden_sweep/run_sweep.py",
+      "reason": "Allow geometry regeneration after consolidation: prefer the child tiling_research directory delivered alongside the sweep, then retain the original sibling fallback. Search equations and recorded results unchanged.",
+      "original_archive_sha256": "ea20aafe305b1522525bfaddeb120e188da67c8405dde0af602b2185148a4b9e",
+      "repository_sha256": "f2be9542faf0ac08f618ee46042620da7ae444d57f440d3002c212875ae0ab85"
+    }
+  ],
+  "verification": {
+    "archive_crc_and_extracted_file_sha256": "passed",
+    "runtime_checks": {
+      "status": "passed",
+      "checks": [
+        "Initial: exhaustive zero-set checks on all 16 states of each stored four-variable example; all 12 demonstration search paths exactly reproduced.",
+        "Quasicrystal: regenerated full geometry JSON exactly; all geometry invariants passed.",
+        "Tiling: isolated rerun reproduced both selected formulas and all eight method outcomes exactly.",
+        "Golden sweep: isolated exhaustive_small.py rerun reproduced all recorded JSON for 136680 toy searches exactly.",
+        "Golden sweep: relocated tiling cache loads all three templates. Full 58176-run sweep was intentionally not rerun.",
+        "Golden sweep: removed the cache in isolation and rebuilt all three tiling templates exactly through the new child-directory fallback."
+      ]
+    }
+  },
+  "hash_convention": "sha256 records the original archive member; repository_sha256 records its current repository bytes."
+}

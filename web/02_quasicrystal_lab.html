@@ -1,0 +1,1720 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; style-src 'unsafe-inline' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; img-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; font-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; media-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; worker-src blob:; connect-src blob: data:; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>Quasicrystal and search lab · Black Swan Jeweled Math</title>
+<style>:root {
+  color-scheme: light dark;
+  background-color: var(
+    --background,
+    var(--color-background-primary, light-dark(rgb(255 255 255), rgb(24 24 24)))
+  ) !important;
+
+  /* Agent-facing contract; keep in sync with SKILL.md. */
+  --background: var(
+    --color-background-primary,
+    light-dark(rgb(255 255 255), rgb(24 24 24))
+  );
+  --foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --card: color-mix(in oklab, var(--foreground) 5%, var(--background));
+  --card-foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --popover: var(
+    --color-background-secondary,
+    light-dark(rgb(255 255 255), rgb(45 45 45))
+  );
+  --popover-foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --primary: var(
+    --color-text-info,
+    light-dark(rgb(51 156 255), rgb(131 195 255))
+  );
+  --primary-foreground: var(
+    --color-text-inverse,
+    light-dark(rgb(255 255 255), rgb(13 13 13))
+  );
+  --secondary: var(
+    --color-background-secondary,
+    light-dark(rgb(255 255 255 / 96%), rgb(54 54 54 / 96%))
+  );
+  --secondary-foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --muted: color-mix(in srgb, var(--foreground) 10%, transparent);
+  --muted-foreground: var(
+    --color-text-secondary,
+    light-dark(rgb(26 28 31 / 49.4%), rgb(255 255 255 / 49.8%))
+  );
+  --accent: var(
+    --color-background-info,
+    light-dark(rgb(229 242 255), rgb(13 39 63))
+  );
+  --accent-foreground: var(
+    --color-text-info,
+    light-dark(rgb(51 156 255), rgb(131 195 255))
+  );
+  --destructive: var(
+    --color-text-warning,
+    light-dark(rgb(226 85 7), rgb(255 133 73))
+  );
+  --border: var(
+    --color-border-secondary,
+    light-dark(rgb(26 28 31 / 8%), rgb(255 255 255 / 8.2%))
+  );
+  --input: var(
+    --color-border-primary,
+    light-dark(
+      rgb(26 28 31 / 11.8%),
+      color-mix(in oklab, rgb(0 0 0) 10%, transparent)
+    )
+  );
+  --ring: var(
+    --color-ring-primary,
+    light-dark(rgb(51 156 255), rgb(131 195 255 / 76%))
+  );
+  --font-size-base: var(--font-text-md-size, 16px);
+  --blue: light-dark(rgb(51 156 255), rgb(51 156 255));
+  --orange: light-dark(rgb(226 85 7), rgb(251 106 34));
+  --green: light-dark(rgb(0 162 64), rgb(64 201 119));
+  --red: light-dark(rgb(224 46 42), rgb(255 103 100));
+  --purple: light-dark(rgb(146 79 247), rgb(173 123 249));
+  --yellow: light-dark(rgb(255 195 0), rgb(255 210 64));
+  --viz-series-1: var(--primary);
+  --viz-series-2: light-dark(rgb(243 136 59), rgb(245 154 86));
+  --viz-series-3: light-dark(rgb(93 201 119), rgb(116 213 139));
+  --viz-series-4: light-dark(rgb(235 119 177), rgb(240 143 192));
+  --viz-series-5: light-dark(rgb(155 121 236), rgb(170 145 239));
+  --viz-series-6: light-dark(rgb(58 185 177), rgb(90 203 194));
+
+  /* Internal implementation variables; not part of the agent contract. */
+  --font-sans:
+    -apple-system-body, ui-sans-serif, -apple-system, system-ui, "Segoe UI",
+    Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji",
+    "Segoe UI Symbol";
+  --font-mono:
+    ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono",
+    monospace;
+  --font-size-normal: max(11px, var(--font-size-base));
+  --font-size-tooltip: calc(var(--font-size-base) - 1px);
+  --font-size-small: max(11px, calc(var(--font-size-base) - 2px));
+  --font-size-h1: calc(var(--font-size-normal) * 1.7142857143);
+  --font-size-h2: calc(var(--font-size-normal) * 1.4285714286);
+  --font-size-h3: calc(var(--font-size-normal) * 1.2857142857);
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --icon-size: 16px;
+  --line-height-normal: calc(var(--font-size-normal) * 1.5);
+  --line-height-tooltip: calc(var(--font-size-tooltip) * 1.4285714286);
+  --line-height-small: calc(var(--font-size-small) + 4px);
+  --corner-shape: round;
+  --radius: var(--border-radius-lg, 8px);
+  --radius-sm: calc(var(--radius) * 0.5);
+  --radius-md: calc(var(--radius) * 0.75);
+  --radius-lg: var(--radius);
+  --radius-2xl: calc(var(--radius) * 2);
+  --radius-full: 9999px;
+  --shadow-sm: 0 1px 2px -1px rgb(0 0 0 / 8%);
+  --checkmark-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 17 17'%3E%3Cpath d='M12.8961 3.64101C13.1297 3.41418 13.4984 3.37523 13.7779 3.56581C14.0571 3.75635 14.1554 4.11331 14.0299 4.41347L13.9615 4.53847L7.71151 13.7045C7.59411 13.8767 7.4063 13.9877 7.19881 14.0072C6.99136 14.0267 6.78564 13.9533 6.63826 13.806L2.88826 10.056L2.79842 9.9457C2.6192 9.67407 2.64927 9.30496 2.88826 9.06581C3.12738 8.82669 3.49647 8.79676 3.76815 8.97597L3.8785 9.06581L7.03084 12.2182L12.8053 3.74941L12.8961 3.64101Z'/%3E%3C/svg%3E");
+
+  /* Legacy aliases; not part of the current agent contract. */
+  --viz-bg: transparent;
+  --viz-panel: var(--card);
+  --viz-border: var(--border);
+  --viz-text: var(--foreground);
+  --viz-muted: var(--muted-foreground);
+  --viz-accent: var(--primary);
+  --viz-accent-text: var(--primary-foreground);
+  --viz-accent-bg: var(--accent);
+  --viz-font-size: var(--font-size-base);
+  --viz-warning: var(--destructive);
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html > body {
+  /* Preserve MCP aliases for older inline renderers without creating :root cycles. */
+  --color-background-primary: var(
+    --background,
+    light-dark(rgb(255 255 255), rgb(24 24 24))
+  );
+  --color-text-primary: var(
+    --foreground,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --color-border-secondary: var(
+    --border,
+    light-dark(rgb(26 28 31 / 8%), rgb(255 255 255 / 8.2%))
+  );
+
+  margin: 0;
+  padding: var(--visualize-paint-gutter, 0px);
+  color: var(--foreground);
+  background: transparent !important;
+  font-family: var(--font-sans) !important;
+  -webkit-font-smoothing: antialiased;
+  font-size: var(--font-size-base);
+  line-height: calc(var(--font-size-base) * 1.625);
+  font-weight: var(--font-weight-normal);
+}
+
+:root:not([data-app-block-surface], [data-visualize-standalone]) > body {
+  padding: 12px;
+}
+
+.cursor-interaction {
+  cursor: var(--cursor-interaction, pointer);
+}
+
+a {
+  color: color-mix(in srgb, var(--viz-accent) 80%, var(--viz-text) 20%);
+  cursor: var(--cursor-interaction, pointer);
+  text-decoration: none;
+  text-underline-offset: 2px;
+  font-weight: inherit;
+}
+
+a:is(:hover, :focus-visible) {
+  text-decoration-line: underline;
+  text-decoration-style: dashed;
+  text-decoration-thickness: 0.5px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin-block: 0;
+}
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+li,
+.table {
+  font-family: var(--font-sans);
+}
+
+h1 {
+  font-size: calc(var(--font-size-base) * 1.5);
+  line-height: 1.3333333333;
+}
+
+h2 {
+  font-size: calc(var(--font-size-base) * 1.25);
+  line-height: 1.4;
+}
+h3 {
+  font-size: calc(var(--font-size-base) * 1.125);
+  line-height: 1.5555555556;
+}
+h4 {
+  font-size: var(--font-size-base);
+  line-height: 1.5;
+}
+h5,
+h6 {
+  font-size: var(--font-size-base);
+  line-height: calc(var(--font-size-base) * 1.625);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+b,
+strong,
+th {
+  font-weight: 600;
+}
+
+code:not(pre code) {
+  display: inline;
+  padding: 1px 6px;
+  border-radius: var(--radius-sm);
+  corner-shape: var(--corner-shape);
+  background: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  overflow-wrap: anywhere;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  word-break: break-word;
+}
+pre,
+pre code {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 20px;
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.table {
+  width: 100%;
+  color: var(--foreground);
+  font: inherit;
+  text-align: start;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: calc(var(--font-size-base) * 0.875);
+  line-height: calc(var(--font-size-base) * 1.625);
+  font-family: var(--font-sans);
+}
+
+.table :is(th, td) {
+  padding-block: 10px;
+  padding-inline: 0 24px;
+  overflow-wrap: anywhere;
+  border-bottom: 1px solid var(--border);
+  text-align: start;
+  vertical-align: top;
+  border-bottom-color: color-mix(in srgb, var(--foreground) 5%, transparent);
+}
+.table :is(th, td):not(:last-child) {
+  padding-inline-end: calc(var(--font-size-base) * 1.5);
+}
+
+.table-responsive > .table :is(th, td) {
+  overflow-wrap: break-word;
+}
+
+.table :is(th, td):last-child {
+  padding-inline-end: 0;
+}
+
+.table :is(caption, thead th) {
+  font-weight: 600;
+}
+
+.table thead :is(th, td) {
+  border-bottom-color: var(--border-strong, var(--input));
+  padding-block: calc(var(--font-size-base) / 2);
+  line-height: var(--font-size-base);
+}
+
+.table tbody tr:last-child :is(th, td) {
+  border-bottom: 0;
+}
+.table tbody :is(th, td) {
+  padding-block: calc(var(--font-size-base) * 0.625);
+}
+
+.table.table-sm :is(th, td) {
+  padding-block: 8px;
+}
+
+.table.table-sm :is(th, td):not(:last-child) {
+  padding-inline-end: 16px;
+}
+
+.table :is(.text-end, [align="right"]) {
+  text-align: end;
+  font-variant-numeric: tabular-nums;
+}
+
+.table :is(.text-center, [align="center"]) {
+  text-align: center;
+}
+
+.table .text-nowrap {
+  white-space: nowrap;
+}
+
+#widget {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  padding: 0;
+  background: transparent !important;
+}
+
+.card {
+  min-width: 0;
+  padding: 12px;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  border-radius: var(--radius-2xl);
+  corner-shape: var(--corner-shape);
+  color: var(--card-foreground);
+  background: var(--card);
+}
+
+.widget {
+  min-width: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: var(--radius-lg);
+  corner-shape: var(--corner-shape);
+  box-shadow: 0 0 0 0.5px var(--border-strong, var(--border));
+  color: var(--foreground);
+  background: var(--background);
+}
+
+#widget > :not(.card, .widget, .progress) {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.tooltip {
+  position: fixed;
+  z-index: 50;
+  top: 0;
+  left: 0;
+  width: max-content;
+  max-width: min(
+    20rem,
+    var(--tooltip-available-width, calc(100vw - 10px)),
+    calc(100vw - 10px)
+  );
+  max-height: min(
+    var(--tooltip-available-height, calc(100vh - 10px)),
+    calc(100vh - 10px)
+  );
+  border: 1px solid var(--border);
+  corner-shape: var(--corner-shape);
+  overflow-wrap: break-word;
+  white-space: normal;
+  pointer-events: none;
+  user-select: none;
+  font-family: var(--font-sans);
+  padding: 5px 12px;
+  border-color: color-mix(
+    in oklab,
+    light-dark(var(--primary-foreground), var(--foreground)) 5%,
+    transparent
+  );
+  border-radius: var(--radius-2xl);
+  color: light-dark(var(--primary-foreground), var(--foreground));
+  background: light-dark(var(--foreground), var(--popover));
+  box-shadow: 0 8px 18px rgb(15 23 42 / 20%);
+  letter-spacing: -0.15px;
+  font-size: calc(var(--font-size-base) * 14 / 16);
+  font-size: round(nearest, calc(var(--font-size-base) * 14 / 16), 1px);
+  font-weight: 600;
+  line-height: 18px;
+  text-align: center;
+}
+
+/* The shared runtime owns data-tooltip; suppress AppBlock's pseudo-tooltip. */
+main [data-tooltip]::after {
+  content: none;
+}
+
+.viz-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(max(180px, 24%), 1fr));
+  gap: 10px;
+}
+
+.viz-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.viz-stat-value {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+.viz-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+hr {
+  width: 100%;
+  height: 1px;
+  margin-block: 6px;
+  border: 0;
+  background: var(--border);
+}
+
+.nav {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 4px;
+}
+
+.progress {
+  display: flex;
+  height: 8px;
+  margin-block: calc((var(--line-height-normal, 1.5em) - 8px) / 2);
+  overflow: hidden;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: var(--muted);
+}
+
+.progress-bar:only-child {
+  border-radius: var(--radius-full);
+}
+
+.progress-bar {
+  height: 100%;
+  flex-shrink: 0;
+  border: 0;
+  background: var(--viz-series-1);
+}
+
+.viz-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  color: color-mix(in srgb, var(--foreground) 40%, var(--muted-foreground));
+  background: color-mix(in srgb, var(--foreground) 5%, transparent);
+  font-family: var(--font-sans);
+  font-size: calc(var(--font-size-base) * 14 / 16);
+  font-size: round(nearest, calc(var(--font-size-base) * 14 / 16), 1px);
+  font-weight: var(--font-weight-normal);
+  line-height: 1;
+}
+
+small,
+.text-small {
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+}
+
+.text-muted {
+  color: var(--muted-foreground);
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.viz-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.viz-controls > .form-label {
+  display: grid;
+  min-width: min(100%, 260px);
+  flex: 1 1 280px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 2px 12px;
+  margin-bottom: 0;
+}
+
+.viz-controls > .form-label > :is(.form-control, .form-range, .form-select) {
+  grid-column: 1 / -1;
+}
+
+.btn,
+.nav-link,
+.form-check-input,
+.form-control,
+.form-range,
+.form-select {
+  font: inherit;
+}
+
+/* Match inline alignment without overriding a containing flex or grid layout. */
+.btn,
+.nav-link,
+.form-control,
+.form-select,
+.form-range,
+.form-check {
+  vertical-align: middle;
+}
+
+.btn,
+.nav-link {
+  appearance: button;
+  display: inline-flex;
+  inline-size: fit-content;
+  max-inline-size: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin: 0;
+  padding: 0 8px;
+  -webkit-app-region: no-drag;
+  border: 1px solid var(--input);
+  corner-shape: var(--corner-shape);
+  cursor: var(--cursor-interaction, pointer);
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-font-smoothing: inherit;
+  font-family: var(--font-sans);
+  height: fit-content;
+  min-height: calc(12px + 2 * var(--control-spacing, 12px));
+  padding-inline: var(--control-spacing, 12px);
+  border-color: transparent;
+  border-radius: var(--radius-full);
+  color: var(--foreground);
+  background: color-mix(in srgb, var(--foreground) 5%, transparent);
+  font-size: calc(var(--font-size-base) * 14 / 16);
+  font-size: round(nearest, calc(var(--font-size-base) * 14 / 16), 1px);
+  font-weight: var(--font-weight-normal);
+  line-height: 18px;
+}
+
+.btn {
+  border-color: var(--border);
+  color: var(--secondary-foreground);
+  background: var(--secondary);
+}
+
+.btn:is(.btn-block, .viz-tile) {
+  inline-size: 100%;
+}
+
+.btn.viz-tile {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+a.btn {
+  cursor: var(--cursor-interaction, pointer);
+  text-decoration: none;
+}
+
+.btn:not(:disabled):hover {
+  background: light-dark(
+    color-mix(in srgb, var(--foreground) 5.5%, transparent),
+    color-mix(in srgb, var(--foreground) 8%, transparent)
+  );
+}
+
+.nav-link:not(:disabled):not([aria-disabled="true"]):hover {
+  background: color-mix(in srgb, var(--foreground) 10%, transparent);
+}
+
+.btn-primary {
+  border-color: var(--border);
+  color: var(--primary-foreground);
+  background: var(--foreground);
+  background-clip: border-box;
+}
+
+.btn-primary .text-muted {
+  color: color-mix(in srgb, var(--primary-foreground) 50%, transparent);
+}
+
+.btn-primary:not(:disabled):hover {
+  background: color-mix(in srgb, var(--foreground) 80%, transparent);
+  background-clip: border-box;
+}
+
+.btn-ghost {
+  border-color: transparent;
+  color: var(--muted-foreground);
+  background: transparent;
+}
+
+.btn-ghost:not(:disabled):hover {
+  color: var(--muted-foreground);
+  background: light-dark(
+    color-mix(in srgb, var(--foreground) 5.5%, transparent),
+    color-mix(in srgb, var(--foreground) 8%, transparent)
+  );
+}
+
+.nav-pills .nav-link {
+  min-width: 0;
+  border-color: transparent;
+  color: var(--muted-foreground);
+  background: transparent;
+}
+
+.nav-justified .nav-link {
+  flex: 1 1 0;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+.nav-pills .nav-link.active {
+  color: var(--foreground);
+  background: var(--muted);
+}
+
+/* Shared preview chrome; product styles stay inside each variant. */
+.viz-dotted-background {
+  background-image: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--foreground) 14%, transparent) 0.8px,
+    transparent 0.8px
+  );
+  background-position: center;
+  background-size: 16px 16px;
+}
+
+.viz-carousel {
+  position: relative;
+  min-width: 0;
+}
+
+.viz-carousel:has(> .viz-carousel-controls) {
+  min-height: calc(60px + var(--viz-carousel-picker-height, 0px));
+  padding-bottom: 60px;
+}
+
+.viz-carousel > [data-variant][hidden] {
+  display: none !important;
+}
+
+.viz-carousel > [data-variant] {
+  isolation: isolate;
+}
+
+.viz-carousel-controls {
+  --viz-carousel-hover: light-dark(
+    color-mix(in srgb, var(--foreground) 5.4%, transparent),
+    color-mix(in srgb, var(--foreground) 7.8%, transparent)
+  );
+  position: absolute;
+  z-index: 2;
+  bottom: 8px;
+  left: 50%;
+  display: flex;
+  width: max-content;
+  /* Leave room for the host's design-controls launcher at the trailing edge. */
+  max-width: calc(100% - 96px);
+  align-items: center;
+  gap: 0;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  color: var(--foreground);
+  background: var(--background);
+  font-family: var(--font-sans);
+  /* Match the settings dropdown chrome independently of the content font size. */
+  font-size: 13px;
+  font-weight: var(--font-weight-normal);
+  line-height: 18px;
+  transform: translateX(-50%);
+  user-select: none;
+}
+
+/* Keep authored mockup button styles out of the shared carousel chrome. */
+.viz-carousel-controls button,
+.viz-carousel-picker > summary {
+  display: flex !important;
+  height: auto !important;
+  min-height: 30px;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 4px;
+  padding: 0 6px !important;
+  -webkit-app-region: no-drag;
+  border: 0 !important;
+  border-radius: 14px !important;
+  color: inherit !important;
+  background: transparent !important;
+  font: inherit !important;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.viz-carousel-controls > button,
+.viz-carousel-picker > summary {
+  position: relative;
+  isolation: isolate;
+}
+
+.viz-carousel-controls > button {
+  --icon-size: 16px;
+  width: 30px !important;
+  padding: 0 !important;
+}
+
+.viz-carousel-picker > summary {
+  padding-inline: 12px !important;
+}
+
+.viz-carousel-controls .viz-carousel-caret {
+  width: 14px;
+  height: 14px;
+  flex: none;
+  margin: 0;
+  color: inherit;
+  transform: rotate(180deg);
+}
+
+.viz-carousel-controls > button > svg,
+.viz-carousel-controls .viz-carousel-caret,
+.viz-carousel-count {
+  opacity: 0.5;
+}
+
+.viz-carousel-controls > button::before,
+.viz-carousel-picker > summary::before {
+  position: absolute;
+  z-index: -1;
+  inset: 3px;
+  border-radius: 12px;
+  content: "";
+  pointer-events: none;
+}
+
+.viz-carousel-controls > button:hover::before,
+.viz-carousel-picker > summary:hover::before {
+  background: var(--viz-carousel-hover);
+}
+
+.viz-carousel-controls > button,
+.viz-carousel-controls [data-lucide],
+.viz-carousel-controls .lucide {
+  flex-shrink: 0;
+}
+
+.viz-carousel-picker {
+  min-width: 0;
+}
+
+.viz-carousel-picker > summary {
+  min-width: 0;
+  list-style: none;
+}
+
+.viz-carousel-picker > summary::-webkit-details-marker {
+  display: none;
+}
+
+.viz-carousel-count {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.viz-carousel-name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.viz-carousel-options {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 4px);
+  left: 0;
+  display: flex;
+  max-height: 240px;
+  flex-direction: column;
+  gap: 2px;
+  overflow: auto;
+  padding: 4px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--background);
+  box-shadow: 0 4px 12px light-dark(rgb(0 0 0 / 6%), rgb(0 0 0 / 25%));
+}
+
+.viz-carousel-options > button {
+  border-radius: max(0px, calc(var(--radius-lg) - 5px)) !important;
+  width: 100% !important;
+  min-height: 28px;
+  justify-content: flex-start !important;
+  padding: 4px 8px !important;
+  font-size: var(--font-size-small) !important;
+  text-align: start;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.viz-carousel-options > [aria-current="true"],
+.viz-carousel-options > button:hover {
+  background: var(--viz-carousel-hover) !important;
+}
+
+.btn:disabled,
+.nav-link:disabled,
+.nav-link[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+[data-lucide] {
+  stroke-width: 1.6;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--foreground);
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  padding: 0 8px;
+  outline: none;
+  border: 1px solid var(--input);
+  corner-shape: var(--corner-shape);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  height: calc(12px + 2 * var(--control-spacing, 12px));
+  min-height: calc(12px + 2 * var(--control-spacing, 12px));
+  padding-inline: calc(4px + var(--control-spacing, 12px) / 2);
+  border-color: var(--input);
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--popover) 96%, transparent);
+  font-size: calc(var(--font-size-base) * 14 / 16);
+  font-size: round(nearest, calc(var(--font-size-base) * 14 / 16), 1px);
+  font-weight: var(--font-weight-normal);
+  line-height: 1.4285714286;
+}
+.form-control:is(
+  [type="file"],
+  [type="date"],
+  [type="datetime-local"],
+  [type="month"],
+  [type="week"],
+  [type="color"]
+) {
+  height: calc(12px + 2 * var(--control-spacing, 12px));
+  min-height: calc(12px + 2 * var(--control-spacing, 12px));
+  line-height: 18px;
+}
+.form-control:is(
+  [type="date"],
+  [type="datetime-local"],
+  [type="month"],
+  [type="week"]
+) {
+  padding-inline: var(--control-spacing, 12px);
+}
+
+.form-control::placeholder {
+  color: var(--muted-foreground);
+}
+
+.form-control[type="file"] {
+  overflow: hidden;
+  cursor: var(--cursor-interaction, pointer);
+  padding: 0;
+}
+
+.form-control[type="file"]::file-selector-button {
+  padding: 0 8px;
+  border: 0;
+  border-right: 1px solid var(--input);
+  color: var(--secondary-foreground);
+  background: var(--secondary);
+  cursor: inherit;
+  font: inherit;
+  min-height: calc(10px + 2 * var(--control-spacing, 12px));
+  padding-inline: var(--control-spacing, 12px);
+  margin-inline-end: var(--control-spacing, 12px);
+}
+
+.form-control[type="file"]:not(:disabled):hover::file-selector-button {
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.form-control-color[type="color"] {
+  width: 40px;
+  height: calc(12px + 2 * var(--control-spacing, 12px));
+  padding: 3px;
+  cursor: var(--cursor-interaction, pointer);
+}
+
+.form-control-color[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.form-control-color[type="color"]::-webkit-color-swatch {
+  border: 0;
+  border-radius: calc(var(--radius-lg) - 4px);
+  corner-shape: var(--corner-shape);
+}
+
+textarea.form-control {
+  height: auto;
+  resize: vertical;
+  min-height: 96px;
+  padding: 8px 10px;
+}
+
+.form-control:focus-visible {
+  border-color: var(--ring);
+  box-shadow: none;
+}
+.form-control:disabled {
+  color: var(--muted-foreground);
+  background: color-mix(in srgb, var(--foreground) 5%, transparent);
+  opacity: 1;
+}
+.form-control[aria-invalid="true"] {
+  border-color: var(--red);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--red) 20%, transparent);
+}
+
+.form-control:disabled,
+.form-select:disabled {
+  cursor: not-allowed;
+}
+
+.form-select {
+  appearance: none;
+  display: block;
+  width: 100%;
+  height: fit-content;
+  min-height: calc(12px + 2 * var(--control-spacing, 12px));
+  margin: 0;
+  /* The secondary icon role is 14px at compact density and 16px at web density. */
+  --icon-size: calc(10px + var(--control-spacing, 12px) / 2);
+  /* Settings dropdowns retain a 12px inset and a 4px text-to-chevron gap. */
+  padding: 0 calc(16px + var(--icon-size)) 0 12px;
+  outline: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  corner-shape: var(--corner-shape);
+  color: var(--foreground);
+  background-color: var(--secondary);
+  background-image:
+    linear-gradient(
+      45deg,
+      transparent calc(50% - 0.6px),
+      var(--muted-foreground) calc(50% - 0.6px) calc(50% + 0.6px),
+      transparent calc(50% + 0.6px)
+    ),
+    linear-gradient(
+      135deg,
+      transparent calc(50% - 0.6px),
+      var(--muted-foreground) calc(50% - 0.6px) calc(50% + 0.6px),
+      transparent calc(50% + 0.6px)
+    );
+  background-position:
+    calc(100% - 12px - var(--icon-size) / 2) 50%,
+    calc(100% - 12px - var(--icon-size) * 0.18) 50%;
+  background-repeat: no-repeat;
+  background-size: calc(var(--icon-size) * 0.32) calc(var(--icon-size) * 0.32);
+  cursor: var(--cursor-interaction, default);
+  font-size: calc(var(--font-size-base) * 14 / 16);
+  font-size: round(nearest, calc(var(--font-size-base) * 14 / 16), 1px);
+  font-weight: var(--font-weight-normal);
+  line-height: 18px;
+}
+
+.form-select :is(option, optgroup) {
+  color: var(--popover-foreground);
+  background-color: var(--popover);
+}
+
+.form-select :is(option, optgroup):disabled {
+  color: var(--muted-foreground);
+}
+
+.form-select:not(:disabled):hover {
+  background-color: light-dark(
+    color-mix(in srgb, var(--foreground) 5.5%, transparent),
+    color-mix(in srgb, var(--foreground) 8%, transparent)
+  );
+}
+
+.form-select:focus-visible {
+  box-shadow: 0 0 0 2px var(--ring);
+}
+.form-select:disabled {
+  opacity: 0.4;
+}
+
+.form-check {
+  display: flex;
+  min-height: calc(12px + 2 * var(--control-spacing, 12px));
+  align-items: center;
+  gap: 6px;
+}
+
+.form-check-input {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  flex: 0 0 auto;
+  margin: 0;
+  border: 1px solid var(--input);
+  color: var(--primary-foreground);
+  background-color: transparent;
+  cursor: var(--cursor-interaction, default);
+  transition:
+    background-color 150ms,
+    border-color 150ms,
+    box-shadow 150ms;
+}
+
+.form-check:not(.form-switch) .form-check-input[type="checkbox"] {
+  corner-shape: round;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  width: calc(10px + var(--control-spacing, 12px) / 2);
+  height: calc(10px + var(--control-spacing, 12px) / 2);
+  border-color: var(--border-strong, var(--input));
+  border-radius: calc(var(--radius-sm) / 2);
+  background-color: transparent;
+  color: var(--foreground);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input:not(:disabled):not(:checked):hover {
+  background-color: var(--card);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input[type="checkbox"]:is(:checked, :indeterminate) {
+  border-color: var(--border-strong, var(--input));
+  background-color: color-mix(in srgb, var(--popover) 96%, transparent);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input[type="checkbox"]:checked::before {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--primary-foreground);
+  content: "";
+  mask: var(--checkmark-image) center / 12px 12px no-repeat;
+  background-color: var(--foreground);
+}
+.form-check:not(.form-switch)
+  .form-check-input[type="checkbox"]:indeterminate::before {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 65%;
+  height: 6.65%;
+  margin: auto;
+  border-radius: var(--radius-full);
+  background: var(--foreground);
+  mask: none;
+  content: "";
+}
+
+.form-check-input[type="radio"] {
+  border-radius: var(--radius-full);
+  width: 16px;
+  height: 16px;
+  border: 0;
+  box-shadow: inset 0 0 0 1px var(--input);
+}
+
+.form-check-input[type="radio"]:checked {
+  border: 0;
+  background: radial-gradient(
+    circle,
+    var(--primary-foreground) 0 3px,
+    var(--foreground) 3px
+  );
+  box-shadow: none;
+}
+
+.form-check:not(.form-switch) .form-check-input:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+.form-check:not(.form-switch) .form-check-input[type="checkbox"]:focus-visible {
+  border-color: var(--ring);
+  outline: none;
+  box-shadow: 0 0 0 2px var(--ring);
+}
+
+.form-check:not(.form-switch) .form-check-input:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.form-check:not(.form-switch) .form-check-input:disabled + .form-check-label {
+  cursor: not-allowed;
+}
+.form-check:not(.form-switch) .form-check-input[type="radio"]:disabled,
+.form-check:not(.form-switch)
+  .form-check-input[type="radio"]:disabled
+  + .form-check-label {
+  opacity: 0.5;
+}
+
+.form-switch .form-check-input:disabled,
+.form-switch .form-check-input:disabled + .form-check-label {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.form-check-label {
+  color: var(--foreground);
+  cursor: var(--cursor-interaction, default);
+}
+
+.form-switch .form-check-input {
+  position: relative;
+  width: 32px;
+  height: 20px;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: var(--muted);
+  box-shadow: none;
+  transition: background-color 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.form-switch .form-check-input::before {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  box-sizing: border-box;
+  border: 1px solid light-dark(var(--primary-foreground), var(--foreground));
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-sm);
+  content: "";
+  transform: translate(2px, -50%);
+  transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
+  border-color: #fff;
+  background: #fff;
+}
+
+.form-switch .form-check-input:checked {
+  background: var(--blue);
+}
+
+.form-switch .form-check-input:checked::before {
+  transform: translate(14px, -50%);
+}
+
+.form-switch .form-check-input:focus-visible {
+  box-shadow: 0 0 0 2px var(--ring);
+  outline: none;
+}
+
+.form-range {
+  appearance: none;
+  display: block;
+  width: 100%;
+  flex: 1;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  accent-color: var(--primary);
+  height: calc(12px + 2 * var(--control-spacing, 12px));
+  min-height: calc(12px + 2 * var(--control-spacing, 12px));
+  outline: none;
+  border-radius: var(--radius-full);
+  color: var(--foreground);
+  background: transparent;
+}
+
+.form-range::-webkit-slider-runnable-track {
+  background: var(--form-range-track, var(--border));
+  height: 2px;
+  border-radius: var(--radius-full);
+}
+
+.form-range::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  margin-top: -9px;
+  border-color: transparent;
+  background: currentColor;
+  box-shadow: var(--shadow-sm);
+}
+
+/* Outline the native track and thumb, preserving the larger input hit area. */
+.form-range:focus-visible::-webkit-slider-runnable-track {
+  outline: 2px auto Highlight;
+  outline-color: -webkit-focus-ring-color;
+}
+
+.form-range::-moz-range-track {
+  background: var(--form-range-track, var(--border));
+  height: 2px;
+  border-radius: var(--radius-full);
+}
+
+.form-range::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  border-color: transparent;
+  background: currentColor;
+  box-shadow: var(--shadow-sm);
+}
+
+.form-range:focus-visible::-moz-range-thumb {
+  outline: 2px solid Highlight;
+  outline-offset: 2px;
+}
+
+.form-range:disabled {
+  opacity: 1;
+  cursor: default;
+}
+
+.btn:not(.btn-primary, .viz-tile):is(
+  [aria-pressed="true"],
+  [aria-selected="true"],
+  .is-selected
+) {
+  border-color: transparent;
+  color: var(--primary-foreground);
+  background: var(--blue);
+}
+
+.btn.viz-tile:is([aria-pressed="true"], [aria-selected="true"], .is-selected) {
+  border-color: var(--primary);
+  box-shadow: inset 0 0 0 1px var(--primary);
+}
+
+.btn:focus-visible,
+.nav-link:focus-visible {
+  outline-offset: 2px;
+  outline: none;
+  box-shadow: 0 0 0 2px var(--ring);
+}
+
+.viz-carousel-controls :is(button, summary):focus-visible {
+  outline: 2px solid var(--ring) !important;
+  outline-offset: 2px !important;
+}
+
+/* Web recipes are the default, including on renderers without inline style queries. */
+@supports (border-radius: if(style(--corner-shape: round): 1px; else: 2px)) {
+  /* Match the host's proportional text-sm scale at every text preference. */
+  .tooltip,
+  .viz-badge,
+  .btn,
+  .nav-link,
+  .form-control,
+  .form-select {
+    font-size: if(
+      style(--corner-shape: round): round(
+          nearest,
+          calc(var(--font-size-base) * 14 / 16),
+          1px
+        );
+        else: round(nearest, calc(var(--font-size-base) * 13 / 14), 1px)
+    );
+  }
+
+  .btn,
+  .nav-link,
+  .form-select {
+    border-radius: if(
+      style(--corner-shape: round): var(--radius-full); else: var(--radius-lg)
+    );
+  }
+
+  .form-check:not(.form-switch) .form-check-input[type="checkbox"] {
+    border-radius: if(
+      style(--corner-shape: round): calc(var(--radius-sm) / 2);
+        else: calc(var(--radius-lg) * 0.4)
+    );
+  }
+
+  .tooltip {
+    font-weight: if(
+      style(--corner-shape: round): 600; else: var(--font-weight-normal)
+    );
+  }
+}
+
+@media (pointer: coarse) {
+  .viz-carousel:has(> .viz-carousel-controls) {
+    min-height: calc(76px + var(--viz-carousel-picker-height, 0px));
+    padding-bottom: 76px;
+  }
+
+  .btn,
+  .nav-link,
+  .viz-carousel-controls button,
+  .viz-carousel-picker > summary,
+  .form-control,
+  .form-select {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  /* Keep small-screen WebKit from zooming when a text field receives focus. */
+  .form-control,
+  .form-select {
+    font-size: max(16px, calc(var(--font-size-base) * 14 / 16));
+    font-size: max(
+      16px,
+      round(nearest, calc(var(--font-size-base) * 14 / 16), 1px)
+    );
+  }
+  .form-control:is(
+    [type="file"],
+    [type="date"],
+    [type="datetime-local"],
+    [type="month"],
+    [type="week"],
+    [type="time"],
+    [type="color"]
+  ) {
+    height: 44px;
+    min-height: 44px;
+    font-size: max(16px, calc(var(--font-size-base) * 14 / 16));
+    font-size: max(
+      16px,
+      round(nearest, calc(var(--font-size-base) * 14 / 16), 1px)
+    );
+  }
+
+  .form-control[type="file"]::file-selector-button {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .form-control-color[type="color"] {
+    width: 44px;
+    height: 44px;
+  }
+
+  .form-control:is(
+    [type="date"],
+    [type="datetime-local"],
+    [type="month"],
+    [type="time"],
+    [type="week"]
+  ) {
+    min-width: 0;
+    max-width: 100%;
+    padding-block: 8px;
+  }
+
+  .form-check {
+    min-height: 44px;
+    padding-inline: 15px;
+  }
+
+  .form-check-input {
+    position: relative;
+  }
+
+  .form-check-input::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 44px;
+    height: 44px;
+    content: "";
+    transform: translate(-50%, -50%);
+  }
+
+  .form-check-label {
+    display: inline-flex;
+    min-width: 44px;
+    min-height: 44px;
+    align-items: center;
+  }
+
+  .form-range {
+    height: 44px;
+    touch-action: pan-y;
+  }
+}
+
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+#widget > svg {
+  width: 100%;
+}
+
+/* Model-authored chart rules can otherwise stretch icons after these styles load. */
+svg.lucide {
+  display: block;
+  width: var(--icon-size) !important;
+  height: var(--icon-size) !important;
+  flex: none;
+  margin: 0 !important;
+  stroke-width: 1.6;
+}
+
+.text-warning,
+.text-destructive {
+  color: var(--destructive);
+}
+
+html>body{padding:0}</style>
+<style>
+html { background: var(--background); }
+body { margin: 0; }
+.export-shell { max-width: 960px; margin: 0 auto; padding: 20px; }
+.export-nav { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 18px; margin-bottom: 24px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
+.export-nav a { color: var(--foreground); text-decoration: none; }
+.export-nav a:hover { text-decoration: underline; }
+.export-nav .export-brand { font-weight: 500; margin-right: auto; }
+.export-nav .export-current { color: var(--muted-foreground); }
+.export-tip { position: fixed; z-index: 100; max-width: min(320px, calc(100vw - 24px)); padding: 8px 10px; background: var(--popover); color: var(--popover-foreground); border: 1px solid var(--border); border-radius: 6px; box-shadow: 0 5px 18px color-mix(in srgb, var(--foreground) 12%, transparent); pointer-events: none; font-size: var(--font-size-small); }
+@media (max-width: 480px) { .export-shell { padding: 12px; } .export-nav { margin-bottom: 18px; } }
+</style></head>
+<body><main class="export-shell"><nav class="export-nav" aria-label="Lab navigation"><a class="export-brand" href="index.html">Black Swan Jeweled Math</a><a href="01_3sat_jewel.html">1</a><a href="02_quasicrystal_lab.html" aria-current="page" class="export-current">2</a><a href="03_tiling_lab.html">3</a><a href="04_sweep_results.html">4</a></nav><div id="black-swan-jewel-lab">
+  <style>
+    #black-swan-jewel-lab { color: var(--foreground); }
+    #black-swan-jewel-lab h3 { padding-right: 96px; }
+    #black-swan-jewel-lab .jewel-figure svg { display: block; width: 100%; overflow: visible; }
+    #black-swan-jewel-lab .jewel-figure text { fill: var(--foreground); font-size: 12px; font-weight: 400; }
+    #black-swan-jewel-lab .jewel-live { margin: 12px 0; }
+    #black-swan-jewel-lab .jewel-legend { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: 8px 0; }
+    #black-swan-jewel-lab [hidden] { display: none; }
+    #black-swan-jewel-lab .jewel-label { paint-order: stroke; stroke: var(--background); stroke-width: 3px; stroke-linejoin: round; }
+  </style>
+  <h3>Black Swan · jewel experiments</h3>
+  <div class="viz-controls">
+    <label class="form-label" for="jewel-view">View
+      <select class="form-select" id="jewel-view">
+        <option value="sat">3SAT jewel</option>
+        <option value="patch">Quasicrystal patch</option>
+      </select>
+    </label>
+    <label class="form-label" id="jewel-example-label" for="jewel-example">Example
+      <select class="form-select" id="jewel-example"></select>
+    </label>
+    <label class="form-label" id="jewel-method-label" for="jewel-method">Search weights
+      <select class="form-select" id="jewel-method">
+        <option value="uniform">Uniform</option>
+        <option value="phi">Golden ratio</option>
+        <option value="zeta">Zeta zeros</option>
+        <option value="phi_shuffled">Shuffled golden ratio</option>
+        <option value="zeta_shuffled">Shuffled zeta zeros</option>
+      </select>
+    </label>
+    <label class="form-label" id="jewel-shift-label" for="jewel-shift" hidden>Internal window shift: <output id="jewel-shift-value" class="tabular-nums">0.00</output>
+      <input class="form-range" id="jewel-shift" type="range" min="-0.35" max="0.35" step="0.01" value="0">
+    </label>
+  </div>
+  <div id="jewel-live" class="jewel-live tabular-nums" role="status" aria-live="polite"></div>
+  <div id="jewel-figure" class="jewel-figure"></div>
+  <div id="jewel-legend" class="jewel-legend text-small"></div>
+  <div id="jewel-detail" class="text-small tabular-nums" aria-live="polite"></div>
+  <script type="application/json" id="jewel-data">{"demos":[{"label":"Golden weights help","clauses":[[-1,-3,-4],[2,-3,-4],[1,-2,3],[-2,-3,-4],[2,3,-4],[-1,2,-4],[-1,3,4],[1,2,-3],[2,-3,4],[1,3,-4],[-1,-2,4],[-2,-3,4],[-1,-2,-3],[1,-3,-4]],"start":6,"runs":{"uniform":{"weights":[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],"path":[6],"success":false},"phi":{"weights":[0.4476817249617414,1.5655989076155217,0.7182082111366968,0.8499700827961106,1.5030465723169333,0.4081681439029269,1.3697502111656836,1.0465472593441474,0.5616047880338869,1.599970711860574,0.5535957505971466,1.0583584892425761,1.3603407819245656,0.4102333545702641],"path":[6,2,0],"success":true},"zeta":{"weights":[1.0936509786309858,0.8817481775038271,0.9825804375724161,1.193360571559235,1.0357085886496464,1.1815684203910082,1.104494317213367,1.032443111093071,1.2182798529716943,0.9984854462911752,1.1054565629899642,0.8894082687195336,1.042323535035941,0.8152297593119843],"path":[6],"success":false},"phi_shuffled":{"weights":[0.5535957505971466,0.4081681439029269,1.5030465723169333,1.599970711860574,0.7182082111366968,1.5655989076155217,0.5616047880338869,0.4476817249617414,0.4102333545702641,1.0465472593441474,1.0583584892425761,1.3603407819245656,1.3697502111656836,0.8499700827961106],"path":[6,4,0],"success":true},"zeta_shuffled":{"weights":[1.193360571559235,0.9984854462911752,0.8152297593119843,1.1815684203910082,1.032443111093071,1.2182798529716943,1.104494317213367,1.0357085886496464,0.8817481775038271,1.0936509786309858,0.8894082687195336,0.9825804375724161,1.042323535035941,1.1054565629899642],"path":[6,2,0],"success":true}}},{"label":"Zeta weights help","clauses":[[-1,-3,-4],[2,-3,-4],[1,-2,3],[-2,-3,-4],[2,3,-4],[-1,2,-4],[-1,3,4],[1,2,-3],[2,-3,4],[1,3,-4],[-1,-2,4],[-2,-3,4],[-1,-2,-3],[1,-3,-4]],"start":5,"runs":{"uniform":{"weights":[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],"path":[5],"success":false},"phi":{"weights":[0.4476817249617414,1.5655989076155217,0.7182082111366968,0.8499700827961106,1.5030465723169333,0.4081681439029269,1.3697502111656836,1.0465472593441474,0.5616047880338869,1.599970711860574,0.5535957505971466,1.0583584892425761,1.3603407819245656,0.4102333545702641],"path":[5],"success":false},"zeta":{"weights":[1.0936509786309858,0.8817481775038271,0.9825804375724161,1.193360571559235,1.0357085886496464,1.1815684203910082,1.104494317213367,1.032443111093071,1.2182798529716943,0.9984854462911752,1.1054565629899642,0.8894082687195336,1.042323535035941,0.8152297593119843],"path":[5,1,0],"success":true},"phi_shuffled":{"weights":[0.5535957505971466,0.4081681439029269,1.5030465723169333,1.599970711860574,0.7182082111366968,1.5655989076155217,0.5616047880338869,0.4476817249617414,0.4102333545702641,1.0465472593441474,1.0583584892425761,1.3603407819245656,1.3697502111656836,0.8499700827961106],"path":[5],"success":false},"zeta_shuffled":{"weights":[1.193360571559235,0.9984854462911752,0.8152297593119843,1.1815684203910082,1.032443111093071,1.2182798529716943,1.104494317213367,1.0357085886496464,0.8817481775038271,1.0936509786309858,0.8894082687195336,0.9825804375724161,1.042323535035941,1.1054565629899642],"path":[5],"success":false}}},{"label":"Golden weights hurt","clauses":[[-1,-3,4],[-1,3,-4],[-1,-3,-4],[1,-2,4],[-1,2,-3],[-1,-2,3],[1,2,-4],[1,-2,-4],[-1,-2,-4],[1,2,3],[-2,3,4],[1,-2,3],[-1,-2,4],[-1,-2,-3]],"start":13,"runs":{"uniform":{"weights":[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],"path":[13,9,1],"success":true},"phi":{"weights":[1.3014952024033355,1.1280968122950379,0.509595592061862,1.5951210838769774,0.6127568760598974,0.9759609718095386,1.4226943864338915,0.40067565720093756,1.461151850075654,0.9192462981710123,0.6579386829609761,1.5852044409871087,0.4790382328447982,1.1830775465507521],"path":[13],"success":false},"zeta":{"weights":[1.1291681061408934,1.074609209934027,0.723036579591509,1.1160989600679472,1.1669778451106223,1.0537152905364293,1.0555641090015355,1.0619250930131938,0.9906259787318,1.2010892407930778,0.8369670552156709,0.8797687004680265,1.0963852082720817,0.9620558897468041],"path":[13,12,4],"success":true},"phi_shuffled":{"weights":[0.40067565720093756,1.4226943864338915,1.1280968122950379,0.509595592061862,1.5852044409871087,1.1830775465507521,0.9759609718095386,0.4790382328447982,0.6127568760598974,1.5951210838769774,0.6579386829609761,0.9192462981710123,1.3014952024033355,1.461151850075654],"path":[13,12,4],"success":true},"zeta_shuffled":{"weights":[1.1669778451106223,1.1160989600679472,1.0555641090015355,1.2010892407930778,0.723036579591509,0.9906259787318,0.8369670552156709,0.8797687004680265,1.074609209934027,0.9620558897468041,1.1291681061408934,1.0963852082720817,1.0619250930131938,1.0537152905364293],"path":[13,12,4],"success":true}}},{"label":"Zeta weights hurt","clauses":[[-1,-2,-4],[-1,-2,-3],[-1,2,-3],[-1,-2,3],[1,2,-4],[-1,-3,-4],[-2,3,4],[1,-3,4],[-1,-2,4],[1,-2,-4],[1,-2,-3],[1,3,4],[-2,-3,4],[-1,2,-4],[1,3,-4]],"start":8,"runs":{"uniform":{"weights":[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],"path":[8,0,1],"success":true},"phi":{"weights":[1.2577741595846959,0.4439414475904181,1.5622663822875207,0.7268630894325713,0.8405389323262447,1.5083001677029633,0.4098516189014424,1.3620139316377977,1.0562727678575876,0.5549984929591771,1.5999877561221159,0.5601769098558348,1.048635960942967,1.368097802234609,0.4085163121433747],"path":[8,0,1],"success":true},"zeta":{"weights":[1.0447697588914528,0.7962882194035648,0.9661365758667256,0.8714613474627637,0.8402397873586629,1.1683724708946108,0.992169517470868,0.8774656690701932,0.9833461853257525,1.0562932017001172,1.022965166958008,1.0983490909465026,0.8474379789060771,1.0733965767656701,0.9711708804059057],"path":[8,12],"success":false},"phi_shuffled":{"weights":[0.8405389323262447,1.0562727678575876,1.5999877561221159,0.4098516189014424,1.5083001677029633,1.5622663822875207,1.3620139316377977,1.368097802234609,0.4439414475904181,1.048635960942967,0.7268630894325713,0.5601769098558348,0.4085163121433747,1.2577741595846959,0.5549984929591771],"path":[8,0,1],"success":true},"zeta_shuffled":{"weights":[0.8402397873586629,1.022965166958008,0.7962882194035648,0.8474379789060771,0.8714613474627637,1.0447697588914528,0.9833461853257525,1.0983490909465026,0.992169517470868,0.8774656690701932,1.1683724708946108,0.9661365758667256,0.9711708804059057,1.0562932017001172,1.0733965767656701],"path":[8,12],"success":false}}}],"geometry":{"shift":[0.071,0.113],"window":[[-1.2071067811865475,-0.5],[-0.5,-1.2071067811865475],[0.5,-1.2071067811865475],[1.2071067811865475,-0.5],[1.2071067811865475,0.5],[0.5,1.2071067811865475],[-0.5,1.2071067811865475],[-1.2071067811865475,0.5]],"candidates":[{"lattice":[0,0,0,0],"physical":[0.0,0.0],"internal":[0.0,0.0],"id":0},{"lattice":[1,0,-1,1],"physical":[0.29289321881345254,-0.29289321881345254],"internal":[1.7071067811865475,1.7071067811865475],"id":1},{"lattice":[0,0,-1,1],"physical":[-0.7071067811865475,-0.29289321881345254],"internal":[0.7071067811865475,1.7071067811865475],"id":2},{"lattice":[1,-1,0,0],"physical":[0.29289321881345254,-0.7071067811865475],"internal":[1.7071067811865475,-0.7071067811865475],"id":3},{"lattice":[0,1,-1,0],"physical":[0.7071067811865475,-0.29289321881345254],"internal":[-0.7071067811865475,1.7071067811865475],"id":4},{"lattice":[1,0,0,1],"physical":[0.29289321881345254,0.7071067811865475],"internal":[1.7071067811865475,0.7071067811865475],"id":5},{"lattice":[0,-1,0,0],"physical":[-0.7071067811865475,-0.7071067811865475],"internal":[0.7071067811865475,-0.7071067811865475],"id":6},{"lattice":[0,0,-1,0],"physical":[0.0,-1.0],"internal":[0.0,1.0],"id":7},{"lattice":[0,0,0,-1],"physical":[0.7071067811865475,-0.7071067811865475],"internal":[-0.7071067811865475,-0.7071067811865475],"id":8},{"lattice":[1,0,0,0],"physical":[1.0,0.0],"internal":[1.0,0.0],"id":9},{"lattice":[0,1,0,0],"physical":[0.7071067811865475,0.7071067811865475],"internal":[-0.7071067811865475,0.7071067811865475],"id":10},{"lattice":[0,0,1,0],"physical":[0.0,1.0],"internal":[0.0,-1.0],"id":11},{"lattice":[0,0,0,1],"physical":[-0.7071067811865475,0.7071067811865475],"internal":[0.7071067811865475,0.7071067811865475],"id":12},{"lattice":[-1,0,0,0],"physical":[-1.0,0.0],"internal":[-1.0,0.0],"id":13},{"lattice":[-1,0,-1,0],"physical":[-1.0,-1.0],"internal":[-1.0,1.0],"id":14},{"lattice":[0,-1,0,-1],"physical":[0.0,-1.414213562373095],"internal":[0.0,-1.414213562373095],"id":15},{"lattice":[1,0,-1,0],"physical":[1.0,-1.0],"internal":[1.0,1.0],"id":16},{"lattice":[0,1,0,-1],"physical":[1.414213562373095,0.0],"internal":[-1.414213562373095,0.0],"id":17},{"lattice":[1,0,1,0],"physical":[1.0,1.0],"internal":[1.0,-1.0],"id":18},{"lattice":[0,1,0,1],"physical":[0.0,1.414213562373095],"internal":[0.0,1.414213562373095],"id":19},{"lattice":[-1,0,1,0],"physical":[-1.0,1.0],"internal":[-1.0,-1.0],"id":20},{"lattice":[0,-1,0,1],"physical":[-1.414213562373095,0.0],"internal":[1.414213562373095,0.0],"id":21},{"lattice":[-1,0,-1,1],"physical":[-1.7071067811865475,-0.29289321881345254],"internal":[-0.29289321881345254,1.7071067811865475],"id":22},{"lattice":[0,-1,-1,1],"physical":[-1.414213562373095,-1.0],"internal":[1.414213562373095,1.0],"id":23},{"lattice":[-1,-1,0,-1],"physical":[-1.0,-1.414213562373095],"internal":[-1.0,-1.414213562373095],"id":24},{"lattice":[1,-1,-1,0],"physical":[0.29289321881345254,-1.7071067811865475],"internal":[1.7071067811865475,0.29289321881345254],"id":25},{"lattice":[1,-1,0,-1],"physical":[1.0,-1.414213562373095],"internal":[1.0,-1.414213562373095],"id":26},{"lattice":[0,1,-1,-1],"physical":[1.414213562373095,-1.0],"internal":[-1.414213562373095,1.0],"id":27},{"lattice":[1,1,-1,0],"physical":[1.7071067811865475,-0.29289321881345254],"internal":[0.29289321881345254,1.7071067811865475],"id":28},{"lattice":[0,1,1,-1],"physical":[1.414213562373095,1.0],"internal":[-1.414213562373095,-1.0],"id":29},{"lattice":[1,1,0,1],"physical":[1.0,1.414213562373095],"internal":[1.0,1.414213562373095],"id":30},{"lattice":[1,0,1,1],"physical":[0.29289321881345254,1.7071067811865475],"internal":[1.7071067811865475,-0.29289321881345254],"id":31},{"lattice":[-1,1,0,1],"physical":[-1.0,1.414213562373095],"internal":[-1.0,1.414213562373095],"id":32},{"lattice":[0,-1,1,1],"physical":[-1.414213562373095,1.0],"internal":[1.414213562373095,-1.0],"id":33},{"lattice":[-1,-1,0,0],"physical":[-1.7071067811865475,-0.7071067811865475],"internal":[-0.29289321881345254,-0.7071067811865475],"id":34},{"lattice":[0,-1,-1,0],"physical":[-0.7071067811865475,-1.7071067811865475],"internal":[0.7071067811865475,0.29289321881345254],"id":35},{"lattice":[0,0,-1,-1],"physical":[0.7071067811865475,-1.7071067811865475],"internal":[-0.7071067811865475,0.29289321881345254],"id":36},{"lattice":[1,0,0,-1],"physical":[1.7071067811865475,-0.7071067811865475],"internal":[0.29289321881345254,-0.7071067811865475],"id":37},{"lattice":[1,1,0,0],"physical":[1.7071067811865475,0.7071067811865475],"internal":[0.29289321881345254,0.7071067811865475],"id":38},{"lattice":[0,1,1,0],"physical":[0.7071067811865475,1.7071067811865475],"internal":[-0.7071067811865475,-0.29289321881345254],"id":39},{"lattice":[0,0,1,1],"physical":[-0.7071067811865475,1.7071067811865475],"internal":[0.7071067811865475,-0.29289321881345254],"id":40},{"lattice":[-1,0,0,1],"physical":[-1.7071067811865475,0.7071067811865475],"internal":[-0.29289321881345254,0.7071067811865475],"id":41},{"lattice":[0,-2,0,0],"physical":[-1.414213562373095,-1.414213562373095],"internal":[1.414213562373095,-1.414213562373095],"id":42},{"lattice":[0,0,0,-2],"physical":[1.414213562373095,-1.414213562373095],"internal":[-1.414213562373095,-1.414213562373095],"id":43},{"lattice":[0,2,0,0],"physical":[1.414213562373095,1.414213562373095],"internal":[-1.414213562373095,1.414213562373095],"id":44},{"lattice":[0,0,0,2],"physical":[-1.414213562373095,1.414213562373095],"internal":[1.414213562373095,1.414213562373095],"id":45},{"lattice":[-1,-1,-1,0],"physical":[-1.7071067811865475,-1.7071067811865475],"internal":[-0.29289321881345254,0.29289321881345254],"id":46},{"lattice":[0,-1,-1,-1],"physical":[0.0,-2.414213562373095],"internal":[0.0,-0.4142135623730949],"id":47},{"lattice":[1,0,-1,-1],"physical":[1.7071067811865475,-1.7071067811865475],"internal":[0.29289321881345254,0.29289321881345254],"id":48},{"lattice":[1,1,0,-1],"physical":[2.414213562373095,0.0],"internal":[-0.4142135623730949,0.0],"id":49},{"lattice":[1,1,1,0],"physical":[1.7071067811865475,1.7071067811865475],"internal":[0.29289321881345254,-0.29289321881345254],"id":50},{"lattice":[0,1,1,1],"physical":[0.0,2.414213562373095],"internal":[0.0,0.4142135623730949],"id":51},{"lattice":[-1,0,1,1],"physical":[-1.7071067811865475,1.7071067811865475],"internal":[-0.29289321881345254,-0.29289321881345254],"id":52},{"lattice":[-1,-1,0,1],"physical":[-2.414213562373095,0.0],"internal":[0.4142135623730949,0.0],"id":53},{"lattice":[-1,-1,-1,1],"physical":[-2.414213562373095,-1.0],"internal":[0.4142135623730949,1.0],"id":54},{"lattice":[-1,-1,-1,-1],"physical":[-1.0,-2.414213562373095],"internal":[-1.0,-0.4142135623730949],"id":55},{"lattice":[1,-1,-1,-1],"physical":[1.0,-2.414213562373095],"internal":[1.0,-0.4142135623730949],"id":56},{"lattice":[1,1,-1,-1],"physical":[2.414213562373095,-1.0],"internal":[-0.4142135623730949,1.0],"id":57},{"lattice":[1,1,1,-1],"physical":[2.414213562373095,1.0],"internal":[-0.4142135623730949,-1.0],"id":58},{"lattice":[1,1,1,1],"physical":[1.0,2.414213562373095],"internal":[1.0,0.4142135623730949],"id":59},{"lattice":[-1,1,1,1],"physical":[-1.0,2.414213562373095],"internal":[-1.0,0.4142135623730949],"id":60},{"lattice":[-1,-1,1,1],"physical":[-2.414213562373095,1.0],"internal":[0.4142135623730949,-1.0],"id":61},{"lattice":[-2,0,-1,1],"physical":[-2.7071067811865475,-0.29289321881345254],"internal":[-1.2928932188134525,1.7071067811865475],"id":62},{"lattice":[1,-1,-2,0],"physical":[0.29289321881345254,-2.7071067811865475],"internal":[1.7071067811865475,1.2928932188134525],"id":63},{"lattice":[2,1,-1,0],"physical":[2.7071067811865475,-0.29289321881345254],"internal":[1.2928932188134525,1.7071067811865475],"id":64},{"lattice":[1,0,2,1],"physical":[0.29289321881345254,2.7071067811865475],"internal":[1.7071067811865475,-1.2928932188134525],"id":65},{"lattice":[-2,-1,0,0],"physical":[-2.7071067811865475,-0.7071067811865475],"internal":[-1.2928932188134525,-0.7071067811865475],"id":66},{"lattice":[-1,-2,0,0],"physical":[-2.414213562373095,-1.414213562373095],"internal":[0.4142135623730949,-1.414213562373095],"id":67},{"lattice":[0,-2,-1,0],"physical":[-1.414213562373095,-2.414213562373095],"internal":[1.414213562373095,-0.4142135623730949],"id":68},{"lattice":[0,-1,-2,0],"physical":[-0.7071067811865475,-2.7071067811865475],"internal":[0.7071067811865475,1.2928932188134525],"id":69},{"lattice":[0,0,-2,-1],"physical":[0.7071067811865475,-2.7071067811865475],"internal":[-0.7071067811865475,1.2928932188134525],"id":70},{"lattice":[0,0,-1,-2],"physical":[1.414213562373095,-2.414213562373095],"internal":[-1.414213562373095,-0.4142135623730949],"id":71},{"lattice":[1,0,0,-2],"physical":[2.414213562373095,-1.414213562373095],"internal":[-0.4142135623730949,-1.414213562373095],"id":72},{"lattice":[2,0,0,-1],"physical":[2.7071067811865475,-0.7071067811865475],"internal":[1.2928932188134525,-0.7071067811865475],"id":73},{"lattice":[2,1,0,0],"physical":[2.7071067811865475,0.7071067811865475],"internal":[1.2928932188134525,0.7071067811865475],"id":74},{"lattice":[1,2,0,0],"physical":[2.414213562373095,1.414213562373095],"internal":[-0.4142135623730949,1.414213562373095],"id":75},{"lattice":[0,2,1,0],"physical":[1.414213562373095,2.414213562373095],"internal":[-1.414213562373095,0.4142135623730949],"id":76},{"lattice":[0,1,2,0],"physical":[0.7071067811865475,2.7071067811865475],"internal":[-0.7071067811865475,-1.2928932188134525],"id":77},{"lattice":[0,0,2,1],"physical":[-0.7071067811865475,2.7071067811865475],"internal":[0.7071067811865475,-1.2928932188134525],"id":78},{"lattice":[0,0,1,2],"physical":[-1.414213562373095,2.414213562373095],"internal":[1.414213562373095,0.4142135623730949],"id":79},{"lattice":[-1,0,0,2],"physical":[-2.414213562373095,1.414213562373095],"internal":[0.4142135623730949,1.414213562373095],"id":80},{"lattice":[-2,0,0,1],"physical":[-2.7071067811865475,0.7071067811865475],"internal":[-1.2928932188134525,0.7071067811865475],"id":81},{"lattice":[-1,-1,-1,2],"physical":[-3.1213203435596424,-0.29289321881345254],"internal":[1.1213203435596424,1.7071067811865475],"id":82},{"lattice":[1,-2,-1,-1],"physical":[0.29289321881345254,-3.1213203435596424],"internal":[1.7071067811865475,-1.1213203435596424],"id":83},{"lattice":[1,2,-1,-1],"physical":[3.1213203435596424,-0.29289321881345254],"internal":[-1.1213203435596424,1.7071067811865475],"id":84},{"lattice":[1,1,1,2],"physical":[0.29289321881345254,3.1213203435596424],"internal":[1.7071067811865475,1.1213203435596424],"id":85},{"lattice":[-1,-2,0,1],"physical":[-3.1213203435596424,-0.7071067811865475],"internal":[1.1213203435596424,-0.7071067811865475],"id":86},{"lattice":[-2,-1,-1,0],"physical":[-2.7071067811865475,-1.7071067811865475],"internal":[-1.2928932188134525,0.29289321881345254],"id":87},{"lattice":[-1,-1,-2,0],"physical":[-1.7071067811865475,-2.7071067811865475],"internal":[-0.29289321881345254,1.2928932188134525],"id":88},{"lattice":[0,-2,-1,-1],"physical":[-0.7071067811865475,-3.1213203435596424],"internal":[0.7071067811865475,-1.1213203435596424],"id":89},{"lattice":[0,-1,-1,-2],"physical":[0.7071067811865475,-3.1213203435596424],"internal":[-0.7071067811865475,-1.1213203435596424],"id":90},{"lattice":[1,0,-2,-1],"physical":[1.7071067811865475,-2.7071067811865475],"internal":[0.29289321881345254,1.2928932188134525],"id":91},{"lattice":[2,0,-1,-1],"physical":[2.7071067811865475,-1.7071067811865475],"internal":[1.2928932188134525,0.29289321881345254],"id":92},{"lattice":[1,1,0,-2],"physical":[3.1213203435596424,-0.7071067811865475],"internal":[-1.1213203435596424,-0.7071067811865475],"id":93},{"lattice":[1,2,0,-1],"physical":[3.1213203435596424,0.7071067811865475],"internal":[-1.1213203435596424,0.7071067811865475],"id":94},{"lattice":[2,1,1,0],"physical":[2.7071067811865475,1.7071067811865475],"internal":[1.2928932188134525,-0.29289321881345254],"id":95},{"lattice":[1,1,2,0],"physical":[1.7071067811865475,2.7071067811865475],"internal":[0.29289321881345254,-1.2928932188134525],"id":96},{"lattice":[0,2,1,1],"physical":[0.7071067811865475,3.1213203435596424],"internal":[-0.7071067811865475,1.1213203435596424],"id":97},{"lattice":[0,1,1,2],"physical":[-0.7071067811865475,3.1213203435596424],"internal":[0.7071067811865475,1.1213203435596424],"id":98},{"lattice":[-1,0,2,1],"physical":[-1.7071067811865475,2.7071067811865475],"internal":[-0.29289321881345254,-1.2928932188134525],"id":99},{"lattice":[-2,0,1,1],"physical":[-2.7071067811865475,1.7071067811865475],"internal":[-1.2928932188134525,-0.29289321881345254],"id":100},{"lattice":[-1,-1,0,2],"physical":[-3.1213203435596424,0.7071067811865475],"internal":[1.1213203435596424,0.7071067811865475],"id":101},{"lattice":[-1,-2,-1,0],"physical":[-2.414213562373095,-2.414213562373095],"internal":[0.4142135623730949,-0.4142135623730949],"id":102},{"lattice":[0,-1,-2,-1],"physical":[0.0,-3.414213562373095],"internal":[0.0,0.5857864376269051],"id":103},{"lattice":[1,0,-1,-2],"physical":[2.414213562373095,-2.414213562373095],"internal":[-0.4142135623730949,-0.4142135623730949],"id":104},{"lattice":[2,1,0,-1],"physical":[3.414213562373095,0.0],"internal":[0.5857864376269051,0.0],"id":105},{"lattice":[1,2,1,0],"physical":[2.414213562373095,2.414213562373095],"internal":[-0.4142135623730949,0.4142135623730949],"id":106},{"lattice":[0,1,2,1],"physical":[0.0,3.414213562373095],"internal":[0.0,-0.5857864376269051],"id":107},{"lattice":[-1,0,1,2],"physical":[-2.414213562373095,2.414213562373095],"internal":[0.4142135623730949,0.4142135623730949],"id":108},{"lattice":[-2,-1,0,1],"physical":[-3.414213562373095,0.0],"internal":[-0.5857864376269051,0.0],"id":109},{"lattice":[-2,-1,-1,1],"physical":[-3.414213562373095,-1.0],"internal":[-0.5857864376269051,1.0],"id":110},{"lattice":[-1,-2,-1,1],"physical":[-3.1213203435596424,-1.7071067811865475],"internal":[1.1213203435596424,0.29289321881345254],"id":111},{"lattice":[-1,-2,-1,-1],"physical":[-1.7071067811865475,-3.1213203435596424],"internal":[-0.29289321881345254,-1.1213203435596424],"id":112},{"lattice":[-1,-1,-2,-1],"physical":[-1.0,-3.414213562373095],"internal":[-1.0,0.5857864376269051],"id":113},{"lattice":[1,-1,-2,-1],"physical":[1.0,-3.414213562373095],"internal":[1.0,0.5857864376269051],"id":114},{"lattice":[1,-1,-1,-2],"physical":[1.7071067811865475,-3.1213203435596424],"internal":[0.29289321881345254,-1.1213203435596424],"id":115},{"lattice":[1,1,-1,-2],"physical":[3.1213203435596424,-1.7071067811865475],"internal":[-1.1213203435596424,0.29289321881345254],"id":116},{"lattice":[2,1,-1,-1],"physical":[3.414213562373095,-1.0],"internal":[0.5857864376269051,1.0],"id":117},{"lattice":[2,1,1,-1],"physical":[3.414213562373095,1.0],"internal":[0.5857864376269051,-1.0],"id":118},{"lattice":[1,2,1,-1],"physical":[3.1213203435596424,1.7071067811865475],"internal":[-1.1213203435596424,-0.29289321881345254],"id":119},{"lattice":[1,2,1,1],"physical":[1.7071067811865475,3.1213203435596424],"internal":[0.29289321881345254,1.1213203435596424],"id":120},{"lattice":[1,1,2,1],"physical":[1.0,3.414213562373095],"internal":[1.0,-0.5857864376269051],"id":121},{"lattice":[-1,1,2,1],"physical":[-1.0,3.414213562373095],"internal":[-1.0,-0.5857864376269051],"id":122},{"lattice":[-1,1,1,2],"physical":[-1.7071067811865475,3.1213203435596424],"internal":[-0.29289321881345254,1.1213203435596424],"id":123},{"lattice":[-1,-1,1,2],"physical":[-3.1213203435596424,1.7071067811865475],"internal":[1.1213203435596424,-0.29289321881345254],"id":124},{"lattice":[-2,-1,1,1],"physical":[-3.414213562373095,1.0],"internal":[-0.5857864376269051,-1.0],"id":125},{"lattice":[-2,-2,0,0],"physical":[-3.414213562373095,-1.414213562373095],"internal":[-0.5857864376269051,-1.414213562373095],"id":126},{"lattice":[0,-2,-2,0],"physical":[-1.414213562373095,-3.414213562373095],"internal":[1.414213562373095,0.5857864376269051],"id":127},{"lattice":[0,0,-2,-2],"physical":[1.414213562373095,-3.414213562373095],"internal":[-1.414213562373095,0.5857864376269051],"id":128},{"lattice":[2,0,0,-2],"physical":[3.414213562373095,-1.414213562373095],"internal":[0.5857864376269051,-1.414213562373095],"id":129},{"lattice":[2,2,0,0],"physical":[3.414213562373095,1.414213562373095],"internal":[0.5857864376269051,1.414213562373095],"id":130},{"lattice":[0,2,2,0],"physical":[1.414213562373095,3.414213562373095],"internal":[-1.414213562373095,-0.5857864376269051],"id":131},{"lattice":[0,0,2,2],"physical":[-1.414213562373095,3.414213562373095],"internal":[1.414213562373095,-0.5857864376269051],"id":132},{"lattice":[-2,0,0,2],"physical":[-3.414213562373095,1.414213562373095],"internal":[-0.5857864376269051,1.414213562373095],"id":133},{"lattice":[-2,-1,-2,0],"physical":[-2.7071067811865475,-2.7071067811865475],"internal":[-1.2928932188134525,1.2928932188134525],"id":134},{"lattice":[2,0,-2,-1],"physical":[2.7071067811865475,-2.7071067811865475],"internal":[1.2928932188134525,1.2928932188134525],"id":135},{"lattice":[2,1,2,0],"physical":[2.7071067811865475,2.7071067811865475],"internal":[1.2928932188134525,-1.2928932188134525],"id":136},{"lattice":[-2,0,2,1],"physical":[-2.7071067811865475,2.7071067811865475],"internal":[-1.2928932188134525,-1.2928932188134525],"id":137},{"lattice":[-2,-1,-1,2],"physical":[-4.121320343559642,-0.29289321881345254],"internal":[0.12132034355964239,1.7071067811865475],"id":138},{"lattice":[-1,-2,-2,1],"physical":[-3.1213203435596424,-2.7071067811865475],"internal":[1.1213203435596424,1.2928932188134525],"id":139},{"lattice":[-2,-2,-1,-1],"physical":[-2.7071067811865475,-3.1213203435596424],"internal":[-1.2928932188134525,-1.1213203435596424],"id":140},{"lattice":[1,-2,-2,-1],"physical":[0.29289321881345254,-4.121320343559642],"internal":[1.7071067811865475,-0.12132034355964239],"id":141},{"lattice":[2,-1,-1,-2],"physical":[2.7071067811865475,-3.1213203435596424],"internal":[1.2928932188134525,-1.1213203435596424],"id":142},{"lattice":[1,1,-2,-2],"physical":[3.1213203435596424,-2.7071067811865475],"internal":[-1.1213203435596424,1.2928932188134525],"id":143},{"lattice":[2,2,-1,-1],"physical":[4.121320343559642,-0.29289321881345254],"internal":[-0.12132034355964239,1.7071067811865475],"id":144},{"lattice":[1,2,2,-1],"physical":[3.1213203435596424,2.7071067811865475],"internal":[-1.1213203435596424,-1.2928932188134525],"id":145},{"lattice":[2,2,1,1],"physical":[2.7071067811865475,3.1213203435596424],"internal":[1.2928932188134525,1.1213203435596424],"id":146},{"lattice":[1,1,2,2],"physical":[0.29289321881345254,4.121320343559642],"internal":[1.7071067811865475,0.12132034355964239],"id":147},{"lattice":[-2,1,1,2],"physical":[-2.7071067811865475,3.1213203435596424],"internal":[-1.2928932188134525,1.1213203435596424],"id":148},{"lattice":[-1,-1,2,2],"physical":[-3.1213203435596424,2.7071067811865475],"internal":[1.1213203435596424,-1.2928932188134525],"id":149},{"lattice":[-2,-2,0,1],"physical":[-4.121320343559642,-0.7071067811865475],"internal":[0.12132034355964239,-0.7071067811865475],"id":150},{"lattice":[-2,-2,-1,0],"physical":[-3.414213562373095,-2.414213562373095],"internal":[-0.5857864376269051,-0.4142135623730949],"id":151},{"lattice":[-1,-2,-2,0],"physical":[-2.414213562373095,-3.414213562373095],"internal":[0.4142135623730949,0.5857864376269051],"id":152},{"lattice":[0,-2,-2,-1],"physical":[-0.7071067811865475,-4.121320343559642],"internal":[0.7071067811865475,-0.12132034355964239],"id":153},{"lattice":[0,-1,-2,-2],"physical":[0.7071067811865475,-4.121320343559642],"internal":[-0.7071067811865475,-0.12132034355964239],"id":154},{"lattice":[1,0,-2,-2],"physical":[2.414213562373095,-3.414213562373095],"internal":[-0.4142135623730949,0.5857864376269051],"id":155},{"lattice":[2,0,-1,-2],"physical":[3.414213562373095,-2.414213562373095],"internal":[0.5857864376269051,-0.4142135623730949],"id":156},{"lattice":[2,1,0,-2],"physical":[4.121320343559642,-0.7071067811865475],"internal":[-0.12132034355964239,-0.7071067811865475],"id":157},{"lattice":[2,2,0,-1],"physical":[4.121320343559642,0.7071067811865475],"internal":[-0.12132034355964239,0.7071067811865475],"id":158},{"lattice":[2,2,1,0],"physical":[3.414213562373095,2.414213562373095],"internal":[0.5857864376269051,0.4142135623730949],"id":159},{"lattice":[1,2,2,0],"physical":[2.414213562373095,3.414213562373095],"internal":[-0.4142135623730949,-0.5857864376269051],"id":160},{"lattice":[0,2,2,1],"physical":[0.7071067811865475,4.121320343559642],"internal":[-0.7071067811865475,0.12132034355964239],"id":161},{"lattice":[0,1,2,2],"physical":[-0.7071067811865475,4.121320343559642],"internal":[0.7071067811865475,0.12132034355964239],"id":162},{"lattice":[-1,0,2,2],"physical":[-2.414213562373095,3.414213562373095],"internal":[0.4142135623730949,-0.5857864376269051],"id":163},{"lattice":[-2,0,1,2],"physical":[-3.414213562373095,2.414213562373095],"internal":[-0.5857864376269051,0.4142135623730949],"id":164},{"lattice":[-2,-1,0,2],"physical":[-4.121320343559642,0.7071067811865475],"internal":[0.12132034355964239,0.7071067811865475],"id":165},{"lattice":[-1,-3,-1,0],"physical":[-3.1213203435596424,-3.1213203435596424],"internal":[1.1213203435596424,-1.1213203435596424],"id":166},{"lattice":[0,-1,-3,-1],"physical":[0.0,-4.414213562373095],"internal":[0.0,1.585786437626905],"id":167},{"lattice":[1,0,-1,-3],"physical":[3.1213203435596424,-3.1213203435596424],"internal":[-1.1213203435596424,-1.1213203435596424],"id":168},{"lattice":[3,1,0,-1],"physical":[4.414213562373095,0.0],"internal":[1.585786437626905,0.0],"id":169},{"lattice":[1,3,1,0],"physical":[3.1213203435596424,3.1213203435596424],"internal":[-1.1213203435596424,1.1213203435596424],"id":170},{"lattice":[0,1,3,1],"physical":[0.0,4.414213562373095],"internal":[0.0,-1.585786437626905],"id":171},{"lattice":[-1,0,1,3],"physical":[-3.1213203435596424,3.1213203435596424],"internal":[1.1213203435596424,1.1213203435596424],"id":172},{"lattice":[-3,-1,0,1],"physical":[-4.414213562373095,0.0],"internal":[-1.585786437626905,0.0],"id":173},{"lattice":[-2,-2,-1,1],"physical":[-4.121320343559642,-1.7071067811865475],"internal":[0.12132034355964239,0.29289321881345254],"id":174},{"lattice":[-1,-2,-2,-1],"physical":[-1.7071067811865475,-4.121320343559642],"internal":[-0.29289321881345254,-0.12132034355964239],"id":175},{"lattice":[1,-1,-2,-2],"physical":[1.7071067811865475,-4.121320343559642],"internal":[0.29289321881345254,-0.12132034355964239],"id":176},{"lattice":[2,1,-1,-2],"physical":[4.121320343559642,-1.7071067811865475],"internal":[-0.12132034355964239,0.29289321881345254],"id":177},{"lattice":[2,2,1,-1],"physical":[4.121320343559642,1.7071067811865475],"internal":[-0.12132034355964239,-0.29289321881345254],"id":178},{"lattice":[1,2,2,1],"physical":[1.7071067811865475,4.121320343559642],"internal":[0.29289321881345254,0.12132034355964239],"id":179},{"lattice":[-1,1,2,2],"physical":[-1.7071067811865475,4.121320343559642],"internal":[-0.29289321881345254,0.12132034355964239],"id":180},{"lattice":[-2,-1,1,2],"physical":[-4.121320343559642,1.7071067811865475],"internal":[0.12132034355964239,-0.29289321881345254],"id":181}],"candidateEdges":[[0,9],[0,10],[0,11],[0,12],[1,5],[2,1],[2,12],[3,9],[4,28],[4,10],[5,30],[5,31],[6,3],[6,0],[6,21],[7,16],[7,4],[7,0],[7,2],[8,37],[8,17],[8,0],[9,38],[9,18],[9,5],[10,38],[10,44],[10,39],[10,19],[11,18],[11,39],[11,40],[12,5],[12,19],[12,40],[12,45],[13,0],[13,20],[13,41],[14,7],[14,13],[14,22],[15,26],[15,8],[15,6],[16,28],[16,9],[16,1],[17,49],[17,29],[17,10],[18,50],[18,31],[19,30],[19,51],[20,11],[20,52],[21,12],[21,33],[22,2],[22,41],[23,2],[23,21],[24,15],[24,34],[25,16],[25,3],[26,37],[26,3],[27,57],[27,17],[27,4],[28,64],[28,38],[29,58],[29,39],[30,59],[31,59],[31,65],[32,19],[32,60],[33,40],[34,6],[34,13],[34,53],[35,25],[35,7],[35,6],[35,23],[36,48],[36,27],[36,8],[36,7],[37,73],[37,49],[37,9],[38,74],[38,75],[38,50],[38,30],[39,50],[39,76],[39,77],[39,51],[40,31],[40,51],[40,78],[40,79],[41,12],[41,32],[41,52],[41,80],[42,6],[43,72],[43,8],[44,75],[44,76],[45,79],[46,35],[46,14],[46,34],[46,54],[47,56],[47,36],[47,15],[47,35],[48,92],[48,57],[48,37],[48,16],[49,105],[49,94],[49,58],[49,38],[50,95],[50,106],[50,96],[50,59],[51,59],[51,97],[51,107],[51,98],[52,40],[52,60],[52,99],[52,108],[53,21],[53,41],[53,61],[53,101],[54,23],[54,22],[54,53],[54,82],[55,47],[55,24],[55,46],[56,48],[56,26],[56,25],[57,117],[57,84],[57,49],[57,28],[58,118],[58,119],[58,50],[59,120],[59,121],[59,85],[60,51],[60,122],[60,123],[61,33],[61,52],[61,124],[62,22],[62,81],[63,25],[64,74],[65,121],[66,34],[66,109],[67,42],[67,34],[67,86],[68,35],[68,42],[69,63],[69,35],[70,91],[70,36],[71,104],[71,43],[71,36],[72,129],[72,93],[72,37],[73,105],[74,130],[74,95],[75,130],[75,106],[76,106],[76,131],[76,97],[77,96],[77,131],[77,107],[78,65],[78,107],[78,132],[79,98],[79,132],[80,45],[80,108],[81,41],[81,100],[81,133],[82,101],[83,56],[84,144],[84,94],[85,147],[86,53],[87,46],[87,66],[87,110],[88,69],[88,46],[89,83],[89,47],[89,68],[90,115],[90,71],[90,47],[91,135],[91,48],[92,117],[92,73],[93,157],[93,49],[94,158],[94,119],[94,75],[95,159],[95,136],[96,136],[96,160],[96,121],[97,120],[97,161],[98,85],[98,162],[99,78],[99,122],[99,163],[100,52],[100,137],[100,164],[101,80],[101,124],[102,68],[102,46],[102,67],[102,111],[103,114],[103,70],[103,47],[103,69],[104,156],[104,116],[104,72],[104,48],[105,169],[105,158],[105,118],[105,74],[106,159],[106,170],[106,160],[106,120],[107,121],[107,161],[107,171],[107,162],[108,79],[108,123],[108,163],[108,172],[109,53],[109,81],[109,125],[109,165],[110,54],[110,62],[110,109],[110,138],[111,54],[111,86],[112,89],[112,55],[112,102],[113,103],[113,55],[113,88],[114,91],[114,56],[114,63],[115,142],[115,104],[115,56],[116,177],[116,93],[116,57],[117,144],[117,105],[117,64],[118,178],[118,95],[119,178],[119,145],[119,106],[120,146],[120,179],[121,179],[121,147],[122,107],[122,180],[123,98],[123,180],[124,108],[124,149],[125,61],[125,100],[125,181],[126,67],[126,66],[126,150],[127,69],[127,68],[128,155],[128,71],[128,70],[129,157],[129,73],[130,159],[131,160],[131,161],[132,162],[133,80],[133,164],[134,88],[134,87],[135,92],[137,99],[138,82],[138,165],[139,111],[140,112],[140,151],[141,114],[141,83],[142,156],[143,116],[144,158],[145,160],[148,123],[149,163],[150,86],[150,109],[151,102],[151,87],[151,126],[151,174],[152,127],[152,88],[152,102],[152,139],[153,141],[153,103],[153,89],[153,127],[154,176],[154,128],[154,90],[154,103],[155,143],[155,104],[155,91],[156,177],[156,129],[156,92],[157,105],[158,178],[158,130],[159,146],[160,179],[161,179],[162,147],[163,132],[163,180],[164,108],[164,148],[165,101],[165,133],[165,181],[166,102],[167,103],[168,104],[173,109],[174,111],[174,110],[174,150],[175,153],[175,113],[175,112],[175,152],[176,155],[176,115],[176,114],[177,157],[177,117],[178,159],[180,162],[181,124],[181,164]],"booleanVertices":[{"id":0,"bits":[0,0,0,0],"label":"0000","physical":[0.0,0.0],"internal":[0.0,0.0],"insideWindow":true},{"id":1,"bits":[1,0,0,0],"label":"1000","physical":[1.0,0.0],"internal":[1.0,0.0],"insideWindow":true},{"id":2,"bits":[0,1,0,0],"label":"0100","physical":[0.7071067811865475,0.7071067811865475],"internal":[-0.7071067811865475,0.7071067811865475],"insideWindow":true},{"id":3,"bits":[1,1,0,0],"label":"1100","physical":[1.7071067811865475,0.7071067811865475],"internal":[0.29289321881345254,0.7071067811865475],"insideWindow":true},{"id":4,"bits":[0,0,1,0],"label":"0010","physical":[0.0,1.0],"internal":[0.0,-1.0],"insideWindow":true},{"id":5,"bits":[1,0,1,0],"label":"1010","physical":[1.0,1.0],"internal":[1.0,-1.0],"insideWindow":false},{"id":6,"bits":[0,1,1,0],"label":"0110","physical":[0.7071067811865475,1.7071067811865475],"internal":[-0.7071067811865475,-0.29289321881345254],"insideWindow":true},{"id":7,"bits":[1,1,1,0],"label":"1110","physical":[1.7071067811865475,1.7071067811865475],"internal":[0.29289321881345254,-0.29289321881345254],"insideWindow":true},{"id":8,"bits":[0,0,0,1],"label":"0001","physical":[-0.7071067811865475,0.7071067811865475],"internal":[0.7071067811865475,0.7071067811865475],"insideWindow":true},{"id":9,"bits":[1,0,0,1],"label":"1001","physical":[0.29289321881345254,0.7071067811865475],"internal":[1.7071067811865475,0.7071067811865475],"insideWindow":false},{"id":10,"bits":[0,1,0,1],"label":"0101","physical":[0.0,1.414213562373095],"internal":[0.0,1.414213562373095],"insideWindow":false},{"id":11,"bits":[1,1,0,1],"label":"1101","physical":[1.0,1.414213562373095],"internal":[1.0,1.414213562373095],"insideWindow":false},{"id":12,"bits":[0,0,1,1],"label":"0011","physical":[-0.7071067811865475,1.7071067811865475],"internal":[0.7071067811865475,-0.29289321881345254],"insideWindow":true},{"id":13,"bits":[1,0,1,1],"label":"1011","physical":[0.29289321881345254,1.7071067811865475],"internal":[1.7071067811865475,-0.29289321881345254],"insideWindow":false},{"id":14,"bits":[0,1,1,1],"label":"0111","physical":[0.0,2.414213562373095],"internal":[0.0,0.4142135623730949],"insideWindow":true},{"id":15,"bits":[1,1,1,1],"label":"1111","physical":[1.0,2.414213562373095],"internal":[1.0,0.4142135623730949],"insideWindow":true}]}}</script>
+  <script>
+    (() => {
+      const root = document.getElementById('black-swan-jewel-lab');
+      const data = JSON.parse(root.querySelector('#jewel-data').textContent);
+      if (data.pending) return;
+      const view = root.querySelector('#jewel-view');
+      const example = root.querySelector('#jewel-example');
+      const method = root.querySelector('#jewel-method');
+      const shift = root.querySelector('#jewel-shift');
+      const figure = root.querySelector('#jewel-figure');
+      const live = root.querySelector('#jewel-live');
+      const detail = root.querySelector('#jewel-detail');
+      const legend = root.querySelector('#jewel-legend');
+      const ns = 'http://www.w3.org/2000/svg';
+      data.demos.forEach((demo, index) => {
+        const option = document.createElement('option');
+        option.value = index; option.textContent = demo.label;
+        example.appendChild(option);
+      });
+      example.value = '0';
+      method.value = 'phi';
+      const xy = point => point.physical;
+      const inside = (point, polygon) => polygon.every((a, i) => {
+        const b = polygon[(i + 1) % polygon.length];
+        return (b[0] - a[0]) * (point[1] - a[1]) - (b[1] - a[1]) * (point[0] - a[0]) >= -1e-9;
+      });
+      function element(tag, attrs, parent, text) {
+        const node = document.createElementNS(ns, tag);
+        Object.entries(attrs || {}).forEach(([key, value]) => node.setAttribute(key, value));
+        if (text !== undefined) node.textContent = text;
+        parent.appendChild(node); return node;
+      }
+      function violationCount(id, clauses) {
+        return clauses.reduce((total, clause) => total + Number(!clause.some(literal => {
+          const bit = (id >> (Math.abs(literal) - 1)) & 1;
+          return literal > 0 ? bit === 1 : bit === 0;
+        })), 0);
+      }
+      function energy(id, clauses, weights) {
+        return clauses.reduce((sum, clause, j) => sum + (clause.some(literal => {
+          const bit = (id >> (Math.abs(literal) - 1)) & 1;
+          return literal > 0 ? bit === 1 : bit === 0;
+        }) ? 0 : weights[j]), 0);
+      }
+      function axes(svg, points, width, height) {
+        const frame = {left: 64, right: width - 14, top: 14, bottom: height - 48};
+        const values = points.map(xy);
+        const minX = Math.min(...values.map(p => p[0]));
+        const maxX = Math.max(...values.map(p => p[0]));
+        const minY = Math.min(...values.map(p => p[1]));
+        const maxY = Math.max(...values.map(p => p[1]));
+        const span = Math.max(maxX - minX, maxY - minY) || 1;
+        const scale = Math.min(frame.right - frame.left - 30, frame.bottom - frame.top - 66) / span;
+        const cx = (frame.left + frame.right) / 2, cy = (frame.top + frame.bottom) / 2;
+        const x = value => cx + (value - (minX + maxX) / 2) * scale;
+        const y = value => cy - (value - (minY + maxY) / 2) * scale;
+        element('rect', {x: frame.left, y: frame.top, width: frame.right - frame.left, height: frame.bottom - frame.top, fill: 'none', stroke: 'var(--border)', 'data-chart-frame': ''}, svg);
+        const ticks = [0, 1 / 3, 2 / 3, 1];
+        ticks.forEach(f => {
+          const tx = minX + f * (maxX - minX), ty = minY + f * (maxY - minY);
+          element('line', {x1: x(tx), x2: x(tx), y1: frame.bottom, y2: frame.bottom + 4, stroke: 'var(--border)'}, svg);
+          element('text', {x: x(tx), y: frame.bottom + 18, 'text-anchor': 'middle'}, svg, tx.toFixed(1));
+          element('line', {x1: frame.left - 4, x2: frame.left, y1: y(ty), y2: y(ty), stroke: 'var(--border)'}, svg);
+          element('text', {x: frame.left - 9, y: y(ty) + 4, 'text-anchor': 'end'}, svg, ty.toFixed(1));
+        });
+        element('text', {x: cx, y: height - 6, 'text-anchor': 'middle', class: 'axis-title', 'data-axis': 'x'}, svg, 'Re(w)');
+        element('text', {x: 16, y: cy, transform: 'rotate(-90 16 ' + cy + ')', 'text-anchor': 'middle', class: 'axis-title', 'data-axis': 'y'}, svg, 'Im(w)');
+        return {x, y};
+      }
+      function update() {
+        const patchMode = view.value === 'patch';
+        root.querySelector('#jewel-example-label').hidden = patchMode;
+        root.querySelector('#jewel-method-label').hidden = patchMode;
+        root.querySelector('#jewel-shift-label').hidden = !patchMode;
+        const width = Math.max(280, figure.getBoundingClientRect().width);
+        const height = Math.min(470, Math.max(350, width * 0.68));
+        const svg = document.createElementNS(ns, 'svg');
+        svg.setAttribute('viewBox', '0 0 ' + width + ' ' + height);
+        svg.setAttribute('height', height); svg.setAttribute('role', 'img');
+        svg.setAttribute('aria-labelledby', 'jewel-plot-title jewel-plot-desc');
+        if (patchMode) {
+          const dx = Number(shift.value), base = data.geometry.shift;
+          const polygon = data.geometry.window;
+          const points = data.geometry.candidates.filter(p => inside([p.internal[0] - base[0] - dx, p.internal[1] - base[1]], polygon));
+          const accepted = new Set(points.map(p => p.id));
+          const edges = data.geometry.candidateEdges.filter(([u, v]) => accepted.has(u) && accepted.has(v));
+          const byId = new Map(data.geometry.candidates.map(p => [p.id, p]));
+          element('title', {id: 'jewel-plot-title'}, svg, 'Octagonal cut-and-project quasicrystal patch');
+          element('desc', {id: 'jewel-plot-desc'}, svg, 'Integer points in four dimensions are selected by an octagonal internal window and projected into the plane. Changing the internal window shift changes which points are accepted.');
+          const {x, y} = axes(svg, data.geometry.candidates, width, height);
+          edges.forEach(([u, v]) => {
+            const a = xy(byId.get(u)), b = xy(byId.get(v));
+            element('line', {x1: x(a[0]), y1: y(a[1]), x2: x(b[0]), y2: y(b[1]), stroke: 'var(--border)', 'stroke-width': 1.25}, svg);
+          });
+          points.forEach(p => element('circle', {cx: x(p.physical[0]), cy: y(p.physical[1]), r: 3.2, fill: 'var(--viz-series-1)', 'data-site': '', 'data-tooltip': 'Lattice point (' + p.lattice.join(', ') + ')'}, svg));
+          root.querySelector('#jewel-shift-value').textContent = dx.toFixed(2);
+          live.textContent = points.length + ' sites · ' + edges.length + ' unit lattice edges';
+          legend.textContent = 'Dots: accepted lattice points · Edges: one lattice-coordinate step';
+          detail.textContent = '4D lattice → internal window → 2D projection';
+        } else {
+          const demo = data.demos[Number(example.value)];
+          const run = demo.runs[method.value], path = run.path;
+          const points = data.geometry.booleanVertices;
+          const byId = new Map(points.map(p => [p.id, p]));
+          const solutions = new Set(points.filter(p => violationCount(p.id, demo.clauses) === 0).map(p => p.id));
+          const last = path[path.length - 1], remaining = violationCount(last, demo.clauses);
+          element('title', {id: 'jewel-plot-title'}, svg, 'A four-variable 3SAT search projected into the complex plane');
+          element('desc', {id: 'jewel-plot-desc'}, svg, 'Sixteen assignments are projected from four dimensions using the octagonal basis. Edges flip one Boolean variable. Diamonds are satisfying assignments. The highlighted path follows strict weighted greedy descent from the same starting point for every weighting.');
+          const {x, y} = axes(svg, points, width, height);
+          points.forEach(p => [1, 2, 4, 8].forEach(mask => {
+            const next = p.id ^ mask;
+            if (p.id < next) {
+              const q = byId.get(next);
+              element('line', {x1: x(p.physical[0]), y1: y(p.physical[1]), x2: x(q.physical[0]), y2: y(q.physical[1]), stroke: 'var(--border)', 'stroke-width': 1, opacity: 0.65}, svg);
+            }
+          }));
+          element('polyline', {points: path.map(id => { const p = byId.get(id); return x(p.physical[0]) + ',' + y(p.physical[1]); }).join(' '), fill: 'none', stroke: 'var(--viz-series-1)', 'stroke-width': 3, 'stroke-linejoin': 'round', 'data-search-path': ''}, svg);
+          points.forEach(p => {
+            const px = x(p.physical[0]), py = y(p.physical[1]);
+            const solved = solutions.has(p.id);
+            const group = element('g', {'data-assignment': p.id, 'data-tooltip': p.label + ' · ' + violationCount(p.id, demo.clauses) + ' violations · weighted energy ' + energy(p.id, demo.clauses, run.weights).toFixed(3)}, svg);
+            if (solved) element('path', {d: 'M ' + px + ' ' + (py - 7) + ' L ' + (px + 7) + ' ' + py + ' L ' + px + ' ' + (py + 7) + ' L ' + (px - 7) + ' ' + py + ' Z', fill: 'var(--viz-series-2)', 'data-solution': ''}, group);
+            else element('circle', {cx: px, cy: py, r: 4, fill: 'var(--muted-foreground)'}, group);
+            if (p.id === demo.start) element('circle', {cx: px, cy: py, r: 10, fill: 'none', stroke: 'var(--foreground)', 'stroke-width': 1.5, 'data-start': ''}, group);
+            if (p.id === last) element('circle', {cx: px, cy: py, r: 13, fill: 'none', stroke: 'var(--viz-series-1)', 'stroke-width': 2, 'data-end': ''}, group);
+            element('text', {x: px, y: py - 17, 'text-anchor': 'middle', class: 'jewel-label'}, group, p.label);
+          });
+          live.textContent = (path.length - 1) + ' flips · ' + (remaining === 0 ? 'solution found' : 'local minimum') + ' · ' + remaining + ' violated clauses';
+          legend.textContent = 'Diamond: solution · Thin edge: one-bit flip · Highlight: search path';
+          detail.textContent = 'Start ' + byId.get(demo.start).label + ' → end ' + byId.get(last).label + ' · final weighted energy ' + energy(last, demo.clauses, run.weights).toFixed(3);
+        }
+        figure.replaceChildren(svg);
+      }
+      view.addEventListener('change', update);
+      example.addEventListener('change', update);
+      method.addEventListener('change', update);
+      shift.addEventListener('input', update);
+      new ResizeObserver(update).observe(figure);
+      update();
+    })();
+  </script>
+</div>
+</main><script>
+(() => {
+  const tip = document.createElement('div');
+  tip.className = 'export-tip'; tip.setAttribute('role', 'tooltip'); tip.hidden = true;
+  document.body.appendChild(tip);
+  let active = null;
+  function show(target, x, y) {
+    const mark = target instanceof Element ? target.closest('[data-tooltip]') : null;
+    if (!mark) { tip.hidden = true; active = null; return; }
+    active = mark; tip.textContent = mark.getAttribute('data-tooltip'); tip.hidden = false;
+    const bounds = tip.getBoundingClientRect();
+    tip.style.left = Math.max(8, Math.min(x + 12, window.innerWidth - bounds.width - 8)) + 'px';
+    tip.style.top = Math.max(8, Math.min(y + 12, window.innerHeight - bounds.height - 8)) + 'px';
+  }
+  document.addEventListener('pointermove', event => show(event.target, event.clientX, event.clientY));
+  document.addEventListener('pointerdown', event => {
+    const mark = event.target instanceof Element ? event.target.closest('[data-tooltip]') : null;
+    if (active === mark && !tip.hidden) { tip.hidden = true; active = null; }
+    else show(event.target, event.clientX, event.clientY);
+  });
+  document.addEventListener('focusin', event => { const b = event.target.getBoundingClientRect(); show(event.target, b.left, b.bottom); });
+  document.addEventListener('focusout', () => { tip.hidden = true; active = null; });
+  document.addEventListener('keydown', event => { if (event.key === 'Escape') { tip.hidden = true; active = null; } });
+})();
+</script></body>
+</html>

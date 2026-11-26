@@ -1,0 +1,3 @@
+# Recorded versions used for the initial numerical experiment.
+numpy==2.3.5
+mpmath==1.3.0

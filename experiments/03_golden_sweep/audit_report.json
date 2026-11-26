@@ -1,0 +1,1075 @@
+{
+  "invariants": {
+    "positive_zero_set_cases": 1648,
+    "variable_permutation_gauge_and_clause_reorder_cases": 1648,
+    "dpll_compared_with_exhaustive_instances": 32,
+    "golden_frequency_alias_max_error": 4.273202144306561e-13,
+    "golden_frequency_reversal_max_error": 2.42053343536449e-13,
+    "fixed_weight_strict_greedy_obstructions_checked": 65,
+    "obstruction_theorem": "For any seven positive weights fixed independently of clause contents, put the clause forbidding 000 at a minimum-weight index and use all clauses forbidding assignments other than 111. Then 111 is uniquely satisfying while strict one-bit descent stalls at 000. This obstruction does not apply to adaptive weights, sideways moves, nonlocal moves, or content-dependent choices.",
+    "golden_identity": "1/phi = phi-1; 1/phi^2 = 1-1/phi. Thus j/phi and j/(1/phi) agree modulo integers; j/phi^2 reverses that rotation. Tile phases must also be reflected/rephased before claiming full schedule equivalence."
+  },
+  "mismatches": [],
+  "limitations": [
+    "Finite successes and favorable scaling plots do not prove a worst-case polynomial bound.",
+    "Heuristic timeout or trap is UNKNOWN, never an UNSAT certificate.",
+    "Runs sharing a formula are correlated; configuration selection introduces multiple-comparison bias.",
+    "A held-out comparison must keep the training-selected configuration fixed.",
+    "Golden-ratio reciprocal/power schedules can be rotation aliases rather than independent constants.",
+    "A tiling layout does not ensure SAT locality; clause-to-tile permutations test representation sensitivity.",
+    "Configuration IDs seed different tie-breaking RNG streams; rotation-alias configurations can therefore have different sampled search paths without constituting distinct rotation mechanisms."
+  ],
+  "geometry_and_schedule_checks": {
+    "truncated_diffusion_rows_checked": 1083,
+    "positive_schedule_values_checked": 106128,
+    "diffusion": "Each retained-neighbor+self averaging row is nonnegative and sums to one; .8I+.2P therefore preserves strictly positive weights.",
+    "boost_control": "Mean raw boost is normalized to one over violated clauses; this removes average increment-size confounding at each trap."
+  },
+  "independent_exact_labels": {
+    "0": {
+      "label": "SAT",
+      "witness": 169,
+      "solution_count": 7,
+      "assignments_checked": 4096
+    },
+    "1": {
+      "label": "SAT",
+      "witness": 254,
+      "solution_count": 14,
+      "assignments_checked": 4096
+    },
+    "2": {
+      "label": "SAT",
+      "witness": 99,
+      "solution_count": 9,
+      "assignments_checked": 4096
+    },
+    "3": {
+      "label": "SAT",
+      "witness": 2717,
+      "solution_count": 6,
+      "assignments_checked": 4096
+    },
+    "4": {
+      "label": "SAT",
+      "witness": 178,
+      "solution_count": 15,
+      "assignments_checked": 4096
+    },
+    "5": {
+      "label": "SAT",
+      "witness": 1567,
+      "solution_count": 6,
+      "assignments_checked": 4096
+    },
+    "6": {
+      "label": "SAT",
+      "witness": 695,
+      "solution_count": 37,
+      "assignments_checked": 4096
+    },
+    "7": {
+      "label": "SAT",
+      "witness": 2155,
+      "solution_count": 9,
+      "assignments_checked": 4096
+    },
+    "8": {
+      "label": "SAT",
+      "witness": 1279,
+      "solution_count": 1,
+      "assignments_checked": 4096
+    },
+    "9": {
+      "label": "SAT",
+      "witness": 2154,
+      "solution_count": 4,
+      "assignments_checked": 4096
+    },
+    "10": {
+      "label": "UNSAT",
+      "witness": null,
+      "solution_count": 0,
+      "assignments_checked": 4096
+    },
+    "11": {
+      "label": "UNSAT",
+      "witness": null,
+      "solution_count": 0,
+      "assignments_checked": 4096
+    },
+    "12": {
+      "label": "SAT",
+      "witness": 2581,
+      "solution_count": 10,
+      "assignments_checked": 4096
+    },
+    "13": {
+      "label": "SAT",
+      "witness": 2576,
+      "solution_count": 5,
+      "assignments_checked": 4096
+    },
+    "14": {
+      "label": "SAT",
+      "witness": 3515,
+      "solution_count": 1,
+      "assignments_checked": 4096
+    },
+    "15": {
+      "label": "UNSAT",
+      "witness": null,
+      "solution_count": 0,
+      "assignments_checked": 4096
+    },
+    "16": {
+      "label": "SAT",
+      "witness": 340,
+      "solution_count": 6,
+      "assignments_checked": 4096
+    },
+    "17": {
+      "label": "SAT",
+      "witness": 776,
+      "solution_count": 10,
+      "assignments_checked": 4096
+    },
+    "18": {
+      "label": "SAT",
+      "witness": 2656,
+      "solution_count": 9,
+      "assignments_checked": 4096
+    },
+    "19": {
+      "label": "SAT",
+      "witness": 1336,
+      "solution_count": 3,
+      "assignments_checked": 4096
+    },
+    "20": {
+      "label": "SAT",
+      "witness": 850,
+      "solution_count": 14,
+      "assignments_checked": 4096
+    },
+    "21": {
+      "label": "SAT",
+      "witness": 2475,
+      "solution_count": 1,
+      "assignments_checked": 4096
+    },
+    "22": {
+      "label": "SAT",
+      "witness": 70,
+      "solution_count": 10,
+      "assignments_checked": 4096
+    },
+    "23": {
+      "label": "SAT",
+      "witness": 767,
+      "solution_count": 9,
+      "assignments_checked": 4096
+    },
+    "24": {
+      "label": "SAT",
+      "witness": 38015,
+      "nodes": 4,
+      "node_cap": 200000
+    },
+    "25": {
+      "label": "SAT",
+      "witness": 155104,
+      "nodes": 9,
+      "node_cap": 200000
+    },
+    "26": {
+      "label": "SAT",
+      "witness": 136173,
+      "nodes": 6,
+      "node_cap": 200000
+    },
+    "27": {
+      "label": "SAT",
+      "witness": 256304,
+      "nodes": 9,
+      "node_cap": 200000
+    },
+    "28": {
+      "label": "SAT",
+      "witness": 131878,
+      "nodes": 8,
+      "node_cap": 200000
+    },
+    "29": {
+      "label": "SAT",
+      "witness": 116800,
+      "nodes": 9,
+      "node_cap": 200000
+    },
+    "30": {
+      "label": "SAT",
+      "witness": 15712,
+      "nodes": 6,
+      "node_cap": 200000
+    },
+    "31": {
+      "label": "SAT",
+      "witness": 121306,
+      "nodes": 13,
+      "node_cap": 200000
+    },
+    "32": {
+      "label": "SAT",
+      "witness": 190630,
+      "nodes": 11,
+      "node_cap": 200000
+    },
+    "33": {
+      "label": "SAT",
+      "witness": 103426,
+      "nodes": 9,
+      "node_cap": 200000
+    },
+    "34": {
+      "label": "SAT",
+      "witness": 9129,
+      "nodes": 9,
+      "node_cap": 200000
+    },
+    "35": {
+      "label": "SAT",
+      "witness": 128,
+      "nodes": 17,
+      "node_cap": 200000
+    },
+    "36": {
+      "label": "SAT",
+      "witness": 83941,
+      "nodes": 4,
+      "node_cap": 200000
+    },
+    "37": {
+      "label": "UNSAT",
+      "witness": null,
+      "nodes": 17,
+      "node_cap": 200000
+    },
+    "38": {
+      "label": "SAT",
+      "witness": 133619,
+      "nodes": 12,
+      "node_cap": 200000
+    },
+    "39": {
+      "label": "UNSAT",
+      "witness": null,
+      "nodes": 9,
+      "node_cap": 200000
+    },
+    "40": {
+      "label": "SAT",
+      "witness": 80676,
+      "nodes": 9,
+      "node_cap": 200000
+    },
+    "41": {
+      "label": "SAT",
+      "witness": 202,
+      "nodes": 6,
+      "node_cap": 200000
+    },
+    "42": {
+      "label": "SAT",
+      "witness": 196102,
+      "nodes": 5,
+      "node_cap": 200000
+    },
+    "43": {
+      "label": "SAT",
+      "witness": 201125,
+      "nodes": 7,
+      "node_cap": 200000
+    },
+    "44": {
+      "label": "SAT",
+      "witness": 21830,
+      "nodes": 7,
+      "node_cap": 200000
+    },
+    "45": {
+      "label": "SAT",
+      "witness": 82209,
+      "nodes": 14,
+      "node_cap": 200000
+    },
+    "46": {
+      "label": "SAT",
+      "witness": 142320,
+      "nodes": 7,
+      "node_cap": 200000
+    },
+    "47": {
+      "label": "SAT",
+      "witness": 14715,
+      "nodes": 9,
+      "node_cap": 200000
+    },
+    "48": {
+      "label": "SAT",
+      "witness": 14933011,
+      "nodes": 8,
+      "node_cap": 200000
+    },
+    "49": {
+      "label": "SAT",
+      "witness": 2319760,
+      "nodes": 8,
+      "node_cap": 200000
+    },
+    "50": {
+      "label": "SAT",
+      "witness": 12946455,
+      "nodes": 17,
+      "node_cap": 200000
+    },
+    "51": {
+      "label": "SAT",
+      "witness": 96519,
+      "nodes": 13,
+      "node_cap": 200000
+    },
+    "52": {
+      "label": "SAT",
+      "witness": 14327823,
+      "nodes": 7,
+      "node_cap": 200000
+    },
+    "53": {
+      "label": "SAT",
+      "witness": 370688,
+      "nodes": 18,
+      "node_cap": 200000
+    },
+    "54": {
+      "label": "SAT",
+      "witness": 90629,
+      "nodes": 7,
+      "node_cap": 200000
+    },
+    "55": {
+      "label": "SAT",
+      "witness": 1445364,
+      "nodes": 16,
+      "node_cap": 200000
+    },
+    "56": {
+      "label": "SAT",
+      "witness": 12342378,
+      "nodes": 12,
+      "node_cap": 200000
+    },
+    "57": {
+      "label": "SAT",
+      "witness": 6417597,
+      "nodes": 10,
+      "node_cap": 200000
+    },
+    "58": {
+      "label": "SAT",
+      "witness": 1350634,
+      "nodes": 14,
+      "node_cap": 200000
+    },
+    "59": {
+      "label": "SAT",
+      "witness": 1544462,
+      "nodes": 16,
+      "node_cap": 200000
+    },
+    "60": {
+      "label": "UNSAT",
+      "witness": null,
+      "nodes": 21,
+      "node_cap": 200000
+    },
+    "61": {
+      "label": "SAT",
+      "witness": 8828673,
+      "nodes": 22,
+      "node_cap": 200000
+    },
+    "62": {
+      "label": "SAT",
+      "witness": 1184717,
+      "nodes": 8,
+      "node_cap": 200000
+    },
+    "63": {
+      "label": "SAT",
+      "witness": 16369961,
+      "nodes": 17,
+      "node_cap": 200000
+    },
+    "64": {
+      "label": "SAT",
+      "witness": 2101420,
+      "nodes": 13,
+      "node_cap": 200000
+    },
+    "65": {
+      "label": "SAT",
+      "witness": 3316510,
+      "nodes": 10,
+      "node_cap": 200000
+    },
+    "66": {
+      "label": "SAT",
+      "witness": 12986729,
+      "nodes": 15,
+      "node_cap": 200000
+    },
+    "67": {
+      "label": "SAT",
+      "witness": 818976,
+      "nodes": 12,
+      "node_cap": 200000
+    },
+    "68": {
+      "label": "SAT",
+      "witness": 8817485,
+      "nodes": 16,
+      "node_cap": 200000
+    },
+    "69": {
+      "label": "SAT",
+      "witness": 2539746,
+      "nodes": 14,
+      "node_cap": 200000
+    },
+    "70": {
+      "label": "SAT",
+      "witness": 5738066,
+      "nodes": 12,
+      "node_cap": 200000
+    },
+    "71": {
+      "label": "SAT",
+      "witness": 14747940,
+      "nodes": 9,
+      "node_cap": 200000
+    },
+    "72": {
+      "label": "SAT",
+      "witness": 327159910,
+      "nodes": 12,
+      "node_cap": 200000
+    },
+    "73": {
+      "label": "SAT",
+      "witness": 3313240082,
+      "nodes": 14,
+      "node_cap": 200000
+    },
+    "74": {
+      "label": "SAT",
+      "witness": 1163203709,
+      "nodes": 37,
+      "node_cap": 200000
+    },
+    "75": {
+      "label": "SAT",
+      "witness": 34428409,
+      "nodes": 12,
+      "node_cap": 200000
+    },
+    "76": {
+      "label": "SAT",
+      "witness": 2823164940,
+      "nodes": 18,
+      "node_cap": 200000
+    },
+    "77": {
+      "label": "SAT",
+      "witness": 2141947912,
+      "nodes": 10,
+      "node_cap": 200000
+    },
+    "78": {
+      "label": "SAT",
+      "witness": 752925200,
+      "nodes": 15,
+      "node_cap": 200000
+    },
+    "79": {
+      "label": "SAT",
+      "witness": 2982857516,
+      "nodes": 12,
+      "node_cap": 200000
+    },
+    "80": {
+      "label": "SAT",
+      "witness": 247485590,
+      "nodes": 10,
+      "node_cap": 200000
+    },
+    "81": {
+      "label": "SAT",
+      "witness": 865707272,
+      "nodes": 24,
+      "node_cap": 200000
+    },
+    "82": {
+      "label": "SAT",
+      "witness": 2229569346,
+      "nodes": 11,
+      "node_cap": 200000
+    },
+    "83": {
+      "label": "SAT",
+      "witness": 3541911472,
+      "nodes": 40,
+      "node_cap": 200000
+    },
+    "84": {
+      "label": "SAT",
+      "witness": 3876700704,
+      "nodes": 15,
+      "node_cap": 200000
+    },
+    "85": {
+      "label": "SAT",
+      "witness": 1221644440,
+      "nodes": 13,
+      "node_cap": 200000
+    },
+    "86": {
+      "label": "SAT",
+      "witness": 1035028712,
+      "nodes": 9,
+      "node_cap": 200000
+    },
+    "87": {
+      "label": "UNSAT",
+      "witness": null,
+      "nodes": 21,
+      "node_cap": 200000
+    },
+    "88": {
+      "label": "SAT",
+      "witness": 517113429,
+      "nodes": 16,
+      "node_cap": 200000
+    },
+    "89": {
+      "label": "SAT",
+      "witness": 120133323,
+      "nodes": 12,
+      "node_cap": 200000
+    },
+    "90": {
+      "label": "SAT",
+      "witness": 2682993385,
+      "nodes": 14,
+      "node_cap": 200000
+    },
+    "91": {
+      "label": "SAT",
+      "witness": 121667602,
+      "nodes": 32,
+      "node_cap": 200000
+    },
+    "92": {
+      "label": "SAT",
+      "witness": 427840586,
+      "nodes": 18,
+      "node_cap": 200000
+    },
+    "93": {
+      "label": "SAT",
+      "witness": 1185647246,
+      "nodes": 13,
+      "node_cap": 200000
+    },
+    "94": {
+      "label": "SAT",
+      "witness": 2417534208,
+      "nodes": 26,
+      "node_cap": 200000
+    },
+    "95": {
+      "label": "SAT",
+      "witness": 2522420719,
+      "nodes": 11,
+      "node_cap": 200000
+    }
+  },
+  "label_counts": {
+    "SAT": 89,
+    "UNSAT": 7
+  },
+  "run_records_checked": 58176,
+  "SAT_witnesses_checked": 35957,
+  "independently_selected_training_best": {
+    "id": 176,
+    "name": "341:rational_13_8:pinwheel",
+    "method": "341",
+    "tiling": "pinwheel",
+    "constant": 1.625,
+    "amplitude": 0,
+    "cname": "rational_13_8"
+  },
+  "selected_training_scores": [
+    133,
+    138,
+    80710
+  ],
+  "selected_heldout_SAT_failures": 9,
+  "concrete_heldout_counterexample": {
+    "configuration": {
+      "id": 176,
+      "name": "341:rational_13_8:pinwheel",
+      "method": "341",
+      "tiling": "pinwheel",
+      "constant": 1.625,
+      "amplitude": 0,
+      "cname": "rational_13_8"
+    },
+    "instance": {
+      "id": 35,
+      "n": 18,
+      "m": 76,
+      "clauses": [
+        [
+          6,
+          13,
+          -15
+        ],
+        [
+          9,
+          16,
+          -18
+        ],
+        [
+          -1,
+          3,
+          7
+        ],
+        [
+          9,
+          10,
+          -13
+        ],
+        [
+          -2,
+          -12,
+          14
+        ],
+        [
+          7,
+          -14,
+          18
+        ],
+        [
+          3,
+          13,
+          -17
+        ],
+        [
+          5,
+          -10,
+          -18
+        ],
+        [
+          -1,
+          -2,
+          9
+        ],
+        [
+          1,
+          -6,
+          12
+        ],
+        [
+          1,
+          -7,
+          -16
+        ],
+        [
+          -1,
+          -2,
+          11
+        ],
+        [
+          -11,
+          12,
+          18
+        ],
+        [
+          -1,
+          7,
+          10
+        ],
+        [
+          1,
+          8,
+          17
+        ],
+        [
+          3,
+          -7,
+          -11
+        ],
+        [
+          4,
+          -7,
+          -9
+        ],
+        [
+          -11,
+          14,
+          15
+        ],
+        [
+          6,
+          -7,
+          8
+        ],
+        [
+          -1,
+          6,
+          11
+        ],
+        [
+          10,
+          -12,
+          -16
+        ],
+        [
+          -3,
+          -14,
+          18
+        ],
+        [
+          1,
+          -10,
+          16
+        ],
+        [
+          4,
+          -16,
+          17
+        ],
+        [
+          4,
+          -5,
+          -17
+        ],
+        [
+          -2,
+          -4,
+          7
+        ],
+        [
+          1,
+          -2,
+          16
+        ],
+        [
+          10,
+          16,
+          -18
+        ],
+        [
+          -6,
+          12,
+          13
+        ],
+        [
+          -1,
+          15,
+          -16
+        ],
+        [
+          -6,
+          -13,
+          -18
+        ],
+        [
+          -8,
+          10,
+          -18
+        ],
+        [
+          -13,
+          14,
+          15
+        ],
+        [
+          -1,
+          3,
+          11
+        ],
+        [
+          -10,
+          17,
+          18
+        ],
+        [
+          -6,
+          16,
+          17
+        ],
+        [
+          -1,
+          10,
+          15
+        ],
+        [
+          13,
+          -17,
+          -18
+        ],
+        [
+          9,
+          12,
+          -14
+        ],
+        [
+          -2,
+          12,
+          -17
+        ],
+        [
+          1,
+          7,
+          8
+        ],
+        [
+          2,
+          -6,
+          -17
+        ],
+        [
+          7,
+          14,
+          -15
+        ],
+        [
+          1,
+          -2,
+          -16
+        ],
+        [
+          -3,
+          10,
+          11
+        ],
+        [
+          3,
+          -11,
+          14
+        ],
+        [
+          4,
+          8,
+          -14
+        ],
+        [
+          1,
+          -2,
+          18
+        ],
+        [
+          1,
+          10,
+          -11
+        ],
+        [
+          -5,
+          7,
+          -18
+        ],
+        [
+          7,
+          -12,
+          14
+        ],
+        [
+          8,
+          10,
+          15
+        ],
+        [
+          -7,
+          11,
+          -13
+        ],
+        [
+          -11,
+          12,
+          -13
+        ],
+        [
+          -7,
+          8,
+          12
+        ],
+        [
+          5,
+          -9,
+          -10
+        ],
+        [
+          -1,
+          14,
+          -16
+        ],
+        [
+          -5,
+          -15,
+          16
+        ],
+        [
+          -3,
+          4,
+          -14
+        ],
+        [
+          -1,
+          7,
+          8
+        ],
+        [
+          -7,
+          9,
+          -13
+        ],
+        [
+          -4,
+          -7,
+          12
+        ],
+        [
+          4,
+          -7,
+          -15
+        ],
+        [
+          4,
+          16,
+          -17
+        ],
+        [
+          5,
+          -12,
+          -15
+        ],
+        [
+          -10,
+          -12,
+          -15
+        ],
+        [
+          1,
+          -7,
+          15
+        ],
+        [
+          -4,
+          -13,
+          -14
+        ],
+        [
+          1,
+          -9,
+          11
+        ],
+        [
+          -5,
+          -11,
+          17
+        ],
+        [
+          -13,
+          -16,
+          17
+        ],
+        [
+          4,
+          -12,
+          -17
+        ],
+        [
+          13,
+          16,
+          -17
+        ],
+        [
+          4,
+          -11,
+          -12
+        ],
+        [
+          -8,
+          10,
+          -13
+        ],
+        [
+          7,
+          14,
+          -18
+        ]
+      ],
+      "family": "random",
+      "replicate": 3,
+      "split": "test",
+      "sat_label": "SAT",
+      "witness": 136,
+      "exact_nodes": 17,
+      "planted_generation_only": null,
+      "starts": [
+        10129,
+        241071,
+        20291
+      ]
+    },
+    "failed_run": {
+      "instance": "35",
+      "config": "176",
+      "start_index": "0",
+      "success": "0",
+      "reason": "budget",
+      "evaluations": "2035",
+      "flips": "66",
+      "updates": "47",
+      "restarts": "0",
+      "final_state": "174748",
+      "final_violations": "1"
+    },
+    "independent_satisfying_witness": 128,
+    "interpretation": "A concrete failure under the stated finite search cap, not a proof that the heuristic cannot eventually solve it."
+  },
+  "permutation_stress_audit": {
+    "transformations_verified": 172,
+    "assignment_equivalences_checked": 5676,
+    "all_terminal_states_checked": 1548,
+    "identity_replays_matching_exactly": 387,
+    "new_permuted_runs": 1161,
+    "counts_successes_runs": {
+      "breakout": [
+        352,
+        387
+      ],
+      "walksat": [
+        384,
+        387
+      ],
+      "341:rational_13_8:pinwheel": [
+        354,
+        387
+      ]
+    },
+    "interpretation": "Training winner remains frozen; starts, witnesses, variable labels, gauge bits, and clauses transform consistently. Reordered representations change bounded-heuristic outcomes, not SAT truth."
+  },
+  "elapsed_seconds": 4.974970290000783
+}

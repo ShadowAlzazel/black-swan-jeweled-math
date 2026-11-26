@@ -1,0 +1,1703 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; style-src 'unsafe-inline' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; img-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; font-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; media-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; worker-src blob:; connect-src blob: data:; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>Tilings and adaptive weights · Black Swan Jeweled Math</title>
+<style>:root {
+  color-scheme: light dark;
+  background-color: var(
+    --background,
+    var(--color-background-primary, light-dark(rgb(255 255 255), rgb(24 24 24)))
+  ) !important;
+
+  /* Agent-facing contract; keep in sync with SKILL.md. */
+  --background: var(
+    --color-background-primary,
+    light-dark(rgb(255 255 255), rgb(24 24 24))
+  );
+  --foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --card: color-mix(in oklab, var(--foreground) 5%, var(--background));
+  --card-foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --popover: var(
+    --color-background-secondary,
+    light-dark(rgb(255 255 255), rgb(45 45 45))
+  );
+  --popover-foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --primary: var(
+    --color-text-info,
+    light-dark(rgb(51 156 255), rgb(131 195 255))
+  );
+  --primary-foreground: var(
+    --color-text-inverse,
+    light-dark(rgb(255 255 255), rgb(13 13 13))
+  );
+  --secondary: var(
+    --color-background-secondary,
+    light-dark(rgb(255 255 255 / 96%), rgb(54 54 54 / 96%))
+  );
+  --secondary-foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --muted: color-mix(in srgb, var(--foreground) 10%, transparent);
+  --muted-foreground: var(
+    --color-text-secondary,
+    light-dark(rgb(26 28 31 / 49.4%), rgb(255 255 255 / 49.8%))
+  );
+  --accent: var(
+    --color-background-info,
+    light-dark(rgb(229 242 255), rgb(13 39 63))
+  );
+  --accent-foreground: var(
+    --color-text-info,
+    light-dark(rgb(51 156 255), rgb(131 195 255))
+  );
+  --destructive: var(
+    --color-text-warning,
+    light-dark(rgb(226 85 7), rgb(255 133 73))
+  );
+  --border: var(
+    --color-border-secondary,
+    light-dark(rgb(26 28 31 / 8%), rgb(255 255 255 / 8.2%))
+  );
+  --input: var(
+    --color-border-primary,
+    light-dark(
+      rgb(26 28 31 / 11.8%),
+      color-mix(in oklab, rgb(0 0 0) 10%, transparent)
+    )
+  );
+  --ring: var(
+    --color-ring-primary,
+    light-dark(rgb(51 156 255), rgb(131 195 255 / 76%))
+  );
+  --font-size-base: var(--font-text-md-size, 16px);
+  --blue: light-dark(rgb(51 156 255), rgb(51 156 255));
+  --orange: light-dark(rgb(226 85 7), rgb(251 106 34));
+  --green: light-dark(rgb(0 162 64), rgb(64 201 119));
+  --red: light-dark(rgb(224 46 42), rgb(255 103 100));
+  --purple: light-dark(rgb(146 79 247), rgb(173 123 249));
+  --yellow: light-dark(rgb(255 195 0), rgb(255 210 64));
+  --viz-series-1: var(--primary);
+  --viz-series-2: light-dark(rgb(243 136 59), rgb(245 154 86));
+  --viz-series-3: light-dark(rgb(93 201 119), rgb(116 213 139));
+  --viz-series-4: light-dark(rgb(235 119 177), rgb(240 143 192));
+  --viz-series-5: light-dark(rgb(155 121 236), rgb(170 145 239));
+  --viz-series-6: light-dark(rgb(58 185 177), rgb(90 203 194));
+
+  /* Internal implementation variables; not part of the agent contract. */
+  --font-sans:
+    -apple-system-body, ui-sans-serif, -apple-system, system-ui, "Segoe UI",
+    Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji",
+    "Segoe UI Symbol";
+  --font-mono:
+    ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono",
+    monospace;
+  --font-size-normal: max(11px, var(--font-size-base));
+  --font-size-tooltip: calc(var(--font-size-base) - 1px);
+  --font-size-small: max(11px, calc(var(--font-size-base) - 2px));
+  --font-size-h1: calc(var(--font-size-normal) * 1.7142857143);
+  --font-size-h2: calc(var(--font-size-normal) * 1.4285714286);
+  --font-size-h3: calc(var(--font-size-normal) * 1.2857142857);
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --icon-size: 16px;
+  --line-height-normal: calc(var(--font-size-normal) * 1.5);
+  --line-height-tooltip: calc(var(--font-size-tooltip) * 1.4285714286);
+  --line-height-small: calc(var(--font-size-small) + 4px);
+  --corner-shape: round;
+  --radius: var(--border-radius-lg, 8px);
+  --radius-sm: calc(var(--radius) * 0.5);
+  --radius-md: calc(var(--radius) * 0.75);
+  --radius-lg: var(--radius);
+  --radius-2xl: calc(var(--radius) * 2);
+  --radius-full: 9999px;
+  --shadow-sm: 0 1px 2px -1px rgb(0 0 0 / 8%);
+  --checkmark-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 17 17'%3E%3Cpath d='M12.8961 3.64101C13.1297 3.41418 13.4984 3.37523 13.7779 3.56581C14.0571 3.75635 14.1554 4.11331 14.0299 4.41347L13.9615 4.53847L7.71151 13.7045C7.59411 13.8767 7.4063 13.9877 7.19881 14.0072C6.99136 14.0267 6.78564 13.9533 6.63826 13.806L2.88826 10.056L2.79842 9.9457C2.6192 9.67407 2.64927 9.30496 2.88826 9.06581C3.12738 8.82669 3.49647 8.79676 3.76815 8.97597L3.8785 9.06581L7.03084 12.2182L12.8053 3.74941L12.8961 3.64101Z'/%3E%3C/svg%3E");
+
+  /* Legacy aliases; not part of the current agent contract. */
+  --viz-bg: transparent;
+  --viz-panel: var(--card);
+  --viz-border: var(--border);
+  --viz-text: var(--foreground);
+  --viz-muted: var(--muted-foreground);
+  --viz-accent: var(--primary);
+  --viz-accent-text: var(--primary-foreground);
+  --viz-accent-bg: var(--accent);
+  --viz-font-size: var(--font-size-base);
+  --viz-warning: var(--destructive);
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html > body {
+  /* Preserve MCP aliases for older inline renderers without creating :root cycles. */
+  --color-background-primary: var(
+    --background,
+    light-dark(rgb(255 255 255), rgb(24 24 24))
+  );
+  --color-text-primary: var(
+    --foreground,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --color-border-secondary: var(
+    --border,
+    light-dark(rgb(26 28 31 / 8%), rgb(255 255 255 / 8.2%))
+  );
+
+  margin: 0;
+  padding: var(--visualize-paint-gutter, 0px);
+  color: var(--foreground);
+  background: transparent !important;
+  font-family: var(--font-sans) !important;
+  -webkit-font-smoothing: antialiased;
+  font-size: var(--font-size-base);
+  line-height: calc(var(--font-size-base) * 1.625);
+  font-weight: var(--font-weight-normal);
+}
+
+:root:not([data-app-block-surface], [data-visualize-standalone]) > body {
+  padding: 12px;
+}
+
+.cursor-interaction {
+  cursor: var(--cursor-interaction, pointer);
+}
+
+a {
+  color: color-mix(in srgb, var(--viz-accent) 80%, var(--viz-text) 20%);
+  cursor: var(--cursor-interaction, pointer);
+  text-decoration: none;
+  text-underline-offset: 2px;
+  font-weight: inherit;
+}
+
+a:is(:hover, :focus-visible) {
+  text-decoration-line: underline;
+  text-decoration-style: dashed;
+  text-decoration-thickness: 0.5px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin-block: 0;
+}
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+li,
+.table {
+  font-family: var(--font-sans);
+}
+
+h1 {
+  font-size: calc(var(--font-size-base) * 1.5);
+  line-height: 1.3333333333;
+}
+
+h2 {
+  font-size: calc(var(--font-size-base) * 1.25);
+  line-height: 1.4;
+}
+h3 {
+  font-size: calc(var(--font-size-base) * 1.125);
+  line-height: 1.5555555556;
+}
+h4 {
+  font-size: var(--font-size-base);
+  line-height: 1.5;
+}
+h5,
+h6 {
+  font-size: var(--font-size-base);
+  line-height: calc(var(--font-size-base) * 1.625);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+b,
+strong,
+th {
+  font-weight: 600;
+}
+
+code:not(pre code) {
+  display: inline;
+  padding: 1px 6px;
+  border-radius: var(--radius-sm);
+  corner-shape: var(--corner-shape);
+  background: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  overflow-wrap: anywhere;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  word-break: break-word;
+}
+pre,
+pre code {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 20px;
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.table {
+  width: 100%;
+  color: var(--foreground);
+  font: inherit;
+  text-align: start;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: calc(var(--font-size-base) * 0.875);
+  line-height: calc(var(--font-size-base) * 1.625);
+  font-family: var(--font-sans);
+}
+
+.table :is(th, td) {
+  padding-block: 10px;
+  padding-inline: 0 24px;
+  overflow-wrap: anywhere;
+  border-bottom: 1px solid var(--border);
+  text-align: start;
+  vertical-align: top;
+  border-bottom-color: color-mix(in srgb, var(--foreground) 5%, transparent);
+}
+.table :is(th, td):not(:last-child) {
+  padding-inline-end: calc(var(--font-size-base) * 1.5);
+}
+
+.table-responsive > .table :is(th, td) {
+  overflow-wrap: break-word;
+}
+
+.table :is(th, td):last-child {
+  padding-inline-end: 0;
+}
+
+.table :is(caption, thead th) {
+  font-weight: 600;
+}
+
+.table thead :is(th, td) {
+  border-bottom-color: var(--border-strong, var(--input));
+  padding-block: calc(var(--font-size-base) / 2);
+  line-height: var(--font-size-base);
+}
+
+.table tbody tr:last-child :is(th, td) {
+  border-bottom: 0;
+}
+.table tbody :is(th, td) {
+  padding-block: calc(var(--font-size-base) * 0.625);
+}
+
+.table.table-sm :is(th, td) {
+  padding-block: 8px;
+}
+
+.table.table-sm :is(th, td):not(:last-child) {
+  padding-inline-end: 16px;
+}
+
+.table :is(.text-end, [align="right"]) {
+  text-align: end;
+  font-variant-numeric: tabular-nums;
+}
+
+.table :is(.text-center, [align="center"]) {
+  text-align: center;
+}
+
+.table .text-nowrap {
+  white-space: nowrap;
+}
+
+#widget {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  padding: 0;
+  background: transparent !important;
+}
+
+.card {
+  min-width: 0;
+  padding: 12px;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  border-radius: var(--radius-2xl);
+  corner-shape: var(--corner-shape);
+  color: var(--card-foreground);
+  background: var(--card);
+}
+
+.widget {
+  min-width: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: var(--radius-lg);
+  corner-shape: var(--corner-shape);
+  box-shadow: 0 0 0 0.5px var(--border-strong, var(--border));
+  color: var(--foreground);
+  background: var(--background);
+}
+
+#widget > :not(.card, .widget, .progress) {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.tooltip {
+  position: fixed;
+  z-index: 50;
+  top: 0;
+  left: 0;
+  width: max-content;
+  max-width: min(
+    20rem,
+    var(--tooltip-available-width, calc(100vw - 10px)),
+    calc(100vw - 10px)
+  );
+  max-height: min(
+    var(--tooltip-available-height, calc(100vh - 10px)),
+    calc(100vh - 10px)
+  );
+  border: 1px solid var(--border);
+  corner-shape: var(--corner-shape);
+  overflow-wrap: break-word;
+  white-space: normal;
+  pointer-events: none;
+  user-select: none;
+  font-family: var(--font-sans);
+  padding: 5px 12px;
+  border-color: color-mix(
+    in oklab,
+    light-dark(var(--primary-foreground), var(--foreground)) 5%,
+    transparent
+  );
+  border-radius: var(--radius-2xl);
+  color: light-dark(var(--primary-foreground), var(--foreground));
+  background: light-dark(var(--foreground), var(--popover));
+  box-shadow: 0 8px 18px rgb(15 23 42 / 20%);
+  letter-spacing: -0.15px;
+  font-size: calc(var(--font-size-base) * 14 / 16);
+  font-size: round(nearest, calc(var(--font-size-base) * 14 / 16), 1px);
+  font-weight: 600;
+  line-height: 18px;
+  text-align: center;
+}
+
+/* The shared runtime owns data-tooltip; suppress AppBlock's pseudo-tooltip. */
+main [data-tooltip]::after {
+  content: none;
+}
+
+.viz-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(max(180px, 24%), 1fr));
+  gap: 10px;
+}
+
+.viz-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.viz-stat-value {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+.viz-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+hr {
+  width: 100%;
+  height: 1px;
+  margin-block: 6px;
+  border: 0;
+  background: var(--border);
+}
+
+.nav {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 4px;
+}
+
+.progress {
+  display: flex;
+  height: 8px;
+  margin-block: calc((var(--line-height-normal, 1.5em) - 8px) / 2);
+  overflow: hidden;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: var(--muted);
+}
+
+.progress-bar:only-child {
+  border-radius: var(--radius-full);
+}
+
+.progress-bar {
+  height: 100%;
+  flex-shrink: 0;
+  border: 0;
+  background: var(--viz-series-1);
+}
+
+.viz-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  color: color-mix(in srgb, var(--foreground) 40%, var(--muted-foreground));
+  background: color-mix(in srgb, var(--foreground) 5%, transparent);
+  font-family: var(--font-sans);
+  font-size: calc(var(--font-size-base) * 14 / 16);
+  font-size: round(nearest, calc(var(--font-size-base) * 14 / 16), 1px);
+  font-weight: var(--font-weight-normal);
+  line-height: 1;
+}
+
+small,
+.text-small {
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+}
+
+.text-muted {
+  color: var(--muted-foreground);
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.viz-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.viz-controls > .form-label {
+  display: grid;
+  min-width: min(100%, 260px);
+  flex: 1 1 280px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 2px 12px;
+  margin-bottom: 0;
+}
+
+.viz-controls > .form-label > :is(.form-control, .form-range, .form-select) {
+  grid-column: 1 / -1;
+}
+
+.btn,
+.nav-link,
+.form-check-input,
+.form-control,
+.form-range,
+.form-select {
+  font: inherit;
+}
+
+/* Match inline alignment without overriding a containing flex or grid layout. */
+.btn,
+.nav-link,
+.form-control,
+.form-select,
+.form-range,
+.form-check {
+  vertical-align: middle;
+}
+
+.btn,
+.nav-link {
+  appearance: button;
+  display: inline-flex;
+  inline-size: fit-content;
+  max-inline-size: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin: 0;
+  padding: 0 8px;
+  -webkit-app-region: no-drag;
+  border: 1px solid var(--input);
+  corner-shape: var(--corner-shape);
+  cursor: var(--cursor-interaction, pointer);
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-font-smoothing: inherit;
+  font-family: var(--font-sans);
+  height: fit-content;
+  min-height: calc(12px + 2 * var(--control-spacing, 12px));
+  padding-inline: var(--control-spacing, 12px);
+  border-color: transparent;
+  border-radius: var(--radius-full);
+  color: var(--foreground);
+  background: color-mix(in srgb, var(--foreground) 5%, transparent);
+  font-size: calc(var(--font-size-base) * 14 / 16);
+  font-size: round(nearest, calc(var(--font-size-base) * 14 / 16), 1px);
+  font-weight: var(--font-weight-normal);
+  line-height: 18px;
+}
+
+.btn {
+  border-color: var(--border);
+  color: var(--secondary-foreground);
+  background: var(--secondary);
+}
+
+.btn:is(.btn-block, .viz-tile) {
+  inline-size: 100%;
+}
+
+.btn.viz-tile {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+a.btn {
+  cursor: var(--cursor-interaction, pointer);
+  text-decoration: none;
+}
+
+.btn:not(:disabled):hover {
+  background: light-dark(
+    color-mix(in srgb, var(--foreground) 5.5%, transparent),
+    color-mix(in srgb, var(--foreground) 8%, transparent)
+  );
+}
+
+.nav-link:not(:disabled):not([aria-disabled="true"]):hover {
+  background: color-mix(in srgb, var(--foreground) 10%, transparent);
+}
+
+.btn-primary {
+  border-color: var(--border);
+  color: var(--primary-foreground);
+  background: var(--foreground);
+  background-clip: border-box;
+}
+
+.btn-primary .text-muted {
+  color: color-mix(in srgb, var(--primary-foreground) 50%, transparent);
+}
+
+.btn-primary:not(:disabled):hover {
+  background: color-mix(in srgb, var(--foreground) 80%, transparent);
+  background-clip: border-box;
+}
+
+.btn-ghost {
+  border-color: transparent;
+  color: var(--muted-foreground);
+  background: transparent;
+}
+
+.btn-ghost:not(:disabled):hover {
+  color: var(--muted-foreground);
+  background: light-dark(
+    color-mix(in srgb, var(--foreground) 5.5%, transparent),
+    color-mix(in srgb, var(--foreground) 8%, transparent)
+  );
+}
+
+.nav-pills .nav-link {
+  min-width: 0;
+  border-color: transparent;
+  color: var(--muted-foreground);
+  background: transparent;
+}
+
+.nav-justified .nav-link {
+  flex: 1 1 0;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+.nav-pills .nav-link.active {
+  color: var(--foreground);
+  background: var(--muted);
+}
+
+/* Shared preview chrome; product styles stay inside each variant. */
+.viz-dotted-background {
+  background-image: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--foreground) 14%, transparent) 0.8px,
+    transparent 0.8px
+  );
+  background-position: center;
+  background-size: 16px 16px;
+}
+
+.viz-carousel {
+  position: relative;
+  min-width: 0;
+}
+
+.viz-carousel:has(> .viz-carousel-controls) {
+  min-height: calc(60px + var(--viz-carousel-picker-height, 0px));
+  padding-bottom: 60px;
+}
+
+.viz-carousel > [data-variant][hidden] {
+  display: none !important;
+}
+
+.viz-carousel > [data-variant] {
+  isolation: isolate;
+}
+
+.viz-carousel-controls {
+  --viz-carousel-hover: light-dark(
+    color-mix(in srgb, var(--foreground) 5.4%, transparent),
+    color-mix(in srgb, var(--foreground) 7.8%, transparent)
+  );
+  position: absolute;
+  z-index: 2;
+  bottom: 8px;
+  left: 50%;
+  display: flex;
+  width: max-content;
+  /* Leave room for the host's design-controls launcher at the trailing edge. */
+  max-width: calc(100% - 96px);
+  align-items: center;
+  gap: 0;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  color: var(--foreground);
+  background: var(--background);
+  font-family: var(--font-sans);
+  /* Match the settings dropdown chrome independently of the content font size. */
+  font-size: 13px;
+  font-weight: var(--font-weight-normal);
+  line-height: 18px;
+  transform: translateX(-50%);
+  user-select: none;
+}
+
+/* Keep authored mockup button styles out of the shared carousel chrome. */
+.viz-carousel-controls button,
+.viz-carousel-picker > summary {
+  display: flex !important;
+  height: auto !important;
+  min-height: 30px;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 4px;
+  padding: 0 6px !important;
+  -webkit-app-region: no-drag;
+  border: 0 !important;
+  border-radius: 14px !important;
+  color: inherit !important;
+  background: transparent !important;
+  font: inherit !important;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.viz-carousel-controls > button,
+.viz-carousel-picker > summary {
+  position: relative;
+  isolation: isolate;
+}
+
+.viz-carousel-controls > button {
+  --icon-size: 16px;
+  width: 30px !important;
+  padding: 0 !important;
+}
+
+.viz-carousel-picker > summary {
+  padding-inline: 12px !important;
+}
+
+.viz-carousel-controls .viz-carousel-caret {
+  width: 14px;
+  height: 14px;
+  flex: none;
+  margin: 0;
+  color: inherit;
+  transform: rotate(180deg);
+}
+
+.viz-carousel-controls > button > svg,
+.viz-carousel-controls .viz-carousel-caret,
+.viz-carousel-count {
+  opacity: 0.5;
+}
+
+.viz-carousel-controls > button::before,
+.viz-carousel-picker > summary::before {
+  position: absolute;
+  z-index: -1;
+  inset: 3px;
+  border-radius: 12px;
+  content: "";
+  pointer-events: none;
+}
+
+.viz-carousel-controls > button:hover::before,
+.viz-carousel-picker > summary:hover::before {
+  background: var(--viz-carousel-hover);
+}
+
+.viz-carousel-controls > button,
+.viz-carousel-controls [data-lucide],
+.viz-carousel-controls .lucide {
+  flex-shrink: 0;
+}
+
+.viz-carousel-picker {
+  min-width: 0;
+}
+
+.viz-carousel-picker > summary {
+  min-width: 0;
+  list-style: none;
+}
+
+.viz-carousel-picker > summary::-webkit-details-marker {
+  display: none;
+}
+
+.viz-carousel-count {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.viz-carousel-name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.viz-carousel-options {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 4px);
+  left: 0;
+  display: flex;
+  max-height: 240px;
+  flex-direction: column;
+  gap: 2px;
+  overflow: auto;
+  padding: 4px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--background);
+  box-shadow: 0 4px 12px light-dark(rgb(0 0 0 / 6%), rgb(0 0 0 / 25%));
+}
+
+.viz-carousel-options > button {
+  border-radius: max(0px, calc(var(--radius-lg) - 5px)) !important;
+  width: 100% !important;
+  min-height: 28px;
+  justify-content: flex-start !important;
+  padding: 4px 8px !important;
+  font-size: var(--font-size-small) !important;
+  text-align: start;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.viz-carousel-options > [aria-current="true"],
+.viz-carousel-options > button:hover {
+  background: var(--viz-carousel-hover) !important;
+}
+
+.btn:disabled,
+.nav-link:disabled,
+.nav-link[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+[data-lucide] {
+  stroke-width: 1.6;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--foreground);
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  padding: 0 8px;
+  outline: none;
+  border: 1px solid var(--input);
+  corner-shape: var(--corner-shape);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  height: calc(12px + 2 * var(--control-spacing, 12px));
+  min-height: calc(12px + 2 * var(--control-spacing, 12px));
+  padding-inline: calc(4px + var(--control-spacing, 12px) / 2);
+  border-color: var(--input);
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--popover) 96%, transparent);
+  font-size: calc(var(--font-size-base) * 14 / 16);
+  font-size: round(nearest, calc(var(--font-size-base) * 14 / 16), 1px);
+  font-weight: var(--font-weight-normal);
+  line-height: 1.4285714286;
+}
+.form-control:is(
+  [type="file"],
+  [type="date"],
+  [type="datetime-local"],
+  [type="month"],
+  [type="week"],
+  [type="color"]
+) {
+  height: calc(12px + 2 * var(--control-spacing, 12px));
+  min-height: calc(12px + 2 * var(--control-spacing, 12px));
+  line-height: 18px;
+}
+.form-control:is(
+  [type="date"],
+  [type="datetime-local"],
+  [type="month"],
+  [type="week"]
+) {
+  padding-inline: var(--control-spacing, 12px);
+}
+
+.form-control::placeholder {
+  color: var(--muted-foreground);
+}
+
+.form-control[type="file"] {
+  overflow: hidden;
+  cursor: var(--cursor-interaction, pointer);
+  padding: 0;
+}
+
+.form-control[type="file"]::file-selector-button {
+  padding: 0 8px;
+  border: 0;
+  border-right: 1px solid var(--input);
+  color: var(--secondary-foreground);
+  background: var(--secondary);
+  cursor: inherit;
+  font: inherit;
+  min-height: calc(10px + 2 * var(--control-spacing, 12px));
+  padding-inline: var(--control-spacing, 12px);
+  margin-inline-end: var(--control-spacing, 12px);
+}
+
+.form-control[type="file"]:not(:disabled):hover::file-selector-button {
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.form-control-color[type="color"] {
+  width: 40px;
+  height: calc(12px + 2 * var(--control-spacing, 12px));
+  padding: 3px;
+  cursor: var(--cursor-interaction, pointer);
+}
+
+.form-control-color[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.form-control-color[type="color"]::-webkit-color-swatch {
+  border: 0;
+  border-radius: calc(var(--radius-lg) - 4px);
+  corner-shape: var(--corner-shape);
+}
+
+textarea.form-control {
+  height: auto;
+  resize: vertical;
+  min-height: 96px;
+  padding: 8px 10px;
+}
+
+.form-control:focus-visible {
+  border-color: var(--ring);
+  box-shadow: none;
+}
+.form-control:disabled {
+  color: var(--muted-foreground);
+  background: color-mix(in srgb, var(--foreground) 5%, transparent);
+  opacity: 1;
+}
+.form-control[aria-invalid="true"] {
+  border-color: var(--red);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--red) 20%, transparent);
+}
+
+.form-control:disabled,
+.form-select:disabled {
+  cursor: not-allowed;
+}
+
+.form-select {
+  appearance: none;
+  display: block;
+  width: 100%;
+  height: fit-content;
+  min-height: calc(12px + 2 * var(--control-spacing, 12px));
+  margin: 0;
+  /* The secondary icon role is 14px at compact density and 16px at web density. */
+  --icon-size: calc(10px + var(--control-spacing, 12px) / 2);
+  /* Settings dropdowns retain a 12px inset and a 4px text-to-chevron gap. */
+  padding: 0 calc(16px + var(--icon-size)) 0 12px;
+  outline: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  corner-shape: var(--corner-shape);
+  color: var(--foreground);
+  background-color: var(--secondary);
+  background-image:
+    linear-gradient(
+      45deg,
+      transparent calc(50% - 0.6px),
+      var(--muted-foreground) calc(50% - 0.6px) calc(50% + 0.6px),
+      transparent calc(50% + 0.6px)
+    ),
+    linear-gradient(
+      135deg,
+      transparent calc(50% - 0.6px),
+      var(--muted-foreground) calc(50% - 0.6px) calc(50% + 0.6px),
+      transparent calc(50% + 0.6px)
+    );
+  background-position:
+    calc(100% - 12px - var(--icon-size) / 2) 50%,
+    calc(100% - 12px - var(--icon-size) * 0.18) 50%;
+  background-repeat: no-repeat;
+  background-size: calc(var(--icon-size) * 0.32) calc(var(--icon-size) * 0.32);
+  cursor: var(--cursor-interaction, default);
+  font-size: calc(var(--font-size-base) * 14 / 16);
+  font-size: round(nearest, calc(var(--font-size-base) * 14 / 16), 1px);
+  font-weight: var(--font-weight-normal);
+  line-height: 18px;
+}
+
+.form-select :is(option, optgroup) {
+  color: var(--popover-foreground);
+  background-color: var(--popover);
+}
+
+.form-select :is(option, optgroup):disabled {
+  color: var(--muted-foreground);
+}
+
+.form-select:not(:disabled):hover {
+  background-color: light-dark(
+    color-mix(in srgb, var(--foreground) 5.5%, transparent),
+    color-mix(in srgb, var(--foreground) 8%, transparent)
+  );
+}
+
+.form-select:focus-visible {
+  box-shadow: 0 0 0 2px var(--ring);
+}
+.form-select:disabled {
+  opacity: 0.4;
+}
+
+.form-check {
+  display: flex;
+  min-height: calc(12px + 2 * var(--control-spacing, 12px));
+  align-items: center;
+  gap: 6px;
+}
+
+.form-check-input {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  flex: 0 0 auto;
+  margin: 0;
+  border: 1px solid var(--input);
+  color: var(--primary-foreground);
+  background-color: transparent;
+  cursor: var(--cursor-interaction, default);
+  transition:
+    background-color 150ms,
+    border-color 150ms,
+    box-shadow 150ms;
+}
+
+.form-check:not(.form-switch) .form-check-input[type="checkbox"] {
+  corner-shape: round;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  width: calc(10px + var(--control-spacing, 12px) / 2);
+  height: calc(10px + var(--control-spacing, 12px) / 2);
+  border-color: var(--border-strong, var(--input));
+  border-radius: calc(var(--radius-sm) / 2);
+  background-color: transparent;
+  color: var(--foreground);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input:not(:disabled):not(:checked):hover {
+  background-color: var(--card);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input[type="checkbox"]:is(:checked, :indeterminate) {
+  border-color: var(--border-strong, var(--input));
+  background-color: color-mix(in srgb, var(--popover) 96%, transparent);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input[type="checkbox"]:checked::before {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--primary-foreground);
+  content: "";
+  mask: var(--checkmark-image) center / 12px 12px no-repeat;
+  background-color: var(--foreground);
+}
+.form-check:not(.form-switch)
+  .form-check-input[type="checkbox"]:indeterminate::before {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 65%;
+  height: 6.65%;
+  margin: auto;
+  border-radius: var(--radius-full);
+  background: var(--foreground);
+  mask: none;
+  content: "";
+}
+
+.form-check-input[type="radio"] {
+  border-radius: var(--radius-full);
+  width: 16px;
+  height: 16px;
+  border: 0;
+  box-shadow: inset 0 0 0 1px var(--input);
+}
+
+.form-check-input[type="radio"]:checked {
+  border: 0;
+  background: radial-gradient(
+    circle,
+    var(--primary-foreground) 0 3px,
+    var(--foreground) 3px
+  );
+  box-shadow: none;
+}
+
+.form-check:not(.form-switch) .form-check-input:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+.form-check:not(.form-switch) .form-check-input[type="checkbox"]:focus-visible {
+  border-color: var(--ring);
+  outline: none;
+  box-shadow: 0 0 0 2px var(--ring);
+}
+
+.form-check:not(.form-switch) .form-check-input:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.form-check:not(.form-switch) .form-check-input:disabled + .form-check-label {
+  cursor: not-allowed;
+}
+.form-check:not(.form-switch) .form-check-input[type="radio"]:disabled,
+.form-check:not(.form-switch)
+  .form-check-input[type="radio"]:disabled
+  + .form-check-label {
+  opacity: 0.5;
+}
+
+.form-switch .form-check-input:disabled,
+.form-switch .form-check-input:disabled + .form-check-label {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.form-check-label {
+  color: var(--foreground);
+  cursor: var(--cursor-interaction, default);
+}
+
+.form-switch .form-check-input {
+  position: relative;
+  width: 32px;
+  height: 20px;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: var(--muted);
+  box-shadow: none;
+  transition: background-color 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.form-switch .form-check-input::before {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  box-sizing: border-box;
+  border: 1px solid light-dark(var(--primary-foreground), var(--foreground));
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-sm);
+  content: "";
+  transform: translate(2px, -50%);
+  transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
+  border-color: #fff;
+  background: #fff;
+}
+
+.form-switch .form-check-input:checked {
+  background: var(--blue);
+}
+
+.form-switch .form-check-input:checked::before {
+  transform: translate(14px, -50%);
+}
+
+.form-switch .form-check-input:focus-visible {
+  box-shadow: 0 0 0 2px var(--ring);
+  outline: none;
+}
+
+.form-range {
+  appearance: none;
+  display: block;
+  width: 100%;
+  flex: 1;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  accent-color: var(--primary);
+  height: calc(12px + 2 * var(--control-spacing, 12px));
+  min-height: calc(12px + 2 * var(--control-spacing, 12px));
+  outline: none;
+  border-radius: var(--radius-full);
+  color: var(--foreground);
+  background: transparent;
+}
+
+.form-range::-webkit-slider-runnable-track {
+  background: var(--form-range-track, var(--border));
+  height: 2px;
+  border-radius: var(--radius-full);
+}
+
+.form-range::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  margin-top: -9px;
+  border-color: transparent;
+  background: currentColor;
+  box-shadow: var(--shadow-sm);
+}
+
+/* Outline the native track and thumb, preserving the larger input hit area. */
+.form-range:focus-visible::-webkit-slider-runnable-track {
+  outline: 2px auto Highlight;
+  outline-color: -webkit-focus-ring-color;
+}
+
+.form-range::-moz-range-track {
+  background: var(--form-range-track, var(--border));
+  height: 2px;
+  border-radius: var(--radius-full);
+}
+
+.form-range::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  border-color: transparent;
+  background: currentColor;
+  box-shadow: var(--shadow-sm);
+}
+
+.form-range:focus-visible::-moz-range-thumb {
+  outline: 2px solid Highlight;
+  outline-offset: 2px;
+}
+
+.form-range:disabled {
+  opacity: 1;
+  cursor: default;
+}
+
+.btn:not(.btn-primary, .viz-tile):is(
+  [aria-pressed="true"],
+  [aria-selected="true"],
+  .is-selected
+) {
+  border-color: transparent;
+  color: var(--primary-foreground);
+  background: var(--blue);
+}
+
+.btn.viz-tile:is([aria-pressed="true"], [aria-selected="true"], .is-selected) {
+  border-color: var(--primary);
+  box-shadow: inset 0 0 0 1px var(--primary);
+}
+
+.btn:focus-visible,
+.nav-link:focus-visible {
+  outline-offset: 2px;
+  outline: none;
+  box-shadow: 0 0 0 2px var(--ring);
+}
+
+.viz-carousel-controls :is(button, summary):focus-visible {
+  outline: 2px solid var(--ring) !important;
+  outline-offset: 2px !important;
+}
+
+/* Web recipes are the default, including on renderers without inline style queries. */
+@supports (border-radius: if(style(--corner-shape: round): 1px; else: 2px)) {
+  /* Match the host's proportional text-sm scale at every text preference. */
+  .tooltip,
+  .viz-badge,
+  .btn,
+  .nav-link,
+  .form-control,
+  .form-select {
+    font-size: if(
+      style(--corner-shape: round): round(
+          nearest,
+          calc(var(--font-size-base) * 14 / 16),
+          1px
+        );
+        else: round(nearest, calc(var(--font-size-base) * 13 / 14), 1px)
+    );
+  }
+
+  .btn,
+  .nav-link,
+  .form-select {
+    border-radius: if(
+      style(--corner-shape: round): var(--radius-full); else: var(--radius-lg)
+    );
+  }
+
+  .form-check:not(.form-switch) .form-check-input[type="checkbox"] {
+    border-radius: if(
+      style(--corner-shape: round): calc(var(--radius-sm) / 2);
+        else: calc(var(--radius-lg) * 0.4)
+    );
+  }
+
+  .tooltip {
+    font-weight: if(
+      style(--corner-shape: round): 600; else: var(--font-weight-normal)
+    );
+  }
+}
+
+@media (pointer: coarse) {
+  .viz-carousel:has(> .viz-carousel-controls) {
+    min-height: calc(76px + var(--viz-carousel-picker-height, 0px));
+    padding-bottom: 76px;
+  }
+
+  .btn,
+  .nav-link,
+  .viz-carousel-controls button,
+  .viz-carousel-picker > summary,
+  .form-control,
+  .form-select {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  /* Keep small-screen WebKit from zooming when a text field receives focus. */
+  .form-control,
+  .form-select {
+    font-size: max(16px, calc(var(--font-size-base) * 14 / 16));
+    font-size: max(
+      16px,
+      round(nearest, calc(var(--font-size-base) * 14 / 16), 1px)
+    );
+  }
+  .form-control:is(
+    [type="file"],
+    [type="date"],
+    [type="datetime-local"],
+    [type="month"],
+    [type="week"],
+    [type="time"],
+    [type="color"]
+  ) {
+    height: 44px;
+    min-height: 44px;
+    font-size: max(16px, calc(var(--font-size-base) * 14 / 16));
+    font-size: max(
+      16px,
+      round(nearest, calc(var(--font-size-base) * 14 / 16), 1px)
+    );
+  }
+
+  .form-control[type="file"]::file-selector-button {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .form-control-color[type="color"] {
+    width: 44px;
+    height: 44px;
+  }
+
+  .form-control:is(
+    [type="date"],
+    [type="datetime-local"],
+    [type="month"],
+    [type="time"],
+    [type="week"]
+  ) {
+    min-width: 0;
+    max-width: 100%;
+    padding-block: 8px;
+  }
+
+  .form-check {
+    min-height: 44px;
+    padding-inline: 15px;
+  }
+
+  .form-check-input {
+    position: relative;
+  }
+
+  .form-check-input::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 44px;
+    height: 44px;
+    content: "";
+    transform: translate(-50%, -50%);
+  }
+
+  .form-check-label {
+    display: inline-flex;
+    min-width: 44px;
+    min-height: 44px;
+    align-items: center;
+  }
+
+  .form-range {
+    height: 44px;
+    touch-action: pan-y;
+  }
+}
+
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+#widget > svg {
+  width: 100%;
+}
+
+/* Model-authored chart rules can otherwise stretch icons after these styles load. */
+svg.lucide {
+  display: block;
+  width: var(--icon-size) !important;
+  height: var(--icon-size) !important;
+  flex: none;
+  margin: 0 !important;
+  stroke-width: 1.6;
+}
+
+.text-warning,
+.text-destructive {
+  color: var(--destructive);
+}
+
+html>body{padding:0}</style>
+<style>
+html { background: var(--background); }
+body { margin: 0; }
+.export-shell { max-width: 960px; margin: 0 auto; padding: 20px; }
+.export-nav { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 18px; margin-bottom: 24px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
+.export-nav a { color: var(--foreground); text-decoration: none; }
+.export-nav a:hover { text-decoration: underline; }
+.export-nav .export-brand { font-weight: 500; margin-right: auto; }
+.export-nav .export-current { color: var(--muted-foreground); }
+.export-tip { position: fixed; z-index: 100; max-width: min(320px, calc(100vw - 24px)); padding: 8px 10px; background: var(--popover); color: var(--popover-foreground); border: 1px solid var(--border); border-radius: 6px; box-shadow: 0 5px 18px color-mix(in srgb, var(--foreground) 12%, transparent); pointer-events: none; font-size: var(--font-size-small); }
+@media (max-width: 480px) { .export-shell { padding: 12px; } .export-nav { margin-bottom: 18px; } }
+</style></head>
+<body><main class="export-shell"><nav class="export-nav" aria-label="Lab navigation"><a class="export-brand" href="index.html">Black Swan Jeweled Math</a><a href="01_3sat_jewel.html">1</a><a href="02_quasicrystal_lab.html">2</a><a href="03_tiling_lab.html" aria-current="page" class="export-current">3</a><a href="04_sweep_results.html">4</a></nav><div id="hat-pinwheel-zeta-lab">
+  <style>
+    #hat-pinwheel-zeta-lab { color: var(--foreground); }
+    #hat-pinwheel-zeta-lab h3 { padding-right: 96px; }
+    #hat-pinwheel-zeta-lab [hidden] { display: none; }
+    #hat-pinwheel-zeta-lab .pattern-figure svg { display: block; width: 100%; }
+    #hat-pinwheel-zeta-lab .pattern-figure text { fill: var(--foreground); font-size: 12px; font-weight: 400; }
+    #hat-pinwheel-zeta-lab .pattern-status { margin: 12px 0; }
+    #hat-pinwheel-zeta-lab .pattern-legend { display: flex; flex-wrap: wrap; gap: 6px 16px; margin: 8px 0; }
+    #hat-pinwheel-zeta-lab .pattern-legend span { display: inline-flex; align-items: center; gap: 5px; }
+    #hat-pinwheel-zeta-lab .pattern-swatch { display: inline-block; width: 11px; height: 11px; }
+  </style>
+  <h3>Tilings, rotations, and a changing jewel</h3>
+  <div class="viz-controls">
+    <label class="form-label" for="pattern-view">Construction
+      <select class="form-select" id="pattern-view">
+        <option value="hat">Hat substitution</option>
+        <option value="pinwheel">Pinwheel substitution</option>
+        <option value="adaptive">Adaptive hat weights</option>
+        <option value="lattice">Coprime lattice points</option>
+      </select>
+    </label>
+    <label class="form-label" for="pattern-level"><span id="pattern-level-label">Refinement</span>: <output id="pattern-level-value" class="tabular-nums">1</output>
+      <input class="form-range" id="pattern-level" type="range" min="0" max="2" step="1" value="1">
+    </label>
+    <label class="form-label" for="pattern-color" id="pattern-color-label">Color
+      <select class="form-select" id="pattern-color">
+        <option value="orientation">Orientation sector</option>
+        <option value="reflection">Handedness</option>
+      </select>
+    </label>
+  </div>
+  <div id="pattern-status" class="pattern-status tabular-nums" role="status" aria-live="polite"></div>
+  <div id="pattern-figure" class="pattern-figure"></div>
+  <div id="pattern-legend" class="pattern-legend text-small"></div>
+  <div id="pattern-detail" class="text-small tabular-nums" aria-live="polite"></div>
+  <script type="application/json" id="pattern-data">{"hat":[{"iteration":0,"tiles":[{"polygon":[[1,1.732050808],[1.0,2.598076211],[0.5,2.598076211],[0,1.732050808],[0.25,1.299038106],[-0.5,0.866025404],[-0.5,-0.0],[0.0,-0.0],[0.25,0.433012702],[1.0,0],[1.75,0.433012702],[1.5,0.866025404],[1.75,1.299038106]],"orientationDegrees":240,"reflected":false},{"polygon":[[4,1.732050808],[4,2.598076211],[3.5,2.598076211],[3,1.732050808],[3.25,1.299038106],[2.5,0.866025404],[2.5,0],[3,0],[3.25,0.433012702],[4,0],[4.75,0.433012702],[4.5,0.866025404],[4.75,1.299038106]],"orientationDegrees":240,"reflected":false},{"polygon":[[2.5,2.598076211],[3.25,2.165063509],[3.5,2.598076211],[3,3.464101615],[2.5,3.464101615],[2.5,4.330127019],[1.75,4.763139721],[1.5,4.330127019],[1.75,3.897114317],[1.0,3.464101615],[1,2.598076211],[1.5,2.598076211],[1.75,2.165063509]],"orientationDegrees":120,"reflected":false},{"polygon":[[2.5,0.866025404],[2.5,0],[2,0],[1.5,0.866025404],[1.75,1.299038106],[1,1.732050808],[1,2.598076211],[1.5,2.598076211],[1.75,2.165063509],[2.5,2.598076211],[3.25,2.165063509],[3,1.732050808],[3.25,1.299038106]],"orientationDegrees":120,"reflected":true}]},{"iteration":1,"tiles":[{"polygon":[[-3.5,-0.866025404],[-3.5,0.0],[-4.0,0.0],[-4.5,-0.866025404],[-4.25,-1.299038106],[-5.0,-1.732050808],[-5.0,-2.598076211],[-4.5,-2.598076211],[-4.25,-2.165063509],[-3.5,-2.598076211],[-2.75,-2.165063509],[-3.0,-1.732050808],[-2.75,-1.299038106]],"orientationDegrees":240,"reflected":false},{"polygon":[[-0.5,-0.866025404],[-0.5,0.0],[-1.0,0.0],[-1.5,-0.866025404],[-1.25,-1.299038106],[-2.0,-1.732050808],[-2.0,-2.598076211],[-1.5,-2.598076211],[-1.25,-2.165063509],[-0.5,-2.598076211],[0.25,-2.165063509],[0.0,-1.732050808],[0.25,-1.299038106]],"orientationDegrees":240,"reflected":false},{"polygon":[[-2.0,-0.0],[-1.25,-0.433012702],[-1.0,-0.0],[-1.5,0.866025404],[-2.0,0.866025404],[-2.0,1.732050808],[-2.75,2.165063509],[-3.0,1.732050808],[-2.75,1.299038106],[-3.5,0.866025404],[-3.5,-0.0],[-3.0,-0.0],[-2.75,-0.433012702]],"orientationDegrees":120,"reflected":false},{"polygon":[[-2.0,-1.732050808],[-2.0,-2.598076211],[-2.5,-2.598076211],[-3.0,-1.732050808],[-2.75,-1.299038106],[-3.5,-0.866025404],[-3.5,0.0],[-3.0,0.0],[-2.75,-0.433012702],[-2.0,0.0],[-1.25,-0.433012702],[-1.5,-0.866025404],[-1.25,-1.299038106]],"orientationDegrees":120,"reflected":true},{"polygon":[[1.0,-1.732050808],[1.0,-0.866025404],[0.5,-0.866025404],[0.0,-1.732050808],[0.25,-2.165063509],[-0.5,-2.598076211],[-0.5,-3.464101615],[0.0,-3.464101615],[0.25,-3.031088913],[1.0,-3.464101615],[1.75,-3.031088913],[1.5,-2.598076211],[1.75,-2.165063509]],"orientationDegrees":240,"reflected":false},{"polygon":[[4.0,-1.732050808],[4.0,-0.866025404],[3.5,-0.866025404],[3.0,-1.732050808],[3.25,-2.165063509],[2.5,-2.598076211],[2.5,-3.464101615],[3.0,-3.464101615],[3.25,-3.031088913],[4.0,-3.464101615],[4.75,-3.031088913],[4.5,-2.598076211],[4.75,-2.165063509]],"orientationDegrees":240,"reflected":false},{"polygon":[[2.5,-0.866025404],[3.25,-1.299038106],[3.5,-0.866025404],[3.0,-0.0],[2.5,-0.0],[2.5,0.866025404],[1.75,1.299038106],[1.5,0.866025404],[1.75,0.433012702],[1.0,-0.0],[1.0,-0.866025404],[1.5,-0.866025404],[1.75,-1.299038106]],"orientationDegrees":120,"reflected":false},{"polygon":[[2.5,-2.598076211],[2.5,-3.464101615],[2.0,-3.464101615],[1.5,-2.598076211],[1.75,-2.165063509],[1.0,-1.732050808],[1.0,-0.866025404],[1.5,-0.866025404],[1.75,-1.299038106],[2.5,-0.866025404],[3.25,-1.299038106],[3.0,-1.732050808],[3.25,-2.165063509]],"orientationDegrees":120,"reflected":true},{"polygon":[[1.0,3.464101615],[1.75,3.031088913],[2.0,3.464101615],[1.5,4.330127019],[1.0,4.330127019],[1.0,5.196152423],[0.25,5.629165125],[-0.0,5.196152423],[0.25,4.763139721],[-0.5,4.330127019],[-0.5,3.464101615],[-0.0,3.464101615],[0.25,3.031088913]],"orientationDegrees":120,"reflected":false},{"polygon":[[-0.5,0.866025404],[0.25,0.433012702],[0.5,0.866025404],[-0.0,1.732050808],[-0.5,1.732050808],[-0.5,2.598076211],[-1.25,3.031088913],[-1.5,2.598076211],[-1.25,2.165063509],[-2.0,1.732050808],[-2.0,0.866025404],[-1.5,0.866025404],[-1.25,0.433012702]],"orientationDegrees":120,"reflected":false},{"polygon":[[1.0,1.732050808],[0.25,1.299038106],[0.5,0.866025404],[1.5,0.866025404],[1.75,1.299038106],[2.5,0.866025404],[3.25,1.299038106],[3.0,1.732050808],[2.5,1.732050808],[2.5,2.598076211],[1.75,3.031088913],[1.5,2.598076211],[1.0,2.598076211]],"orientationDegrees":0,"reflected":false},{"polygon":[[-0.5,2.598076211],[-1.25,3.031088913],[-1.0,3.464101615],[-0.0,3.464101615],[0.25,3.031088913],[1.0,3.464101615],[1.75,3.031088913],[1.5,2.598076211],[1.0,2.598076211],[1.0,1.732050808],[0.25,1.299038106],[-0.0,1.732050808],[-0.5,1.732050808]],"orientationDegrees":0,"reflected":true},{"polygon":[[1.0,-0.0],[1.75,0.433012702],[1.5,0.866025404],[0.5,0.866025404],[0.25,0.433012702],[-0.5,0.866025404],[-1.25,0.433012702],[-1.0,-0.0],[-0.5,-0.0],[-0.5,-0.866025404],[0.25,-1.299038106],[0.5,-0.866025404],[1.0,-0.866025404]],"orientationDegrees":180,"reflected":false},{"polygon":[[-2.0,3.464101615],[-2.0,4.330127019],[-2.5,4.330127019],[-3.0,3.464101615],[-2.75,3.031088913],[-3.5,2.598076211],[-3.5,1.732050808],[-3.0,1.732050808],[-2.75,2.165063509],[-2.0,1.732050808],[-1.25,2.165063509],[-1.5,2.598076211],[-1.25,3.031088913]],"orientationDegrees":240,"reflected":false},{"polygon":[[-0.5,4.330127019],[0.25,4.763139721],[-0.0,5.196152423],[-1.0,5.196152423],[-1.25,4.763139721],[-2.0,5.196152423],[-2.75,4.763139721],[-2.5,4.330127019],[-2.0,4.330127019],[-2.0,3.464101615],[-1.25,3.031088913],[-1.0,3.464101615],[-0.5,3.464101615]],"orientationDegrees":180,"reflected":false},{"polygon":[[-5.0,0],[-5.0,0.866025404],[-5.5,0.866025404],[-6.0,0],[-5.75,-0.433012702],[-6.5,-0.866025404],[-6.5,-1.732050808],[-6.0,-1.732050808],[-5.75,-1.299038106],[-5.0,-1.732050808],[-4.25,-1.299038106],[-4.5,-0.866025404],[-4.25,-0.433012702]],"orientationDegrees":240,"reflected":false},{"polygon":[[-3.5,0.866025404],[-2.75,1.299038106],[-3.0,1.732050808],[-4.0,1.732050808],[-4.25,1.299038106],[-5.0,1.732050808],[-5.75,1.299038106],[-5.5,0.866025404],[-5.0,0.866025404],[-5.0,0.0],[-4.25,-0.433012702],[-4.0,0.0],[-3.5,0.0]],"orientationDegrees":180,"reflected":false},{"polygon":[[-2.0,-3.464101615],[-2.75,-3.897114317],[-2.5,-4.330127019],[-1.5,-4.330127019],[-1.25,-3.897114317],[-0.5,-4.330127019],[0.25,-3.897114317],[0.0,-3.464101615],[-0.5,-3.464101615],[-0.5,-2.598076211],[-1.25,-2.165063509],[-1.5,-2.598076211],[-2.0,-2.598076211]],"orientationDegrees":0,"reflected":false},{"polygon":[[-3.5,-2.598076211],[-4.25,-2.165063509],[-4.5,-2.598076211],[-4.0,-3.464101615],[-3.5,-3.464101615],[-3.5,-4.330127019],[-2.75,-4.763139721],[-2.5,-4.330127019],[-2.75,-3.897114317],[-2.0,-3.464101615],[-2.0,-2.598076211],[-2.5,-2.598076211],[-2.75,-2.165063509]],"orientationDegrees":300,"reflected":false},{"polygon":[[2.5,-4.330127019],[1.75,-4.763139721],[2.0,-5.196152423],[3.0,-5.196152423],[3.25,-4.763139721],[4.0,-5.196152423],[4.75,-4.763139721],[4.5,-4.330127019],[4.0,-4.330127019],[4.0,-3.464101615],[3.25,-3.031088913],[3.0,-3.464101615],[2.5,-3.464101615]],"orientationDegrees":0,"reflected":false},{"polygon":[[1.0,-3.464101615],[0.25,-3.031088913],[0.0,-3.464101615],[0.5,-4.330127019],[1.0,-4.330127019],[1.0,-5.196152423],[1.75,-5.629165125],[2.0,-5.196152423],[1.75,-4.763139721],[2.5,-4.330127019],[2.5,-3.464101615],[2.0,-3.464101615],[1.75,-3.031088913]],"orientationDegrees":300,"reflected":false},{"polygon":[[4,0],[3.25,0.433012702],[3,-0.0],[3.5,-0.866025404],[4.0,-0.866025404],[4.0,-1.732050808],[4.75,-2.165063509],[5.0,-1.732050808],[4.75,-1.299038106],[5.5,-0.866025404],[5.5,0.0],[5,0.0],[4.75,0.433012702]],"orientationDegrees":300,"reflected":false},{"polygon":[[4.0,1.732050808],[4.0,2.598076211],[3.5,2.598076211],[3.0,1.732050808],[3.25,1.299038106],[2.5,0.866025404],[2.5,-0.0],[3,-0.0],[3.25,0.433012702],[4,0.0],[4.75,0.433012702],[4.5,0.866025404],[4.75,1.299038106]],"orientationDegrees":240,"reflected":false},{"polygon":[[2.5,4.330127019],[3.25,3.897114317],[3.5,4.330127019],[3.0,5.196152423],[2.5,5.196152423],[2.5,6.062177826],[1.75,6.495190528],[1.5,6.062177826],[1.75,5.629165125],[1.0,5.196152423],[1.0,4.330127019],[1.5,4.330127019],[1.75,3.897114317]],"orientationDegrees":120,"reflected":false},{"polygon":[[2.5,2.598076211],[2.5,1.732050808],[3.0,1.732050808],[3.5,2.598076211],[3.25,3.031088913],[4.0,3.464101615],[4.0,4.330127019],[3.5,4.330127019],[3.25,3.897114317],[2.5,4.330127019],[1.75,3.897114317],[2.0,3.464101615],[1.75,3.031088913]],"orientationDegrees":60,"reflected":false}]},{"iteration":2,"tiles":[{"polygon":[[-9.5,-2.598076211],[-9.5,-1.732050808],[-10.0,-1.732050808],[-10.5,-2.598076211],[-10.25,-3.031088913],[-11.0,-3.464101615],[-11.0,-4.330127019],[-10.5,-4.330127019],[-10.25,-3.897114317],[-9.5,-4.330127019],[-8.75,-3.897114317],[-9.0,-3.464101615],[-8.75,-3.031088913]],"orientationDegrees":240,"reflected":false},{"polygon":[[-6.5,-2.598076211],[-6.5,-1.732050808],[-7.0,-1.732050808],[-7.5,-2.598076211],[-7.25,-3.031088913],[-8.0,-3.464101615],[-8.0,-4.330127019],[-7.5,-4.330127019],[-7.25,-3.897114317],[-6.5,-4.330127019],[-5.75,-3.897114317],[-6.0,-3.464101615],[-5.75,-3.031088913]],"orientationDegrees":240,"reflected":false},{"polygon":[[-8.0,-1.732050808],[-7.25,-2.165063509],[-7.0,-1.732050808],[-7.5,-0.866025404],[-8.0,-0.866025404],[-8.0,0.0],[-8.75,0.433012702],[-9.0,0.0],[-8.75,-0.433012702],[-9.5,-0.866025404],[-9.5,-1.732050808],[-9.0,-1.732050808],[-8.75,-2.165063509]],"orientationDegrees":120,"reflected":false},{"polygon":[[-8.0,-3.464101615],[-8.0,-4.330127019],[-8.5,-4.330127019],[-9.0,-3.464101615],[-8.75,-3.031088913],[-9.5,-2.598076211],[-9.5,-1.732050808],[-9.0,-1.732050808],[-8.75,-2.165063509],[-8.0,-1.732050808],[-7.25,-2.165063509],[-7.5,-2.598076211],[-7.25,-3.031088913]],"orientationDegrees":120,"reflected":true},{"polygon":[[-5.0,-3.464101615],[-5.0,-2.598076211],[-5.5,-2.598076211],[-6.0,-3.464101615],[-5.75,-3.897114317],[-6.5,-4.330127019],[-6.5,-5.196152423],[-6.0,-5.196152423],[-5.75,-4.763139721],[-5.0,-5.196152423],[-4.25,-4.763139721],[-4.5,-4.330127019],[-4.25,-3.897114317]],"orientationDegrees":240,"reflected":false},{"polygon":[[-2.0,-3.464101615],[-2.0,-2.598076211],[-2.5,-2.598076211],[-3.0,-3.464101615],[-2.75,-3.897114317],[-3.5,-4.330127019],[-3.5,-5.196152423],[-3.0,-5.196152423],[-2.75,-4.763139721],[-2.0,-5.196152423],[-1.25,-4.763139721],[-1.5,-4.330127019],[-1.25,-3.897114317]],"orientationDegrees":240,"reflected":false},{"polygon":[[-3.5,-2.598076211],[-2.75,-3.031088913],[-2.5,-2.598076211],[-3.0,-1.732050808],[-3.5,-1.732050808],[-3.5,-0.866025404],[-4.25,-0.433012702],[-4.5,-0.866025404],[-4.25,-1.299038106],[-5.0,-1.732050808],[-5.0,-2.598076211],[-4.5,-2.598076211],[-4.25,-3.031088913]],"orientationDegrees":120,"reflected":false},{"polygon":[[-3.5,-4.330127019],[-3.5,-5.196152423],[-4.0,-5.196152423],[-4.5,-4.330127019],[-4.25,-3.897114317],[-5.0,-3.464101615],[-5.0,-2.598076211],[-4.5,-2.598076211],[-4.25,-3.031088913],[-3.5,-2.598076211],[-2.75,-3.031088913],[-3.0,-3.464101615],[-2.75,-3.897114317]],"orientationDegrees":120,"reflected":true},{"polygon":[[-5,1.732050808],[-4.25,1.299038106],[-4,1.732050808],[-4.5,2.598076211],[-5,2.598076211],[-5.0,3.464101615],[-5.75,3.897114317],[-6.0,3.464101615],[-5.75,3.031088913],[-6.5,2.598076211],[-6.5,1.732050808],[-6,1.732050808],[-5.75,1.299038106]],"orientationDegrees":120,"reflected":false},{"polygon":[[-6.5,-0.866025404],[-5.75,-1.299038106],[-5.5,-0.866025404],[-6,0.0],[-6.5,0.0],[-6.5,0.866025404],[-7.25,1.299038106],[-7.5,0.866025404],[-7.25,0.433012702],[-8,0.0],[-8,-0.866025404],[-7.5,-0.866025404],[-7.25,-1.299038106]],"orientationDegrees":120,"reflected":false},{"polygon":[[-5.0,0.0],[-5.75,-0.433012702],[-5.5,-0.866025404],[-4.5,-0.866025404],[-4.25,-0.433012702],[-3.5,-0.866025404],[-2.75,-0.433012702],[-3.0,0.0],[-3.5,0.0],[-3.5,0.866025404],[-4.25,1.299038106],[-4.5,0.866025404],[-5.0,0.866025404]],"orientationDegrees":0,"reflected":false},{"polygon":[[-6.5,0.866025404],[-7.25,1.299038106],[-7.0,1.732050808],[-6.0,1.732050808],[-5.75,1.299038106],[-5.0,1.732050808],[-4.25,1.299038106],[-4.5,0.866025404],[-5.0,0.866025404],[-5.0,0.0],[-5.75,-0.433012702],[-6.0,0.0],[-6.5,0.0]],"orientationDegrees":0,"reflected":true},{"polygon":[[-5.0,-1.732050808],[-4.25,-1.299038106],[-4.5,-0.866025404],[-5.5,-0.866025404],[-5.75,-1.299038106],[-6.5,-0.866025404],[-7.25,-1.299038106],[-7.0,-1.732050808],[-6.5,-1.732050808],[-6.5,-2.598076211],[-5.75,-3.031088913],[-5.5,-2.598076211],[-5.0,-2.598076211]],"orientationDegrees":180,"reflected":false},{"polygon":[[-8,1.732050808],[-8,2.598076211],[-8.5,2.598076211],[-9,1.732050808],[-8.75,1.299038106],[-9.5,0.866025404],[-9.5,0.0],[-9,0.0],[-8.75,0.433012702],[-8,0.0],[-7.25,0.433012702],[-7.5,0.866025404],[-7.25,1.299038106]],"orientationDegrees":240,"reflected":false},{"polygon":[[-6.5,2.598076211],[-5.75,3.031088913],[-6,3.464101615],[-7,3.464101615],[-7.25,3.031088913],[-8,3.464101615],[-8.75,3.031088913],[-8.5,2.598076211],[-8,2.598076211],[-8,1.732050808],[-7.25,1.299038106],[-7,1.732050808],[-6.5,1.732050808]],"orientationDegrees":180,"reflected":false},{"polygon":[[-11.0,-1.732050808],[-11.0,-0.866025404],[-11.5,-0.866025404],[-12.0,-1.732050808],[-11.75,-2.165063509],[-12.5,-2.598076211],[-12.5,-3.464101615],[-12.0,-3.464101615],[-11.75,-3.031088913],[-11.0,-3.464101615],[-10.25,-3.031088913],[-10.5,-2.598076211],[-10.25,-2.165063509]],"orientationDegrees":240,"reflected":false},{"polygon":[[-9.5,-0.866025404],[-8.75,-0.433012702],[-9.0,0.0],[-10.0,0.0],[-10.25,-0.433012702],[-11.0,0.0],[-11.75,-0.433012702],[-11.5,-0.866025404],[-11.0,-0.866025404],[-11.0,-1.732050808],[-10.25,-2.165063509],[-10.0,-1.732050808],[-9.5,-1.732050808]],"orientationDegrees":180,"reflected":false},{"polygon":[[-8.0,-5.196152423],[-8.75,-5.629165125],[-8.5,-6.062177826],[-7.5,-6.062177826],[-7.25,-5.629165125],[-6.5,-6.062177826],[-5.75,-5.629165125],[-6.0,-5.196152423],[-6.5,-5.196152423],[-6.5,-4.330127019],[-7.25,-3.897114317],[-7.5,-4.330127019],[-8.0,-4.330127019]],"orientationDegrees":0,"reflected":false},{"polygon":[[-9.5,-4.330127019],[-10.25,-3.897114317],[-10.5,-4.330127019],[-10.0,-5.196152423],[-9.5,-5.196152423],[-9.5,-6.062177826],[-8.75,-6.495190528],[-8.5,-6.062177826],[-8.75,-5.629165125],[-8.0,-5.196152423],[-8.0,-4.330127019],[-8.5,-4.330127019],[-8.75,-3.897114317]],"orientationDegrees":300,"reflected":false},{"polygon":[[-3.5,-6.062177826],[-4.25,-6.495190528],[-4.0,-6.92820323],[-3.0,-6.92820323],[-2.75,-6.495190528],[-2.0,-6.92820323],[-1.25,-6.495190528],[-1.5,-6.062177826],[-2.0,-6.062177826],[-2.0,-5.196152423],[-2.75,-4.763139721],[-3.0,-5.196152423],[-3.5,-5.196152423]],"orientationDegrees":0,"reflected":false},{"polygon":[[-5.0,-5.196152423],[-5.75,-4.763139721],[-6.0,-5.196152423],[-5.5,-6.062177826],[-5.0,-6.062177826],[-5.0,-6.92820323],[-4.25,-7.361215932],[-4.0,-6.92820323],[-4.25,-6.495190528],[-3.5,-6.062177826],[-3.5,-5.196152423],[-4.0,-5.196152423],[-4.25,-4.763139721]],"orientationDegrees":300,"reflected":false},{"polygon":[[-2.0,-1.732050808],[-2.75,-1.299038106],[-3.0,-1.732050808],[-2.5,-2.598076211],[-2.0,-2.598076211],[-2.0,-3.464101615],[-1.25,-3.897114317],[-1.0,-3.464101615],[-1.25,-3.031088913],[-0.5,-2.598076211],[-0.5,-1.732050808],[-1.0,-1.732050808],[-1.25,-1.299038106]],"orientationDegrees":300,"reflected":false},{"polygon":[[-2.0,0.0],[-2.0,0.866025404],[-2.5,0.866025404],[-3.0,0.0],[-2.75,-0.433012702],[-3.5,-0.866025404],[-3.5,-1.732050808],[-3.0,-1.732050808],[-2.75,-1.299038106],[-2.0,-1.732050808],[-1.25,-1.299038106],[-1.5,-0.866025404],[-1.25,-0.433012702]],"orientationDegrees":240,"reflected":false},{"polygon":[[-3.5,2.598076211],[-2.75,2.165063509],[-2.5,2.598076211],[-3.0,3.464101615],[-3.5,3.464101615],[-3.5,4.330127019],[-4.25,4.763139721],[-4.5,4.330127019],[-4.25,3.897114317],[-5.0,3.464101615],[-5.0,2.598076211],[-4.5,2.598076211],[-4.25,2.165063509]],"orientationDegrees":120,"reflected":false},{"polygon":[[-3.5,0.866025404],[-3.5,0.0],[-3.0,0.0],[-2.5,0.866025404],[-2.75,1.299038106],[-2.0,1.732050808],[-2.0,2.598076211],[-2.5,2.598076211],[-2.75,2.165063509],[-3.5,2.598076211],[-4.25,2.165063509],[-4.0,1.732050808],[-4.25,1.299038106]],"orientationDegrees":60,"reflected":false},{"polygon":[[1.0,-5.196152423],[1.0,-4.330127019],[0.5,-4.330127019],[0.0,-5.196152423],[0.25,-5.629165125],[-0.5,-6.062177826],[-0.5,-6.92820323],[0.0,-6.92820323],[0.25,-6.495190528],[1.0,-6.92820323],[1.75,-6.495190528],[1.5,-6.062177826],[1.75,-5.629165125]],"orientationDegrees":240,"reflected":false},{"polygon":[[4.0,-5.196152423],[4.0,-4.330127019],[3.5,-4.330127019],[3.0,-5.196152423],[3.25,-5.629165125],[2.5,-6.062177826],[2.5,-6.92820323],[3.0,-6.92820323],[3.25,-6.495190528],[4.0,-6.92820323],[4.75,-6.495190528],[4.5,-6.062177826],[4.75,-5.629165125]],"orientationDegrees":240,"reflected":false},{"polygon":[[2.5,-4.330127019],[3.25,-4.763139721],[3.5,-4.330127019],[3.0,-3.464101615],[2.5,-3.464101615],[2.5,-2.598076211],[1.75,-2.165063509],[1.5,-2.598076211],[1.75,-3.031088913],[1.0,-3.464101615],[1.0,-4.330127019],[1.5,-4.330127019],[1.75,-4.763139721]],"orientationDegrees":120,"reflected":false},{"polygon":[[2.5,-6.062177826],[2.5,-6.92820323],[2.0,-6.92820323],[1.5,-6.062177826],[1.75,-5.629165125],[1.0,-5.196152423],[1.0,-4.330127019],[1.5,-4.330127019],[1.75,-4.763139721],[2.5,-4.330127019],[3.25,-4.763139721],[3.0,-5.196152423],[3.25,-5.629165125]],"orientationDegrees":120,"reflected":true},{"polygon":[[5.5,-6.062177826],[5.5,-5.196152423],[5.0,-5.196152423],[4.5,-6.062177826],[4.75,-6.495190528],[4.0,-6.92820323],[4.0,-7.794228634],[4.5,-7.794228634],[4.75,-7.361215932],[5.5,-7.794228634],[6.25,-7.361215932],[6.0,-6.92820323],[6.25,-6.495190528]],"orientationDegrees":240,"reflected":false},{"polygon":[[8.5,-6.062177826],[8.5,-5.196152423],[8.0,-5.196152423],[7.5,-6.062177826],[7.75,-6.495190528],[7.0,-6.92820323],[7.0,-7.794228634],[7.5,-7.794228634],[7.75,-7.361215932],[8.5,-7.794228634],[9.25,-7.361215932],[9.0,-6.92820323],[9.25,-6.495190528]],"orientationDegrees":240,"reflected":false},{"polygon":[[7.0,-5.196152423],[7.75,-5.629165125],[8.0,-5.196152423],[7.5,-4.330127019],[7.0,-4.330127019],[7.0,-3.464101615],[6.25,-3.031088913],[6.0,-3.464101615],[6.25,-3.897114317],[5.5,-4.330127019],[5.5,-5.196152423],[6.0,-5.196152423],[6.25,-5.629165125]],"orientationDegrees":120,"reflected":false},{"polygon":[[7.0,-6.92820323],[7.0,-7.794228634],[6.5,-7.794228634],[6.0,-6.92820323],[6.25,-6.495190528],[5.5,-6.062177826],[5.5,-5.196152423],[6.0,-5.196152423],[6.25,-5.629165125],[7.0,-5.196152423],[7.75,-5.629165125],[7.5,-6.062177826],[7.75,-6.495190528]],"orientationDegrees":120,"reflected":true},{"polygon":[[5.5,-0.866025404],[6.25,-1.299038106],[6.5,-0.866025404],[6.0,0.0],[5.5,0.0],[5.5,0.866025404],[4.75,1.299038106],[4.5,0.866025404],[4.75,0.433012702],[4.0,0.0],[4.0,-0.866025404],[4.5,-0.866025404],[4.75,-1.299038106]],"orientationDegrees":120,"reflected":false},{"polygon":[[4,-3.464101615],[4.75,-3.897114317],[5,-3.464101615],[4.5,-2.598076211],[4,-2.598076211],[4,-1.732050808],[3.25,-1.299038106],[3.0,-1.732050808],[3.25,-2.165063509],[2.5,-2.598076211],[2.5,-3.464101615],[3,-3.464101615],[3.25,-3.897114317]],"orientationDegrees":120,"reflected":false},{"polygon":[[5.5,-2.598076211],[4.75,-3.031088913],[5,-3.464101615],[6,-3.464101615],[6.25,-3.031088913],[7,-3.464101615],[7.75,-3.031088913],[7.5,-2.598076211],[7,-2.598076211],[7,-1.732050808],[6.25,-1.299038106],[6,-1.732050808],[5.5,-1.732050808]],"orientationDegrees":0,"reflected":false},{"polygon":[[4.0,-1.732050808],[3.25,-1.299038106],[3.5,-0.866025404],[4.5,-0.866025404],[4.75,-1.299038106],[5.5,-0.866025404],[6.25,-1.299038106],[6.0,-1.732050808],[5.5,-1.732050808],[5.5,-2.598076211],[4.75,-3.031088913],[4.5,-2.598076211],[4.0,-2.598076211]],"orientationDegrees":0,"reflected":true},{"polygon":[[5.5,-4.330127019],[6.25,-3.897114317],[6.0,-3.464101615],[5.0,-3.464101615],[4.75,-3.897114317],[4.0,-3.464101615],[3.25,-3.897114317],[3.5,-4.330127019],[4.0,-4.330127019],[4.0,-5.196152423],[4.75,-5.629165125],[5.0,-5.196152423],[5.5,-5.196152423]],"orientationDegrees":180,"reflected":false},{"polygon":[[2.5,-0.866025404],[2.5,0.0],[2.0,0.0],[1.5,-0.866025404],[1.75,-1.299038106],[1.0,-1.732050808],[1.0,-2.598076211],[1.5,-2.598076211],[1.75,-2.165063509],[2.5,-2.598076211],[3.25,-2.165063509],[3.0,-1.732050808],[3.25,-1.299038106]],"orientationDegrees":240,"reflected":false},{"polygon":[[4.0,0.0],[4.75,0.433012702],[4.5,0.866025404],[3.5,0.866025404],[3.25,0.433012702],[2.5,0.866025404],[1.75,0.433012702],[2.0,0.0],[2.5,0.0],[2.5,-0.866025404],[3.25,-1.299038106],[3.5,-0.866025404],[4.0,-0.866025404]],"orientationDegrees":180,"reflected":false},{"polygon":[[-0.5,-4.330127019],[-0.5,-3.464101615],[-1.0,-3.464101615],[-1.5,-4.330127019],[-1.25,-4.763139721],[-2.0,-5.196152423],[-2.0,-6.062177826],[-1.5,-6.062177826],[-1.25,-5.629165125],[-0.5,-6.062177826],[0.25,-5.629165125],[0.0,-5.196152423],[0.25,-4.763139721]],"orientationDegrees":240,"reflected":false},{"polygon":[[1.0,-3.464101615],[1.75,-3.031088913],[1.5,-2.598076211],[0.5,-2.598076211],[0.25,-3.031088913],[-0.5,-2.598076211],[-1.25,-3.031088913],[-1.0,-3.464101615],[-0.5,-3.464101615],[-0.5,-4.330127019],[0.25,-4.763139721],[0.5,-4.330127019],[1.0,-4.330127019]],"orientationDegrees":180,"reflected":false},{"polygon":[[2.5,-7.794228634],[1.75,-8.227241336],[2.0,-8.660254038],[3.0,-8.660254038],[3.25,-8.227241336],[4.0,-8.660254038],[4.75,-8.227241336],[4.5,-7.794228634],[4.0,-7.794228634],[4.0,-6.92820323],[3.25,-6.495190528],[3.0,-6.92820323],[2.5,-6.92820323]],"orientationDegrees":0,"reflected":false},{"polygon":[[1.0,-6.92820323],[0.25,-6.495190528],[0.0,-6.92820323],[0.5,-7.794228634],[1.0,-7.794228634],[1.0,-8.660254038],[1.75,-9.09326674],[2.0,-8.660254038],[1.75,-8.227241336],[2.5,-7.794228634],[2.5,-6.92820323],[2.0,-6.92820323],[1.75,-6.495190528]],"orientationDegrees":300,"reflected":false},{"polygon":[[7.0,-8.660254038],[6.25,-9.09326674],[6.5,-9.526279442],[7.5,-9.526279442],[7.75,-9.09326674],[8.5,-9.526279442],[9.25,-9.09326674],[9.0,-8.660254038],[8.5,-8.660254038],[8.5,-7.794228634],[7.75,-7.361215932],[7.5,-7.794228634],[7.0,-7.794228634]],"orientationDegrees":0,"reflected":false},{"polygon":[[5.5,-7.794228634],[4.75,-7.361215932],[4.5,-7.794228634],[5.0,-8.660254038],[5.5,-8.660254038],[5.5,-9.526279442],[6.25,-9.959292144],[6.5,-9.526279442],[6.25,-9.09326674],[7.0,-8.660254038],[7.0,-7.794228634],[6.5,-7.794228634],[6.25,-7.361215932]],"orientationDegrees":300,"reflected":false},{"polygon":[[8.5,-4.330127019],[7.75,-3.897114317],[7.5,-4.330127019],[8.0,-5.196152423],[8.5,-5.196152423],[8.5,-6.062177826],[9.25,-6.495190528],[9.5,-6.062177826],[9.25,-5.629165125],[10.0,-5.196152423],[10.0,-4.330127019],[9.5,-4.330127019],[9.25,-3.897114317]],"orientationDegrees":300,"reflected":false},{"polygon":[[8.5,-2.598076211],[8.5,-1.732050808],[8.0,-1.732050808],[7.5,-2.598076211],[7.75,-3.031088913],[7.0,-3.464101615],[7.0,-4.330127019],[7.5,-4.330127019],[7.75,-3.897114317],[8.5,-4.330127019],[9.25,-3.897114317],[9.0,-3.464101615],[9.25,-3.031088913]],"orientationDegrees":240,"reflected":false},{"polygon":[[7,0],[7.75,-0.433012702],[8,-0.0],[7.5,0.866025404],[7,0.866025404],[7.0,1.732050808],[6.25,2.165063509],[6.0,1.732050808],[6.25,1.299038106],[5.5,0.866025404],[5.5,0.0],[6,0.0],[6.25,-0.433012702]],"orientationDegrees":120,"reflected":false},{"polygon":[[7,-1.732050808],[7,-2.598076211],[7.5,-2.598076211],[8,-1.732050808],[7.75,-1.299038106],[8.5,-0.866025404],[8.5,-0.0],[8,-0.0],[7.75,-0.433012702],[7.0,0],[6.25,-0.433012702],[6.5,-0.866025404],[6.25,-1.299038106]],"orientationDegrees":60,"reflected":false},{"polygon":[[2.5,9.526279442],[3.25,9.09326674],[3.5,9.526279442],[3.0,10.392304845],[2.5,10.392304845],[2.5,11.258330249],[1.75,11.691342951],[1.5,11.258330249],[1.75,10.825317547],[1.0,10.392304845],[1.0,9.526279442],[1.5,9.526279442],[1.75,9.09326674]],"orientationDegrees":120,"reflected":false},{"polygon":[[1.0,6.92820323],[1.75,6.495190528],[2.0,6.92820323],[1.5,7.794228634],[1.0,7.794228634],[1.0,8.660254038],[0.25,9.09326674],[-0.0,8.660254038],[0.25,8.227241336],[-0.5,7.794228634],[-0.5,6.92820323],[-0.0,6.92820323],[0.25,6.495190528]],"orientationDegrees":120,"reflected":false},{"polygon":[[2.5,7.794228634],[1.75,7.361215932],[2.0,6.92820323],[3.0,6.92820323],[3.25,7.361215932],[4.0,6.92820323],[4.75,7.361215932],[4.5,7.794228634],[4.0,7.794228634],[4.0,8.660254038],[3.25,9.09326674],[3.0,8.660254038],[2.5,8.660254038]],"orientationDegrees":0,"reflected":false},{"polygon":[[1.0,8.660254038],[0.25,9.09326674],[0.5,9.526279442],[1.5,9.526279442],[1.75,9.09326674],[2.5,9.526279442],[3.25,9.09326674],[3.0,8.660254038],[2.5,8.660254038],[2.5,7.794228634],[1.75,7.361215932],[1.5,7.794228634],[1.0,7.794228634]],"orientationDegrees":0,"reflected":true},{"polygon":[[-0.5,6.062177826],[0.25,5.629165125],[0.5,6.062177826],[-0.0,6.92820323],[-0.5,6.92820323],[-0.5,7.794228634],[-1.25,8.227241336],[-1.5,7.794228634],[-1.25,7.361215932],[-2.0,6.92820323],[-2.0,6.062177826],[-1.5,6.062177826],[-1.25,5.629165125]],"orientationDegrees":120,"reflected":false},{"polygon":[[-2.0,3.464101615],[-1.25,3.031088913],[-1.0,3.464101615],[-1.5,4.330127019],[-2.0,4.330127019],[-2.0,5.196152423],[-2.75,5.629165125],[-3.0,5.196152423],[-2.75,4.763139721],[-3.5,4.330127019],[-3.5,3.464101615],[-3.0,3.464101615],[-2.75,3.031088913]],"orientationDegrees":120,"reflected":false},{"polygon":[[-0.5,4.330127019],[-1.25,3.897114317],[-1.0,3.464101615],[-0.0,3.464101615],[0.25,3.897114317],[1.0,3.464101615],[1.75,3.897114317],[1.5,4.330127019],[1.0,4.330127019],[1.0,5.196152423],[0.25,5.629165125],[-0.0,5.196152423],[-0.5,5.196152423]],"orientationDegrees":0,"reflected":false},{"polygon":[[-2.0,5.196152423],[-2.75,5.629165125],[-2.5,6.062177826],[-1.5,6.062177826],[-1.25,5.629165125],[-0.5,6.062177826],[0.25,5.629165125],[-0.0,5.196152423],[-0.5,5.196152423],[-0.5,4.330127019],[-1.25,3.897114317],[-1.5,4.330127019],[-2.0,4.330127019]],"orientationDegrees":0,"reflected":true},{"polygon":[[4,3.464101615],[3.25,3.031088913],[3.5,2.598076211],[4.5,2.598076211],[4.75,3.031088913],[5.5,2.598076211],[6.25,3.031088913],[6.0,3.464101615],[5.5,3.464101615],[5.5,4.330127019],[4.75,4.763139721],[4.5,4.330127019],[4.0,4.330127019]],"orientationDegrees":0,"reflected":false},{"polygon":[[2.5,6.062177826],[1.75,5.629165125],[2.0,5.196152423],[3.0,5.196152423],[3.25,5.629165125],[4.0,5.196152423],[4.75,5.629165125],[4.5,6.062177826],[4.0,6.062177826],[4.0,6.92820323],[3.25,7.361215932],[3.0,6.92820323],[2.5,6.92820323]],"orientationDegrees":0,"reflected":false},{"polygon":[[2.5,4.330127019],[2.5,5.196152423],[2.0,5.196152423],[1.5,4.330127019],[1.75,3.897114317],[1.0,3.464101615],[1.0,2.598076211],[1.5,2.598076211],[1.75,3.031088913],[2.5,2.598076211],[3.25,3.031088913],[3,3.464101615],[3.25,3.897114317]],"orientationDegrees":240,"reflected":false},{"polygon":[[4.0,5.196152423],[4.75,5.629165125],[5.0,5.196152423],[4.5,4.330127019],[4,4.330127019],[4.0,3.464101615],[3.25,3.031088913],[3.0,3.464101615],[3.25,3.897114317],[2.5,4.330127019],[2.5,5.196152423],[3.0,5.196152423],[3.25,5.629165125]],"orientationDegrees":240,"reflected":true},{"polygon":[[1.0,5.196152423],[1.0,4.330127019],[1.5,4.330127019],[2.0,5.196152423],[1.75,5.629165125],[2.5,6.062177826],[2.5,6.92820323],[2.0,6.92820323],[1.75,6.495190528],[1.0,6.92820323],[0.25,6.495190528],[0.5,6.062177826],[0.25,5.629165125]],"orientationDegrees":60,"reflected":false},{"polygon":[[5.5,6.062177826],[6.25,5.629165125],[6.5,6.062177826],[6,6.92820323],[5.5,6.92820323],[5.5,7.794228634],[4.75,8.227241336],[4.5,7.794228634],[4.75,7.361215932],[4.0,6.92820323],[4.0,6.062177826],[4.5,6.062177826],[4.75,5.629165125]],"orientationDegrees":120,"reflected":false},{"polygon":[[5.5,4.330127019],[5.5,3.464101615],[6.0,3.464101615],[6.5,4.330127019],[6.25,4.763139721],[7.0,5.196152423],[7.0,6.062177826],[6.5,6.062177826],[6.25,5.629165125],[5.5,6.062177826],[4.75,5.629165125],[5.0,5.196152423],[4.75,4.763139721]],"orientationDegrees":60,"reflected":false},{"polygon":[[4.0,10.392304845],[4.75,9.959292144],[5.0,10.392304845],[4.5,11.258330249],[4.0,11.258330249],[4.0,12.124355653],[3.25,12.557368355],[3.0,12.124355653],[3.25,11.691342951],[2.5,11.258330249],[2.5,10.392304845],[3.0,10.392304845],[3.25,9.959292144]],"orientationDegrees":120,"reflected":false},{"polygon":[[4.0,8.660254038],[4.0,7.794228634],[4.5,7.794228634],[5.0,8.660254038],[4.75,9.09326674],[5.5,9.526279442],[5.5,10.392304845],[5.0,10.392304845],[4.75,9.959292144],[4.0,10.392304845],[3.25,9.959292144],[3.5,9.526279442],[3.25,9.09326674]],"orientationDegrees":60,"reflected":false},{"polygon":[[-0.5,9.526279442],[-0.5,10.392304845],[-1.0,10.392304845],[-1.5,9.526279442],[-1.25,9.09326674],[-2.0,8.660254038],[-2.0,7.794228634],[-1.5,7.794228634],[-1.25,8.227241336],[-0.5,7.794228634],[0.25,8.227241336],[-0.0,8.660254038],[0.25,9.09326674]],"orientationDegrees":240,"reflected":false},{"polygon":[[1.0,10.392304845],[1.75,10.825317547],[1.5,11.258330249],[0.5,11.258330249],[0.25,10.825317547],[-0.5,11.258330249],[-1.25,10.825317547],[-1.0,10.392304845],[-0.5,10.392304845],[-0.5,9.526279442],[0.25,9.09326674],[0.5,9.526279442],[1.0,9.526279442]],"orientationDegrees":180,"reflected":false},{"polygon":[[-3.5,6.062177826],[-3.5,6.92820323],[-4.0,6.92820323],[-4.5,6.062177826],[-4.25,5.629165125],[-5.0,5.196152423],[-5.0,4.330127019],[-4.5,4.330127019],[-4.25,4.763139721],[-3.5,4.330127019],[-2.75,4.763139721],[-3.0,5.196152423],[-2.75,5.629165125]],"orientationDegrees":240,"reflected":false},{"polygon":[[-2.0,6.92820323],[-1.25,7.361215932],[-1.5,7.794228634],[-2.5,7.794228634],[-2.75,7.361215932],[-3.5,7.794228634],[-4.25,7.361215932],[-4.0,6.92820323],[-3.5,6.92820323],[-3.5,6.062177826],[-2.75,5.629165125],[-2.5,6.062177826],[-2.0,6.062177826]],"orientationDegrees":180,"reflected":false},{"polygon":[[-0.5,2.598076211],[0.25,3.031088913],[-0.0,3.464101615],[-1.0,3.464101615],[-1.25,3.031088913],[-2.0,3.464101615],[-2.75,3.031088913],[-2.5,2.598076211],[-2.0,2.598076211],[-2.0,1.732050808],[-1.25,1.299038106],[-1.0,1.732050808],[-0.5,1.732050808]],"orientationDegrees":180,"reflected":false},{"polygon":[[1.0,1.732050808],[1.75,1.299038106],[2.0,1.732050808],[1.5,2.598076211],[1.0,2.598076211],[1.0,3.464101615],[0.25,3.897114317],[-0.0,3.464101615],[0.25,3.031088913],[-0.5,2.598076211],[-0.5,1.732050808],[-0.0,1.732050808],[0.25,1.299038106]],"orientationDegrees":120,"reflected":false},{"polygon":[[4.0,1.732050808],[3.25,1.299038106],[3.5,0.866025404],[4.5,0.866025404],[4.75,1.299038106],[5.5,0.866025404],[6.25,1.299038106],[6.0,1.732050808],[5.5,1.732050808],[5.5,2.598076211],[4.75,3.031088913],[4.5,2.598076211],[4.0,2.598076211]],"orientationDegrees":0,"reflected":false},{"polygon":[[2.5,2.598076211],[1.75,3.031088913],[1.5,2.598076211],[2.0,1.732050808],[2.5,1.732050808],[2.5,0.866025404],[3.25,0.433012702],[3.5,0.866025404],[3.25,1.299038106],[4,1.732050808],[4,2.598076211],[3.5,2.598076211],[3.25,3.031088913]],"orientationDegrees":300,"reflected":false},{"polygon":[[-0.5,0.866025404],[0.25,1.299038106],[0.0,1.732050808],[-1.0,1.732050808],[-1.25,1.299038106],[-2.0,1.732050808],[-2.75,1.299038106],[-2.5,0.866025404],[-2.0,0.866025404],[-2.0,0.0],[-1.25,-0.433012702],[-1.0,0.0],[-0.5,0.0]],"orientationDegrees":180,"reflected":false},{"polygon":[[1.0,-1.732050808],[1.75,-1.299038106],[1.5,-0.866025404],[0.5,-0.866025404],[0.25,-1.299038106],[-0.5,-0.866025404],[-1.25,-1.299038106],[-1.0,-1.732050808],[-0.5,-1.732050808],[-0.5,-2.598076211],[0.25,-3.031088913],[0.5,-2.598076211],[1.0,-2.598076211]],"orientationDegrees":180,"reflected":false},{"polygon":[[1.0,0.0],[1.0,-0.866025404],[1.5,-0.866025404],[2.0,0.0],[1.75,0.433012702],[2.5,0.866025404],[2.5,1.732050808],[2.0,1.732050808],[1.75,1.299038106],[1.0,1.732050808],[0.25,1.299038106],[0.5,0.866025404],[0.25,0.433012702]],"orientationDegrees":60,"reflected":false},{"polygon":[[-0.5,-0.866025404],[-1.25,-1.299038106],[-1.5,-0.866025404],[-1.0,0.0],[-0.5,0.0],[-0.5,0.866025404],[0.25,1.299038106],[0.5,0.866025404],[0.25,0.433012702],[1.0,0.0],[1.0,-0.866025404],[0.5,-0.866025404],[0.25,-1.299038106]],"orientationDegrees":60,"reflected":true},{"polygon":[[-3.5,12.990381057],[-2.75,13.423393759],[-3.0,13.856406461],[-4.0,13.856406461],[-4.25,13.423393759],[-5.0,13.856406461],[-5.75,13.423393759],[-5.5,12.990381057],[-5.0,12.990381057],[-5.0,12.124355653],[-4.25,11.691342951],[-4.0,12.124355653],[-3.5,12.124355653]],"orientationDegrees":180,"reflected":false},{"polygon":[[-2.0,12.124355653],[-1.25,11.691342951],[-1.0,12.124355653],[-1.5,12.990381057],[-2.0,12.990381057],[-2.0,13.856406461],[-2.75,14.289419162],[-3.0,13.856406461],[-2.75,13.423393759],[-3.5,12.990381057],[-3.5,12.124355653],[-3.0,12.124355653],[-2.75,11.691342951]],"orientationDegrees":120,"reflected":false},{"polygon":[[-3.5,11.258330249],[-2.75,11.691342951],[-3.0,12.124355653],[-4.0,12.124355653],[-4.25,11.691342951],[-5.0,12.124355653],[-5.75,11.691342951],[-5.5,11.258330249],[-5.0,11.258330249],[-5.0,10.392304845],[-4.25,9.959292144],[-4.0,10.392304845],[-3.5,10.392304845]],"orientationDegrees":180,"reflected":false},{"polygon":[[-2.0,8.660254038],[-1.25,9.09326674],[-1.5,9.526279442],[-2.5,9.526279442],[-2.75,9.09326674],[-3.5,9.526279442],[-4.25,9.09326674],[-4.0,8.660254038],[-3.5,8.660254038],[-3.5,7.794228634],[-2.75,7.361215932],[-2.5,7.794228634],[-2.0,7.794228634]],"orientationDegrees":180,"reflected":false},{"polygon":[[-2.0,10.392304845],[-2.0,9.526279442],[-1.5,9.526279442],[-1.0,10.392304845],[-1.25,10.825317547],[-0.5,11.258330249],[-0.5,12.124355653],[-1.0,12.124355653],[-1.25,11.691342951],[-2.0,12.124355653],[-2.75,11.691342951],[-2.5,11.258330249],[-2.75,10.825317547]],"orientationDegrees":60,"reflected":false},{"polygon":[[-3.5,9.526279442],[-4.25,9.09326674],[-4.5,9.526279442],[-4.0,10.392304845],[-3.5,10.392304845],[-3.5,11.258330249],[-2.75,11.691342951],[-2.5,11.258330249],[-2.75,10.825317547],[-2.0,10.392304845],[-2.0,9.526279442],[-2.5,9.526279442],[-2.75,9.09326674]],"orientationDegrees":60,"reflected":true},{"polygon":[[-5.0,8.660254038],[-5.75,9.09326674],[-6.0,8.660254038],[-5.5,7.794228634],[-5.0,7.794228634],[-5.0,6.92820323],[-4.25,6.495190528],[-4.0,6.92820323],[-4.25,7.361215932],[-3.5,7.794228634],[-3.5,8.660254038],[-4.0,8.660254038],[-4.25,9.09326674]],"orientationDegrees":300,"reflected":false},{"polygon":[[-5.0,10.392304845],[-5.0,11.258330249],[-5.5,11.258330249],[-6.0,10.392304845],[-5.75,9.959292144],[-6.5,9.526279442],[-6.5,8.660254038],[-6.0,8.660254038],[-5.75,9.09326674],[-5.0,8.660254038],[-4.25,9.09326674],[-4.5,9.526279442],[-4.25,9.959292144]],"orientationDegrees":240,"reflected":false},{"polygon":[[-8.0,6.92820323],[-8.0,7.794228634],[-8.5,7.794228634],[-9.0,6.92820323],[-8.75,6.495190528],[-9.5,6.062177826],[-9.5,5.196152423],[-9.0,5.196152423],[-8.75,5.629165125],[-8.0,5.196152423],[-7.25,5.629165125],[-7.5,6.062177826],[-7.25,6.495190528]],"orientationDegrees":240,"reflected":false},{"polygon":[[-5.0,6.92820323],[-5.0,7.794228634],[-5.5,7.794228634],[-6.0,6.92820323],[-5.75,6.495190528],[-6.5,6.062177826],[-6.5,5.196152423],[-6.0,5.196152423],[-5.75,5.629165125],[-5.0,5.196152423],[-4.25,5.629165125],[-4.5,6.062177826],[-4.25,6.495190528]],"orientationDegrees":240,"reflected":false},{"polygon":[[-6.5,7.794228634],[-5.75,7.361215932],[-5.5,7.794228634],[-6.0,8.660254038],[-6.5,8.660254038],[-6.5,9.526279442],[-7.25,9.959292144],[-7.5,9.526279442],[-7.25,9.09326674],[-8.0,8.660254038],[-8.0,7.794228634],[-7.5,7.794228634],[-7.25,7.361215932]],"orientationDegrees":120,"reflected":false},{"polygon":[[-6.5,6.062177826],[-6.5,5.196152423],[-7.0,5.196152423],[-7.5,6.062177826],[-7.25,6.495190528],[-8.0,6.92820323],[-8.0,7.794228634],[-7.5,7.794228634],[-7.25,7.361215932],[-6.5,7.794228634],[-5.75,7.361215932],[-6.0,6.92820323],[-5.75,6.495190528]],"orientationDegrees":120,"reflected":true},{"polygon":[[-6.5,4.330127019],[-7.25,3.897114317],[-7.0,3.464101615],[-6.0,3.464101615],[-5.75,3.897114317],[-5.0,3.464101615],[-4.25,3.897114317],[-4.5,4.330127019],[-5.0,4.330127019],[-5.0,5.196152423],[-5.75,5.629165125],[-6.0,5.196152423],[-6.5,5.196152423]],"orientationDegrees":0,"reflected":false},{"polygon":[[-8.0,5.196152423],[-8.75,5.629165125],[-9.0,5.196152423],[-8.5,4.330127019],[-8.0,4.330127019],[-8.0,3.464101615],[-7.25,3.031088913],[-7.0,3.464101615],[-7.25,3.897114317],[-6.5,4.330127019],[-6.5,5.196152423],[-7.0,5.196152423],[-7.25,5.629165125]],"orientationDegrees":300,"reflected":false},{"polygon":[[-11,5.196152423],[-10.25,5.629165125],[-10.5,6.062177826],[-11.5,6.062177826],[-11.75,5.629165125],[-12.5,6.062177826],[-13.25,5.629165125],[-13.0,5.196152423],[-12.5,5.196152423],[-12.5,4.330127019],[-11.75,3.897114317],[-11.5,4.330127019],[-11,4.330127019]],"orientationDegrees":180,"reflected":false},{"polygon":[[-9.5,4.330127019],[-8.75,3.897114317],[-8.5,4.330127019],[-9.0,5.196152423],[-9.5,5.196152423],[-9.5,6.062177826],[-10.25,6.495190528],[-10.5,6.062177826],[-10.25,5.629165125],[-11.0,5.196152423],[-11,4.330127019],[-10.5,4.330127019],[-10.25,3.897114317]],"orientationDegrees":120,"reflected":false},{"polygon":[[-11,3.464101615],[-10.25,3.897114317],[-10.5,4.330127019],[-11.5,4.330127019],[-11.75,3.897114317],[-12.5,4.330127019],[-13.25,3.897114317],[-13,3.464101615],[-12.5,3.464101615],[-12.5,2.598076211],[-11.75,2.165063509],[-11.5,2.598076211],[-11,2.598076211]],"orientationDegrees":180,"reflected":false},{"polygon":[[-9.5,0.866025404],[-8.75,1.299038106],[-9,1.732050808],[-10,1.732050808],[-10.25,1.299038106],[-11,1.732050808],[-11.75,1.299038106],[-11.5,0.866025404],[-11,0.866025404],[-11,0.0],[-10.25,-0.433012702],[-10,0.0],[-9.5,0.0]],"orientationDegrees":180,"reflected":false},{"polygon":[[-9.5,2.598076211],[-9.5,1.732050808],[-9.0,1.732050808],[-8.5,2.598076211],[-8.75,3.031088913],[-8.0,3.464101615],[-8.0,4.330127019],[-8.5,4.330127019],[-8.75,3.897114317],[-9.5,4.330127019],[-10.25,3.897114317],[-10.0,3.464101615],[-10.25,3.031088913]],"orientationDegrees":60,"reflected":false},{"polygon":[[-11,1.732050808],[-11.75,1.299038106],[-12,1.732050808],[-11.5,2.598076211],[-11,2.598076211],[-11,3.464101615],[-10.25,3.897114317],[-10.0,3.464101615],[-10.25,3.031088913],[-9.5,2.598076211],[-9.5,1.732050808],[-10,1.732050808],[-10.25,1.299038106]],"orientationDegrees":60,"reflected":true},{"polygon":[[-12.5,0.866025404],[-13.25,1.299038106],[-13.5,0.866025404],[-13.0,0.0],[-12.5,0.0],[-12.5,-0.866025404],[-11.75,-1.299038106],[-11.5,-0.866025404],[-11.75,-0.433012702],[-11.0,0.0],[-11.0,0.866025404],[-11.5,0.866025404],[-11.75,1.299038106]],"orientationDegrees":300,"reflected":false},{"polygon":[[-12.5,2.598076211],[-12.5,3.464101615],[-13,3.464101615],[-13.5,2.598076211],[-13.25,2.165063509],[-14,1.732050808],[-14.0,0.866025404],[-13.5,0.866025404],[-13.25,1.299038106],[-12.5,0.866025404],[-11.75,1.299038106],[-12,1.732050808],[-11.75,2.165063509]],"orientationDegrees":240,"reflected":false},{"polygon":[[-15.5,-0.866025404],[-15.5,0.0],[-16.0,0.0],[-16.5,-0.866025404],[-16.25,-1.299038106],[-17.0,-1.732050808],[-17.0,-2.598076211],[-16.5,-2.598076211],[-16.25,-2.165063509],[-15.5,-2.598076211],[-14.75,-2.165063509],[-15.0,-1.732050808],[-14.75,-1.299038106]],"orientationDegrees":240,"reflected":false},{"polygon":[[-12.5,-0.866025404],[-12.5,0.0],[-13.0,0.0],[-13.5,-0.866025404],[-13.25,-1.299038106],[-14.0,-1.732050808],[-14.0,-2.598076211],[-13.5,-2.598076211],[-13.25,-2.165063509],[-12.5,-2.598076211],[-11.75,-2.165063509],[-12.0,-1.732050808],[-11.75,-1.299038106]],"orientationDegrees":240,"reflected":false},{"polygon":[[-14.0,0.0],[-13.25,-0.433012702],[-13.0,0.0],[-13.5,0.866025404],[-14.0,0.866025404],[-14.0,1.732050808],[-14.75,2.165063509],[-15.0,1.732050808],[-14.75,1.299038106],[-15.5,0.866025404],[-15.5,0.0],[-15.0,0.0],[-14.75,-0.433012702]],"orientationDegrees":120,"reflected":false},{"polygon":[[-14.0,-1.732050808],[-14.0,-2.598076211],[-14.5,-2.598076211],[-15.0,-1.732050808],[-14.75,-1.299038106],[-15.5,-0.866025404],[-15.5,0.0],[-15.0,0.0],[-14.75,-0.433012702],[-14.0,0.0],[-13.25,-0.433012702],[-13.5,-0.866025404],[-13.25,-1.299038106]],"orientationDegrees":120,"reflected":true},{"polygon":[[-17.0,0.0],[-17.0,0.866025404],[-17.5,0.866025404],[-18.0,0.0],[-17.75,-0.433012702],[-18.5,-0.866025404],[-18.5,-1.732050808],[-18.0,-1.732050808],[-17.75,-1.299038106],[-17.0,-1.732050808],[-16.25,-1.299038106],[-16.5,-0.866025404],[-16.25,-0.433012702]],"orientationDegrees":240,"reflected":false},{"polygon":[[-15.5,0.866025404],[-14.75,1.299038106],[-15.0,1.732050808],[-16.0,1.732050808],[-16.25,1.299038106],[-17.0,1.732050808],[-17.75,1.299038106],[-17.5,0.866025404],[-17.0,0.866025404],[-17.0,0.0],[-16.25,-0.433012702],[-16.0,0.0],[-15.5,0.0]],"orientationDegrees":180,"reflected":false},{"polygon":[[-14.0,-3.464101615],[-14.75,-3.897114317],[-14.5,-4.330127019],[-13.5,-4.330127019],[-13.25,-3.897114317],[-12.5,-4.330127019],[-11.75,-3.897114317],[-12.0,-3.464101615],[-12.5,-3.464101615],[-12.5,-2.598076211],[-13.25,-2.165063509],[-13.5,-2.598076211],[-14.0,-2.598076211]],"orientationDegrees":0,"reflected":false},{"polygon":[[-15.5,-2.598076211],[-16.25,-2.165063509],[-16.5,-2.598076211],[-16.0,-3.464101615],[-15.5,-3.464101615],[-15.5,-4.330127019],[-14.75,-4.763139721],[-14.5,-4.330127019],[-14.75,-3.897114317],[-14.0,-3.464101615],[-14.0,-2.598076211],[-14.5,-2.598076211],[-14.75,-2.165063509]],"orientationDegrees":300,"reflected":false},{"polygon":[[-9.5,-9.526279442],[-10.25,-9.09326674],[-10.5,-9.526279442],[-10.0,-10.392304845],[-9.5,-10.392304845],[-9.5,-11.258330249],[-8.75,-11.691342951],[-8.5,-11.258330249],[-8.75,-10.825317547],[-8.0,-10.392304845],[-8.0,-9.526279442],[-8.5,-9.526279442],[-8.75,-9.09326674]],"orientationDegrees":300,"reflected":false},{"polygon":[[-9.5,-7.794228634],[-9.5,-6.92820323],[-10.0,-6.92820323],[-10.5,-7.794228634],[-10.25,-8.227241336],[-11.0,-8.660254038],[-11.0,-9.526279442],[-10.5,-9.526279442],[-10.25,-9.09326674],[-9.5,-9.526279442],[-8.75,-9.09326674],[-9.0,-8.660254038],[-8.75,-8.227241336]],"orientationDegrees":240,"reflected":false},{"polygon":[[-8.0,-8.660254038],[-8.75,-8.227241336],[-9.0,-8.660254038],[-8.5,-9.526279442],[-8.0,-9.526279442],[-8.0,-10.392304845],[-7.25,-10.825317547],[-7.0,-10.392304845],[-7.25,-9.959292144],[-6.5,-9.526279442],[-6.5,-8.660254038],[-7.0,-8.660254038],[-7.25,-8.227241336]],"orientationDegrees":300,"reflected":false},{"polygon":[[-6.5,-6.062177826],[-7.25,-5.629165125],[-7.5,-6.062177826],[-7.0,-6.92820323],[-6.5,-6.92820323],[-6.5,-7.794228634],[-5.75,-8.227241336],[-5.5,-7.794228634],[-5.75,-7.361215932],[-5.0,-6.92820323],[-5.0,-6.062177826],[-5.5,-6.062177826],[-5.75,-5.629165125]],"orientationDegrees":300,"reflected":false},{"polygon":[[-8.0,-6.92820323],[-7.25,-6.495190528],[-7.5,-6.062177826],[-8.5,-6.062177826],[-8.75,-6.495190528],[-9.5,-6.062177826],[-10.25,-6.495190528],[-10.0,-6.92820323],[-9.5,-6.92820323],[-9.5,-7.794228634],[-8.75,-8.227241336],[-8.5,-7.794228634],[-8.0,-7.794228634]],"orientationDegrees":180,"reflected":false},{"polygon":[[-6.5,-7.794228634],[-5.75,-8.227241336],[-6.0,-8.660254038],[-7.0,-8.660254038],[-7.25,-8.227241336],[-8.0,-8.660254038],[-8.75,-8.227241336],[-8.5,-7.794228634],[-8.0,-7.794228634],[-8.0,-6.92820323],[-7.25,-6.495190528],[-7.0,-6.92820323],[-6.5,-6.92820323]],"orientationDegrees":180,"reflected":true},{"polygon":[[-5.0,-8.660254038],[-5.0,-9.526279442],[-4.5,-9.526279442],[-4.0,-8.660254038],[-4.25,-8.227241336],[-3.5,-7.794228634],[-3.5,-6.92820323],[-4.0,-6.92820323],[-4.25,-7.361215932],[-5.0,-6.92820323],[-5.75,-7.361215932],[-5.5,-7.794228634],[-5.75,-8.227241336]],"orientationDegrees":60,"reflected":false},{"polygon":[[-6.5,-9.526279442],[-7.25,-9.959292144],[-7.0,-10.392304845],[-6.0,-10.392304845],[-5.75,-9.959292144],[-5.0,-10.392304845],[-4.25,-9.959292144],[-4.5,-9.526279442],[-5.0,-9.526279442],[-5.0,-8.660254038],[-5.75,-8.227241336],[-6.0,-8.660254038],[-6.5,-8.660254038]],"orientationDegrees":0,"reflected":false},{"polygon":[[-2.0,-10.392304845],[-2.75,-10.825317547],[-2.5,-11.258330249],[-1.5,-11.258330249],[-1.25,-10.825317547],[-0.5,-11.258330249],[0.25,-10.825317547],[0.0,-10.392304845],[-0.5,-10.392304845],[-0.5,-9.526279442],[-1.25,-9.09326674],[-1.5,-9.526279442],[-2.0,-9.526279442]],"orientationDegrees":0,"reflected":false},{"polygon":[[-3.5,-7.794228634],[-4.25,-8.227241336],[-4.0,-8.660254038],[-3.0,-8.660254038],[-2.75,-8.227241336],[-2.0,-8.660254038],[-1.25,-8.227241336],[-1.5,-7.794228634],[-2.0,-7.794228634],[-2.0,-6.92820323],[-2.75,-6.495190528],[-3.0,-6.92820323],[-3.5,-6.92820323]],"orientationDegrees":0,"reflected":false},{"polygon":[[-3.5,-9.526279442],[-3.5,-8.660254038],[-4.0,-8.660254038],[-4.5,-9.526279442],[-4.25,-9.959292144],[-5.0,-10.392304845],[-5.0,-11.258330249],[-4.5,-11.258330249],[-4.25,-10.825317547],[-3.5,-11.258330249],[-2.75,-10.825317547],[-3.0,-10.392304845],[-2.75,-9.959292144]],"orientationDegrees":240,"reflected":false},{"polygon":[[-2.0,-8.660254038],[-1.25,-8.227241336],[-1.0,-8.660254038],[-1.5,-9.526279442],[-2.0,-9.526279442],[-2.0,-10.392304845],[-2.75,-10.825317547],[-3.0,-10.392304845],[-2.75,-9.959292144],[-3.5,-9.526279442],[-3.5,-8.660254038],[-3.0,-8.660254038],[-2.75,-8.227241336]],"orientationDegrees":240,"reflected":true},{"polygon":[[-0.5,-7.794228634],[0.25,-8.227241336],[0.5,-7.794228634],[0.0,-6.92820323],[-0.5,-6.92820323],[-0.5,-6.062177826],[-1.25,-5.629165125],[-1.5,-6.062177826],[-1.25,-6.495190528],[-2.0,-6.92820323],[-2.0,-7.794228634],[-1.5,-7.794228634],[-1.25,-8.227241336]],"orientationDegrees":120,"reflected":false},{"polygon":[[-0.5,-9.526279442],[-0.5,-10.392304845],[0.0,-10.392304845],[0.5,-9.526279442],[0.25,-9.09326674],[1.0,-8.660254038],[1.0,-7.794228634],[0.5,-7.794228634],[0.25,-8.227241336],[-0.5,-7.794228634],[-1.25,-8.227241336],[-1.0,-8.660254038],[-1.25,-9.09326674]],"orientationDegrees":60,"reflected":false},{"polygon":[[1.0,-12.124355653],[0.25,-11.691342951],[0.0,-12.124355653],[0.5,-12.990381057],[1.0,-12.990381057],[1.0,-13.856406461],[1.75,-14.289419162],[2.0,-13.856406461],[1.75,-13.423393759],[2.5,-12.990381057],[2.5,-12.124355653],[2.0,-12.124355653],[1.75,-11.691342951]],"orientationDegrees":300,"reflected":false},{"polygon":[[1.0,-10.392304845],[1.0,-9.526279442],[0.5,-9.526279442],[0.0,-10.392304845],[0.25,-10.825317547],[-0.5,-11.258330249],[-0.5,-12.124355653],[0.0,-12.124355653],[0.25,-11.691342951],[1.0,-12.124355653],[1.75,-11.691342951],[1.5,-11.258330249],[1.75,-10.825317547]],"orientationDegrees":240,"reflected":false},{"polygon":[[2.5,-11.258330249],[1.75,-10.825317547],[1.5,-11.258330249],[2.0,-12.124355653],[2.5,-12.124355653],[2.5,-12.990381057],[3.25,-13.423393759],[3.5,-12.990381057],[3.25,-12.557368355],[4.0,-12.124355653],[4.0,-11.258330249],[3.5,-11.258330249],[3.25,-10.825317547]],"orientationDegrees":300,"reflected":false},{"polygon":[[4.0,-8.660254038],[3.25,-8.227241336],[3.0,-8.660254038],[3.5,-9.526279442],[4.0,-9.526279442],[4.0,-10.392304845],[4.75,-10.825317547],[5.0,-10.392304845],[4.75,-9.959292144],[5.5,-9.526279442],[5.5,-8.660254038],[5.0,-8.660254038],[4.75,-8.227241336]],"orientationDegrees":300,"reflected":false},{"polygon":[[2.5,-9.526279442],[3.25,-9.09326674],[3.0,-8.660254038],[2.0,-8.660254038],[1.75,-9.09326674],[1.0,-8.660254038],[0.25,-9.09326674],[0.5,-9.526279442],[1.0,-9.526279442],[1.0,-10.392304845],[1.75,-10.825317547],[2.0,-10.392304845],[2.5,-10.392304845]],"orientationDegrees":180,"reflected":false},{"polygon":[[4.0,-10.392304845],[4.75,-10.825317547],[4.5,-11.258330249],[3.5,-11.258330249],[3.25,-10.825317547],[2.5,-11.258330249],[1.75,-10.825317547],[2.0,-10.392304845],[2.5,-10.392304845],[2.5,-9.526279442],[3.25,-9.09326674],[3.5,-9.526279442],[4.0,-9.526279442]],"orientationDegrees":180,"reflected":true},{"polygon":[[5.5,-11.258330249],[5.5,-12.124355653],[6.0,-12.124355653],[6.5,-11.258330249],[6.25,-10.825317547],[7.0,-10.392304845],[7.0,-9.526279442],[6.5,-9.526279442],[6.25,-9.959292144],[5.5,-9.526279442],[4.75,-9.959292144],[5.0,-10.392304845],[4.75,-10.825317547]],"orientationDegrees":60,"reflected":false},{"polygon":[[4.0,-12.124355653],[3.25,-12.557368355],[3.5,-12.990381057],[4.5,-12.990381057],[4.75,-12.557368355],[5.5,-12.990381057],[6.25,-12.557368355],[6.0,-12.124355653],[5.5,-12.124355653],[5.5,-11.258330249],[4.75,-10.825317547],[4.5,-11.258330249],[4.0,-11.258330249]],"orientationDegrees":0,"reflected":false},{"polygon":[[8.5,-12.990381057],[7.75,-13.423393759],[8,-13.856406461],[9,-13.856406461],[9.25,-13.423393759],[10,-13.856406461],[10.75,-13.423393759],[10.5,-12.990381057],[10,-12.990381057],[10,-12.124355653],[9.25,-11.691342951],[9,-12.124355653],[8.5,-12.124355653]],"orientationDegrees":0,"reflected":false},{"polygon":[[7.0,-10.392304845],[6.25,-10.825317547],[6.5,-11.258330249],[7.5,-11.258330249],[7.75,-10.825317547],[8.5,-11.258330249],[9.25,-10.825317547],[9.0,-10.392304845],[8.5,-10.392304845],[8.5,-9.526279442],[7.75,-9.09326674],[7.5,-9.526279442],[7.0,-9.526279442]],"orientationDegrees":0,"reflected":false},{"polygon":[[7.0,-12.124355653],[7.0,-11.258330249],[6.5,-11.258330249],[6.0,-12.124355653],[6.25,-12.557368355],[5.5,-12.990381057],[5.5,-13.856406461],[6.0,-13.856406461],[6.25,-13.423393759],[7.0,-13.856406461],[7.75,-13.423393759],[7.5,-12.990381057],[7.75,-12.557368355]],"orientationDegrees":240,"reflected":false},{"polygon":[[8.5,-11.258330249],[9.25,-10.825317547],[9.5,-11.258330249],[9.0,-12.124355653],[8.5,-12.124355653],[8.5,-12.990381057],[7.75,-13.423393759],[7.5,-12.990381057],[7.75,-12.557368355],[7.0,-12.124355653],[7.0,-11.258330249],[7.5,-11.258330249],[7.75,-10.825317547]],"orientationDegrees":240,"reflected":true},{"polygon":[[8.5,-14.722431864],[7.75,-15.155444566],[8.0,-15.588457268],[9.0,-15.588457268],[9.25,-15.155444566],[10.0,-15.588457268],[10.75,-15.155444566],[10.5,-14.722431864],[10.0,-14.722431864],[10.0,-13.856406461],[9.25,-13.423393759],[9.0,-13.856406461],[8.5,-13.856406461]],"orientationDegrees":0,"reflected":false},{"polygon":[[7.0,-13.856406461],[6.25,-13.423393759],[6.0,-13.856406461],[6.5,-14.722431864],[7.0,-14.722431864],[7.0,-15.588457268],[7.75,-16.02146997],[8.0,-15.588457268],[7.75,-15.155444566],[8.5,-14.722431864],[8.5,-13.856406461],[8.0,-13.856406461],[7.75,-13.423393759]],"orientationDegrees":300,"reflected":false},{"polygon":[[10.0,-10.392304845],[10.75,-10.825317547],[11.0,-10.392304845],[10.5,-9.526279442],[10.0,-9.526279442],[10.0,-8.660254038],[9.25,-8.227241336],[9.0,-8.660254038],[9.25,-9.09326674],[8.5,-9.526279442],[8.5,-10.392304845],[9.0,-10.392304845],[9.25,-10.825317547]],"orientationDegrees":120,"reflected":false},{"polygon":[[10.0,-12.124355653],[10.0,-12.990381057],[10.5,-12.990381057],[11.0,-12.124355653],[10.75,-11.691342951],[11.5,-11.258330249],[11.5,-10.392304845],[11.0,-10.392304845],[10.75,-10.825317547],[10.0,-10.392304845],[9.25,-10.825317547],[9.5,-11.258330249],[9.25,-11.691342951]],"orientationDegrees":60,"reflected":false},{"polygon":[[7.0,3.464101615],[7.0,4.330127019],[6.5,4.330127019],[6.0,3.464101615],[6.25,3.031088913],[5.5,2.598076211],[5.5,1.732050808],[6.0,1.732050808],[6.25,2.165063509],[7.0,1.732050808],[7.75,2.165063509],[7.5,2.598076211],[7.75,3.031088913]],"orientationDegrees":240,"reflected":false},{"polygon":[[8.5,4.330127019],[9.25,4.763139721],[9.0,5.196152423],[8.0,5.196152423],[7.75,4.763139721],[7.0,5.196152423],[6.25,4.763139721],[6.5,4.330127019],[7.0,4.330127019],[7.0,3.464101615],[7.75,3.031088913],[8.0,3.464101615],[8.5,3.464101615]],"orientationDegrees":180,"reflected":false},{"polygon":[[8.5,2.598076211],[8.5,3.464101615],[8,3.464101615],[7.5,2.598076211],[7.75,2.165063509],[7,1.732050808],[7,0.866025404],[7.5,0.866025404],[7.75,1.299038106],[8.5,0.866025404],[9.25,1.299038106],[9,1.732050808],[9.25,2.165063509]],"orientationDegrees":240,"reflected":false},{"polygon":[[11.5,2.598076211],[11.5,3.464101615],[11,3.464101615],[10.5,2.598076211],[10.75,2.165063509],[10,1.732050808],[10,0.866025404],[10.5,0.866025404],[10.75,1.299038106],[11.5,0.866025404],[12.25,1.299038106],[12,1.732050808],[12.25,2.165063509]],"orientationDegrees":240,"reflected":false},{"polygon":[[10,3.464101615],[10.75,3.031088913],[11,3.464101615],[10.5,4.330127019],[10,4.330127019],[10,5.196152423],[9.25,5.629165125],[9,5.196152423],[9.25,4.763139721],[8.5,4.330127019],[8.5,3.464101615],[9,3.464101615],[9.25,3.031088913]],"orientationDegrees":120,"reflected":false},{"polygon":[[10,1.732050808],[10,0.866025404],[9.5,0.866025404],[9,1.732050808],[9.25,2.165063509],[8.5,2.598076211],[8.5,3.464101615],[9,3.464101615],[9.25,3.031088913],[10,3.464101615],[10.75,3.031088913],[10.5,2.598076211],[10.75,2.165063509]],"orientationDegrees":120,"reflected":true},{"polygon":[[10,0.0],[9.25,-0.433012702],[9.5,-0.866025404],[10.5,-0.866025404],[10.75,-0.433012702],[11.5,-0.866025404],[12.25,-0.433012702],[12,0.0],[11.5,0.0],[11.5,0.866025404],[10.75,1.299038106],[10.5,0.866025404],[10,0.866025404]],"orientationDegrees":0,"reflected":false},{"polygon":[[8.5,0.866025404],[7.75,1.299038106],[7.5,0.866025404],[8,0.0],[8.5,0.0],[8.5,-0.866025404],[9.25,-1.299038106],[9.5,-0.866025404],[9.25,-0.433012702],[10,0.0],[10,0.866025404],[9.5,0.866025404],[9.25,1.299038106]],"orientationDegrees":300,"reflected":false},{"polygon":[[10.0,-3.464101615],[9.25,-3.031088913],[9.0,-3.464101615],[9.5,-4.330127019],[10.0,-4.330127019],[10.0,-5.196152423],[10.75,-5.629165125],[11.0,-5.196152423],[10.75,-4.763139721],[11.5,-4.330127019],[11.5,-3.464101615],[11.0,-3.464101615],[10.75,-3.031088913]],"orientationDegrees":300,"reflected":false},{"polygon":[[11.5,-0.866025404],[10.75,-0.433012702],[10.5,-0.866025404],[11,-1.732050808],[11.5,-1.732050808],[11.5,-2.598076211],[12.25,-3.031088913],[12.5,-2.598076211],[12.25,-2.165063509],[13,-1.732050808],[13,-0.866025404],[12.5,-0.866025404],[12.25,-0.433012702]],"orientationDegrees":300,"reflected":false},{"polygon":[[10.0,-1.732050808],[10.75,-1.299038106],[10.5,-0.866025404],[9.5,-0.866025404],[9.25,-1.299038106],[8.5,-0.866025404],[7.75,-1.299038106],[8.0,-1.732050808],[8.5,-1.732050808],[8.5,-2.598076211],[9.25,-3.031088913],[9.5,-2.598076211],[10.0,-2.598076211]],"orientationDegrees":180,"reflected":false},{"polygon":[[11.5,-2.598076211],[12.25,-3.031088913],[12.0,-3.464101615],[11.0,-3.464101615],[10.75,-3.031088913],[10.0,-3.464101615],[9.25,-3.031088913],[9.5,-2.598076211],[10.0,-2.598076211],[10.0,-1.732050808],[10.75,-1.299038106],[11.0,-1.732050808],[11.5,-1.732050808]],"orientationDegrees":180,"reflected":true},{"polygon":[[13.0,-3.464101615],[13.0,-4.330127019],[13.5,-4.330127019],[14.0,-3.464101615],[13.75,-3.031088913],[14.5,-2.598076211],[14.5,-1.732050808],[14.0,-1.732050808],[13.75,-2.165063509],[13.0,-1.732050808],[12.25,-2.165063509],[12.5,-2.598076211],[12.25,-3.031088913]],"orientationDegrees":60,"reflected":false},{"polygon":[[11.5,-4.330127019],[10.75,-4.763139721],[11.0,-5.196152423],[12.0,-5.196152423],[12.25,-4.763139721],[13.0,-5.196152423],[13.75,-4.763139721],[13.5,-4.330127019],[13.0,-4.330127019],[13.0,-3.464101615],[12.25,-3.031088913],[12.0,-3.464101615],[11.5,-3.464101615]],"orientationDegrees":0,"reflected":false},{"polygon":[[10.0,6.92820323],[10.0,6.062177826],[10.5,6.062177826],[11.0,6.92820323],[10.75,7.361215932],[11.5,7.794228634],[11.5,8.660254038],[11,8.660254038],[10.75,8.227241336],[10,8.660254038],[9.25,8.227241336],[9.5,7.794228634],[9.25,7.361215932]],"orientationDegrees":60,"reflected":false},{"polygon":[[8.5,6.062177826],[7.75,5.629165125],[8.0,5.196152423],[9.0,5.196152423],[9.25,5.629165125],[10.0,5.196152423],[10.75,5.629165125],[10.5,6.062177826],[10.0,6.062177826],[10.0,6.92820323],[9.25,7.361215932],[9.0,6.92820323],[8.5,6.92820323]],"orientationDegrees":0,"reflected":false},{"polygon":[[8.5,7.794228634],[8.5,6.92820323],[9.0,6.92820323],[9.5,7.794228634],[9.25,8.227241336],[10.0,8.660254038],[10,9.526279442],[9.5,9.526279442],[9.25,9.09326674],[8.5,9.526279442],[7.75,9.09326674],[8,8.660254038],[7.75,8.227241336]],"orientationDegrees":60,"reflected":false},{"polygon":[[5.5,7.794228634],[5.5,6.92820323],[6.0,6.92820323],[6.5,7.794228634],[6.25,8.227241336],[7.0,8.660254038],[7,9.526279442],[6.5,9.526279442],[6.25,9.09326674],[5.5,9.526279442],[4.75,9.09326674],[5,8.660254038],[4.75,8.227241336]],"orientationDegrees":60,"reflected":false},{"polygon":[[7.0,6.92820323],[6.25,7.361215932],[6.0,6.92820323],[6.5,6.062177826],[7.0,6.062177826],[7.0,5.196152423],[7.75,4.763139721],[8.0,5.196152423],[7.75,5.629165125],[8.5,6.062177826],[8.5,6.92820323],[8.0,6.92820323],[7.75,7.361215932]],"orientationDegrees":300,"reflected":false},{"polygon":[[7.0,8.660254038],[7.0,9.526279442],[7.5,9.526279442],[8.0,8.660254038],[7.75,8.227241336],[8.5,7.794228634],[8.5,6.92820323],[8.0,6.92820323],[7.75,7.361215932],[7.0,6.92820323],[6.25,7.361215932],[6.5,7.794228634],[6.25,8.227241336]],"orientationDegrees":300,"reflected":true},{"polygon":[[7,10.392304845],[7.75,10.825317547],[7.5,11.258330249],[6.5,11.258330249],[6.25,10.825317547],[5.5,11.258330249],[4.75,10.825317547],[5.0,10.392304845],[5.5,10.392304845],[5.5,9.526279442],[6.25,9.09326674],[6.5,9.526279442],[7.0,9.526279442]],"orientationDegrees":180,"reflected":false},{"polygon":[[8.5,9.526279442],[9.25,9.09326674],[9.5,9.526279442],[9.0,10.392304845],[8.5,10.392304845],[8.5,11.258330249],[7.75,11.691342951],[7.5,11.258330249],[7.75,10.825317547],[7.0,10.392304845],[7.0,9.526279442],[7.5,9.526279442],[7.75,9.09326674]],"orientationDegrees":120,"reflected":false},{"polygon":[[7.0,13.856406461],[7.75,13.423393759],[8.0,13.856406461],[7.5,14.722431864],[7.0,14.722431864],[7.0,15.588457268],[6.25,16.02146997],[6.0,15.588457268],[6.25,15.155444566],[5.5,14.722431864],[5.5,13.856406461],[6.0,13.856406461],[6.25,13.423393759]],"orientationDegrees":120,"reflected":false},{"polygon":[[5.5,11.258330249],[6.25,10.825317547],[6.5,11.258330249],[6.0,12.124355653],[5.5,12.124355653],[5.5,12.990381057],[4.75,13.423393759],[4.5,12.990381057],[4.75,12.557368355],[4.0,12.124355653],[4.0,11.258330249],[4.5,11.258330249],[4.75,10.825317547]],"orientationDegrees":120,"reflected":false},{"polygon":[[7.0,12.124355653],[6.25,11.691342951],[6.5,11.258330249],[7.5,11.258330249],[7.75,11.691342951],[8.5,11.258330249],[9.25,11.691342951],[9,12.124355653],[8.5,12.124355653],[8.5,12.990381057],[7.75,13.423393759],[7.5,12.990381057],[7.0,12.990381057]],"orientationDegrees":0,"reflected":false},{"polygon":[[5.5,12.990381057],[4.75,13.423393759],[5.0,13.856406461],[6.0,13.856406461],[6.25,13.423393759],[7.0,13.856406461],[7.75,13.423393759],[7.5,12.990381057],[7.0,12.990381057],[7,12.124355653],[6.25,11.691342951],[6.0,12.124355653],[5.5,12.124355653]],"orientationDegrees":0,"reflected":true},{"polygon":[[8.5,14.722431864],[9.25,14.289419162],[9.5,14.722431864],[9.0,15.588457268],[8.5,15.588457268],[8.5,16.454482672],[7.75,16.887495374],[7.5,16.454482672],[7.75,16.02146997],[7.0,15.588457268],[7.0,14.722431864],[7.5,14.722431864],[7.75,14.289419162]],"orientationDegrees":120,"reflected":false},{"polygon":[[8.5,12.990381057],[8.5,12.124355653],[9.0,12.124355653],[9.5,12.990381057],[9.25,13.423393759],[10.0,13.856406461],[10.0,14.722431864],[9.5,14.722431864],[9.25,14.289419162],[8.5,14.722431864],[7.75,14.289419162],[8.0,13.856406461],[7.75,13.423393759]],"orientationDegrees":60,"reflected":false},{"polygon":[[4.0,13.856406461],[4.0,14.722431864],[3.5,14.722431864],[3.0,13.856406461],[3.25,13.423393759],[2.5,12.990381057],[2.5,12.124355653],[3.0,12.124355653],[3.25,12.557368355],[4.0,12.124355653],[4.75,12.557368355],[4.5,12.990381057],[4.75,13.423393759]],"orientationDegrees":240,"reflected":false},{"polygon":[[5.5,14.722431864],[6.25,15.155444566],[6.0,15.588457268],[5.0,15.588457268],[4.75,15.155444566],[4.0,15.588457268],[3.25,15.155444566],[3.5,14.722431864],[4.0,14.722431864],[4.0,13.856406461],[4.75,13.423393759],[5.0,13.856406461],[5.5,13.856406461]],"orientationDegrees":180,"reflected":false}]}],"pinwheel":[{"iteration":0,"tiles":[{"polygon":[[0.0,0.0],[2.0,0.0],[0.0,1.0]],"orientationDegrees":0.0,"reflected":false}]},{"iteration":1,"tiles":[{"polygon":[[0.4,0.8],[0.0,0.0],[0.0,1.0]],"orientationDegrees":243.434948823,"reflected":true},{"polygon":[[0.2,0.4],[1.0,0.0],[0.0,0.0]],"orientationDegrees":333.434948823,"reflected":true},{"polygon":[[0.2,0.4],[1.0,0.0],[0.4,0.8]],"orientationDegrees":333.434948823,"reflected":false},{"polygon":[[1.2,0.4],[0.4,0.8],[1.0,0.0]],"orientationDegrees":153.434948823,"reflected":false},{"polygon":[[1.2,0.4],[2.0,0.0],[1.0,0.0]],"orientationDegrees":333.434948823,"reflected":true}]},{"iteration":2,"tiles":[{"polygon":[[-0.0,0.8],[0.4,0.8],[-0.0,1.0]],"orientationDegrees":0.0,"reflected":false},{"polygon":[[0.2,0.8],[0.2,0.4],[0.4,0.8]],"orientationDegrees":270.0,"reflected":false},{"polygon":[[0.2,0.8],[0.2,0.4],[-0.0,0.8]],"orientationDegrees":270.0,"reflected":true},{"polygon":[[-0.0,0.4],[-0.0,0.8],[0.2,0.4]],"orientationDegrees":90.0,"reflected":true},{"polygon":[[-0.0,0.4],[-0.0,-0.0],[0.2,0.4]],"orientationDegrees":270.0,"reflected":false},{"polygon":[[0.2,-0.0],[0.2,0.4],[-0.0,-0.0]],"orientationDegrees":90.0,"reflected":false},{"polygon":[[0.2,0.2],[0.6,0.2],[0.2,0.4]],"orientationDegrees":0.0,"reflected":false},{"polygon":[[0.2,0.2],[0.6,0.2],[0.2,-0.0]],"orientationDegrees":0.0,"reflected":true},{"polygon":[[0.6,-0.0],[0.2,-0.0],[0.6,0.2]],"orientationDegrees":180.0,"reflected":true},{"polygon":[[0.6,-0.0],[1.0,-0.0],[0.6,0.2]],"orientationDegrees":0.0,"reflected":false},{"polygon":[[0.52,0.64],[0.2,0.4],[0.4,0.8]],"orientationDegrees":216.869897646,"reflected":true},{"polygon":[[0.36,0.52],[0.6,0.2],[0.2,0.4]],"orientationDegrees":306.869897646,"reflected":true},{"polygon":[[0.36,0.52],[0.6,0.2],[0.52,0.64]],"orientationDegrees":306.869897646,"reflected":false},{"polygon":[[0.76,0.32],[0.52,0.64],[0.6,0.2]],"orientationDegrees":126.869897646,"reflected":false},{"polygon":[[0.76,0.32],[1.0,-0.0],[0.6,0.2]],"orientationDegrees":306.869897646,"reflected":true},{"polygon":[[0.88,0.16],[1.2,0.4],[1.0,-0.0]],"orientationDegrees":36.869897646,"reflected":true},{"polygon":[[1.04,0.28],[0.8,0.6],[1.2,0.4]],"orientationDegrees":126.869897646,"reflected":true},{"polygon":[[1.04,0.28],[0.8,0.6],[0.88,0.16]],"orientationDegrees":126.869897646,"reflected":false},{"polygon":[[0.64,0.48],[0.88,0.16],[0.8,0.6]],"orientationDegrees":306.869897646,"reflected":false},{"polygon":[[0.64,0.48],[0.4,0.8],[0.8,0.6]],"orientationDegrees":126.869897646,"reflected":true},{"polygon":[[1.2,-0.0],[1.2,0.4],[1.0,-0.0]],"orientationDegrees":90.0,"reflected":false},{"polygon":[[1.2,0.2],[1.6,0.2],[1.2,0.4]],"orientationDegrees":0.0,"reflected":false},{"polygon":[[1.2,0.2],[1.6,0.2],[1.2,-0.0]],"orientationDegrees":0.0,"reflected":true},{"polygon":[[1.6,-0.0],[1.2,-0.0],[1.6,0.2]],"orientationDegrees":180.0,"reflected":true},{"polygon":[[1.6,-0.0],[2.0,-0.0],[1.6,0.2]],"orientationDegrees":0.0,"reflected":false}]},{"iteration":3,"tiles":[{"polygon":[[0.08,0.96],[-0.0,0.8],[-0.0,1.0]],"orientationDegrees":243.434948823,"reflected":true},{"polygon":[[0.04,0.88],[0.2,0.8],[-0.0,0.8]],"orientationDegrees":333.434948823,"reflected":true},{"polygon":[[0.04,0.88],[0.2,0.8],[0.08,0.96]],"orientationDegrees":333.434948823,"reflected":false},{"polygon":[[0.24,0.88],[0.08,0.96],[0.2,0.8]],"orientationDegrees":153.434948823,"reflected":false},{"polygon":[[0.24,0.88],[0.4,0.8],[0.2,0.8]],"orientationDegrees":333.434948823,"reflected":true},{"polygon":[[0.36,0.72],[0.2,0.8],[0.4,0.8]],"orientationDegrees":153.434948823,"reflected":true},{"polygon":[[0.28,0.76],[0.2,0.6],[0.2,0.8]],"orientationDegrees":243.434948823,"reflected":true},{"polygon":[[0.28,0.76],[0.2,0.6],[0.36,0.72]],"orientationDegrees":243.434948823,"reflected":false},{"polygon":[[0.28,0.56],[0.36,0.72],[0.2,0.6]],"orientationDegrees":63.434948823,"reflected":false},{"polygon":[[0.28,0.56],[0.2,0.4],[0.2,0.6]],"orientationDegrees":243.434948823,"reflected":true},{"polygon":[[0.04,0.72],[0.2,0.8],[-0.0,0.8]],"orientationDegrees":26.565051177,"reflected":false},{"polygon":[[0.12,0.76],[0.2,0.6],[0.2,0.8]],"orientationDegrees":296.565051177,"reflected":false},{"polygon":[[0.12,0.76],[0.2,0.6],[0.04,0.72]],"orientationDegrees":296.565051177,"reflected":true},{"polygon":[[0.12,0.56],[0.04,0.72],[0.2,0.6]],"orientationDegrees":116.565051177,"reflected":true},{"polygon":[[0.12,0.56],[0.2,0.4],[0.2,0.6]],"orientationDegrees":296.565051177,"reflected":false},{"polygon":[[0.16,0.48],[-0.0,0.4],[0.2,0.4]],"orientationDegrees":206.565051177,"reflected":false},{"polygon":[[0.08,0.44],[-0.0,0.6],[-0.0,0.4]],"orientationDegrees":116.565051177,"reflected":false},{"polygon":[[0.08,0.44],[-0.0,0.6],[0.16,0.48]],"orientationDegrees":116.565051177,"reflected":true},{"polygon":[[0.08,0.64],[0.16,0.48],[-0.0,0.6]],"orientationDegrees":296.565051177,"reflected":true},{"polygon":[[0.08,0.64],[-0.0,0.8],[-0.0,0.6]],"orientationDegrees":116.565051177,"reflected":false},{"polygon":[[0.16,0.32],[-0.0,0.4],[0.2,0.4]],"orientationDegrees":153.434948823,"reflected":true},{"polygon":[[0.08,0.36],[-0.0,0.2],[-0.0,0.4]],"orientationDegrees":243.434948823,"reflected":true},{"polygon":[[0.08,0.36],[-0.0,0.2],[0.16,0.32]],"orientationDegrees":243.434948823,"reflected":false},{"polygon":[[0.08,0.16],[0.16,0.32],[-0.0,0.2]],"orientationDegrees":63.434948823,"reflected":false},{"polygon":[[0.08,0.16],[-0.0,-0.0],[-0.0,0.2]],"orientationDegrees":243.434948823,"reflected":true},{"polygon":[[0.04,0.08],[0.2,-0.0],[-0.0,-0.0]],"orientationDegrees":333.434948823,"reflected":true},{"polygon":[[0.12,0.04],[0.2,0.2],[0.2,-0.0]],"orientationDegrees":63.434948823,"reflected":true},{"polygon":[[0.12,0.04],[0.2,0.2],[0.04,0.08]],"orientationDegrees":63.434948823,"reflected":false},{"polygon":[[0.12,0.24],[0.04,0.08],[0.2,0.2]],"orientationDegrees":243.434948823,"reflected":false},{"polygon":[[0.12,0.24],[0.2,0.4],[0.2,0.2]],"orientationDegrees":63.434948823,"reflected":true},{"polygon":[[0.28,0.36],[0.2,0.2],[0.2,0.4]],"orientationDegrees":243.434948823,"reflected":true},{"polygon":[[0.24,0.28],[0.4,0.2],[0.2,0.2]],"orientationDegrees":333.434948823,"reflected":true},{"polygon":[[0.24,0.28],[0.4,0.2],[0.28,0.36]],"orientationDegrees":333.434948823,"reflected":false},{"polygon":[[0.44,0.28],[0.28,0.36],[0.4,0.2]],"orientationDegrees":153.434948823,"reflected":false},{"polygon":[[0.44,0.28],[0.6,0.2],[0.4,0.2]],"orientationDegrees":333.434948823,"reflected":true},{"polygon":[[0.28,0.04],[0.2,0.2],[0.2,-0.0]],"orientationDegrees":116.565051177,"reflected":false},{"polygon":[[0.24,0.12],[0.4,0.2],[0.2,0.2]],"orientationDegrees":26.565051177,"reflected":false},{"polygon":[[0.24,0.12],[0.4,0.2],[0.28,0.04]],"orientationDegrees":26.565051177,"reflected":true},{"polygon":[[0.44,0.12],[0.28,0.04],[0.4,0.2]],"orientationDegrees":206.565051177,"reflected":true},{"polygon":[[0.44,0.12],[0.6,0.2],[0.4,0.2]],"orientationDegrees":26.565051177,"reflected":false},{"polygon":[[0.52,0.16],[0.6,-0.0],[0.6,0.2]],"orientationDegrees":296.565051177,"reflected":false},{"polygon":[[0.56,0.08],[0.4,-0.0],[0.6,-0.0]],"orientationDegrees":206.565051177,"reflected":false},{"polygon":[[0.56,0.08],[0.4,-0.0],[0.52,0.16]],"orientationDegrees":206.565051177,"reflected":true},{"polygon":[[0.36,0.08],[0.52,0.16],[0.4,-0.0]],"orientationDegrees":26.565051177,"reflected":true},{"polygon":[[0.36,0.08],[0.2,-0.0],[0.4,-0.0]],"orientationDegrees":206.565051177,"reflected":false},{"polygon":[[0.68,0.16],[0.6,-0.0],[0.6,0.2]],"orientationDegrees":243.434948823,"reflected":true},{"polygon":[[0.64,0.08],[0.8,-0.0],[0.6,-0.0]],"orientationDegrees":333.434948823,"reflected":true},{"polygon":[[0.64,0.08],[0.8,-0.0],[0.68,0.16]],"orientationDegrees":333.434948823,"reflected":false},{"polygon":[[0.84,0.08],[0.68,0.16],[0.8,-0.0]],"orientationDegrees":153.434948823,"reflected":false},{"polygon":[[0.84,0.08],[1.0,-0.0],[0.8,-0.0]],"orientationDegrees":333.434948823,"reflected":true},{"polygon":[[0.36,0.72],[0.52,0.64],[0.4,0.8]],"orientationDegrees":333.434948823,"reflected":false},{"polygon":[[0.44,0.68],[0.36,0.52],[0.52,0.64]],"orientationDegrees":243.434948823,"reflected":false},{"polygon":[[0.44,0.68],[0.36,0.52],[0.36,0.72]],"orientationDegrees":243.434948823,"reflected":true},{"polygon":[[0.28,0.56],[0.36,0.72],[0.36,0.52]],"orientationDegrees":63.434948823,"reflected":true},{"polygon":[[0.28,0.56],[0.2,0.4],[0.36,0.52]],"orientationDegrees":243.434948823,"reflected":false},{"polygon":[[0.28,0.36],[0.36,0.52],[0.2,0.4]],"orientationDegrees":63.434948823,"reflected":false},{"polygon":[[0.32,0.44],[0.48,0.36],[0.36,0.52]],"orientationDegrees":333.434948823,"reflected":false},{"polygon":[[0.32,0.44],[0.48,0.36],[0.28,0.36]],"orientationDegrees":333.434948823,"reflected":true},{"polygon":[[0.44,0.28],[0.28,0.36],[0.48,0.36]],"orientationDegrees":153.434948823,"reflected":true},{"polygon":[[0.44,0.28],[0.6,0.2],[0.48,0.36]],"orientationDegrees":333.434948823,"reflected":false},{"polygon":[[0.536,0.552],[0.36,0.52],[0.52,0.64]],"orientationDegrees":190.304846469,"reflected":true},{"polygon":[[0.448,0.536],[0.48,0.36],[0.36,0.52]],"orientationDegrees":280.304846469,"reflected":true},{"polygon":[[0.448,0.536],[0.48,0.36],[0.536,0.552]],"orientationDegrees":280.304846469,"reflected":false},{"polygon":[[0.568,0.376],[0.536,0.552],[0.48,0.36]],"orientationDegrees":100.304846469,"reflected":false},{"polygon":[[0.568,0.376],[0.6,0.2],[0.48,0.36]],"orientationDegrees":280.304846469,"reflected":true},{"polygon":[[0.584,0.288],[0.76,0.32],[0.6,0.2]],"orientationDegrees":10.304846469,"reflected":true},{"polygon":[[0.672,0.304],[0.64,0.48],[0.76,0.32]],"orientationDegrees":100.304846469,"reflected":true},{"polygon":[[0.672,0.304],[0.64,0.48],[0.584,0.288]],"orientationDegrees":100.304846469,"reflected":false},{"polygon":[[0.552,0.464],[0.584,0.288],[0.64,0.48]],"orientationDegrees":280.304846469,"reflected":false},{"polygon":[[0.552,0.464],[0.52,0.64],[0.64,0.48]],"orientationDegrees":100.304846469,"reflected":true},{"polygon":[[0.68,0.16],[0.76,0.32],[0.6,0.2]],"orientationDegrees":63.434948823,"reflected":false},{"polygon":[[0.72,0.24],[0.88,0.16],[0.76,0.32]],"orientationDegrees":333.434948823,"reflected":false},{"polygon":[[0.72,0.24],[0.88,0.16],[0.68,0.16]],"orientationDegrees":333.434948823,"reflected":true},{"polygon":[[0.84,0.08],[0.68,0.16],[0.88,0.16]],"orientationDegrees":153.434948823,"reflected":true},{"polygon":[[0.84,0.08],[1.0,-0.0],[0.88,0.16]],"orientationDegrees":333.434948823,"reflected":false},{"polygon":[[1.04,0.08],[0.88,0.16],[1.0,-0.0]],"orientationDegrees":153.434948823,"reflected":false},{"polygon":[[0.96,0.12],[1.04,0.28],[0.88,0.16]],"orientationDegrees":63.434948823,"reflected":false},{"polygon":[[0.96,0.12],[1.04,0.28],[1.04,0.08]],"orientationDegrees":63.434948823,"reflected":true},{"polygon":[[1.12,0.24],[1.04,0.08],[1.04,0.28]],"orientationDegrees":243.434948823,"reflected":true},{"polygon":[[1.12,0.24],[1.2,0.4],[1.04,0.28]],"orientationDegrees":63.434948823,"reflected":false},{"polygon":[[1.12,0.44],[1.04,0.28],[1.2,0.4]],"orientationDegrees":243.434948823,"reflected":false},{"polygon":[[1.08,0.36],[0.92,0.44],[1.04,0.28]],"orientationDegrees":153.434948823,"reflected":false},{"polygon":[[1.08,0.36],[0.92,0.44],[1.12,0.44]],"orientationDegrees":153.434948823,"reflected":true},{"polygon":[[0.96,0.52],[1.12,0.44],[0.92,0.44]],"orientationDegrees":333.434948823,"reflected":true},{"polygon":[[0.96,0.52],[0.8,0.6],[0.92,0.44]],"orientationDegrees":153.434948823,"reflected":false},{"polygon":[[0.864,0.248],[1.04,0.28],[0.88,0.16]],"orientationDegrees":10.304846469,"reflected":true},{"polygon":[[0.952,0.264],[0.92,0.44],[1.04,0.28]],"orientationDegrees":100.304846469,"reflected":true},{"polygon":[[0.952,0.264],[0.92,0.44],[0.864,0.248]],"orientationDegrees":100.304846469,"reflected":false},{"polygon":[[0.832,0.424],[0.864,0.248],[0.92,0.44]],"orientationDegrees":280.304846469,"reflected":false},{"polygon":[[0.832,0.424],[0.8,0.6],[0.92,0.44]],"orientationDegrees":100.304846469,"reflected":true},{"polygon":[[0.816,0.512],[0.64,0.48],[0.8,0.6]],"orientationDegrees":190.304846469,"reflected":true},{"polygon":[[0.728,0.496],[0.76,0.32],[0.64,0.48]],"orientationDegrees":280.304846469,"reflected":true},{"polygon":[[0.728,0.496],[0.76,0.32],[0.816,0.512]],"orientationDegrees":280.304846469,"reflected":false},{"polygon":[[0.848,0.336],[0.816,0.512],[0.76,0.32]],"orientationDegrees":100.304846469,"reflected":false},{"polygon":[[0.848,0.336],[0.88,0.16],[0.76,0.32]],"orientationDegrees":280.304846469,"reflected":true},{"polygon":[[0.72,0.64],[0.64,0.48],[0.8,0.6]],"orientationDegrees":243.434948823,"reflected":false},{"polygon":[[0.68,0.56],[0.52,0.64],[0.64,0.48]],"orientationDegrees":153.434948823,"reflected":false},{"polygon":[[0.68,0.56],[0.52,0.64],[0.72,0.64]],"orientationDegrees":153.434948823,"reflected":true},{"polygon":[[0.56,0.72],[0.72,0.64],[0.52,0.64]],"orientationDegrees":333.434948823,"reflected":true},{"polygon":[[0.56,0.72],[0.4,0.8],[0.52,0.64]],"orientationDegrees":153.434948823,"reflected":false},{"polygon":[[1.04,0.08],[1.2,-0.0],[1.0,-0.0]],"orientationDegrees":333.434948823,"reflected":true},{"polygon":[[1.12,0.04],[1.2,0.2],[1.2,-0.0]],"orientationDegrees":63.434948823,"reflected":true},{"polygon":[[1.12,0.04],[1.2,0.2],[1.04,0.08]],"orientationDegrees":63.434948823,"reflected":false},{"polygon":[[1.12,0.24],[1.04,0.08],[1.2,0.2]],"orientationDegrees":243.434948823,"reflected":false},{"polygon":[[1.12,0.24],[1.2,0.4],[1.2,0.2]],"orientationDegrees":63.434948823,"reflected":true},{"polygon":[[1.28,0.36],[1.2,0.2],[1.2,0.4]],"orientationDegrees":243.434948823,"reflected":true},{"polygon":[[1.24,0.28],[1.4,0.2],[1.2,0.2]],"orientationDegrees":333.434948823,"reflected":true},{"polygon":[[1.24,0.28],[1.4,0.2],[1.28,0.36]],"orientationDegrees":333.434948823,"reflected":false},{"polygon":[[1.44,0.28],[1.28,0.36],[1.4,0.2]],"orientationDegrees":153.434948823,"reflected":false},{"polygon":[[1.44,0.28],[1.6,0.2],[1.4,0.2]],"orientationDegrees":333.434948823,"reflected":true},{"polygon":[[1.28,0.04],[1.2,0.2],[1.2,-0.0]],"orientationDegrees":116.565051177,"reflected":false},{"polygon":[[1.24,0.12],[1.4,0.2],[1.2,0.2]],"orientationDegrees":26.565051177,"reflected":false},{"polygon":[[1.24,0.12],[1.4,0.2],[1.28,0.04]],"orientationDegrees":26.565051177,"reflected":true},{"polygon":[[1.44,0.12],[1.28,0.04],[1.4,0.2]],"orientationDegrees":206.565051177,"reflected":true},{"polygon":[[1.44,0.12],[1.6,0.2],[1.4,0.2]],"orientationDegrees":26.565051177,"reflected":false},{"polygon":[[1.52,0.16],[1.6,-0.0],[1.6,0.2]],"orientationDegrees":296.565051177,"reflected":false},{"polygon":[[1.56,0.08],[1.4,-0.0],[1.6,-0.0]],"orientationDegrees":206.565051177,"reflected":false},{"polygon":[[1.56,0.08],[1.4,-0.0],[1.52,0.16]],"orientationDegrees":206.565051177,"reflected":true},{"polygon":[[1.36,0.08],[1.52,0.16],[1.4,-0.0]],"orientationDegrees":26.565051177,"reflected":true},{"polygon":[[1.36,0.08],[1.2,-0.0],[1.4,-0.0]],"orientationDegrees":206.565051177,"reflected":false},{"polygon":[[1.68,0.16],[1.6,-0.0],[1.6,0.2]],"orientationDegrees":243.434948823,"reflected":true},{"polygon":[[1.64,0.08],[1.8,-0.0],[1.6,-0.0]],"orientationDegrees":333.434948823,"reflected":true},{"polygon":[[1.64,0.08],[1.8,-0.0],[1.68,0.16]],"orientationDegrees":333.434948823,"reflected":false},{"polygon":[[1.84,0.08],[1.68,0.16],[1.8,-0.0]],"orientationDegrees":153.434948823,"reflected":false},{"polygon":[[1.84,0.08],[2.0,-0.0],[1.8,-0.0]],"orientationDegrees":333.434948823,"reflected":true}]},{"iteration":4,"tiles":[{"polygon":[[-0.0,0.96],[0.08,0.96],[-0.0,1.0]],"orientationDegrees":0.0,"reflected":false},{"polygon":[[0.04,0.96],[0.04,0.88],[0.08,0.96]],"orientationDegrees":270.0,"reflected":false},{"polygon":[[0.04,0.96],[0.04,0.88],[-0.0,0.96]],"orientationDegrees":270.0,"reflected":true},{"polygon":[[-0.0,0.88],[-0.0,0.96],[0.04,0.88]],"orientationDegrees":90.0,"reflected":true},{"polygon":[[-0.0,0.88],[-0.0,0.8],[0.04,0.88]],"orientationDegrees":270.0,"reflected":false},{"polygon":[[0.04,0.8],[0.04,0.88],[-0.0,0.8]],"orientationDegrees":90.0,"reflected":false},{"polygon":[[0.04,0.84],[0.12,0.84],[0.04,0.88]],"orientationDegrees":0.0,"reflected":false},{"polygon":[[0.04,0.84],[0.12,0.84],[0.04,0.8]],"orientationDegrees":0.0,"reflected":true},{"polygon":[[0.12,0.8],[0.04,0.8],[0.12,0.84]],"orientationDegrees":180.0,"reflected":true},{"polygon":[[0.12,0.8],[0.2,0.8],[0.12,0.84]],"orientationDegrees":0.0,"reflected":false},{"polygon":[[0.104,0.928],[0.04,0.88],[0.08,0.96]],"orientationDegrees":216.869897646,"reflected":true},{"polygon":[[0.072,0.904],[0.12,0.84],[0.04,0.88]],"orientationDegrees":306.869897646,"reflected":true},{"polygon":[[0.072,0.904],[0.12,0.84],[0.104,0.928]],"orientationDegrees":306.869897646,"reflected":false},{"polygon":[[0.152,0.864],[0.104,0.928],[0.12,0.84]],"orientationDegrees":126.869897646,"reflected":false},{"polygon":[[0.152,0.864],[0.2,0.8],[0.12,0.84]],"orientationDegrees":306.869897646,"reflected":true},{"polygon":[[0.176,0.832],[0.24,0.88],[0.2,0.8]],"orientationDegrees":36.869897646,"reflected":true},{"polygon":[[0.208,0.856],[0.16,0.92],[0.24,0.88]],"orientationDegrees":126.869897646,"reflected":true},{"polygon":[[0.208,0.856],[0.16,0.92],[0.176,0.832]],"orientationDegrees":126.869897646,"reflected":false},{"polygon":[[0.128,0.896],[0.176,0.832],[0.16,0.92]],"orientationDegrees":306.869897646,"reflected":false},{"polygon":[[0.128,0.896],[0.08,0.96],[0.16,0.92]],"orientationDegrees":126.869897646,"reflected":true},{"polygon":[[0.24,0.8],[0.24,0.88],[0.2,0.8]],"orientationDegrees":90.0,"reflected":false},{"polygon":[[0.24,0.84],[0.32,0.84],[0.24,0.88]],"orientationDegrees":0.0,"reflected":false},{"polygon":[[0.24,0.84],[0.32,0.84],[0.24,0.8]],"orientationDegrees":0.0,"reflected":true},{"polygon":[[0.32,0.8],[0.24,0.8],[0.32,0.84]],"orientationDegrees":180.0,"reflected":true},{"polygon":[[0.32,0.8],[0.4,0.8],[0.32,0.84]],"orientationDegrees":0.0,"reflected":false},{"polygon":[[0.36,0.8],[0.36,0.72],[0.4,0.8]],"orientationDegrees":270.0,"reflected":false},{"polygon":[[0.36,0.76],[0.28,0.76],[0.36,0.72]],"orientationDegrees":180.0,"reflected":false},{"polygon":[[0.36,0.76],[0.28,0.76],[0.36,0.8]],"orientationDegrees":180.0,"reflected":true},{"polygon":[[0.28,0.8],[0.36,0.8],[0.28,0.76]],"orientationDegrees":0.0,"reflected":true},{"polygon":[[0.28,0.8],[0.2,0.8],[0.28,0.76]],"orientationDegrees":180.0,"reflected":false},{"polygon":[[0.2,0.76],[0.28,0.76],[0.2,0.8]],"orientationDegrees":0.0,"reflected":false},{"polygon":[[0.24,0.76],[0.24,0.68],[0.28,0.76]],"orientationDegrees":270.0,"reflected":false},{"polygon":[[0.24,0.76],[0.24,0.68],[0.2,0.76]],"orientationDegrees":270.0,"reflected":true},{"polygon":[[0.2,0.68],[0.2,0.76],[0.24,0.68]],"orientationDegrees":90.0,"reflected":true},{"polygon":[[0.2,0.68],[0.2,0.6],[0.24,0.68]],"orientationDegrees":270.0,"reflected":false},{"polygon":[[0.328,0.696],[0.28,0.76],[0.36,0.72]],"orientationDegrees":126.869897646,"reflected":true},{"polygon":[[0.304,0.728],[0.24,0.68],[0.28,0.76]],"orientationDegrees":216.869897646,"reflected":true},{"polygon":[[0.304,0.728],[0.24,0.68],[0.328,0.696]],"orientationDegrees":216.869897646,"reflected":false},{"polygon":[[0.264,0.648],[0.328,0.696],[0.24,0.68]],"orientationDegrees":36.869897646,"reflected":false},{"polygon":[[0.264,0.648],[0.2,0.6],[0.24,0.68]],"orientationDegrees":216.869897646,"reflected":true},{"polygon":[[0.232,0.624],[0.28,0.56],[0.2,0.6]],"orientationDegrees":306.869897646,"reflected":true},{"polygon":[[0.256,0.592],[0.32,0.64],[0.28,0.56]],"orientationDegrees":36.869897646,"reflected":true},{"polygon":[[0.256,0.592],[0.32,0.64],[0.232,0.624]],"orientationDegrees":36.869897646,"reflected":false},{"polygon":[[0.296,0.672],[0.232,0.624],[0.32,0.64]],"orientationDegrees":216.869897646,"reflected":false},{"polygon":[[0.296,0.672],[0.36,0.72],[0.32,0.64]],"orientationDegrees":36.869897646,"reflected":true},{"polygon":[[0.2,0.56],[0.28,0.56],[0.2,0.6]],"orientationDegrees":0.0,"reflected":false},{"polygon":[[0.24,0.56],[0.24,0.48],[0.28,0.56]],"orientationDegrees":270.0,"reflected":false},{"polygon":[[0.24,0.56],[0.24,0.48],[0.2,0.56]],"orientationDegrees":270.0,"reflected":true},{"polygon":[[0.2,0.48],[0.2,0.56],[0.24,0.48]],"orientationDegrees":90.0,"reflected":true},{"polygon":[[0.2,0.48],[0.2,0.4],[0.24,0.48]],"orientationDegrees":270.0,"reflected":false},{"polygon":[[0.04,0.8],[0.04,0.72],[-0.0,0.8]],"orientationDegrees":270.0,"reflected":true},{"polygon":[[0.04,0.76],[0.12,0.76],[0.04,0.72]],"orientationDegrees":0.0,"reflected":true},{"polygon":[[0.04,0.76],[0.12,0.76],[0.04,0.8]],"orientationDegrees":0.0,"reflected":false},{"polygon":[[0.12,0.8],[0.04,0.8],[0.12,0.76]],"orientationDegrees":180.0,"reflected":false},{"polygon":[[0.12,0.8],[0.2,0.8],[0.12,0.76]],"orientationDegrees":0.0,"reflected":true},{"polygon":[[0.2,0.76],[0.12,0.76],[0.2,0.8]],"orientationDegrees":180.0,"reflected":true},{"polygon":[[0.16,0.76],[0.16,0.68],[0.12,0.76]],"orientationDegrees":270.0,"reflected":true},{"polygon":[[0.16,0.76],[0.16,0.68],[0.2,0.76]],"orientationDegrees":270.0,"reflected":false},{"polygon":[[0.2,0.68],[0.2,0.76],[0.16,0.68]],"orientationDegrees":90.0,"reflected":false},{"polygon":[[0.2,0.68],[0.2,0.6],[0.16,0.68]],"orientationDegrees":270.0,"reflected":true},{"polygon":[[0.072,0.696],[0.12,0.76],[0.04,0.72]],"orientationDegrees":53.130102354,"reflected":false},{"polygon":[[0.096,0.728],[0.16,0.68],[0.12,0.76]],"orientationDegrees":323.130102354,"reflected":false},{"polygon":[[0.096,0.728],[0.16,0.68],[0.072,0.696]],"orientationDegrees":323.130102354,"reflected":true},{"polygon":[[0.136,0.648],[0.072,0.696],[0.16,0.68]],"orientationDegrees":143.130102354,"reflected":true},{"polygon":[[0.136,0.648],[0.2,0.6],[0.16,0.68]],"orientationDegrees":323.130102354,"reflected":false},{"polygon":[[0.168,0.624],[0.12,0.56],[0.2,0.6]],"orientationDegrees":233.130102354,"reflected":false},{"polygon":[[0.144,0.592],[0.08,0.64],[0.12,0.56]],"orientationDegrees":143.130102354,"reflected":false},{"polygon":[[0.144,0.592],[0.08,0.64],[0.168,0.624]],"orientationDegrees":143.130102354,"reflected":true},{"polygon":[[0.104,0.672],[0.168,0.624],[0.08,0.64]],"orientationDegrees":323.130102354,"reflected":true},{"polygon":[[0.104,0.672],[0.04,0.72],[0.08,0.64]],"orientationDegrees":143.130102354,"reflected":false},{"polygon":[[0.2,0.56],[0.12,0.56],[0.2,0.6]],"orientationDegrees":180.0,"reflected":true},{"polygon":[[0.16,0.56],[0.16,0.48],[0.12,0.56]],"orientationDegrees":270.0,"reflected":true},{"polygon":[[0.16,0.56],[0.16,0.48],[0.2,0.56]],"orientationDegrees":270.0,"reflected":false},{"polygon":[[0.2,0.48],[0.2,0.56],[0.16,0.48]],"orientationDegrees":90.0,"reflected":false},{"polygon":[[0.2,0.48],[0.2,0.4],[0.16,0.48]],"orientationDegrees":270.0,"reflected":true},{"polygon":[[0.16,0.4],[0.16,0.48],[0.2,0.4]],"orientationDegrees":90.0,"reflected":true},{"polygon":[[0.16,0.44],[0.08,0.44],[0.16,0.48]],"orientationDegrees":180.0,"reflected":true},{"polygon":[[0.16,0.44],[0.08,0.44],[0.16,0.4]],"orientationDegrees":180.0,"reflected":false},{"polygon":[[0.08,0.4],[0.16,0.4],[0.08,0.44]],"orientationDegrees":0.0,"reflected":false},{"polygon":[[0.08,0.4],[-0.0,0.4],[0.08,0.44]],"orientationDegrees":180.0,"reflected":true},{"polygon":[[-0.0,0.44],[0.08,0.44],[-0.0,0.4]],"orientationDegrees":0.0,"reflected":true},{"polygon":[[0.04,0.44],[0.04,0.52],[0.08,0.44]],"orientationDegrees":90.0,"reflected":true},{"polygon":[[0.04,0.44],[0.04,0.52],[-0.0,0.44]],"orientationDegrees":90.0,"reflected":false},{"polygon":[[-0.0,0.52],[-0.0,0.44],[0.04,0.52]],"orientationDegrees":270.0,"reflected":false},{"polygon":[[-0.0,0.52],[-0.0,0.6],[0.04,0.52]],"orientationDegrees":90.0,"reflected":true},{"polygon":[[0.128,0.504],[0.08,0.44],[0.16,0.48]],"orientationDegrees":233.130102354,"reflected":false},{"polygon":[[0.104,0.472],[0.04,0.52],[0.08,0.44]],"orientationDegrees":143.130102354,"reflected":false},{"polygon":[[0.104,0.472],[0.04,0.52],[0.128,0.504]],"orientationDegrees":143.130102354,"reflected":true},{"polygon":[[0.064,0.552],[0.128,0.504],[0.04,0.52]],"orientationDegrees":323.130102354,"reflected":true},{"polygon":[[0.064,0.552],[-0.0,0.6],[0.04,0.52]],"orientationDegrees":143.130102354,"reflected":false},{"polygon":[[0.032,0.576],[0.08,0.64],[-0.0,0.6]],"orientationDegrees":53.130102354,"reflected":false},{"polygon":[[0.056,0.608],[0.12,0.56],[0.08,0.64]],"orientationDegrees":323.130102354,"reflected":false},{"polygon":[[0.056,0.608],[0.12,0.56],[0.032,0.576]],"orientationDegrees":323.130102354,"reflected":true},{"polygon":[[0.096,0.528],[0.032,0.576],[0.12,0.56]],"orientationDegrees":143.130102354,"reflected":true},{"polygon":[[0.096,0.528],[0.16,0.48],[0.12,0.56]],"orientationDegrees":323.130102354,"reflected":false},{"polygon":[[-0.0,0.64],[0.08,0.64],[-0.0,0.6]],"orientationDegrees":0.0,"reflected":true},{"polygon":[[0.04,0.64],[0.04,0.72],[0.08,0.64]],"orientationDegrees":90.0,"reflected":true},{"polygon":[[0.04,0.64],[0.04,0.72],[-0.0,0.64]],"orientationDegrees":90.0,"reflected":false},{"polygon":[[-0.0,0.72],[-0.0,0.64],[0.04,0.72]],"orientationDegrees":270.0,"reflected":false},{"polygon":[[-0.0,0.72],[-0.0,0.8],[0.04,0.72]],"orientationDegrees":90.0,"reflected":true},{"polygon":[[0.16,0.4],[0.16,0.32],[0.2,0.4]],"orientationDegrees":270.0,"reflected":false},{"polygon":[[0.16,0.36],[0.08,0.36],[0.16,0.32]],"orientationDegrees":180.0,"reflected":false},{"polygon":[[0.16,0.36],[0.08,0.36],[0.16,0.4]],"orientationDegrees":180.0,"reflected":true},{"polygon":[[0.08,0.4],[0.16,0.4],[0.08,0.36]],"orientationDegrees":0.0,"reflected":true},{"polygon":[[0.08,0.4],[-0.0,0.4],[0.08,0.36]],"orientationDegrees":180.0,"reflected":false},{"polygon":[[-0.0,0.36],[0.08,0.36],[-0.0,0.4]],"orientationDegrees":0.0,"reflected":false},{"polygon":[[0.04,0.36],[0.04,0.28],[0.08,0.36]],"orientationDegrees":270.0,"reflected":false},{"polygon":[[0.04,0.36],[0.04,0.28],[-0.0,0.36]],"orientationDegrees":270.0,"reflected":true},{"polygon":[[-0.0,0.28],[-0.0,0.36],[0.04,0.28]],"orientationDegrees":90.0,"reflected":true},{"polygon":[[-0.0,0.28],[-0.0,0.2],[0.04,0.28]],"orientationDegrees":270.0,"reflected":false},{"polygon":[[0.128,0.296],[0.08,0.36],[0.16,0.32]],"orientationDegrees":126.869897646,"reflected":true},{"polygon":[[0.104,0.328],[0.04,0.28],[0.08,0.36]],"orientationDegrees":216.869897646,"reflected":true},{"polygon":[[0.104,0.328],[0.04,0.28],[0.128,0.296]],"orientationDegrees":216.869897646,"reflected":false},{"polygon":[[0.064,0.248],[0.128,0.296],[0.04,0.28]],"orientationDegrees":36.869897646,"reflected":false},{"polygon":[[0.064,0.248],[-0.0,0.2],[0.04,0.28]],"orientationDegrees":216.869897646,"reflected":true},{"polygon":[[0.032,0.224],[0.08,0.16],[-0.0,0.2]],"orientationDegrees":306.869897646,"reflected":true},{"polygon":[[0.056,0.192],[0.12,0.24],[0.08,0.16]],"orientationDegrees":36.869897646,"reflected":true},{"polygon":[[0.056,0.192],[0.12,0.24],[0.032,0.224]],"orientationDegrees":36.869897646,"reflected":false},{"polygon":[[0.096,0.272],[0.032,0.224],[0.12,0.24]],"orientationDegrees":216.869897646,"reflected":false},{"polygon":[[0.096,0.272],[0.16,0.32],[0.12,0.24]],"orientationDegrees":36.869897646,"reflected":true},{"polygon":[[-0.0,0.16],[0.08,0.16],[-0.0,0.2]],"orientationDegrees":0.0,"reflected":false},{"polygon":[[0.04,0.16],[0.04,0.08],[0.08,0.16]],"orientationDegrees":270.0,"reflected":false},{"polygon":[[0.04,0.16],[0.04,0.08],[-0.0,0.16]],"orientationDegrees":270.0,"reflected":true},{"polygon":[[-0.0,0.08],[-0.0,0.16],[0.04,0.08]],"orientationDegrees":90.0,"reflected":true},{"polygon":[[-0.0,0.08],[-0.0,-0.0],[0.04,0.08]],"orientationDegrees":270.0,"reflected":false},{"polygon":[[0.04,-0.0],[0.04,0.08],[-0.0,-0.0]],"orientationDegrees":90.0,"reflected":false},{"polygon":[[0.04,0.04],[0.12,0.04],[0.04,0.08]],"orientationDegrees":0.0,"reflected":false},{"polygon":[[0.04,0.04],[0.12,0.04],[0.04,-0.0]],"orientationDegrees":0.0,"reflected":true},{"polygon":[[0.12,-0.0],[0.04,-0.0],[0.12,0.04]],"orientationDegrees":180.0,"reflected":true},{"polygon":[[0.12,-0.0],[0.2,-0.0],[0.12,0.04]],"orientationDegrees":0.0,"reflected":false},{"polygon":[[0.2,0.04],[0.12,0.04],[0.2,-0.0]],"orientationDegrees":180.0,"reflected":false},{"polygon":[[0.16,0.04],[0.16,0.12],[0.12,0.04]],"orientationDegrees":90.0,"reflected":false},{"polygon":[[0.16,0.04],[0.16,0.12],[0.2,0.04]],"orientationDegrees":90.0,"reflected":true},{"polygon":[[0.2,0.12],[0.2,0.04],[0.16,0.12]],"orientationDegrees":270.0,"reflected":true},{"polygon":[[0.2,0.12],[0.2,0.2],[0.16,0.12]],"orientationDegrees":90.0,"reflected":false},{"polygon":[[0.072,0.104],[0.12,0.04],[0.04,0.08]],"orientationDegrees":306.869897646,"reflected":true},{"polygon":[[0.096,0.072],[0.16,0.12],[0.12,0.04]],"orientationDegrees":36.869897646,"reflected":true},{"polygon":[[0.096,0.072],[0.16,0.12],[0.072,0.104]],"orientationDegrees":36.869897646,"reflected":false},{"polygon":[[0.136,0.152],[0.072,0.104],[0.16,0.12]],"orientationDegrees":216.869897646,"reflected":false},{"polygon":[[0.136,0.152],[0.2,0.2],[0.16,0.12]],"orientationDegrees":36.869897646,"reflected":true},{"polygon":[[0.168,0.176],[0.12,0.24],[0.2,0.2]],"orientationDegrees":126.869897646,"reflected":true},{"polygon":[[0.144,0.208],[0.08,0.16],[0.12,0.24]],"orientationDegrees":216.869897646,"reflected":true},{"polygon":[[0.144,0.208],[0.08,0.16],[0.168,0.176]],"orientationDegrees":216.869897646,"reflected":false},{"polygon":[[0.104,0.128],[0.168,0.176],[0.08,0.16]],"orientationDegrees":36.869897646,"reflected":false},{"polygon":[[0.104,0.128],[0.04,0.08],[0.08,0.16]],"orientationDegrees":216.869897646,"reflected":true},{"polygon":[[0.2,0.24],[0.12,0.24],[0.2,0.2]],"orientationDegrees":180.0,"reflected":false},{"polygon":[[0.16,0.24],[0.16,0.32],[0.12,0.24]],"orientationDegrees":90.0,"reflected":false},{"polygon":[[0.16,0.24],[0.16,0.32],[0.2,0.24]],"orientationDegrees":90.0,"reflected":true},{"polygon":[[0.2,0.32],[0.2,0.24],[0.16,0.32]],"orientationDegrees":270.0,"reflected":true},{"polygon":[[0.2,0.32],[0.2,0.4],[0.16,0.32]],"orientationDegrees":90.0,"reflected":false},{"polygon":[[0.2,0.36],[0.28,0.36],[0.2,0.4]],"orientationDegrees":0.0,"reflected":false},{"polygon":[[0.24,0.36],[0.24,0.28],[0.28,0.36]],"orientationDegrees":270.0,"reflected":false},{"polygon":[[0.24,0.36],[0.24,0.28],[0.2,0.36]],"orientationDegrees":270.0,"reflected":true},{"polygon":[[0.2,0.28],[0.2,0.36],[0.24,0.28]],"orientationDegrees":90.0,"reflected":true},{"polygon":[[0.2,0.28],[0.2,0.2],[0.24,0.28]],"orientationDegrees":270.0,"reflected":false},{"polygon":[[0.24,0.2],[0.24,0.28],[0.2,0.2]],"orientationDegrees":90.0,"reflected":false},{"polygon":[[0.24,0.24],[0.32,0.24],[0.24,0.28]],"orientationDegrees":0.0,"reflected":false},{"polygon":[[0.24,0.24],[0.32,0.24],[0.24,0.2]],"orientationDegrees":0.0,"reflected":true},{"polygon":[[0.32,0.2],[0.24,0.2],[0.32,0.24]],"orientationDegrees":180.0,"reflected":true},{"polygon":[[0.32,0.2],[0.4,0.2],[0.32,0.24]],"orientationDegrees":0.0,"reflected":false},{"polygon":[[0.304,0.328],[0.24,0.28],[0.28,0.36]],"orientationDegrees":216.869897646,"reflected":true},{"polygon":[[0.272,0.304],[0.32,0.24],[0.24,0.28]],"orientationDegrees":306.869897646,"reflected":true},{"polygon":[[0.272,0.304],[0.32,0.24],[0.304,0.328]],"orientationDegrees":306.869897646,"reflected":false},{"polygon":[[0.352,0.264],[0.304,0.328],[0.32,0.24]],"orientationDegrees":126.869897646,"reflected":false},{"polygon":[[0.352,0.264],[0.4,0.2],[0.32,0.24]],"orientationDegrees":306.869897646,"reflected":true},{"polygon":[[0.376,0.232],[0.44,0.28],[0.4,0.2]],"orientationDegrees":36.869897646,"reflected":true},{"polygon":[[0.408,0.256],[0.36,0.32],[0.44,0.28]],"orientationDegrees":126.869897646,"reflected":true},{"polygon":[[0.408,0.256],[0.36,0.32],[0.376,0.232]],"orientationDegrees":126.869897646,"reflected":false},{"polygon":[[0.328,0.296],[0.376,0.232],[0.36,0.32]],"orientationDegrees":306.869897646,"reflected":false},{"polygon":[[0.328,0.296],[0.28,0.36],[0.36,0.32]],"orientationDegrees":126.869897646,"reflected":true},{"polygon":[[0.44,0.2],[0.44,0.28],[0.4,0.2]],"orientationDegrees":90.0,"reflected":false},{"polygon":[[0.44,0.24],[0.52,0.24],[0.44,0.28]],"orientationDegrees":0.0,"reflected":false},{"polygon":[[0.44,0.24],[0.52,0.24],[0.44,0.2]],"orientationDegrees":0.0,"reflected":true},{"polygon":[[0.52,0.2],[0.44,0.2],[0.52,0.24]],"orientationDegrees":180.0,"reflected":true},{"polygon":[[0.52,0.2],[0.6,0.2],[0.52,0.24]],"orientationDegrees":0.0,"reflected":false},{"polygon":[[0.2,0.04],[0.28,0.04],[0.2,-0.0]],"orientationDegrees":0.0,"reflected":true},{"polygon":[[0.24,0.04],[0.24,0.12],[0.28,0.04]],"orientationDegrees":90.0,"reflected":true},{"polygon":[[0.24,0.04],[0.24,0.12],[0.2,0.04]],"orientationDegrees":90.0,"reflected":false},{"polygon":[[0.2,0.12],[0.2,0.04],[0.24,0.12]],"orientationDegrees":270.0,"reflected":false},{"polygon":[[0.2,0.12],[0.2,0.2],[0.24,0.12]],"orientationDegrees":90.0,"reflected":true},{"polygon":[[0.24,0.2],[0.24,0.12],[0.2,0.2]],"orientationDegrees":270.0,"reflected":true},{"polygon":[[0.24,0.16],[0.32,0.16],[0.24,0.12]],"orientationDegrees":0.0,"reflected":true},{"polygon":[[0.24,0.16],[0.32,0.16],[0.24,0.2]],"orientationDegrees":0.0,"reflected":false},{"polygon":[[0.32,0.2],[0.24,0.2],[0.32,0.16]],"orientationDegrees":180.0,"reflected":false},{"polygon":[[0.32,0.2],[0.4,0.2],[0.32,0.16]],"orientationDegrees":0.0,"reflected":true},{"polygon":[[0.304,0.072],[0.24,0.12],[0.28,0.04]],"orientationDegrees":143.130102354,"reflected":false},{"polygon":[[0.272,0.096],[0.32,0.16],[0.24,0.12]],"orientationDegrees":53.130102354,"reflected":false},{"polygon":[[0.272,0.096],[0.32,0.16],[0.304,0.072]],"orientationDegrees":53.130102354,"reflected":true},{"polygon":[[0.352,0.136],[0.304,0.072],[0.32,0.16]],"orientationDegrees":233.130102354,"reflected":true},{"polygon":[[0.352,0.136],[0.4,0.2],[0.32,0.16]],"orientationDegrees":53.130102354,"reflected":false},{"polygon":[[0.376,0.168],[0.44,0.12],[0.4,0.2]],"orientationDegrees":323.130102354,"reflected":false},{"polygon":[[0.408,0.144],[0.36,0.08],[0.44,0.12]],"orientationDegrees":233.130102354,"reflected":false},{"polygon":[[0.408,0.144],[0.36,0.08],[0.376,0.168]],"orientationDegrees":233.130102354,"reflected":true},{"polygon":[[0.328,0.104],[0.376,0.168],[0.36,0.08]],"orientationDegrees":53.130102354,"reflected":true},{"polygon":[[0.328,0.104],[0.28,0.04],[0.36,0.08]],"orientationDegrees":233.130102354,"reflected":false},{"polygon":[[0.44,0.2],[0.44,0.12],[0.4,0.2]],"orientationDegrees":270.0,"reflected":true},{"polygon":[[0.44,0.16],[0.52,0.16],[0.44,0.12]],"orientationDegrees":0.0,"reflected":true},{"polygon":[[0.44,0.16],[0.52,0.16],[0.44,0.2]],"orientationDegrees":0.0,"reflected":false},{"polygon":[[0.52,0.2],[0.44,0.2],[0.52,0.16]],"orientationDegrees":180.0,"reflected":false},{"polygon":[[0.52,0.2],[0.6,0.2],[0.52,0.16]],"orientationDegrees":0.0,"reflected":true},{"polygon":[[0.6,0.16],[0.52,0.16],[0.6,0.2]],"orientationDegrees":180.0,"reflected":true},{"polygon":[[0.56,0.16],[0.56,0.08],[0.52,0.16]],"orientationDegrees":270.0,"reflected":true},{"polygon":[[0.56,0.16],[0.56,0.08],[0.6,0.16]],"orientationDegrees":270.0,"reflected":false},{"polygon":[[0.6,0.08],[0.6,0.16],[0.56,0.08]],"orientationDegrees":90.0,"reflected":false},{"polygon":[[0.6,0.08],[0.6,-0.0],[0.56,0.08]],"orientationDegrees":270.0,"reflected":true},{"polygon":[[0.56,-0.0],[0.56,0.08],[0.6,-0.0]],"orientationDegrees":90.0,"reflected":true},{"polygon":[[0.56,0.04],[0.48,0.04],[0.56,0.08]],"orientationDegrees":180.0,"reflected":true},{"polygon":[[0.56,0.04],[0.48,0.04],[0.56,-0.0]],"orientationDegrees":180.0,"reflected":false},{"polygon":[[0.48,-0.0],[0.56,-0.0],[0.48,0.04]],"orientationDegrees":0.0,"reflected":false},{"polygon":[[0.48,-0.0],[0.4,-0.0],[0.48,0.04]],"orientationDegrees":180.0,"reflected":true},{"polygon":[[0.496,0.128],[0.56,0.08],[0.52,0.16]],"orientationDegrees":323.130102354,"reflected":false},{"polygon":[[0.528,0.104],[0.48,0.04],[0.56,0.08]],"orientationDegrees":233.130102354,"reflected":false},{"polygon":[[0.528,0.104],[0.48,0.04],[0.496,0.128]],"orientationDegrees":233.130102354,"reflected":true},{"polygon":[[0.448,0.064],[0.496,0.128],[0.48,0.04]],"orientationDegrees":53.130102354,"reflected":true},{"polygon":[[0.448,0.064],[0.4,-0.0],[0.48,0.04]],"orientationDegrees":233.130102354,"reflected":false},{"polygon":[[0.424,0.032],[0.36,0.08],[0.4,-0.0]],"orientationDegrees":143.130102354,"reflected":false},{"polygon":[[0.392,0.056],[0.44,0.12],[0.36,0.08]],"orientationDegrees":53.130102354,"reflected":false},{"polygon":[[0.392,0.056],[0.44,0.12],[0.424,0.032]],"orientationDegrees":53.130102354,"reflected":true},{"polygon":[[0.472,0.096],[0.424,0.032],[0.44,0.12]],"orientationDegrees":233.130102354,"reflected":true},{"polygon":[[0.472,0.096],[0.52,0.16],[0.44,0.12]],"orientationDegrees":53.130102354,"reflected":false},{"polygon":[[0.36,-0.0],[0.36,0.08],[0.4,-0.0]],"orientationDegrees":90.0,"reflected":true},{"polygon":[[0.36,0.04],[0.28,0.04],[0.36,0.08]],"orientationDegrees":180.0,"reflected":true},{"polygon":[[0.36,0.04],[0.28,0.04],[0.36,-0.0]],"orientationDegrees":180.0,"reflected":false},{"polygon":[[0.28,-0.0],[0.36,-0.0],[0.28,0.04]],"orientationDegrees":0.0,"reflected":false},{"polygon":[[0.28,-0.0],[0.2,-0.0],[0.28,0.04]],"orientationDegrees":180.0,"reflected":true},{"polygon":[[0.6,0.16],[0.68,0.16],[0.6,0.2]],"orientationDegrees":0.0,"reflected":false},{"polygon":[[0.64,0.16],[0.64,0.08],[0.68,0.16]],"orientationDegrees":270.0,"reflected":false},{"polygon":[[0.64,0.16],[0.64,0.08],[0.6,0.16]],"orientationDegrees":270.0,"reflected":true},{"polygon":[[0.6,0.08],[0.6,0.16],[0.64,0.08]],"orientationDegrees":90.0,"reflected":true},{"polygon":[[0.6,0.08],[0.6,-0.0],[0.64,0.08]],"orientationDegrees":270.0,"reflected":false},{"polygon":[[0.64,-0.0],[0.64,0.08],[0.6,-0.0]],"orientationDegrees":90.0,"reflected":false},{"polygon":[[0.64,0.04],[0.72,0.04],[0.64,0.08]],"orientationDegrees":0.0,"reflected":false},{"polygon":[[0.64,0.04],[0.72,0.04],[0.64,-0.0]],"orientationDegrees":0.0,"reflected":true},{"polygon":[[0.72,-0.0],[0.64,-0.0],[0.72,0.04]],"orientationDegrees":180.0,"reflected":true},{"polygon":[[0.72,-0.0],[0.8,-0.0],[0.72,0.04]],"orientationDegrees":0.0,"reflected":false},{"polygon":[[0.704,0.128],[0.64,0.08],[0.68,0.16]],"orientationDegrees":216.869897646,"reflected":true},{"polygon":[[0.672,0.104],[0.72,0.04],[0.64,0.08]],"orientationDegrees":306.869897646,"reflected":true},{"polygon":[[0.672,0.104],[0.72,0.04],[0.704,0.128]],"orientationDegrees":306.869897646,"reflected":false},{"polygon":[[0.752,0.064],[0.704,0.128],[0.72,0.04]],"orientationDegrees":126.869897646,"reflected":false},{"polygon":[[0.752,0.064],[0.8,-0.0],[0.72,0.04]],"orientationDegrees":306.869897646,"reflected":true},{"polygon":[[0.776,0.032],[0.84,0.08],[0.8,-0.0]],"orientationDegrees":36.869897646,"reflected":true},{"polygon":[[0.808,0.056],[0.76,0.12],[0.84,0.08]],"orientationDegrees":126.869897646,"reflected":true},{"polygon":[[0.808,0.056],[0.76,0.12],[0.776,0.032]],"orientationDegrees":126.869897646,"reflected":false},{"polygon":[[0.728,0.096],[0.776,0.032],[0.76,0.12]],"orientationDegrees":306.869897646,"reflected":false},{"polygon":[[0.728,0.096],[0.68,0.16],[0.76,0.12]],"orientationDegrees":126.869897646,"reflected":true},{"polygon":[[0.84,-0.0],[0.84,0.08],[0.8,-0.0]],"orientationDegrees":90.0,"reflected":false},{"polygon":[[0.84,0.04],[0.92,0.04],[0.84,0.08]],"orientationDegrees":0.0,"reflected":false},{"polygon":[[0.84,0.04],[0.92,0.04],[0.84,-0.0]],"orientationDegrees":0.0,"reflected":true},{"polygon":[[0.92,-0.0],[0.84,-0.0],[0.92,0.04]],"orientationDegrees":180.0,"reflected":true},{"polygon":[[0.92,-0.0],[1.0,-0.0],[0.92,0.04]],"orientationDegrees":0.0,"reflected":false},{"polygon":[[0.424,0.768],[0.36,0.72],[0.4,0.8]],"orientationDegrees":216.869897646,"reflected":true},{"polygon":[[0.392,0.744],[0.44,0.68],[0.36,0.72]],"orientationDegrees":306.869897646,"reflected":true},{"polygon":[[0.392,0.744],[0.44,0.68],[0.424,0.768]],"orientationDegrees":306.869897646,"reflected":false},{"polygon":[[0.472,0.704],[0.424,0.768],[0.44,0.68]],"orientationDegrees":126.869897646,"reflected":false},{"polygon":[[0.472,0.704],[0.52,0.64],[0.44,0.68]],"orientationDegrees":306.869897646,"reflected":true},{"polygon":[[0.488,0.616],[0.44,0.68],[0.52,0.64]],"orientationDegrees":126.869897646,"reflected":true},{"polygon":[[0.464,0.648],[0.4,0.6],[0.44,0.68]],"orientationDegrees":216.869897646,"reflected":true},{"polygon":[[0.464,0.648],[0.4,0.6],[0.488,0.616]],"orientationDegrees":216.869897646,"reflected":false},{"polygon":[[0.424,0.568],[0.488,0.616],[0.4,0.6]],"orientationDegrees":36.869897646,"reflected":false},{"polygon":[[0.424,0.568],[0.36,0.52],[0.4,0.6]],"orientationDegrees":216.869897646,"reflected":true},{"polygon":[[0.36,0.68],[0.44,0.68],[0.36,0.72]],"orientationDegrees":0.0,"reflected":false},{"polygon":[[0.4,0.68],[0.4,0.6],[0.44,0.68]],"orientationDegrees":270.0,"reflected":false},{"polygon":[[0.4,0.68],[0.4,0.6],[0.36,0.68]],"orientationDegrees":270.0,"reflected":true},{"polygon":[[0.36,0.6],[0.36,0.68],[0.4,0.6]],"orientationDegrees":90.0,"reflected":true},{"polygon":[[0.36,0.6],[0.36,0.52],[0.4,0.6]],"orientationDegrees":270.0,"reflected":false},{"polygon":[[0.36,0.56],[0.28,0.56],[0.36,0.52]],"orientationDegrees":180.0,"reflected":false},{"polygon":[[0.32,0.56],[0.32,0.64],[0.28,0.56]],"orientationDegrees":90.0,"reflected":false},{"polygon":[[0.32,0.56],[0.32,0.64],[0.36,0.56]],"orientationDegrees":90.0,"reflected":true},{"polygon":[[0.36,0.64],[0.36,0.56],[0.32,0.64]],"orientationDegrees":270.0,"reflected":true},{"polygon":[[0.36,0.64],[0.36,0.72],[0.32,0.64]],"orientationDegrees":90.0,"reflected":false},{"polygon":[[0.328,0.496],[0.28,0.56],[0.36,0.52]],"orientationDegrees":126.869897646,"reflected":true},{"polygon":[[0.304,0.528],[0.24,0.48],[0.28,0.56]],"orientationDegrees":216.869897646,"reflected":true},{"polygon":[[0.304,0.528],[0.24,0.48],[0.328,0.496]],"orientationDegrees":216.869897646,"reflected":false},{"polygon":[[0.264,0.448],[0.328,0.496],[0.24,0.48]],"orientationDegrees":36.869897646,"reflected":false},{"polygon":[[0.264,0.448],[0.2,0.4],[0.24,0.48]],"orientationDegrees":216.869897646,"reflected":true},{"polygon":[[0.232,0.424],[0.28,0.36],[0.2,0.4]],"orientationDegrees":306.869897646,"reflected":true},{"polygon":[[0.256,0.392],[0.32,0.44],[0.28,0.36]],"orientationDegrees":36.869897646,"reflected":true},{"polygon":[[0.256,0.392],[0.32,0.44],[0.232,0.424]],"orientationDegrees":36.869897646,"reflected":false},{"polygon":[[0.296,0.472],[0.232,0.424],[0.32,0.44]],"orientationDegrees":216.869897646,"reflected":false},{"polygon":[[0.296,0.472],[0.36,0.52],[0.32,0.44]],"orientationDegrees":36.869897646,"reflected":true},{"polygon":[[0.384,0.488],[0.32,0.44],[0.36,0.52]],"orientationDegrees":216.869897646,"reflected":true},{"polygon":[[0.352,0.464],[0.4,0.4],[0.32,0.44]],"orientationDegrees":306.869897646,"reflected":true},{"polygon":[[0.352,0.464],[0.4,0.4],[0.384,0.488]],"orientationDegrees":306.869897646,"reflected":false},{"polygon":[[0.432,0.424],[0.384,0.488],[0.4,0.4]],"orientationDegrees":126.869897646,"reflected":false},{"polygon":[[0.432,0.424],[0.48,0.36],[0.4,0.4]],"orientationDegrees":306.869897646,"reflected":true},{"polygon":[[0.32,0.36],[0.32,0.44],[0.28,0.36]],"orientationDegrees":90.0,"reflected":false},{"polygon":[[0.32,0.4],[0.4,0.4],[0.32,0.44]],"orientationDegrees":0.0,"reflected":false},{"polygon":[[0.32,0.4],[0.4,0.4],[0.32,0.36]],"orientationDegrees":0.0,"reflected":true},{"polygon":[[0.4,0.36],[0.32,0.36],[0.4,0.4]],"orientationDegrees":180.0,"reflected":true},{"polygon":[[0.4,0.36],[0.48,0.36],[0.4,0.4]],"orientationDegrees":0.0,"reflected":false},{"polygon":[[0.44,0.36],[0.44,0.28],[0.48,0.36]],"orientationDegrees":270.0,"reflected":false},{"polygon":[[0.44,0.32],[0.36,0.32],[0.44,0.28]],"orientationDegrees":180.0,"reflected":false},{"polygon":[[0.44,0.32],[0.36,0.32],[0.44,0.36]],"orientationDegrees":180.0,"reflected":true},{"polygon":[[0.36,0.36],[0.44,0.36],[0.36,0.32]],"orientationDegrees":0.0,"reflected":true},{"polygon":[[0.36,0.36],[0.28,0.36],[0.36,0.32]],"orientationDegrees":180.0,"reflected":false},{"polygon":[[0.504,0.328],[0.44,0.28],[0.48,0.36]],"orientationDegrees":216.869897646,"reflected":true},{"polygon":[[0.472,0.304],[0.52,0.24],[0.44,0.28]],"orientationDegrees":306.869897646,"reflected":true},{"polygon":[[0.472,0.304],[0.52,0.24],[0.504,0.328]],"orientationDegrees":306.869897646,"reflected":false},{"polygon":[[0.552,0.264],[0.504,0.328],[0.52,0.24]],"orientationDegrees":126.869897646,"reflected":false},{"polygon":[[0.552,0.264],[0.6,0.2],[0.52,0.24]],"orientationDegrees":306.869897646,"reflected":true},{"polygon":[[0.488,0.616],[0.536,0.552],[0.52,0.64]],"orientationDegrees":306.869897646,"reflected":false},{"polygon":[[0.512,0.584],[0.448,0.536],[0.536,0.552]],"orientationDegrees":216.869897646,"reflected":false},{"polygon":[[0.512,0.584],[0.448,0.536],[0.488,0.616]],"orientationDegrees":216.869897646,"reflected":true},{"polygon":[[0.424,0.568],[0.488,0.616],[0.448,0.536]],"orientationDegrees":36.869897646,"reflected":true},{"polygon":[[0.424,0.568],[0.36,0.52],[0.448,0.536]],"orientationDegrees":216.869897646,"reflected":false},{"polygon":[[0.384,0.488],[0.448,0.536],[0.36,0.52]],"orientationDegrees":36.869897646,"reflected":false},{"polygon":[[0.416,0.512],[0.464,0.448],[0.448,0.536]],"orientationDegrees":306.869897646,"reflected":false},{"polygon":[[0.416,0.512],[0.464,0.448],[0.384,0.488]],"orientationDegrees":306.869897646,"reflected":true},{"polygon":[[0.432,0.424],[0.384,0.488],[0.464,0.448]],"orientationDegrees":126.869897646,"reflected":true},{"polygon":[[0.432,0.424],[0.48,0.36],[0.464,0.448]],"orientationDegrees":306.869897646,"reflected":false},{"polygon":[[0.5248,0.5136],[0.448,0.536],[0.536,0.552]],"orientationDegrees":163.739795292,"reflected":true},{"polygon":[[0.4864,0.5248],[0.464,0.448],[0.448,0.536]],"orientationDegrees":253.739795292,"reflected":true},{"polygon":[[0.4864,0.5248],[0.464,0.448],[0.5248,0.5136]],"orientationDegrees":253.739795292,"reflected":false},{"polygon":[[0.5024,0.4368],[0.5248,0.5136],[0.464,0.448]],"orientationDegrees":73.739795292,"reflected":false},{"polygon":[[0.5024,0.4368],[0.48,0.36],[0.464,0.448]],"orientationDegrees":253.739795292,"reflected":true},{"polygon":[[0.4912,0.3984],[0.568,0.376],[0.48,0.36]],"orientationDegrees":343.739795292,"reflected":true},{"polygon":[[0.5296,0.3872],[0.552,0.464],[0.568,0.376]],"orientationDegrees":73.739795292,"reflected":true},{"polygon":[[0.5296,0.3872],[0.552,0.464],[0.4912,0.3984]],"orientationDegrees":73.739795292,"reflected":false},{"polygon":[[0.5136,0.4752],[0.4912,0.3984],[0.552,0.464]],"orientationDegrees":253.739795292,"reflected":false},{"polygon":[[0.5136,0.4752],[0.536,0.552],[0.552,0.464]],"orientationDegrees":73.739795292,"reflected":true},{"polygon":[[0.504,0.328],[0.568,0.376],[0.48,0.36]],"orientationDegrees":36.869897646,"reflected":false},{"polygon":[[0.536,0.352],[0.584,0.288],[0.568,0.376]],"orientationDegrees":306.869897646,"reflected":false},{"polygon":[[0.536,0.352],[0.584,0.288],[0.504,0.328]],"orientationDegrees":306.869897646,"reflected":true},{"polygon":[[0.552,0.264],[0.504,0.328],[0.584,0.288]],"orientationDegrees":126.869897646,"reflected":true},{"polygon":[[0.552,0.264],[0.6,0.2],[0.584,0.288]],"orientationDegrees":306.869897646,"reflected":false},{"polygon":[[0.632,0.224],[0.584,0.288],[0.6,0.2]],"orientationDegrees":126.869897646,"reflected":false},{"polygon":[[0.608,0.256],[0.672,0.304],[0.584,0.288]],"orientationDegrees":36.869897646,"reflected":false},{"polygon":[[0.608,0.256],[0.672,0.304],[0.632,0.224]],"orientationDegrees":36.869897646,"reflected":true},{"polygon":[[0.696,0.272],[0.632,0.224],[0.672,0.304]],"orientationDegrees":216.869897646,"reflected":true},{"polygon":[[0.696,0.272],[0.76,0.32],[0.672,0.304]],"orientationDegrees":36.869897646,"reflected":false},{"polygon":[[0.736,0.352],[0.672,0.304],[0.76,0.32]],"orientationDegrees":216.869897646,"reflected":false},{"polygon":[[0.704,0.328],[0.656,0.392],[0.672,0.304]],"orientationDegrees":126.869897646,"reflected":false},{"polygon":[[0.704,0.328],[0.656,0.392],[0.736,0.352]],"orientationDegrees":126.869897646,"reflected":true},{"polygon":[[0.688,0.416],[0.736,0.352],[0.656,0.392]],"orientationDegrees":306.869897646,"reflected":true},{"polygon":[[0.688,0.416],[0.64,0.48],[0.656,0.392]],"orientationDegrees":126.869897646,"reflected":false},{"polygon":[[0.5952,0.3264],[0.672,0.304],[0.584,0.288]],"orientationDegrees":343.739795292,"reflected":true},{"polygon":[[0.6336,0.3152],[0.656,0.392],[0.672,0.304]],"orientationDegrees":73.739795292,"reflected":true},{"polygon":[[0.6336,0.3152],[0.656,0.392],[0.5952,0.3264]],"orientationDegrees":73.739795292,"reflected":false},{"polygon":[[0.6176,0.4032],[0.5952,0.3264],[0.656,0.392]],"orientationDegrees":253.739795292,"reflected":false},{"polygon":[[0.6176,0.4032],[0.64,0.48],[0.656,0.392]],"orientationDegrees":73.739795292,"reflected":true},{"polygon":[[0.6288,0.4416],[0.552,0.464],[0.64,0.48]],"orientationDegrees":163.739795292,"reflected":true},{"polygon":[[0.5904,0.4528],[0.568,0.376],[0.552,0.464]],"orientationDegrees":253.739795292,"reflected":true},{"polygon":[[0.5904,0.4528],[0.568,0.376],[0.6288,0.4416]],"orientationDegrees":253.739795292,"reflected":false},{"polygon":[[0.6064,0.3648],[0.6288,0.4416],[0.568,0.376]],"orientationDegrees":73.739795292,"reflected":false},{"polygon":[[0.6064,0.3648],[0.584,0.288],[0.568,0.376]],"orientationDegrees":253.739795292,"reflected":true},{"polygon":[[0.616,0.512],[0.552,0.464],[0.64,0.48]],"orientationDegrees":216.869897646,"reflected":false},{"polygon":[[0.584,0.488],[0.536,0.552],[0.552,0.464]],"orientationDegrees":126.869897646,"reflected":false},{"polygon":[[0.584,0.488],[0.536,0.552],[0.616,0.512]],"orientationDegrees":126.869897646,"reflected":true},{"polygon":[[0.568,0.576],[0.616,0.512],[0.536,0.552]],"orientationDegrees":306.869897646,"reflected":true},{"polygon":[[0.568,0.576],[0.52,0.64],[0.536,0.552]],"orientationDegrees":126.869897646,"reflected":false},{"polygon":[[0.632,0.224],[0.68,0.16],[0.6,0.2]],"orientationDegrees":306.869897646,"reflected":true},{"polygon":[[0.656,0.192],[0.72,0.24],[0.68,0.16]],"orientationDegrees":36.869897646,"reflected":true},{"polygon":[[0.656,0.192],[0.72,0.24],[0.632,0.224]],"orientationDegrees":36.869897646,"reflected":false},{"polygon":[[0.696,0.272],[0.632,0.224],[0.72,0.24]],"orientationDegrees":216.869897646,"reflected":false},{"polygon":[[0.696,0.272],[0.76,0.32],[0.72,0.24]],"orientationDegrees":36.869897646,"reflected":true},{"polygon":[[0.784,0.288],[0.72,0.24],[0.76,0.32]],"orientationDegrees":216.869897646,"reflected":true},{"polygon":[[0.752,0.264],[0.8,0.2],[0.72,0.24]],"orientationDegrees":306.869897646,"reflected":true},{"polygon":[[0.752,0.264],[0.8,0.2],[0.784,0.288]],"orientationDegrees":306.869897646,"reflected":false},{"polygon":[[0.832,0.224],[0.784,0.288],[0.8,0.2]],"orientationDegrees":126.869897646,"reflected":false},{"polygon":[[0.832,0.224],[0.88,0.16],[0.8,0.2]],"orientationDegrees":306.869897646,"reflected":true},{"polygon":[[0.72,0.16],[0.72,0.24],[0.68,0.16]],"orientationDegrees":90.0,"reflected":false},{"polygon":[[0.72,0.2],[0.8,0.2],[0.72,0.24]],"orientationDegrees":0.0,"reflected":false},{"polygon":[[0.72,0.2],[0.8,0.2],[0.72,0.16]],"orientationDegrees":0.0,"reflected":true},{"polygon":[[0.8,0.16],[0.72,0.16],[0.8,0.2]],"orientationDegrees":180.0,"reflected":true},{"polygon":[[0.8,0.16],[0.88,0.16],[0.8,0.2]],"orientationDegrees":0.0,"reflected":false},{"polygon":[[0.84,0.16],[0.84,0.08],[0.88,0.16]],"orientationDegrees":270.0,"reflected":false},{"polygon":[[0.84,0.12],[0.76,0.12],[0.84,0.08]],"orientationDegrees":180.0,"reflected":false},{"polygon":[[0.84,0.12],[0.76,0.12],[0.84,0.16]],"orientationDegrees":180.0,"reflected":true},{"polygon":[[0.76,0.16],[0.84,0.16],[0.76,0.12]],"orientationDegrees":0.0,"reflected":true},{"polygon":[[0.76,0.16],[0.68,0.16],[0.76,0.12]],"orientationDegrees":180.0,"reflected":false},{"polygon":[[0.904,0.128],[0.84,0.08],[0.88,0.16]],"orientationDegrees":216.869897646,"reflected":true},{"polygon":[[0.872,0.104],[0.92,0.04],[0.84,0.08]],"orientationDegrees":306.869897646,"reflected":true},{"polygon":[[0.872,0.104],[0.92,0.04],[0.904,0.128]],"orientationDegrees":306.869897646,"reflected":false},{"polygon":[[0.952,0.064],[0.904,0.128],[0.92,0.04]],"orientationDegrees":126.869897646,"reflected":false},{"polygon":[[0.952,0.064],[1.0,-0.0],[0.92,0.04]],"orientationDegrees":306.869897646,"reflected":true},{"polygon":[[0.976,0.032],[1.04,0.08],[1.0,-0.0]],"orientationDegrees":36.869897646,"reflected":true},{"polygon":[[1.008,0.056],[0.96,0.12],[1.04,0.08]],"orientationDegrees":126.869897646,"reflected":true},{"polygon":[[1.008,0.056],[0.96,0.12],[0.976,0.032]],"orientationDegrees":126.869897646,"reflected":false},{"polygon":[[0.928,0.096],[0.976,0.032],[0.96,0.12]],"orientationDegrees":306.869897646,"reflected":false},{"polygon":[[0.928,0.096],[0.88,0.16],[0.96,0.12]],"orientationDegrees":126.869897646,"reflected":true},{"polygon":[[0.912,0.184],[0.96,0.12],[0.88,0.16]],"orientationDegrees":306.869897646,"reflected":true},{"polygon":[[0.936,0.152],[1.0,0.2],[0.96,0.12]],"orientationDegrees":36.869897646,"reflected":true},{"polygon":[[0.936,0.152],[1.0,0.2],[0.912,0.184]],"orientationDegrees":36.869897646,"reflected":false},{"polygon":[[0.976,0.232],[0.912,0.184],[1.0,0.2]],"orientationDegrees":216.869897646,"reflected":false},{"polygon":[[0.976,0.232],[1.04,0.28],[1.0,0.2]],"orientationDegrees":36.869897646,"reflected":true},{"polygon":[[1.04,0.12],[0.96,0.12],[1.04,0.08]],"orientationDegrees":180.0,"reflected":false},{"polygon":[[1.0,0.12],[1.0,0.2],[0.96,0.12]],"orientationDegrees":90.0,"reflected":false},{"polygon":[[1.0,0.12],[1.0,0.2],[1.04,0.12]],"orientationDegrees":90.0,"reflected":true},{"polygon":[[1.04,0.2],[1.04,0.12],[1.0,0.2]],"orientationDegrees":270.0,"reflected":true},{"polygon":[[1.04,0.2],[1.04,0.28],[1.0,0.2]],"orientationDegrees":90.0,"reflected":false},{"polygon":[[1.04,0.24],[1.12,0.24],[1.04,0.28]],"orientationDegrees":0.0,"reflected":false},{"polygon":[[1.08,0.24],[1.08,0.16],[1.12,0.24]],"orientationDegrees":270.0,"reflected":false},{"polygon":[[1.08,0.24],[1.08,0.16],[1.04,0.24]],"orientationDegrees":270.0,"reflected":true},{"polygon":[[1.04,0.16],[1.04,0.24],[1.08,0.16]],"orientationDegrees":90.0,"reflected":true},{"polygon":[[1.04,0.16],[1.04,0.08],[1.08,0.16]],"orientationDegrees":270.0,"reflected":false},{"polygon":[[1.072,0.304],[1.12,0.24],[1.04,0.28]],"orientationDegrees":306.869897646,"reflected":true},{"polygon":[[1.096,0.272],[1.16,0.32],[1.12,0.24]],"orientationDegrees":36.869897646,"reflected":true},{"polygon":[[1.096,0.272],[1.16,0.32],[1.072,0.304]],"orientationDegrees":36.869897646,"reflected":false},{"polygon":[[1.136,0.352],[1.072,0.304],[1.16,0.32]],"orientationDegrees":216.869897646,"reflected":false},{"polygon":[[1.136,0.352],[1.2,0.4],[1.16,0.32]],"orientationDegrees":36.869897646,"reflected":true},{"polygon":[[1.168,0.376],[1.12,0.44],[1.2,0.4]],"orientationDegrees":126.869897646,"reflected":true},{"polygon":[[1.144,0.408],[1.08,0.36],[1.12,0.44]],"orientationDegrees":216.869897646,"reflected":true},{"polygon":[[1.144,0.408],[1.08,0.36],[1.168,0.376]],"orientationDegrees":216.869897646,"reflected":false},{"polygon":[[1.104,0.328],[1.168,0.376],[1.08,0.36]],"orientationDegrees":36.869897646,"reflected":false},{"polygon":[[1.104,0.328],[1.04,0.28],[1.08,0.36]],"orientationDegrees":216.869897646,"reflected":true},{"polygon":[[1.016,0.312],[1.08,0.36],[1.04,0.28]],"orientationDegrees":36.869897646,"reflected":true},{"polygon":[[1.048,0.336],[1.0,0.4],[1.08,0.36]],"orientationDegrees":126.869897646,"reflected":true},{"polygon":[[1.048,0.336],[1.0,0.4],[1.016,0.312]],"orientationDegrees":126.869897646,"reflected":false},{"polygon":[[0.968,0.376],[1.016,0.312],[1.0,0.4]],"orientationDegrees":306.869897646,"reflected":false},{"polygon":[[0.968,0.376],[0.92,0.44],[1.0,0.4]],"orientationDegrees":126.869897646,"reflected":true},{"polygon":[[1.08,0.44],[1.08,0.36],[1.12,0.44]],"orientationDegrees":270.0,"reflected":false},{"polygon":[[1.08,0.4],[1.0,0.4],[1.08,0.36]],"orientationDegrees":180.0,"reflected":false},{"polygon":[[1.08,0.4],[1.0,0.4],[1.08,0.44]],"orientationDegrees":180.0,"reflected":true},{"polygon":[[1.0,0.44],[1.08,0.44],[1.0,0.4]],"orientationDegrees":0.0,"reflected":true},{"polygon":[[1.0,0.44],[0.92,0.44],[1.0,0.4]],"orientationDegrees":180.0,"reflected":false},{"polygon":[[0.96,0.44],[0.96,0.52],[0.92,0.44]],"orientationDegrees":90.0,"reflected":false},{"polygon":[[0.96,0.48],[1.04,0.48],[0.96,0.52]],"orientationDegrees":0.0,"reflected":false},{"polygon":[[0.96,0.48],[1.04,0.48],[0.96,0.44]],"orientationDegrees":0.0,"reflected":true},{"polygon":[[1.04,0.44],[0.96,0.44],[1.04,0.48]],"orientationDegrees":180.0,"reflected":true},{"polygon":[[1.04,0.44],[1.12,0.44],[1.04,0.48]],"orientationDegrees":0.0,"reflected":false},{"polygon":[[0.896,0.472],[0.96,0.52],[0.92,0.44]],"orientationDegrees":36.869897646,"reflected":true},{"polygon":[[0.928,0.496],[0.88,0.56],[0.96,0.52]],"orientationDegrees":126.869897646,"reflected":true},{"polygon":[[0.928,0.496],[0.88,0.56],[0.896,0.472]],"orientationDegrees":126.869897646,"reflected":false},{"polygon":[[0.848,0.536],[0.896,0.472],[0.88,0.56]],"orientationDegrees":306.869897646,"reflected":false},{"polygon":[[0.848,0.536],[0.8,0.6],[0.88,0.56]],"orientationDegrees":126.869897646,"reflected":true},{"polygon":[[0.912,0.184],[0.864,0.248],[0.88,0.16]],"orientationDegrees":126.869897646,"reflected":false},{"polygon":[[0.888,0.216],[0.952,0.264],[0.864,0.248]],"orientationDegrees":36.869897646,"reflected":false},{"polygon":[[0.888,0.216],[0.952,0.264],[0.912,0.184]],"orientationDegrees":36.869897646,"reflected":true},{"polygon":[[0.976,0.232],[0.912,0.184],[0.952,0.264]],"orientationDegrees":216.869897646,"reflected":true},{"polygon":[[0.976,0.232],[1.04,0.28],[0.952,0.264]],"orientationDegrees":36.869897646,"reflected":false},{"polygon":[[1.016,0.312],[0.952,0.264],[1.04,0.28]],"orientationDegrees":216.869897646,"reflected":false},{"polygon":[[0.984,0.288],[0.936,0.352],[0.952,0.264]],"orientationDegrees":126.869897646,"reflected":false},{"polygon":[[0.984,0.288],[0.936,0.352],[1.016,0.312]],"orientationDegrees":126.869897646,"reflected":true},{"polygon":[[0.968,0.376],[1.016,0.312],[0.936,0.352]],"orientationDegrees":306.869897646,"reflected":true},{"polygon":[[0.968,0.376],[0.92,0.44],[0.936,0.352]],"orientationDegrees":126.869897646,"reflected":false},{"polygon":[[0.8752,0.2864],[0.952,0.264],[0.864,0.248]],"orientationDegrees":343.739795292,"reflected":true},{"polygon":[[0.9136,0.2752],[0.936,0.352],[0.952,0.264]],"orientationDegrees":73.739795292,"reflected":true},{"polygon":[[0.9136,0.2752],[0.936,0.352],[0.8752,0.2864]],"orientationDegrees":73.739795292,"reflected":false},{"polygon":[[0.8976,0.3632],[0.8752,0.2864],[0.936,0.352]],"orientationDegrees":253.739795292,"reflected":false},{"polygon":[[0.8976,0.3632],[0.92,0.44],[0.936,0.352]],"orientationDegrees":73.739795292,"reflected":true},{"polygon":[[0.9088,0.4016],[0.832,0.424],[0.92,0.44]],"orientationDegrees":163.739795292,"reflected":true},{"polygon":[[0.8704,0.4128],[0.848,0.336],[0.832,0.424]],"orientationDegrees":253.739795292,"reflected":true},{"polygon":[[0.8704,0.4128],[0.848,0.336],[0.9088,0.4016]],"orientationDegrees":253.739795292,"reflected":false},{"polygon":[[0.8864,0.3248],[0.9088,0.4016],[0.848,0.336]],"orientationDegrees":73.739795292,"reflected":false},{"polygon":[[0.8864,0.3248],[0.864,0.248],[0.848,0.336]],"orientationDegrees":253.739795292,"reflected":true},{"polygon":[[0.896,0.472],[0.832,0.424],[0.92,0.44]],"orientationDegrees":216.869897646,"reflected":false},{"polygon":[[0.864,0.448],[0.816,0.512],[0.832,0.424]],"orientationDegrees":126.869897646,"reflected":false},{"polygon":[[0.864,0.448],[0.816,0.512],[0.896,0.472]],"orientationDegrees":126.869897646,"reflected":true},{"polygon":[[0.848,0.536],[0.896,0.472],[0.816,0.512]],"orientationDegrees":306.869897646,"reflected":true},{"polygon":[[0.848,0.536],[0.8,0.6],[0.816,0.512]],"orientationDegrees":126.869897646,"reflected":false},{"polygon":[[0.768,0.576],[0.816,0.512],[0.8,0.6]],"orientationDegrees":306.869897646,"reflected":false},{"polygon":[[0.792,0.544],[0.728,0.496],[0.816,0.512]],"orientationDegrees":216.869897646,"reflected":false},{"polygon":[[0.792,0.544],[0.728,0.496],[0.768,0.576]],"orientationDegrees":216.869897646,"reflected":true},{"polygon":[[0.704,0.528],[0.768,0.576],[0.728,0.496]],"orientationDegrees":36.869897646,"reflected":true},{"polygon":[[0.704,0.528],[0.64,0.48],[0.728,0.496]],"orientationDegrees":216.869897646,"reflected":false},{"polygon":[[0.664,0.448],[0.728,0.496],[0.64,0.48]],"orientationDegrees":36.869897646,"reflected":false},{"polygon":[[0.696,0.472],[0.744,0.408],[0.728,0.496]],"orientationDegrees":306.869897646,"reflected":false},{"polygon":[[0.696,0.472],[0.744,0.408],[0.664,0.448]],"orientationDegrees":306.869897646,"reflected":true},{"polygon":[[0.712,0.384],[0.664,0.448],[0.744,0.408]],"orientationDegrees":126.869897646,"reflected":true},{"polygon":[[0.712,0.384],[0.76,0.32],[0.744,0.408]],"orientationDegrees":306.869897646,"reflected":false},{"polygon":[[0.8048,0.4736],[0.728,0.496],[0.816,0.512]],"orientationDegrees":163.739795292,"reflected":true},{"polygon":[[0.7664,0.4848],[0.744,0.408],[0.728,0.496]],"orientationDegrees":253.739795292,"reflected":true},{"polygon":[[0.7664,0.4848],[0.744,0.408],[0.8048,0.4736]],"orientationDegrees":253.739795292,"reflected":false},{"polygon":[[0.7824,0.3968],[0.8048,0.4736],[0.744,0.408]],"orientationDegrees":73.739795292,"reflected":false},{"polygon":[[0.7824,0.3968],[0.76,0.32],[0.744,0.408]],"orientationDegrees":253.739795292,"reflected":true},{"polygon":[[0.7712,0.3584],[0.848,0.336],[0.76,0.32]],"orientationDegrees":343.739795292,"reflected":true},{"polygon":[[0.8096,0.3472],[0.832,0.424],[0.848,0.336]],"orientationDegrees":73.739795292,"reflected":true},{"polygon":[[0.8096,0.3472],[0.832,0.424],[0.7712,0.3584]],"orientationDegrees":73.739795292,"reflected":false},{"polygon":[[0.7936,0.4352],[0.7712,0.3584],[0.832,0.424]],"orientationDegrees":253.739795292,"reflected":false},{"polygon":[[0.7936,0.4352],[0.816,0.512],[0.832,0.424]],"orientationDegrees":73.739795292,"reflected":true},{"polygon":[[0.784,0.288],[0.848,0.336],[0.76,0.32]],"orientationDegrees":36.869897646,"reflected":false},{"polygon":[[0.816,0.312],[0.864,0.248],[0.848,0.336]],"orientationDegrees":306.869897646,"reflected":false},{"polygon":[[0.816,0.312],[0.864,0.248],[0.784,0.288]],"orientationDegrees":306.869897646,"reflected":true},{"polygon":[[0.832,0.224],[0.784,0.288],[0.864,0.248]],"orientationDegrees":126.869897646,"reflected":true},{"polygon":[[0.832,0.224],[0.88,0.16],[0.864,0.248]],"orientationDegrees":306.869897646,"reflected":false},{"polygon":[[0.768,0.576],[0.72,0.64],[0.8,0.6]],"orientationDegrees":126.869897646,"reflected":true},{"polygon":[[0.744,0.608],[0.68,0.56],[0.72,0.64]],"orientationDegrees":216.869897646,"reflected":true},{"polygon":[[0.744,0.608],[0.68,0.56],[0.768,0.576]],"orientationDegrees":216.869897646,"reflected":false},{"polygon":[[0.704,0.528],[0.768,0.576],[0.68,0.56]],"orientationDegrees":36.869897646,"reflected":false},{"polygon":[[0.704,0.528],[0.64,0.48],[0.68,0.56]],"orientationDegrees":216.869897646,"reflected":true},{"polygon":[[0.616,0.512],[0.68,0.56],[0.64,0.48]],"orientationDegrees":36.869897646,"reflected":true},{"polygon":[[0.648,0.536],[0.6,0.6],[0.68,0.56]],"orientationDegrees":126.869897646,"reflected":true},{"polygon":[[0.648,0.536],[0.6,0.6],[0.616,0.512]],"orientationDegrees":126.869897646,"reflected":false},{"polygon":[[0.568,0.576],[0.616,0.512],[0.6,0.6]],"orientationDegrees":306.869897646,"reflected":false},{"polygon":[[0.568,0.576],[0.52,0.64],[0.6,0.6]],"orientationDegrees":126.869897646,"reflected":true},{"polygon":[[0.68,0.64],[0.68,0.56],[0.72,0.64]],"orientationDegrees":270.0,"reflected":false},{"polygon":[[0.68,0.6],[0.6,0.6],[0.68,0.56]],"orientationDegrees":180.0,"reflected":false},{"polygon":[[0.68,0.6],[0.6,0.6],[0.68,0.64]],"orientationDegrees":180.0,"reflected":true},{"polygon":[[0.6,0.64],[0.68,0.64],[0.6,0.6]],"orientationDegrees":0.0,"reflected":true},{"polygon":[[0.6,0.64],[0.52,0.64],[0.6,0.6]],"orientationDegrees":180.0,"reflected":false},{"polygon":[[0.56,0.64],[0.56,0.72],[0.52,0.64]],"orientationDegrees":90.0,"reflected":false},{"polygon":[[0.56,0.68],[0.64,0.68],[0.56,0.72]],"orientationDegrees":0.0,"reflected":false},{"polygon":[[0.56,0.68],[0.64,0.68],[0.56,0.64]],"orientationDegrees":0.0,"reflected":true},{"polygon":[[0.64,0.64],[0.56,0.64],[0.64,0.68]],"orientationDegrees":180.0,"reflected":true},{"polygon":[[0.64,0.64],[0.72,0.64],[0.64,0.68]],"orientationDegrees":0.0,"reflected":false},{"polygon":[[0.496,0.672],[0.56,0.72],[0.52,0.64]],"orientationDegrees":36.869897646,"reflected":true},{"polygon":[[0.528,0.696],[0.48,0.76],[0.56,0.72]],"orientationDegrees":126.869897646,"reflected":true},{"polygon":[[0.528,0.696],[0.48,0.76],[0.496,0.672]],"orientationDegrees":126.869897646,"reflected":false},{"polygon":[[0.448,0.736],[0.496,0.672],[0.48,0.76]],"orientationDegrees":306.869897646,"reflected":false},{"polygon":[[0.448,0.736],[0.4,0.8],[0.48,0.76]],"orientationDegrees":126.869897646,"reflected":true},{"polygon":[[1.04,-0.0],[1.04,0.08],[1.0,-0.0]],"orientationDegrees":90.0,"reflected":false},{"polygon":[[1.04,0.04],[1.12,0.04],[1.04,0.08]],"orientationDegrees":0.0,"reflected":false},{"polygon":[[1.04,0.04],[1.12,0.04],[1.04,-0.0]],"orientationDegrees":0.0,"reflected":true},{"polygon":[[1.12,-0.0],[1.04,-0.0],[1.12,0.04]],"orientationDegrees":180.0,"reflected":true},{"polygon":[[1.12,-0.0],[1.2,-0.0],[1.12,0.04]],"orientationDegrees":0.0,"reflected":false},{"polygon":[[1.2,0.04],[1.12,0.04],[1.2,-0.0]],"orientationDegrees":180.0,"reflected":false},{"polygon":[[1.16,0.04],[1.16,0.12],[1.12,0.04]],"orientationDegrees":90.0,"reflected":false},{"polygon":[[1.16,0.04],[1.16,0.12],[1.2,0.04]],"orientationDegrees":90.0,"reflected":true},{"polygon":[[1.2,0.12],[1.2,0.04],[1.16,0.12]],"orientationDegrees":270.0,"reflected":true},{"polygon":[[1.2,0.12],[1.2,0.2],[1.16,0.12]],"orientationDegrees":90.0,"reflected":false},{"polygon":[[1.072,0.104],[1.12,0.04],[1.04,0.08]],"orientationDegrees":306.869897646,"reflected":true},{"polygon":[[1.096,0.072],[1.16,0.12],[1.12,0.04]],"orientationDegrees":36.869897646,"reflected":true},{"polygon":[[1.096,0.072],[1.16,0.12],[1.072,0.104]],"orientationDegrees":36.869897646,"reflected":false},{"polygon":[[1.136,0.152],[1.072,0.104],[1.16,0.12]],"orientationDegrees":216.869897646,"reflected":false},{"polygon":[[1.136,0.152],[1.2,0.2],[1.16,0.12]],"orientationDegrees":36.869897646,"reflected":true},{"polygon":[[1.168,0.176],[1.12,0.24],[1.2,0.2]],"orientationDegrees":126.869897646,"reflected":true},{"polygon":[[1.144,0.208],[1.08,0.16],[1.12,0.24]],"orientationDegrees":216.869897646,"reflected":true},{"polygon":[[1.144,0.208],[1.08,0.16],[1.168,0.176]],"orientationDegrees":216.869897646,"reflected":false},{"polygon":[[1.104,0.128],[1.168,0.176],[1.08,0.16]],"orientationDegrees":36.869897646,"reflected":false},{"polygon":[[1.104,0.128],[1.04,0.08],[1.08,0.16]],"orientationDegrees":216.869897646,"reflected":true},{"polygon":[[1.2,0.24],[1.12,0.24],[1.2,0.2]],"orientationDegrees":180.0,"reflected":false},{"polygon":[[1.16,0.24],[1.16,0.32],[1.12,0.24]],"orientationDegrees":90.0,"reflected":false},{"polygon":[[1.16,0.24],[1.16,0.32],[1.2,0.24]],"orientationDegrees":90.0,"reflected":true},{"polygon":[[1.2,0.32],[1.2,0.24],[1.16,0.32]],"orientationDegrees":270.0,"reflected":true},{"polygon":[[1.2,0.32],[1.2,0.4],[1.16,0.32]],"orientationDegrees":90.0,"reflected":false},{"polygon":[[1.2,0.36],[1.28,0.36],[1.2,0.4]],"orientationDegrees":0.0,"reflected":false},{"polygon":[[1.24,0.36],[1.24,0.28],[1.28,0.36]],"orientationDegrees":270.0,"reflected":false},{"polygon":[[1.24,0.36],[1.24,0.28],[1.2,0.36]],"orientationDegrees":270.0,"reflected":true},{"polygon":[[1.2,0.28],[1.2,0.36],[1.24,0.28]],"orientationDegrees":90.0,"reflected":true},{"polygon":[[1.2,0.28],[1.2,0.2],[1.24,0.28]],"orientationDegrees":270.0,"reflected":false},{"polygon":[[1.24,0.2],[1.24,0.28],[1.2,0.2]],"orientationDegrees":90.0,"reflected":false},{"polygon":[[1.24,0.24],[1.32,0.24],[1.24,0.28]],"orientationDegrees":0.0,"reflected":false},{"polygon":[[1.24,0.24],[1.32,0.24],[1.24,0.2]],"orientationDegrees":0.0,"reflected":true},{"polygon":[[1.32,0.2],[1.24,0.2],[1.32,0.24]],"orientationDegrees":180.0,"reflected":true},{"polygon":[[1.32,0.2],[1.4,0.2],[1.32,0.24]],"orientationDegrees":0.0,"reflected":false},{"polygon":[[1.304,0.328],[1.24,0.28],[1.28,0.36]],"orientationDegrees":216.869897646,"reflected":true},{"polygon":[[1.272,0.304],[1.32,0.24],[1.24,0.28]],"orientationDegrees":306.869897646,"reflected":true},{"polygon":[[1.272,0.304],[1.32,0.24],[1.304,0.328]],"orientationDegrees":306.869897646,"reflected":false},{"polygon":[[1.352,0.264],[1.304,0.328],[1.32,0.24]],"orientationDegrees":126.869897646,"reflected":false},{"polygon":[[1.352,0.264],[1.4,0.2],[1.32,0.24]],"orientationDegrees":306.869897646,"reflected":true},{"polygon":[[1.376,0.232],[1.44,0.28],[1.4,0.2]],"orientationDegrees":36.869897646,"reflected":true},{"polygon":[[1.408,0.256],[1.36,0.32],[1.44,0.28]],"orientationDegrees":126.869897646,"reflected":true},{"polygon":[[1.408,0.256],[1.36,0.32],[1.376,0.232]],"orientationDegrees":126.869897646,"reflected":false},{"polygon":[[1.328,0.296],[1.376,0.232],[1.36,0.32]],"orientationDegrees":306.869897646,"reflected":false},{"polygon":[[1.328,0.296],[1.28,0.36],[1.36,0.32]],"orientationDegrees":126.869897646,"reflected":true},{"polygon":[[1.44,0.2],[1.44,0.28],[1.4,0.2]],"orientationDegrees":90.0,"reflected":false},{"polygon":[[1.44,0.24],[1.52,0.24],[1.44,0.28]],"orientationDegrees":0.0,"reflected":false},{"polygon":[[1.44,0.24],[1.52,0.24],[1.44,0.2]],"orientationDegrees":0.0,"reflected":true},{"polygon":[[1.52,0.2],[1.44,0.2],[1.52,0.24]],"orientationDegrees":180.0,"reflected":true},{"polygon":[[1.52,0.2],[1.6,0.2],[1.52,0.24]],"orientationDegrees":0.0,"reflected":false},{"polygon":[[1.2,0.04],[1.28,0.04],[1.2,-0.0]],"orientationDegrees":0.0,"reflected":true},{"polygon":[[1.24,0.04],[1.24,0.12],[1.28,0.04]],"orientationDegrees":90.0,"reflected":true},{"polygon":[[1.24,0.04],[1.24,0.12],[1.2,0.04]],"orientationDegrees":90.0,"reflected":false},{"polygon":[[1.2,0.12],[1.2,0.04],[1.24,0.12]],"orientationDegrees":270.0,"reflected":false},{"polygon":[[1.2,0.12],[1.2,0.2],[1.24,0.12]],"orientationDegrees":90.0,"reflected":true},{"polygon":[[1.24,0.2],[1.24,0.12],[1.2,0.2]],"orientationDegrees":270.0,"reflected":true},{"polygon":[[1.24,0.16],[1.32,0.16],[1.24,0.12]],"orientationDegrees":0.0,"reflected":true},{"polygon":[[1.24,0.16],[1.32,0.16],[1.24,0.2]],"orientationDegrees":0.0,"reflected":false},{"polygon":[[1.32,0.2],[1.24,0.2],[1.32,0.16]],"orientationDegrees":180.0,"reflected":false},{"polygon":[[1.32,0.2],[1.4,0.2],[1.32,0.16]],"orientationDegrees":0.0,"reflected":true},{"polygon":[[1.304,0.072],[1.24,0.12],[1.28,0.04]],"orientationDegrees":143.130102354,"reflected":false},{"polygon":[[1.272,0.096],[1.32,0.16],[1.24,0.12]],"orientationDegrees":53.130102354,"reflected":false},{"polygon":[[1.272,0.096],[1.32,0.16],[1.304,0.072]],"orientationDegrees":53.130102354,"reflected":true},{"polygon":[[1.352,0.136],[1.304,0.072],[1.32,0.16]],"orientationDegrees":233.130102354,"reflected":true},{"polygon":[[1.352,0.136],[1.4,0.2],[1.32,0.16]],"orientationDegrees":53.130102354,"reflected":false},{"polygon":[[1.376,0.168],[1.44,0.12],[1.4,0.2]],"orientationDegrees":323.130102354,"reflected":false},{"polygon":[[1.408,0.144],[1.36,0.08],[1.44,0.12]],"orientationDegrees":233.130102354,"reflected":false},{"polygon":[[1.408,0.144],[1.36,0.08],[1.376,0.168]],"orientationDegrees":233.130102354,"reflected":true},{"polygon":[[1.328,0.104],[1.376,0.168],[1.36,0.08]],"orientationDegrees":53.130102354,"reflected":true},{"polygon":[[1.328,0.104],[1.28,0.04],[1.36,0.08]],"orientationDegrees":233.130102354,"reflected":false},{"polygon":[[1.44,0.2],[1.44,0.12],[1.4,0.2]],"orientationDegrees":270.0,"reflected":true},{"polygon":[[1.44,0.16],[1.52,0.16],[1.44,0.12]],"orientationDegrees":0.0,"reflected":true},{"polygon":[[1.44,0.16],[1.52,0.16],[1.44,0.2]],"orientationDegrees":0.0,"reflected":false},{"polygon":[[1.52,0.2],[1.44,0.2],[1.52,0.16]],"orientationDegrees":180.0,"reflected":false},{"polygon":[[1.52,0.2],[1.6,0.2],[1.52,0.16]],"orientationDegrees":0.0,"reflected":true},{"polygon":[[1.6,0.16],[1.52,0.16],[1.6,0.2]],"orientationDegrees":180.0,"reflected":true},{"polygon":[[1.56,0.16],[1.56,0.08],[1.52,0.16]],"orientationDegrees":270.0,"reflected":true},{"polygon":[[1.56,0.16],[1.56,0.08],[1.6,0.16]],"orientationDegrees":270.0,"reflected":false},{"polygon":[[1.6,0.08],[1.6,0.16],[1.56,0.08]],"orientationDegrees":90.0,"reflected":false},{"polygon":[[1.6,0.08],[1.6,-0.0],[1.56,0.08]],"orientationDegrees":270.0,"reflected":true},{"polygon":[[1.56,-0.0],[1.56,0.08],[1.6,-0.0]],"orientationDegrees":90.0,"reflected":true},{"polygon":[[1.56,0.04],[1.48,0.04],[1.56,0.08]],"orientationDegrees":180.0,"reflected":true},{"polygon":[[1.56,0.04],[1.48,0.04],[1.56,-0.0]],"orientationDegrees":180.0,"reflected":false},{"polygon":[[1.48,-0.0],[1.56,-0.0],[1.48,0.04]],"orientationDegrees":0.0,"reflected":false},{"polygon":[[1.48,-0.0],[1.4,-0.0],[1.48,0.04]],"orientationDegrees":180.0,"reflected":true},{"polygon":[[1.496,0.128],[1.56,0.08],[1.52,0.16]],"orientationDegrees":323.130102354,"reflected":false},{"polygon":[[1.528,0.104],[1.48,0.04],[1.56,0.08]],"orientationDegrees":233.130102354,"reflected":false},{"polygon":[[1.528,0.104],[1.48,0.04],[1.496,0.128]],"orientationDegrees":233.130102354,"reflected":true},{"polygon":[[1.448,0.064],[1.496,0.128],[1.48,0.04]],"orientationDegrees":53.130102354,"reflected":true},{"polygon":[[1.448,0.064],[1.4,-0.0],[1.48,0.04]],"orientationDegrees":233.130102354,"reflected":false},{"polygon":[[1.424,0.032],[1.36,0.08],[1.4,-0.0]],"orientationDegrees":143.130102354,"reflected":false},{"polygon":[[1.392,0.056],[1.44,0.12],[1.36,0.08]],"orientationDegrees":53.130102354,"reflected":false},{"polygon":[[1.392,0.056],[1.44,0.12],[1.424,0.032]],"orientationDegrees":53.130102354,"reflected":true},{"polygon":[[1.472,0.096],[1.424,0.032],[1.44,0.12]],"orientationDegrees":233.130102354,"reflected":true},{"polygon":[[1.472,0.096],[1.52,0.16],[1.44,0.12]],"orientationDegrees":53.130102354,"reflected":false},{"polygon":[[1.36,-0.0],[1.36,0.08],[1.4,-0.0]],"orientationDegrees":90.0,"reflected":true},{"polygon":[[1.36,0.04],[1.28,0.04],[1.36,0.08]],"orientationDegrees":180.0,"reflected":true},{"polygon":[[1.36,0.04],[1.28,0.04],[1.36,-0.0]],"orientationDegrees":180.0,"reflected":false},{"polygon":[[1.28,-0.0],[1.36,-0.0],[1.28,0.04]],"orientationDegrees":0.0,"reflected":false},{"polygon":[[1.28,-0.0],[1.2,-0.0],[1.28,0.04]],"orientationDegrees":180.0,"reflected":true},{"polygon":[[1.6,0.16],[1.68,0.16],[1.6,0.2]],"orientationDegrees":0.0,"reflected":false},{"polygon":[[1.64,0.16],[1.64,0.08],[1.68,0.16]],"orientationDegrees":270.0,"reflected":false},{"polygon":[[1.64,0.16],[1.64,0.08],[1.6,0.16]],"orientationDegrees":270.0,"reflected":true},{"polygon":[[1.6,0.08],[1.6,0.16],[1.64,0.08]],"orientationDegrees":90.0,"reflected":true},{"polygon":[[1.6,0.08],[1.6,-0.0],[1.64,0.08]],"orientationDegrees":270.0,"reflected":false},{"polygon":[[1.64,-0.0],[1.64,0.08],[1.6,-0.0]],"orientationDegrees":90.0,"reflected":false},{"polygon":[[1.64,0.04],[1.72,0.04],[1.64,0.08]],"orientationDegrees":0.0,"reflected":false},{"polygon":[[1.64,0.04],[1.72,0.04],[1.64,-0.0]],"orientationDegrees":0.0,"reflected":true},{"polygon":[[1.72,-0.0],[1.64,-0.0],[1.72,0.04]],"orientationDegrees":180.0,"reflected":true},{"polygon":[[1.72,-0.0],[1.8,-0.0],[1.72,0.04]],"orientationDegrees":0.0,"reflected":false},{"polygon":[[1.704,0.128],[1.64,0.08],[1.68,0.16]],"orientationDegrees":216.869897646,"reflected":true},{"polygon":[[1.672,0.104],[1.72,0.04],[1.64,0.08]],"orientationDegrees":306.869897646,"reflected":true},{"polygon":[[1.672,0.104],[1.72,0.04],[1.704,0.128]],"orientationDegrees":306.869897646,"reflected":false},{"polygon":[[1.752,0.064],[1.704,0.128],[1.72,0.04]],"orientationDegrees":126.869897646,"reflected":false},{"polygon":[[1.752,0.064],[1.8,-0.0],[1.72,0.04]],"orientationDegrees":306.869897646,"reflected":true},{"polygon":[[1.776,0.032],[1.84,0.08],[1.8,-0.0]],"orientationDegrees":36.869897646,"reflected":true},{"polygon":[[1.808,0.056],[1.76,0.12],[1.84,0.08]],"orientationDegrees":126.869897646,"reflected":true},{"polygon":[[1.808,0.056],[1.76,0.12],[1.776,0.032]],"orientationDegrees":126.869897646,"reflected":false},{"polygon":[[1.728,0.096],[1.776,0.032],[1.76,0.12]],"orientationDegrees":306.869897646,"reflected":false},{"polygon":[[1.728,0.096],[1.68,0.16],[1.76,0.12]],"orientationDegrees":126.869897646,"reflected":true},{"polygon":[[1.84,-0.0],[1.84,0.08],[1.8,-0.0]],"orientationDegrees":90.0,"reflected":false},{"polygon":[[1.84,0.04],[1.92,0.04],[1.84,0.08]],"orientationDegrees":0.0,"reflected":false},{"polygon":[[1.84,0.04],[1.92,0.04],[1.84,-0.0]],"orientationDegrees":0.0,"reflected":true},{"polygon":[[1.92,-0.0],[1.84,-0.0],[1.92,0.04]],"orientationDegrees":180.0,"reflected":true},{"polygon":[[1.92,-0.0],[2.0,-0.0],[1.92,0.04]],"orientationDegrees":0.0,"reflected":false}]}],"events":[{"state":0,"stateLabel":"0000","weights":[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0],"violatedClauses":[16],"kind":"start","updateCount":0,"flipCount":0,"energy":1.0},{"state":0,"stateLabel":"0000","weights":[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.25],"violatedClauses":[16],"kind":"boost","updateCount":1,"flipCount":0,"energy":1.25,"updateIndex":0,"updatePhase":0.0,"deltaWeights":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.25]},{"state":4,"stateLabel":"0010","weights":[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.25],"violatedClauses":[13],"kind":"flip","updateCount":1,"flipCount":1,"energy":1.0,"flippedVariable":2},{"state":4,"stateLabel":"0010","weights":[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,2.4783484465336123,1.0,1.0,1.25],"violatedClauses":[13],"kind":"boost","updateCount":2,"flipCount":1,"energy":2.4783484465336123,"updateIndex":1,"updatePhase":2.399963229728653,"deltaWeights":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.478348446533612,0.0,0.0,0.0]},{"state":0,"stateLabel":"0000","weights":[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,2.4783484465336123,1.0,1.0,1.25],"violatedClauses":[16],"kind":"flip","updateCount":2,"flipCount":2,"energy":1.25,"flippedVariable":2},{"state":0,"stateLabel":"0000","weights":[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,2.4783484465336123,1.0,1.0,3.1655836158167316],"violatedClauses":[16],"kind":"boost","updateCount":3,"flipCount":2,"energy":3.1655836158167316,"updateIndex":2,"updatePhase":4.799926459457306,"deltaWeights":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.9155836158167314]},{"state":1,"stateLabel":"1000","weights":[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,2.4783484465336123,1.0,1.0,3.1655836158167316],"violatedClauses":[3,10],"kind":"flip","updateCount":3,"flipCount":3,"energy":2.0,"flippedVariable":0},{"state":3,"stateLabel":"1100","weights":[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,2.4783484465336123,1.0,1.0,3.1655836158167316],"violatedClauses":[3],"kind":"flip","updateCount":3,"flipCount":4,"energy":1.0,"flippedVariable":1},{"state":3,"stateLabel":"1100","weights":[1.0,1.0,1.0,5.07570428759012,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,2.4783484465336123,1.0,1.0,3.1655836158167316],"violatedClauses":[3],"kind":"boost","updateCount":4,"flipCount":4,"energy":5.07570428759012,"updateIndex":3,"updatePhase":7.19988968918596,"deltaWeights":[0.0,0.0,0.0,4.07570428759012,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]},{"state":2,"stateLabel":"0100","weights":[1.0,1.0,1.0,5.07570428759012,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,2.4783484465336123,1.0,1.0,3.1655836158167316],"violatedClauses":[2,7],"kind":"flip","updateCount":4,"flipCount":5,"energy":2.0,"flippedVariable":0},{"state":2,"stateLabel":"0100","weights":[1.0,1.0,4.849302178015573,5.07570428759012,1.0,1.0,1.0,4.849302178015573,1.0,1.0,1.0,1.0,1.0,2.4783484465336123,1.0,1.0,3.1655836158167316],"violatedClauses":[2,7],"kind":"boost","updateCount":5,"flipCount":5,"energy":9.698604356031145,"updateIndex":4,"updatePhase":9.599852918914612,"deltaWeights":[0.0,0.0,3.8493021780155727,0.0,0.0,0.0,0.0,3.8493021780155727,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]},{"state":0,"stateLabel":"0000","weights":[1.0,1.0,4.849302178015573,5.07570428759012,1.0,1.0,1.0,4.849302178015573,1.0,1.0,1.0,1.0,1.0,2.4783484465336123,1.0,1.0,3.1655836158167316],"violatedClauses":[16],"kind":"flip","updateCount":5,"flipCount":6,"energy":3.1655836158167316,"flippedVariable":1},{"state":4,"stateLabel":"0010","weights":[1.0,1.0,4.849302178015573,5.07570428759012,1.0,1.0,1.0,4.849302178015573,1.0,1.0,1.0,1.0,1.0,2.4783484465336123,1.0,1.0,3.1655836158167316],"violatedClauses":[13],"kind":"flip","updateCount":5,"flipCount":7,"energy":2.4783484465336123,"flippedVariable":2},{"state":5,"stateLabel":"1010","weights":[1.0,1.0,4.849302178015573,5.07570428759012,1.0,1.0,1.0,4.849302178015573,1.0,1.0,1.0,1.0,1.0,2.4783484465336123,1.0,1.0,3.1655836158167316],"violatedClauses":[0,15],"kind":"flip","updateCount":5,"flipCount":8,"energy":2.0,"flippedVariable":0},{"state":5,"stateLabel":"1010","weights":[3.4254580377324544,1.0,4.849302178015573,5.07570428759012,1.0,1.0,1.0,4.849302178015573,1.0,1.0,1.0,1.0,1.0,2.4783484465336123,1.0,3.4254580377324544,3.1655836158167316],"violatedClauses":[0,15],"kind":"boost","updateCount":6,"flipCount":8,"energy":6.850916075464909,"updateIndex":5,"updatePhase":11.999816148643266,"deltaWeights":[2.4254580377324544,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.4254580377324544,0.0]},{"state":4,"stateLabel":"0010","weights":[3.4254580377324544,1.0,4.849302178015573,5.07570428759012,1.0,1.0,1.0,4.849302178015573,1.0,1.0,1.0,1.0,1.0,2.4783484465336123,1.0,3.4254580377324544,3.1655836158167316],"violatedClauses":[13],"kind":"flip","updateCount":6,"flipCount":9,"energy":2.4783484465336123,"flippedVariable":0},{"state":12,"stateLabel":"0011","weights":[3.4254580377324544,1.0,4.849302178015573,5.07570428759012,1.0,1.0,1.0,4.849302178015573,1.0,1.0,1.0,1.0,1.0,2.4783484465336123,1.0,3.4254580377324544,3.1655836158167316],"violatedClauses":[4,11],"kind":"flip","updateCount":6,"flipCount":10,"energy":2.0,"flippedVariable":3},{"state":14,"stateLabel":"0111","weights":[3.4254580377324544,1.0,4.849302178015573,5.07570428759012,1.0,1.0,1.0,4.849302178015573,1.0,1.0,1.0,1.0,1.0,2.4783484465336123,1.0,3.4254580377324544,3.1655836158167316],"violatedClauses":[],"kind":"flip","updateCount":6,"flipCount":11,"energy":0,"flippedVariable":1}]}</script>
+  <script>
+    (() => {
+      const root = document.getElementById('hat-pinwheel-zeta-lab');
+      const data = JSON.parse(root.querySelector('#pattern-data').textContent);
+      if (data.pending) return;
+      const view = root.querySelector('#pattern-view');
+      const level = root.querySelector('#pattern-level');
+      const color = root.querySelector('#pattern-color');
+      const figure = root.querySelector('#pattern-figure');
+      const status = root.querySelector('#pattern-status');
+      const legend = root.querySelector('#pattern-legend');
+      const detail = root.querySelector('#pattern-detail');
+      const levelLabel = root.querySelector('#pattern-level-label');
+      const levelValue = root.querySelector('#pattern-level-value');
+      const ns = 'http://www.w3.org/2000/svg';
+      const eventMaxWeight = Math.max(...data.events.flatMap(event => event.weights));
+      function element(tag, attrs, parent, text) {
+        const node = document.createElementNS(ns, tag);
+        Object.entries(attrs || {}).forEach(([key, value]) => node.setAttribute(key, value));
+        if (text !== undefined) node.textContent = text;
+        parent.appendChild(node); return node;
+      }
+      function legendItem(text, fill) {
+        const item = document.createElement('span');
+        const swatch = document.createElement('i');
+        swatch.className = 'pattern-swatch'; swatch.style.background = fill;
+        swatch.setAttribute('aria-hidden', 'true'); item.appendChild(swatch);
+        item.appendChild(document.createTextNode(text)); legend.appendChild(item);
+      }
+      function gcd(a, b) { while (b) { const next = a % b; a = b; b = next; } return a; }
+      function labelBits(state) { return Array.from({length: 4}, (_, j) => (state >> j) & 1).join(''); }
+      function fit(polygons, width, height) {
+        const vertices = polygons.flat();
+        const minX = Math.min(...vertices.map(p => p[0])), maxX = Math.max(...vertices.map(p => p[0]));
+        const minY = Math.min(...vertices.map(p => p[1])), maxY = Math.max(...vertices.map(p => p[1]));
+        const scale = Math.min((width - 20) / (maxX - minX), (height - 20) / (maxY - minY));
+        const x = v => (width - (maxX - minX) * scale) / 2 + (v - minX) * scale;
+        const y = v => (height - (maxY - minY) * scale) / 2 + (v - minY) * scale;
+        return {x, y};
+      }
+      function update() {
+        const mode = view.value, index = Number(level.value);
+        const width = Math.max(280, figure.getBoundingClientRect().width);
+        const height = Math.min(470, Math.max(300, width * 0.67));
+        root.querySelector('#pattern-color-label').hidden = mode === 'adaptive' || mode === 'lattice';
+        const svg = document.createElementNS(ns, 'svg');
+        svg.setAttribute('viewBox', '0 0 ' + width + ' ' + height);
+        svg.setAttribute('height', height); svg.setAttribute('role', 'img');
+        svg.setAttribute('aria-labelledby', 'pattern-svg-title pattern-svg-desc');
+        legend.replaceChildren();
+        if (mode === 'lattice') {
+          const n = [5, 10, 20, 40][index];
+          levelLabel.textContent = 'Lattice size'; levelValue.textContent = n + ' × ' + n;
+          element('title', {id: 'pattern-svg-title'}, svg, 'Coprime points in a positive integer lattice');
+          element('desc', {id: 'pattern-svg-desc'}, svg, 'Highlighted pairs have greatest common divisor one and are visible from the origin. Their limiting fraction is six divided by pi squared.');
+          const left = 64, right = width - 16, top = 16, bottom = height - 44;
+          const x = a => left + 8 + (a - 1) / (n - 1) * (right - left - 16);
+          const y = b => bottom - 8 - (b - 1) / (n - 1) * (bottom - top - 16);
+          element('rect', {x: left, y: top, width: right - left, height: bottom - top, fill: 'none', stroke: 'var(--border)'}, svg);
+          let visible = 0;
+          for (let a = 1; a <= n; a++) for (let b = 1; b <= n; b++) {
+            const primitive = gcd(a, b) === 1; if (primitive) visible++;
+            const radius = Math.max(1.1, Math.min(3, (right - left) / n / 4));
+            element('circle', {cx: x(a), cy: y(b), r: radius, fill: primitive ? 'var(--viz-series-1)' : 'var(--muted-foreground)', opacity: primitive ? 1 : 0.22, 'data-lattice-point': '', 'data-coprime': primitive ? 'true' : 'false'}, svg);
+          }
+          [1, Math.round(n / 2), n].forEach(tick => {
+            element('text', {x: x(tick), y: bottom + 18, 'text-anchor': 'middle'}, svg, tick);
+            element('text', {x: left - 9, y: y(tick) + 4, 'text-anchor': 'end'}, svg, tick);
+          });
+          element('text', {x: (left + right) / 2, y: height - 4, 'text-anchor': 'middle', class: 'axis-title', 'data-axis': 'x'}, svg, 'Integer a');
+          const cy = (top + bottom) / 2;
+          element('text', {x: 16, y: cy, transform: 'rotate(-90 16 ' + cy + ')', 'text-anchor': 'middle', class: 'axis-title', 'data-axis': 'y'}, svg, 'Integer b');
+          status.textContent = visible + ' / ' + n * n + ' coprime pairs · ' + (100 * visible / (n * n)).toFixed(2) + '%';
+          legendItem('Coprime', 'var(--viz-series-1)'); legendItem('Share a common divisor', 'var(--muted-foreground)');
+          detail.textContent = 'Limiting visible fraction: 60.7927%';
+        } else {
+          const adaptive = mode === 'adaptive';
+          const patch = adaptive ? data.hat[1] : data[mode][index];
+          const event = adaptive ? data.events[index] : null;
+          const violated = new Set(event ? event.violatedClauses : []);
+          const {x, y} = fit(patch.tiles.map(t => t.polygon), width, height);
+          element('title', {id: 'pattern-svg-title'}, svg, adaptive ? 'Clause weights on a patch of twenty-five hats' : (mode === 'hat' ? 'Hat substitution patch' : 'Pinwheel substitution patch'));
+          element('desc', {id: 'pattern-svg-desc'}, svg, adaptive ? 'The first seventeen tiles represent clauses. Stronger fill means higher positive clause weight. Outlined tiles are clauses violated by the current Boolean assignment.' : 'A valid substitution patch. Colors indicate orientation sectors or reflected versus unreflected copies.');
+          patch.tiles.forEach((tile, j) => {
+            const angle = (Math.round(tile.orientationDegrees * 1e6) / 1e6 + 360) % 360;
+            const sector = Math.min(5, Math.floor(angle / 60));
+            let fill, opacity = 0.3, stroke = 'var(--border)', strokeWidth = 0.85;
+            if (adaptive) {
+              const assigned = j < event.weights.length;
+              fill = assigned ? 'var(--viz-series-1)' : 'var(--muted-foreground)';
+              opacity = assigned ? 0.13 + 0.7 * (event.weights[j] - 1) / Math.max(1, eventMaxWeight - 1) : 0.06;
+              if (violated.has(j)) { stroke = 'var(--viz-series-2)'; strokeWidth = 2.5; }
+            } else fill = color.value === 'orientation' ? 'var(--viz-series-' + (sector + 1) + ')' : 'var(--viz-series-' + (tile.reflected ? 2 : 1) + ')';
+            const points = tile.polygon.map(p => x(p[0]) + ',' + y(p[1])).join(' ');
+            const label = adaptive && j < event.weights.length ? 'Clause ' + (j + 1) + ', weight ' + event.weights[j].toFixed(3) + (violated.has(j) ? ', violated' : ', satisfied') : 'Orientation ' + angle.toFixed(2) + ' degrees, ' + (tile.reflected ? 'reflected' : 'unreflected');
+            element('polygon', {points, fill, 'fill-opacity': opacity, stroke, 'stroke-width': strokeWidth, 'stroke-linejoin': 'round', 'data-tile': '', 'data-tooltip': label}, svg);
+          });
+          if (adaptive) {
+            levelLabel.textContent = 'Search event'; levelValue.textContent = index + ' / ' + (data.events.length - 1);
+            status.textContent = 'Assignment ' + labelBits(event.state) + ' · ' + event.violatedClauses.length + ' violated clauses · ' + event.kind;
+            legendItem('Higher fill: larger clause weight', 'var(--viz-series-1)'); legendItem('Outline: violated clause', 'var(--viz-series-2)');
+            detail.textContent = event.updateCount + ' weight updates · ' + event.flipCount + ' bit flips · current energy ' + event.energy.toFixed(3);
+          } else {
+            levelLabel.textContent = 'Refinement'; levelValue.textContent = index;
+            const reflections = patch.tiles.filter(t => t.reflected).length;
+            const orientations = new Set(patch.tiles.map(t => ((Math.round(t.orientationDegrees * 1e6) / 1e6 + 360) % 360).toFixed(6))).size;
+            status.textContent = patch.tiles.length + (mode === 'hat' ? ' hats' : ' triangles') + ' · ' + reflections + ' reflected · ' + orientations + ' orientations';
+            if (color.value === 'orientation') for (let i = 0; i < 6; i++) legendItem((60 * i) + '–' + (60 * (i + 1)) + '°', 'var(--viz-series-' + (i + 1) + ')');
+            else { legendItem('Unreflected', 'var(--viz-series-1)'); legendItem('Reflected', 'var(--viz-series-2)'); }
+            detail.textContent = mode === 'hat' ? 'Authors’ H-metatile substitution' : 'Five smaller triangles per parent';
+          }
+        }
+        figure.replaceChildren(svg);
+      }
+      function changeView() {
+        const mode = view.value;
+        level.max = mode === 'adaptive' ? data.events.length - 1 : mode === 'lattice' ? 3 : data[mode].length - 1;
+        level.value = mode === 'adaptive' ? 0 : mode === 'pinwheel' ? 2 : 1;
+        update();
+      }
+      view.addEventListener('change', changeView);
+      level.addEventListener('input', update);
+      color.addEventListener('change', update);
+      new ResizeObserver(update).observe(figure);
+      update();
+    })();
+  </script>
+</div>
+</main><script>
+(() => {
+  const tip = document.createElement('div');
+  tip.className = 'export-tip'; tip.setAttribute('role', 'tooltip'); tip.hidden = true;
+  document.body.appendChild(tip);
+  let active = null;
+  function show(target, x, y) {
+    const mark = target instanceof Element ? target.closest('[data-tooltip]') : null;
+    if (!mark) { tip.hidden = true; active = null; return; }
+    active = mark; tip.textContent = mark.getAttribute('data-tooltip'); tip.hidden = false;
+    const bounds = tip.getBoundingClientRect();
+    tip.style.left = Math.max(8, Math.min(x + 12, window.innerWidth - bounds.width - 8)) + 'px';
+    tip.style.top = Math.max(8, Math.min(y + 12, window.innerHeight - bounds.height - 8)) + 'px';
+  }
+  document.addEventListener('pointermove', event => show(event.target, event.clientX, event.clientY));
+  document.addEventListener('pointerdown', event => {
+    const mark = event.target instanceof Element ? event.target.closest('[data-tooltip]') : null;
+    if (active === mark && !tip.hidden) { tip.hidden = true; active = null; }
+    else show(event.target, event.clientX, event.clientY);
+  });
+  document.addEventListener('focusin', event => { const b = event.target.getBoundingClientRect(); show(event.target, b.left, b.bottom); });
+  document.addEventListener('focusout', () => { tip.hidden = true; active = null; });
+  document.addEventListener('keydown', event => { if (event.key === 'Escape') { tip.hidden = true; active = null; } });
+})();
+</script></body>
+</html>
