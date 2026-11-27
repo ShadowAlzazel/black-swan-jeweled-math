@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>05 — Complex Julia-SAT &amp; Holomorphic Spectre Lab</title>
+<style>
+  :root {
+    --bg: #08090f;
+    --panel: #111422;
+    --border: #252b45;
+    --text: #e6e9f5;
+    --muted: #939bb8;
+    --gold: #f4c95d;
+    --cyan: #5ce1e6;
+    --magenta: #f765a3;
+    --emerald: #4ade80;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.45;
+  }
+  header {
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    background: linear-gradient(90deg, #0d1020, #12172b);
+  }
+  header h1 {
+    margin: 0;
+    font-size: 1.2rem;
+    letter-spacing: 0.03em;
+    color: var(--gold);
+  }
+  header p {
+    margin: 2px 0 0;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+  .layout {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    min-height: calc(100vh - 70px);
+  }
+  @media (max-width: 980px) {
+    .layout { grid-template-columns: 1fr; }
+  }
+  aside {
+    background: var(--panel);
+    border-right: 1px solid var(--border);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    overflow-y: auto;
+  }
+  .card {
+    background: #0b0e19;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px;
+  }
+  .card h2 {
+    margin: 0 0 8px;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--cyan);
+  }
+  label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin-top: 8px;
+  }
+  label span.val { color: var(--gold); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+  input[type="range"] { width: 100%; accent-color: var(--gold); margin-top: 4px; }
+  select, textarea, button {
+    width: 100%;
+    background: #14192c;
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 7px 9px;
+    font-size: 0.84rem;
+    margin-top: 6px;
+  }
+  button {
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  button:hover { background: #1d2440; border-color: var(--gold); }
+  button.primary { background: #262010; border-color: var(--gold); color: var(--gold); }
+  .btn-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  main {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .canvases {
+    display: grid;
+    grid-template-columns: minmax(280px, 1.35fr) minmax(260px, 1fr);
+    gap: 16px;
+  }
+  @media (max-width: 900px) {
+    .canvases { grid-template-columns: 1fr; }
+  }
+  .pane {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .pane-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 0.85rem;
+  }
+  .pane-header strong { color: var(--gold); }
+  .pane-header span { color: var(--muted); font-size: 0.78rem; }
+  canvas {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background: #04050a;
+    border-radius: 6px;
+    border: 1px solid #1e233a;
+    cursor: crosshair;
+    display: block;
+  }
+  .metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+  }
+  .metric {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 12px;
+  }
+  .metric .k { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+  .metric .v { font-size: 1.05rem; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--text); margin-top: 2px; }
+  .metric .v.ok { color: var(--emerald); }
+  .metric .v.warn { color: var(--magenta); }
+  .hint { font-size: 0.78rem; color: var(--muted); }
+  textarea { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.75rem; min-height: 76px; resize: vertical; }
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <h1>05 &middot; Complex Julia-SAT &amp; Holomorphic Spectre Lab</h1>
+    <p>Dual Complex-Plane Visualizer (&Copf;<sub>in</sub> &rarr; &Copf;<sub>out</sub>) &bull; Euler Phasors &bull; Plastic Weights &rho; &bull; Chiral Spectre &bull; M&ouml;bius Lens &bull; Feigenbaum &mu;<sub>&infin;</sub></p>
+  </div>
+  <div class="hint">Click left pane to M&ouml;bius-zoom &bull; Hover to move Cauchy Spectre probe</div>
+</header>
+
+<div class="layout">
+  <aside>
+    <div class="card">
+      <h2>1. 3-SAT Formula</h2>
+      <label>Variables (n) <span class="val" id="nVal">14</span></label>
+      <input type="range" id="nSlider" min="6" max="35" value="14" />
+
+      <label>Clause Density (&alpha; = m/n) <span class="val" id="aVal">3.80</span></label>
+      <input type="range" id="aSlider" min="1.5" max="5.0" step="0.05" value="3.80" />
+
+      <label>Seed <span class="val" id="sVal">42</span></label>
+      <input type="range" id="sSlider" min="1" max="200" value="42" />
+
+      <div class="btn-row">
+        <button class="primary" id="genBtn">New Planted 3-SAT</button>
+        <button id="resetMobiusBtn">Reset M&ouml;bius</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>2. Complex Geometry &amp; Dynamics</h2>
+      <label>Tiling Overlay</label>
+      <select id="overlaySel">
+        <option value="spectre">Chiral Spectre + Cauchy Probe</option>
+        <option value="pinwheel">Pinwheel arctan(1/2) Rays</option>
+        <option value="poincare">Poincar&eacute; {7,3} Horizon + Geodesics</option>
+        <option value="none">Clean Fatou/Julia Field</option>
+      </select>
+
+      <label>Newton Damping (&eta;) <span class="val" id="etaVal">0.65</span></label>
+      <input type="range" id="etaSlider" min="0.15" max="1.2" step="0.05" value="0.65" />
+
+      <label>Feigenbaum Drive (&mu;) <span class="val" id="muVal">3.570</span></label>
+      <input type="range" id="muSlider" min="2.80" max="3.98" step="0.005" value="3.570" />
+
+      <label>Probe Tile Radius <span class="val" id="radVal">0.20</span></label>
+      <input type="range" id="radSlider" min="0.05" max="0.45" step="0.01" value="0.20" />
+
+      <button id="feigBtn">Run Feigenbaum Orbit Burst</button>
+    </div>
+
+    <div class="card">
+      <h2>3. Load DIMACS .cnf</h2>
+      <div class="hint">Paste any DIMACS CNF (such as <code>missed_sat_instance_35.cnf</code>) and click Load.</div>
+      <textarea id="cnfInput" placeholder="p cnf 6 12&#10;1 -2 3 0&#10;-1 4 5 0"></textarea>
+      <button id="loadCnfBtn">Load DIMACS CNF</button>
+    </div>
+  </aside>
+
+  <main>
+    <div class="metrics">
+      <div class="metric"><div class="k">Formula</div><div class="v" id="mFormula">—</div></div>
+      <div class="metric"><div class="k">Cauchy Winding W(T)</div><div class="v" id="mWinding">0.00</div></div>
+      <div class="metric"><div class="k">Nyquist Status</div><div class="v" id="mNyquist">CLEAN</div></div>
+      <div class="metric"><div class="k">Min |F<sub>&Phi;</sub>| on &part;T</div><div class="v" id="mMinF">—</div></div>
+      <div class="metric"><div class="k">Best Rounded UNSAT</div><div class="v" id="mUnsat">—</div></div>
+      <div class="metric"><div class="k">M&ouml;bius Center z<sub>0</sub></div><div class="v" id="mMobius">0.00 + 0.00i</div></div>
+    </div>
+
+    <div class="canvases">
+      <div class="pane">
+        <div class="pane-header">
+          <strong>&Copf;<sub>in</sub> &mdash; Tiled Configuration &amp; Newton-Julia Basins</strong>
+          <span>Hue = arg(F<sub>&Phi;</sub>), Brightness = convergence speed</span>
+        </div>
+        <canvas id="inCanvas" width="420" height="420"></canvas>
+      </div>
+      <div class="pane">
+        <div class="pane-header">
+          <strong>&Copf;<sub>out</sub> &mdash; Mapped Boundary F<sub>&Phi;</sub>(&part;T)</strong>
+          <span>Loops wrapping w = 0 indicate interior zeros</span>
+        </div>
+        <canvas id="outCanvas" width="360" height="360"></canvas>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+(() => {
+  const PHI = (1 + Math.sqrt(5)) / 2;
+  const RHO = 1.324717957244746;
+  const GOLDEN_ANGLE = 2 * Math.PI / (PHI * PHI);
+  const PINWHEEL = Math.atan(0.5);
+  const MU_INF = 3.56994567187;
+
+  const inCanvas = document.getElementById("inCanvas");
+  const outCanvas = document.getElementById("outCanvas");
+  const inCtx = inCanvas.getContext("2d");
+  const outCtx = outCanvas.getContext("2d");
+
+  let state = {
+    n: 14,
+    alpha: 3.80,
+    seed: 42,
+    eta: 0.65,
+    mu: 3.570,
+    probeR: 0.20,
+    overlay: "spectre",
+    mobiusZ0: { re: 0, im: 0 },
+    probeCenter: { re: 0.12, im: 0.08 },
+    feigTrajectory: [],
+    clauses: [],
+    kRe: [],
+    kIm: [],
+    offsets: [],
+    wRe: [],
+    wIm: [],
+    bgImage: null,
+  };
+
+  function mulberry32(a) {
+    return function() {
+      let t = a += 0x6D2B79F5;
+      t = Math.imul(t ^ (t >>> 15), t | 1);
+      t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+
+  function buildField(n, clauses) {
+    state.n = n;
+    state.clauses = clauses;
+    state.kRe = new Float64Array(n);
+    state.kIm = new Float64Array(n);
+    state.offsets = new Float64Array(n);
+    const freqScale = Math.sqrt(n) / 2.6;
+    for (let i = 0; i < n; i++) {
+      const mag = freqScale * Math.pow(RHO, 1 + (i % 7) * 0.30) * (1 + 0.1 * Math.floor(i / 7));
+      const ang = i * GOLDEN_ANGLE + i * PINWHEEL * 0.5;
+      state.kRe[i] = mag * Math.cos(ang);
+      state.kIm[i] = mag * Math.sin(ang);
+      state.offsets[i] = (i * Math.PI / PHI) % (2 * Math.PI);
+    }
+    const m = clauses.length;
+    state.wRe = new Float64Array(m);
+    state.wIm = new Float64Array(m);
+    for (let c = 0; c < m; c++) {
+      const th = 2 * Math.PI * (c + 1) / RHO;
+      state.wRe[c] = Math.cos(th);
+      state.wIm[c] = Math.sin(th);
+    }
+    document.getElementById("mFormula").textContent = `n=${n}, m=${m} (α=${(m/n).toFixed(2)})`;
+  }
+
+  function generatePlanted3SAT(n, alpha, seed) {
+    const rng = mulberry32(seed * 9973 + n * 31 + Math.round(alpha * 100));
+    const m = Math.max(1, Math.round(n * alpha));
+    const witness = Array.from({ length: n }, () => rng() > 0.5);
+    const clauses = [];
+    for (let c = 0; c < m; c++) {
+      const picked = new Set();
+      while (picked.size < Math.min(3, n)) picked.add(Math.floor(rng() * n) + 1);
+      const vs = Array.from(picked);
+      const cl = vs.map(v => (rng() > 0.5 ? v : -v));
+      const sat = cl.some(l => (l > 0 && witness[Math.abs(l) - 1]) || (l < 0 && !witness[Math.abs(l) - 1]));
+      if (!sat) {
+        const flipIdx = Math.floor(rng() * cl.length);
+        cl[flipIdx] = -cl[flipIdx];
+      }
+      clauses.push(cl);
+    }
+    buildField(n, clauses);
+  }
+
+  function parseDIMACS(text) {
+    let n = 0;
+    const clauses = [];
+    let cur = [];
+    for (const raw of text.split(/\r?\n/)) {
+      const s = raw.trim();
+      if (!s || s.startsWith("c") || s.startsWith("%")) continue;
+      if (s.startsWith("p")) {
+        const parts = s.split(/\s+/);
+        if (parts.length >= 3) n = Math.max(n, parseInt(parts[2], 10) || 0);
+        continue;
+      }
+      for (const tok of s.split(/\s+/)) {
+        const v = parseInt(tok, 10);
+        if (Number.isNaN(v)) continue;
+        if (v === 0) {
+          if (cur.length) { clauses.push(cur); cur = []; }
+        } else {
+          n = Math.max(n, Math.abs(v));
+          cur.push(v);
+        }
+      }
+    }
+    if (cur.length) clauses.push(cur);
+    if (n > 0 && clauses.length > 0) {
+      buildField(n, clauses);
+      renderFieldBackground();
+      drawAll();
+    }
+  }
+
+  function applyMobiusInv(re, im) {
+    // Map view coordinate w back through Mobius lens centered at z0: z = (w + z0) / (1 + conj(z0) * w)
+    const a = state.mobiusZ0.re, b = state.mobiusZ0.im;
+    const numRe = re + a, numIm = im + b;
+    const denRe = 1 + a * re + b * im;
+    const denIm = a * im - b * re;
+    const d2 = Math.max(1e-9, denRe * denRe + denIm * denIm);
+    return {
+      re: (numRe * denRe + numIm * denIm) / d2,
+      im: (numIm * denRe - numRe * denIm) / d2,
+    };
+  }
+
+  function evalF(re, im) {
+    const n = state.n;
+    const cRe = new Float64Array(n);
+    const cIm = new Float64Array(n);
+    for (let i = 0; i < n; i++) {
+      const th = state.kRe[i] * re + state.kIm[i] * im + state.offsets[i];
+      cRe[i] = Math.cos(th);
+      cIm[i] = Math.sin(th);
+    }
+    let sumRe = 0, sumIm = 0;
+    const clauses = state.clauses;
+    for (let c = 0; c < clauses.length; c++) {
+      const cl = clauses[c];
+      let pRe = 1, pIm = 0;
+      for (let j = 0; j < cl.length; j++) {
+        const lit = cl[j];
+        const idx = Math.abs(lit) - 1;
+        const s = lit > 0 ? 1 : -1;
+        const fRe = 0.5 * (1 - s * cRe[idx]);
+        const fIm = -0.5 * s * cIm[idx];
+        const nRe = pRe * fRe - pIm * fIm;
+        const nIm = pRe * fIm + pIm * fRe;
+        pRe = nRe; pIm = nIm;
+      }
+      const wr = state.wRe[c], wi = state.wIm[c];
+      sumRe += wr * pRe - wi * pIm;
+      sumIm += wr * pIm + wi * pRe;
+    }
+    return { re: sumRe, im: sumIm, cRe };
+  }
+
+  function countUnsatAt(re, im) {
+    const { cRe } = evalF(re, im);
+    let unsat = 0;
+    for (let c = 0; c < state.clauses.length; c++) {
+      const cl = state.clauses[c];
+      let ok = false;
+      for (let j = 0; j < cl.length; j++) {
+        const lit = cl[j];
+        const val = cRe[Math.abs(lit) - 1] >= 0;
+        if ((lit > 0 && val) || (lit < 0 && !val)) { ok = true; break; }
+      }
+      if (!ok) unsat++;
+    }
+    return unsat;
+  }
+
+  function spectreVertices(cx, cy, r, rot) {
+    const headings = [0, 60, 150, 90, 180, 120, 210, 150, 240, 300, 210, 270, 330, 270];
+    let x = 0, y = 0;
+    const raw = [{ x: 0, y: 0 }];
+    for (let i = 0; i < headings.length - 1; i++) {
+      const rad = headings[i] * Math.PI / 180;
+      x += Math.cos(rad);
+      y += Math.sin(rad);
+      raw.push({ x, y });
+    }
+    const mx = raw.reduce((s, p) => s + p.x, 0) / raw.length;
+    const my = raw.reduce((s, p) => s + p.y, 0) / raw.length;
+    const maxR = Math.max(...raw.map(p => Math.hypot(p.x - mx, p.y - my))) || 1;
+    const cr = Math.cos(rot), sr = Math.sin(rot);
+    return raw.map(p => {
+      const nx = (p.x - mx) / maxR * r;
+      const ny = (p.y - my) / maxR * r;
+      return { re: cx + nx * cr - ny * sr, im: cy + nx * sr + ny * cr };
+    });
+  }
+
+  function hslToRgb(h, s, l) {
+    h = ((h % 1) + 1) % 1;
+    const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+    const p = 2 * l - q;
+    const f = t => {
+      if (t < 0) t += 1;
+      if (t > 1) t -= 1;
+      if (t < 1/6) return p + (q - p) * 6 * t;
+      if (t < 1/2) return q;
+      if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+      return p;
+    };
+    return [Math.round(f(h + 1/3) * 255), Math.round(f(h) * 255), Math.round(f(h - 1/3) * 255)];
+  }
+
+  function renderFieldBackground() {
+    const W = inCanvas.width, H = inCanvas.height;
+    const step = 2; // 2x2 pixels for responsive real-time rendering
+    const img = inCtx.createImageData(W, H);
+    const data = img.data;
+    const eps = 1e-3;
+    const iters = 7;
+
+    for (let py = 0; py < H; py += step) {
+      const vy = 1 - (py / (H - 1)) * 2;
+      for (let px = 0; px < W; px += step) {
+        const vx = (px / (W - 1)) * 2 - 1;
+        const r2 = vx * vx + vy * vy;
+        let R = 7, G = 9, B = 18;
+        if (r2 <= 1.0) {
+          let z = applyMobiusInv(vx * 0.96, vy * 0.96);
+          let conv = iters;
+          let lastF = { re: 1, im: 0 };
+          for (let it = 0; it < iters; it++) {
+            const f0 = evalF(z.re, z.im);
+            lastF = f0;
+            const mag = Math.hypot(f0.re, f0.im);
+            if (mag < 0.08) { conv = it; break; }
+            const fx = evalF(z.re + eps, z.im);
+            const dfRe = (fx.re - f0.re) / eps;
+            const dfIm = (fx.im - f0.im) / eps;
+            const d2 = dfRe * dfRe + dfIm * dfIm + 1e-5;
+            const stepRe = (f0.re * dfRe + f0.im * dfIm) / d2;
+            const stepIm = (f0.im * dfRe - f0.re * dfIm) / d2;
+            const cap = 0.25;
+            const sMag = Math.hypot(stepRe, stepIm);
+            const scale = sMag > cap ? cap / sMag : 1.0;
+            z.re -= state.eta * stepRe * scale;
+            z.im -= state.eta * stepIm * scale;
+          }
+          const hue = (Math.atan2(lastF.im, lastF.re) / (2 * Math.PI) + 1) % 1;
+          const mag = Math.hypot(lastF.re, lastF.im);
+          const lum = Math.max(0.08, Math.min(0.72, 0.58 * Math.exp(-0.22 * mag) * (1 - 0.07 * conv)));
+          [R, G, B] = hslToRgb(hue, 0.78, lum);
+        }
+        for (let dy = 0; dy < step && py + dy < H; dy++) {
+          for (let dx = 0; dx < step && px + dx < W; dx++) {
+            const idx = ((py + dy) * W + (px + dx)) * 4;
+            data[idx] = R; data[idx + 1] = G; data[idx + 2] = B; data[idx + 3] = 255;
+          }
+        }
+      }
+    }
+    state.bgImage = img;
+  }
+
+  function toPx(z, W, H) {
+    return { x: (z.re / 0.96 + 1) * 0.5 * W, y: (1 - z.im / 0.96) * 0.5 * H };
+  }
+
+  function drawAll() {
+    const W = inCanvas.width, H = inCanvas.height;
+    if (state.bgImage) inCtx.putImageData(state.bgImage, 0, 0);
+
+    // Poincare unit disk rim
+    inCtx.strokeStyle = "rgba(92,225,230,0.45)";
+    inCtx.lineWidth = 1.5;
+    inCtx.beginPath();
+    inCtx.arc(W / 2, H / 2, W * 0.48, 0, Math.PI * 2);
+    inCtx.stroke();
+
+    // Tiling overlays
+    if (state.overlay === "spectre") {
+      inCtx.strokeStyle = "rgba(244,201,93,0.35)";
+      inCtx.lineWidth = 1;
+      for (let k = 0; k < 18; k++) {
+        const r = 0.78 * Math.sqrt((k + 0.5) / 18);
+        const th = k * GOLDEN_ANGLE + (k % 3) * (2 * Math.PI / (3 * RHO));
+        const verts = spectreVertices(r * Math.cos(th), r * Math.sin(th), 0.14, k * PINWHEEL);
+        inCtx.beginPath();
+        verts.forEach((v, i) => {
+          const p = toPx(v, W, H);
+          if (i === 0) inCtx.moveTo(p.x, p.y); else inCtx.lineTo(p.x, p.y);
+        });
+        inCtx.closePath();
+        inCtx.stroke();
+      }
+    } else if (state.overlay === "pinwheel") {
+      inCtx.strokeStyle = "rgba(247,101,163,0.45)";
+      inCtx.lineWidth = 1;
+      for (let k = 0; k < 24; k++) {
+        const ang = k * PINWHEEL;
+        const p1 = toPx({ re: 0, im: 0 }, W, H);
+        const p2 = toPx({ re: 0.95 * Math.cos(ang), im: 0.95 * Math.sin(ang) }, W, H);
+        inCtx.beginPath(); inCtx.moveTo(p1.x, p1.y); inCtx.lineTo(p2.x, p2.y); inCtx.stroke();
+      }
+    } else if (state.overlay === "poincare") {
+      inCtx.strokeStyle = "rgba(92,225,230,0.4)";
+      inCtx.lineWidth = 1;
+      for (let k = 0; k < 7; k++) {
+        const ang = (2 * Math.PI * k) / 7;
+        const cx = W / 2 + Math.cos(ang) * W * 0.62;
+        const cy = H / 2 + Math.sin(ang) * H * 0.62;
+        inCtx.beginPath();
+        inCtx.arc(cx, cy, W * 0.39, 0, Math.PI * 2);
+        inCtx.stroke();
+      }
+    }
+
+    // Feigenbaum orbit trajectory
+    if (state.feigTrajectory.length > 1) {
+      inCtx.strokeStyle = "#4ade80";
+      inCtx.lineWidth = 1.6;
+      inCtx.beginPath();
+      state.feigTrajectory.forEach((z, idx) => {
+        const p = toPx(z, W, H);
+        if (idx === 0) inCtx.moveTo(p.x, p.y); else inCtx.lineTo(p.x, p.y);
+      });
+      inCtx.stroke();
+    }
+
+    // Active Chiral Spectre Cauchy Contour Probe
+    const probePoly = spectreVertices(state.probeCenter.re, state.probeCenter.im, state.probeR, PINWHEEL);
+    inCtx.strokeStyle = "#ffffff";
+    inCtx.lineWidth = 2;
+    inCtx.beginPath();
+    probePoly.forEach((v, i) => {
+      const p = toPx(v, W, H);
+      if (i === 0) inCtx.moveTo(p.x, p.y); else inCtx.lineTo(p.x, p.y);
+    });
+    inCtx.closePath();
+    inCtx.stroke();
+
+    // Evaluate Cauchy Winding Number and draw C_out contour
+    const samplesPerEdge = 10;
+    const outPts = [];
+    let minAbs = Infinity;
+    let bestU = state.clauses.length;
+
+    for (let i = 0; i < probePoly.length; i++) {
+      const a = probePoly[i], b = probePoly[(i + 1) % probePoly.length];
+      for (let s = 0; s < samplesPerEdge; s++) {
+        const t = s / samplesPerEdge;
+        const vx = a.re + t * (b.re - a.re);
+        const vy = a.im + t * (b.im - a.im);
+        const z = applyMobiusInv(vx, vy);
+        const w = evalF(z.re, z.im);
+        outPts.push(w);
+        const mag = Math.hypot(w.re, w.im);
+        if (mag < minAbs) minAbs = mag;
+        if (s === 0) {
+          const u = countUnsatAt(z.re, z.im);
+          if (u < bestU) bestU = u;
+        }
+      }
+    }
+    outPts.push(outPts[0]);
+
+    let totalD = 0, maxJump = 0;
+    for (let i = 0; i < outPts.length - 1; i++) {
+      const w0 = outPts[i], w1 = outPts[i + 1];
+      const a0 = Math.atan2(w0.im, w0.re);
+      const a1 = Math.atan2(w1.im, w1.re);
+      let d = a1 - a0;
+      while (d > Math.PI) d -= 2 * Math.PI;
+      while (d < -Math.PI) d += 2 * Math.PI;
+      totalD += d;
+      if (Math.abs(d) > maxJump) maxJump = Math.abs(d);
+    }
+    const winding = totalD / (2 * Math.PI);
+    const aliased = maxJump > Math.PI / 2;
+
+    document.getElementById("mWinding").textContent = `${winding.toFixed(2)} (int ${Math.round(winding)})`;
+    const nyqEl = document.getElementById("mNyquist");
+    nyqEl.textContent = aliased ? `ALIASED (${maxJump.toFixed(2)} rad)` : `CLEAN (${maxJump.toFixed(2)} rad)`;
+    nyqEl.className = "v " + (aliased ? "warn" : "ok");
+    document.getElementById("mMinF").textContent = minAbs.toFixed(3);
+    const uEl = document.getElementById("mUnsat");
+    uEl.textContent = bestU === 0 ? "0 (SAT!)" : `${bestU} unsat`;
+    uEl.className = "v " + (bestU === 0 ? "ok" : "");
+    document.getElementById("mMobius").textContent = `${state.mobiusZ0.re.toFixed(2)} ${state.mobiusZ0.im >= 0 ? "+" : "-"} ${Math.abs(state.mobiusZ0.im).toFixed(2)}i`;
+
+    // Render C_out canvas
+    const OW = outCanvas.width, OH = outCanvas.height;
+    outCtx.fillStyle = "#04050a";
+    outCtx.fillRect(0, 0, OW, OH);
+
+    // Axes
+    outCtx.strokeStyle = "#1f2642";
+    outCtx.lineWidth = 1;
+    outCtx.beginPath();
+    outCtx.moveTo(0, OH / 2); outCtx.lineTo(OW, OH / 2);
+    outCtx.moveTo(OW / 2, 0); outCtx.lineTo(OW / 2, OH);
+    outCtx.stroke();
+
+    const maxR = Math.max(0.5, ...outPts.map(p => Math.hypot(p.re, p.im))) * 1.15;
+    const scale = (OW * 0.44) / maxR;
+
+    // Origin w = 0 target (SAT zero)
+    outCtx.fillStyle = "#f4c95d";
+    outCtx.beginPath();
+    outCtx.arc(OW / 2, OH / 2, 4.5, 0, Math.PI * 2);
+    outCtx.fill();
+    outCtx.fillStyle = "rgba(244,201,93,0.75)";
+    outCtx.font = "11px monospace";
+    outCtx.fillText("w = 0 (SAT)", OW / 2 + 8, OH / 2 - 6);
+
+    // Mapped contour F_Phi(dT)
+    for (let i = 0; i < outPts.length - 1; i++) {
+      const p0 = outPts[i], p1 = outPts[i + 1];
+      const frac = i / outPts.length;
+      outCtx.strokeStyle = `hsl(${Math.round(frac * 360)}, 88%, 62%)`;
+      outCtx.lineWidth = 2;
+      outCtx.beginPath();
+      outCtx.moveTo(OW / 2 + p0.re * scale, OH / 2 - p0.im * scale);
+      outCtx.lineTo(OW / 2 + p1.re * scale, OH / 2 - p1.im * scale);
+      outCtx.stroke();
+    }
+  }
+
+  function runFeigenbaumBurst() {
+    let r = 1 / PHI;
+    let z = { re: state.probeCenter.re, im: state.probeCenter.im };
+    const traj = [{ ...z }];
+    for (let step = 1; step <= 48; step++) {
+      r = state.mu * r * (1 - r);
+      const burst = (r < 0.22 || r > 0.86);
+      const amp = (burst ? 0.22 : 0.055) * r;
+      const ang = step * PINWHEEL + (step % 3) * (2 * Math.PI / RHO);
+      z = {
+        re: Math.max(-0.88, Math.min(0.88, z.re + amp * Math.cos(ang))),
+        im: Math.max(-0.88, Math.min(0.88, z.im + amp * Math.sin(ang))),
+      };
+      if (Math.hypot(z.re, z.im) > 0.88) {
+        const d = Math.hypot(z.re, z.im);
+        z.re = z.re / d * 0.85;
+        z.im = z.im / d * 0.85;
+      }
+      traj.push({ ...z });
+    }
+    state.feigTrajectory = traj;
+    drawAll();
+  }
+
+  // Event wiring
+  inCanvas.addEventListener("mousemove", e => {
+    const rect = inCanvas.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+    const y = 1 - ((e.clientY - rect.top) / rect.height) * 2;
+    if (x * x + y * y <= 0.92) {
+      state.probeCenter = { re: x * 0.96, im: y * 0.96 };
+      drawAll();
+    }
+  });
+
+  inCanvas.addEventListener("click", e => {
+    const rect = inCanvas.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+    const y = 1 - ((e.clientY - rect.top) / rect.height) * 2;
+    if (x * x + y * y < 0.90) {
+      const target = applyMobiusInv(x * 0.96, y * 0.96);
+      const d = Math.hypot(target.re, target.im);
+      state.mobiusZ0 = d > 0.85 ? { re: target.re / d * 0.85, im: target.im / d * 0.85 } : target;
+      renderFieldBackground();
+      drawAll();
+    }
+  });
+
+  function bindRange(id, valId, key, fmt, rerender) {
+    const el = document.getElementById(id);
+    const out = document.getElementById(valId);
+    el.addEventListener("input", () => {
+      state[key] = parseFloat(el.value);
+      out.textContent = fmt(state[key]);
+      if (rerender === "formula") {
+        generatePlanted3SAT(state.n, state.alpha, state.seed);
+        renderFieldBackground();
+      } else if (rerender === "bg") {
+        renderFieldBackground();
+      }
+      drawAll();
+    });
+  }
+
+  bindRange("nSlider", "nVal", "n", v => Math.round(v), "formula");
+  bindRange("aSlider", "aVal", "alpha", v => v.toFixed(2), "formula");
+  bindRange("sSlider", "sVal", "seed", v => Math.round(v), "formula");
+  bindRange("etaSlider", "etaVal", "eta", v => v.toFixed(2), "bg");
+  bindRange("muSlider", "muVal", "mu", v => v.toFixed(3), "none");
+  bindRange("radSlider", "radVal", "probeR", v => v.toFixed(2), "none");
+
+  document.getElementById("overlaySel").addEventListener("change", e => {
+    state.overlay = e.target.value;
+    drawAll();
+  });
+  document.getElementById("genBtn").addEventListener("click", () => {
+    state.seed = (state.seed % 200) + 1;
+    document.getElementById("sSlider").value = state.seed;
+    document.getElementById("sVal").textContent = state.seed;
+    state.feigTrajectory = [];
+    generatePlanted3SAT(state.n, state.alpha, state.seed);
+    renderFieldBackground();
+    drawAll();
+  });
+  document.getElementById("resetMobiusBtn").addEventListener("click", () => {
+    state.mobiusZ0 = { re: 0, im: 0 };
+    state.feigTrajectory = [];
+    renderFieldBackground();
+    drawAll();
+  });
+  document.getElementById("feigBtn").addEventListener("click", runFeigenbaumBurst);
+  document.getElementById("loadCnfBtn").addEventListener("click", () => {
+    parseDIMACS(document.getElementById("cnfInput").value);
+  });
+
+  // Boot
+  generatePlanted3SAT(state.n, state.alpha, state.seed);
+  renderFieldBackground();
+  drawAll();
+})();
+</script>
+</body>
+</html>

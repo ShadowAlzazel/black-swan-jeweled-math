@@ -1,0 +1,193 @@
+{
+  "experiment": "04_complex_spectre",
+  "algorithm": "HOLOMORPHIC SPECTRE",
+  "experiment_a_phase_transition": {
+    "alpha_2.50": {
+      "uniform_random_walk": {
+        "solve_rate": 1.0,
+        "solved_count": 10,
+        "trials": 10,
+        "mean_steps": 13.9,
+        "mean_best_unsat": 0.0
+      },
+      "golden_sweep": {
+        "solve_rate": 1.0,
+        "solved_count": 10,
+        "trials": 10,
+        "mean_steps": 10.5,
+        "mean_best_unsat": 0.0
+      },
+      "holomorphic_spectre": {
+        "solve_rate": 1.0,
+        "solved_count": 10,
+        "trials": 10,
+        "mean_steps": 5.5,
+        "mean_best_unsat": 0.0,
+        "mean_feigenbaum_bursts": 0.0
+      }
+    },
+    "alpha_3.50": {
+      "uniform_random_walk": {
+        "solve_rate": 1.0,
+        "solved_count": 10,
+        "trials": 10,
+        "mean_steps": 28.4,
+        "mean_best_unsat": 0.0
+      },
+      "golden_sweep": {
+        "solve_rate": 0.9,
+        "solved_count": 9,
+        "trials": 10,
+        "mean_steps": 218.2,
+        "mean_best_unsat": 0.1
+      },
+      "holomorphic_spectre": {
+        "solve_rate": 1.0,
+        "solved_count": 10,
+        "trials": 10,
+        "mean_steps": 21.5,
+        "mean_best_unsat": 0.0,
+        "mean_feigenbaum_bursts": 1.3
+      }
+    },
+    "alpha_4.00": {
+      "uniform_random_walk": {
+        "solve_rate": 0.9,
+        "solved_count": 9,
+        "trials": 10,
+        "mean_steps": 144.1,
+        "mean_best_unsat": 0.1
+      },
+      "golden_sweep": {
+        "solve_rate": 0.6,
+        "solved_count": 6,
+        "trials": 10,
+        "mean_steps": 404.8,
+        "mean_best_unsat": 0.4
+      },
+      "holomorphic_spectre": {
+        "solve_rate": 1.0,
+        "solved_count": 10,
+        "trials": 10,
+        "mean_steps": 101.4,
+        "mean_best_unsat": 0.0,
+        "mean_feigenbaum_bursts": 11.3
+      }
+    },
+    "alpha_4.26": {
+      "uniform_random_walk": {
+        "solve_rate": 1.0,
+        "solved_count": 10,
+        "trials": 10,
+        "mean_steps": 59.5,
+        "mean_best_unsat": 0.0
+      },
+      "golden_sweep": {
+        "solve_rate": 0.7,
+        "solved_count": 7,
+        "trials": 10,
+        "mean_steps": 340.1,
+        "mean_best_unsat": 0.3
+      },
+      "holomorphic_spectre": {
+        "solve_rate": 0.9,
+        "solved_count": 9,
+        "trials": 10,
+        "mean_steps": 152.4,
+        "mean_best_unsat": 0.1,
+        "mean_feigenbaum_bursts": 17.6
+      }
+    }
+  },
+  "experiment_b_needle_stress_n35": {
+    "n_vars": 35,
+    "alpha": 4.26,
+    "trials": 12,
+    "budget": 1600,
+    "solvers": {
+      "uniform_random_walk": {
+        "solve_rate": 1.0,
+        "solved_count": 12,
+        "mean_steps": 320.4,
+        "median_steps": 239.5,
+        "mean_best_unsat": 0.0,
+        "mean_elapsed_ms": 28.75
+      },
+      "golden_sweep": {
+        "solve_rate": 0.583,
+        "solved_count": 7,
+        "mean_steps": 891.3,
+        "median_steps": 739.0,
+        "mean_best_unsat": 0.5,
+        "mean_elapsed_ms": 60.33
+      },
+      "holomorphic_spectre": {
+        "solve_rate": 1.0,
+        "solved_count": 12,
+        "mean_steps": 287.9,
+        "median_steps": 185.0,
+        "mean_best_unsat": 0.0,
+        "mean_elapsed_ms": 74.58
+      }
+    }
+  },
+  "experiment_c_nyquist_phase_tax": [
+    {
+      "n_vars": 6,
+      "samples_per_edge": 12,
+      "mean_total_phase_variation_rad": 2.72,
+      "mean_max_step_jump_rad": 0.093,
+      "nyquist_aliasing_rate": 0.0
+    },
+    {
+      "n_vars": 10,
+      "samples_per_edge": 12,
+      "mean_total_phase_variation_rad": 3.37,
+      "mean_max_step_jump_rad": 0.181,
+      "nyquist_aliasing_rate": 0.0
+    },
+    {
+      "n_vars": 16,
+      "samples_per_edge": 12,
+      "mean_total_phase_variation_rad": 5.62,
+      "mean_max_step_jump_rad": 0.289,
+      "nyquist_aliasing_rate": 0.0
+    },
+    {
+      "n_vars": 24,
+      "samples_per_edge": 12,
+      "mean_total_phase_variation_rad": 6.6,
+      "mean_max_step_jump_rad": 0.486,
+      "nyquist_aliasing_rate": 0.0
+    },
+    {
+      "n_vars": 35,
+      "samples_per_edge": 12,
+      "mean_total_phase_variation_rad": 9.81,
+      "mean_max_step_jump_rad": 0.77,
+      "nyquist_aliasing_rate": 0.167
+    },
+    {
+      "n_vars": 50,
+      "samples_per_edge": 12,
+      "mean_total_phase_variation_rad": 11.79,
+      "mean_max_step_jump_rad": 1.032,
+      "nyquist_aliasing_rate": 0.167
+    }
+  ],
+  "experiment_d_permutation_invariance": {
+    "n_vars": 30,
+    "alpha": 4.1,
+    "n_permutations": 10,
+    "without_canonicalization": {
+      "solve_rate": 1.0,
+      "mean_steps": 123.7,
+      "std_steps": 143.6
+    },
+    "with_spectral_canonicalization": {
+      "solve_rate": 1.0,
+      "mean_steps": 23.3,
+      "std_steps": 31.4
+    }
+  }
+}
