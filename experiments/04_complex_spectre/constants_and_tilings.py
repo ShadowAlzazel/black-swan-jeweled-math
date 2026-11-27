@@ -96,6 +96,19 @@ def load_dimacs_cnf(path: str) -> CNFInstance:
     return CNFInstance(n_vars=n_vars, clauses=clauses, name=path)
 
 
+def check_clause_widths(cnf: CNFInstance) -> None:
+    """
+    The packed solver arrays hold three literals per clause. Shorter clauses are
+    padded by repeating a literal (harmless for OR); longer clauses would be
+    silently truncated, so they are rejected instead (audit fix).
+    """
+    for ci, cl in enumerate(cnf.clauses):
+        if not 1 <= len(cl) <= 3:
+            raise ValueError(
+                f"clause {ci} has {len(cl)} literals; Experiment 04 handles 1-3 literals per clause"
+            )
+
+
 def generate_random_3sat(n_vars: int, alpha: float, seed: int = 0, planted: bool = False) -> CNFInstance:
     """Generate a random 3-SAT instance, optionally with a planted witness."""
     rng = np.random.default_rng(seed)
@@ -178,6 +191,26 @@ def spectral_canonical_order(cnf: CNFInstance) -> List[int]:
     return [k[3] for k in keys]
 
 
+def canonicalize_cnf(cnf: CNFInstance) -> CNFInstance:
+    """
+    Audit addition: reorder clauses, and literals inside each clause, by the
+    spectral canonical variable ranks. Variable names are unchanged, so a witness
+    for the result is a witness for the input. Variable canonicalization alone
+    leaves the solver sensitive to clause order (clause weights omega_c and the
+    violated-clause picks are indexed by clause position); this removes that.
+    """
+    order = spectral_canonical_order(cnf) if cnf.n_vars >= 2 else list(range(cnf.n_vars))
+    rank = {v: r for r, v in enumerate(order)}
+
+    def lit_key(lit: int) -> Tuple[int, int]:
+        return (rank[abs(lit) - 1], 0 if lit > 0 else 1)
+
+    clauses = [tuple(sorted(cl, key=lit_key)) for cl in cnf.clauses]
+    clauses.sort(key=lambda cl: [lit_key(l) for l in cl])
+    return CNFInstance(n_vars=cnf.n_vars, clauses=clauses, name=f"{cnf.name}_canonical",
+                       planted_witness=cnf.planted_witness)
+
+
 # ---------------------------------------------------------------------------
 # Dual Complex-Plane Transforms (C_in -> C_out)
 # ---------------------------------------------------------------------------
@@ -238,18 +271,58 @@ def disk_to_upper_half_plane(z: complex) -> complex:
 # ---------------------------------------------------------------------------
 def spectre_prototile_vertices(scale: float = 1.0, angle: float = 0.0, center: complex = 0j) -> List[complex]:
     """
-    Construct the 14-sided chiral Spectre monotile outline (Smith-Myers-Kaplan-Goodman-Strauss
-    Tile(1,1) base polygon with chiral edge orientation). Notice reflections are never applied:
-    all copies are produced strictly by rotation + translation.
+    The 14-vertex contour used by the delivered Experiment 04 solver.
+
+    AUDIT NOTE (audit_exp04.py): this is *not* the Spectre or Tile(1,1). Thirteen
+    unit steps are taken and the polygon is then closed implicitly; the closing
+    edge has length sqrt(7) ~= 2.646 at ~10.9 degrees instead of a unit edge at
+    270 degrees. The result is a simple (non-self-intersecting) 14-gon. It is kept
+    unchanged so the recorded benchmark reproduces exactly; use
+    spectre_tile11_vertices() for the true polygonal Tile(1,1). Copies are only
+    rotated and translated, never reflected.
     """
-    # Standard Tile(1,1) edge turn angles (multiples of 30 deg / pi/6) with unit edge length
-    # Yields a closed 14-gon whose chiral curved modification is the Spectre.
+    # Delivered headings (multiples of 30 deg). They are not the Tile(1,1) edge sequence
+    # (see TILE_AB_EDGES); only the first 13 are used and the polygon closes implicitly.
     headings_deg = [0, 60, 150, 90, 180, 120, 210, 150, 240, 300, 210, 270, 330, 270]
     pts = [0j]
     for h in headings_deg[:-1]:
         rad = math.radians(h)
         pts.append(pts[-1] + cmath.exp(1j * rad))
     # Center and normalize radius
+    mean_pt = sum(pts) / len(pts)
+    pts = [p - mean_pt for p in pts]
+    max_r = max(abs(p) for p in pts) or 1.0
+    rot = cmath.exp(1j * angle)
+    return [center + scale * (p / max_r) * rot for p in pts]
+
+
+# Edge sequence of the Smith-Myers-Kaplan-Goodman-Strauss family Tile(a, b):
+# (edge type, heading in degrees). Tile(1, sqrt 3) is the hat (area 8*sqrt 3 with
+# unit short edges), Tile(sqrt 3, 1) is the turtle, and Tile(1, 1) is the
+# equilateral polygon whose curved-edge version is the chiral Spectre.
+TILE_AB_EDGES: Tuple[Tuple[str, int], ...] = (
+    ("a", 0), ("a", 300), ("b", 30), ("b", 90), ("a", 0), ("a", 60), ("b", 150),
+    ("b", 210), ("a", 120), ("a", 180), ("a", 180), ("a", 240), ("b", 330), ("b", 270),
+)
+
+
+def tile_ab_vertices(a: float, b: float) -> List[complex]:
+    """Raw vertices of Tile(a, b); the edge sequence closes exactly for all a, b."""
+    pts = [0j]
+    for kind, heading in TILE_AB_EDGES[:-1]:
+        length = a if kind == "a" else b
+        pts.append(pts[-1] + length * cmath.exp(1j * math.radians(heading)))
+    return pts
+
+
+def spectre_tile11_vertices(scale: float = 1.0, angle: float = 0.0, center: complex = 0j) -> List[complex]:
+    """
+    True polygonal Tile(1, 1), centered and normalized exactly like
+    spectre_prototile_vertices() so the two contours can be swapped in audits.
+    (The Spectre replaces each straight edge by a point-symmetric curve, which
+    leaves the area unchanged.)
+    """
+    pts = tile_ab_vertices(1.0, 1.0)
     mean_pt = sum(pts) / len(pts)
     pts = [p - mean_pt for p in pts]
     max_r = max(abs(p) for p in pts) or 1.0
@@ -324,6 +397,7 @@ class EulerPhasorField:
         )
 
         # Prepack clause indices (in canonical rank space) and literal signs
+        check_clause_widths(cnf)
         self.c_vars = np.zeros((self.m, 3), dtype=np.int32)
         self.c_signs = np.zeros((self.m, 3), dtype=np.float64)
         for ci, cl in enumerate(cnf.clauses):
@@ -500,3 +574,23 @@ class FeigenbaumPhasonDriver:
             self.k = max(0, self.k - 1)
         else:
             self.k = min(6, self.k + 1)
+
+
+class PRNGPhasonDriver(FeigenbaumPhasonDriver):
+    """
+    Audit control: identical burst rule, amplitudes, angles, and level schedule,
+    but r is drawn from a seeded uniform PRNG instead of the logistic map. If the
+    solver behaves the same, the edge-of-chaos property is not what helps.
+    """
+
+    def __init__(self, seed: int = 0, level_k: int = 1):
+        super().__init__(level_k=level_k)
+        self._rng = np.random.default_rng(seed)
+
+    def next_kick(self) -> Tuple[float, complex, bool]:
+        self.step_count += 1
+        self.r = float(self._rng.random())
+        is_burst = (self.r < 0.22) or (self.r > 0.86)
+        amp = (FEIGENBAUM_ALPHA ** (-max(0, self.k - 1))) * (2.2 if is_burst else 0.45) * self.r
+        angle = self.step_count * PINWHEEL_ANGLE + (self.step_count % 3) * (2.0 * math.pi / PLASTIC_RHO)
+        return self.r, amp * cmath.exp(1j * angle), is_burst

@@ -1,5 +1,13 @@
 # Further Explorations: Frontier Mathematics & Algorithmic Directions
 
+> **Audit notes, added after checking Experiment 04.** The body below is the delivered text.
+>
+> * **#8.** The kneading sequence quoted here is verified: for the first 1,023 symbols it equals ν₂(j) mod 2, the parity of the 2-adic valuation. The same ruler function gives Gray-code flips, Luby's restart runs and the 2-adic absolute value, so #8 and #3 share one object (`experiments/04_complex_spectre/feigenbaum_renormalization.py`).
+> * **#1.** It has a one-variable version that makes a winding number count zeros: exponential sums with complex frequencies, whose zeros follow Pólya's indicator diagram.
+> * **#5.** The ρ² : ρ : 1 area ratio matches the letter frequencies of the substitution 1 → 2, 2 → 3, 3 → 12. The boundary dimension was not checked here.
+>
+> More connections and testable predictions are in [CALLBACKS_AND_NEXT_STEPS.md](CALLBACKS_AND_NEXT_STEPS.md).
+
 A curated roadmap of eight mathematical structures, unconventional physical analogies, and concrete coding experiments worth exploring next in `black-swan-jeweled-math`. Each direction includes **why it connects to SAT/tilings**, **what could break or surprise us**, and a **concrete prototype blueprint**.
 
 ---

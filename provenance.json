@@ -1,7 +1,7 @@
 {
   "format_version": 1,
   "project": "Black Swan Jeweled Math",
-  "description": "Consolidation of three experiment deliverables. Archive members retain their experiment directories; any compatibility changes are recorded under modifications.",
+  "description": "Consolidation of four experiment deliverables. Archive members retain their experiment directories; any compatibility changes are recorded under modifications, and audit files added afterwards under additions.",
   "archives": [
     {
       "source_archive": "Black_Swan_Jewel_Lab.zip",
@@ -254,15 +254,119 @@
           "repository_sha256": "ac59f30b5a2bbee371645b82f5dee333bb9de76e61176d197e02f9208e054218"
         }
       ]
+    },
+    {
+      "source_archive": "black_swan_exp04_new_material_clean.zip",
+      "archive_sha256": "2566555db61050981292ec399560f58fccdf36c378dd4549d8d87603aaad3eab",
+      "destination": "repository root (drop-in: docs/, experiments/04_complex_spectre/, web/)",
+      "file_count": 9,
+      "files": [
+        {
+          "path": "DROP_IN_MANIFEST.md",
+          "size_bytes": 2133,
+          "sha256": "1ea0f5a3bdda5f0d7ad5ff2d0baa080de3d7f63f2fa46fd770f84508f367c269",
+          "repository_sha256": null
+        },
+        {
+          "path": "docs/COMPLEX_SPECTRE_NOTES.md",
+          "size_bytes": 9778,
+          "sha256": "f907771ce4b2af9c6c2e6420354cc5657b06491db0f79a71af5d77e05d918014",
+          "repository_sha256": "c5f4392eb7354b6e4f6e88ef241dce6563c90e1c506e8cdc6228965da8d552c5"
+        },
+        {
+          "path": "docs/FURTHER_EXPLORATIONS.md",
+          "size_bytes": 9492,
+          "sha256": "f743210af721ed0dfed71444e14bdbb69cb2bdabee327b01231817de978a8770",
+          "repository_sha256": "763b7d867aee956321ca3aada335819e05407fe990ee56f5c9cf7ad0591be0ca"
+        },
+        {
+          "path": "experiments/04_complex_spectre/README.md",
+          "size_bytes": 4631,
+          "sha256": "6a014872758800bedf574c4d2f1cfc5089edb503999e35bf075600779af4341a",
+          "repository_sha256": "3d33399c5eb86142d2a709c99d874487df33a0506b7073345bb4ed8f0cf49937"
+        },
+        {
+          "path": "experiments/04_complex_spectre/constants_and_tilings.py",
+          "size_bytes": 21067,
+          "sha256": "96188ece2e67d9fbdbcda726403840732e07a005ded56d5f27f8a63aa57cf502",
+          "repository_sha256": "5fd63c704e1d87c51752b367614a2d05b3a1473e2bc5e704c5772a7d5499cca4"
+        },
+        {
+          "path": "experiments/04_complex_spectre/holomorphic_spectre_solver.py",
+          "size_bytes": 16888,
+          "sha256": "f777140a73d5746d2c3ee8f829ac3df112fa6faf252b7c2a4847db9b1064465c",
+          "repository_sha256": "979778571e2adcd5dbfbd1181524509017e70ae433bed54ff0cd960f57709d85"
+        },
+        {
+          "path": "experiments/04_complex_spectre/run_experiments.py",
+          "size_bytes": 8621,
+          "sha256": "13321fb485c13541bad6ebcfb567b8e00c129a6c9ce5a0880b075982ce324b49",
+          "repository_sha256": "13321fb485c13541bad6ebcfb567b8e00c129a6c9ce5a0880b075982ce324b49"
+        },
+        {
+          "path": "experiments/04_complex_spectre/spectre_benchmark_results.json",
+          "size_bytes": 4750,
+          "sha256": "e17dceab3c794e6d0799e9c8036f064dc50b634ab5c62e2c5d52c03b29caba6e",
+          "repository_sha256": "e17dceab3c794e6d0799e9c8036f064dc50b634ab5c62e2c5d52c03b29caba6e"
+        },
+        {
+          "path": "web/05_complex_julia_sat.html",
+          "size_bytes": 27028,
+          "sha256": "c9cbca9a620ddb0a602611b0eca8bd7c1933aa01d271aa873b1bf773c59e84b9",
+          "repository_sha256": "848a43c1bc9bc5d9426259fe6903ce13c063341587edc434674d3f95aa6fa886"
+        }
+      ],
+      "not_copied": [
+        {
+          "path": "DROP_IN_MANIFEST.md",
+          "reason": "Installation instructions for the drop-in; they were carried out instead of committed."
+        }
+      ]
     }
   ],
-  "total_files": 38,
+  "total_files": 46,
   "modifications": [
     {
       "path": "experiments/03_golden_sweep/run_sweep.py",
       "reason": "Allow geometry regeneration after consolidation: prefer the child tiling_research directory delivered alongside the sweep, then retain the original sibling fallback. Search equations and recorded results unchanged.",
       "original_archive_sha256": "ea20aafe305b1522525bfaddeb120e188da67c8405dde0af602b2185148a4b9e",
       "repository_sha256": "f2be9542faf0ac08f618ee46042620da7ae444d57f440d3002c212875ae0ab85"
+    },
+    {
+      "path": "docs/COMPLEX_SPECTRE_NOTES.md",
+      "reason": "Audit notes box added at the top and bracketed markers added beside corrected claims; delivered text otherwise unchanged.",
+      "original_archive_sha256": "f907771ce4b2af9c6c2e6420354cc5657b06491db0f79a71af5d77e05d918014",
+      "repository_sha256": "c5f4392eb7354b6e4f6e88ef241dce6563c90e1c506e8cdc6228965da8d552c5"
+    },
+    {
+      "path": "docs/FURTHER_EXPLORATIONS.md",
+      "reason": "Audit notes box added at the top; delivered text otherwise unchanged.",
+      "original_archive_sha256": "f743210af721ed0dfed71444e14bdbb69cb2bdabee327b01231817de978a8770",
+      "repository_sha256": "763b7d867aee956321ca3aada335819e05407fe990ee56f5c9cf7ad0591be0ca"
+    },
+    {
+      "path": "experiments/04_complex_spectre/README.md",
+      "reason": "Rewritten as the experiment report: delivered tables kept verbatim with audit findings beside them.",
+      "original_archive_sha256": "6a014872758800bedf574c4d2f1cfc5089edb503999e35bf075600779af4341a",
+      "repository_sha256": "3d33399c5eb86142d2a709c99d874487df33a0506b7073345bb4ed8f0cf49937"
+    },
+    {
+      "path": "experiments/04_complex_spectre/constants_and_tilings.py",
+      "reason": "Audit additions: reject clauses wider than three literals (previously truncated), true Tile(a, b) / Tile(1,1) vertices, canonicalize_cnf, PRNGPhasonDriver; spectre_prototile_vertices behavior unchanged but documented as a non-Spectre 14-gon. Default solver behavior and recorded results unchanged.",
+      "original_archive_sha256": "96188ece2e67d9fbdbcda726403840732e07a005ded56d5f27f8a63aa57cf502",
+      "repository_sha256": "5fd63c704e1d87c51752b367614a2d05b3a1473e2bc5e704c5772a7d5499cca4"
+    },
+    {
+      "path": "experiments/04_complex_spectre/holomorphic_spectre_solver.py",
+      "reason": "Audit additions: independent witness recheck before reporting success, opt-in ablation switches (init, use_gradient, driver, polygon, canonical_clauses), flip diagnostics, a standard WalkSAT control, and a --solver CLI option. Defaults reproduce every recorded non-timing field exactly.",
+      "original_archive_sha256": "f777140a73d5746d2c3ee8f829ac3df112fa6faf252b7c2a4847db9b1064465c",
+      "repository_sha256": "979778571e2adcd5dbfbd1181524509017e70ae433bed54ff0cd960f57709d85"
+    },
+    {
+      "path": "web/05_complex_julia_sat.html",
+      "reason": "Audit note and links added to the header; visualization unchanged.",
+      "original_archive_sha256": "c9cbca9a620ddb0a602611b0eca8bd7c1933aa01d271aa873b1bf773c59e84b9",
+      "repository_sha256": "848a43c1bc9bc5d9426259fe6903ce13c063341587edc434674d3f95aa6fa886"
     }
   ],
   "verification": {
@@ -275,9 +379,43 @@
         "Tiling: isolated rerun reproduced both selected formulas and all eight method outcomes exactly.",
         "Golden sweep: isolated exhaustive_small.py rerun reproduced all recorded JSON for 136680 toy searches exactly.",
         "Golden sweep: relocated tiling cache loads all three templates. Full 58176-run sweep was intentionally not rerun.",
-        "Golden sweep: removed the cache in isolation and rebuilt all three tiling templates exactly through the new child-directory fallback."
+        "Golden sweep: removed the cache in isolation and rebuilt all three tiling templates exactly through the new child-directory fallback.",
+        "Complex Spectre: run_experiments.py reproduced every recorded non-timing field exactly (Python 3.13 with NumPy 2.5.3 and with NumPy 2.3.5); recorded wall-clock times differ by machine.",
+        "Complex Spectre: every reported witness, including the CLI run on missed_sat_instance_35.cnf, rechecked by independent evaluators; exhaustive search finds exactly 9 solutions of that 18-variable instance."
       ]
     }
   },
-  "hash_convention": "sha256 records the original archive member; repository_sha256 records its current repository bytes."
+  "hash_convention": "sha256 records the original archive member; repository_sha256 records its current repository bytes.",
+  "additions": [
+    {
+      "path": "experiments/04_complex_spectre/audit_exp04.py",
+      "reason": "Independent audit of Experiment 04.",
+      "repository_sha256": "f61ea48a81aceb114a48210dfcfae8d6621302217758637ab73170bec60dbcc8"
+    },
+    {
+      "path": "experiments/04_complex_spectre/audit_results.json",
+      "reason": "Output of the full audit run (wall-clock fields are machine-dependent).",
+      "repository_sha256": "f531a0027f6fa6170a30a6fd9641191c3759c7995ddb7d3ddfe9bf25c76252be"
+    },
+    {
+      "path": "experiments/04_complex_spectre/feigenbaum_renormalization.py",
+      "reason": "Superstable cycles, renormalization eigenvalue, kneading and ruler-function checks.",
+      "repository_sha256": "a825b57cdf4d14dd4cc4787004444df6b798a9444acc9422301031840dd59522"
+    },
+    {
+      "path": "experiments/04_complex_spectre/feigenbaum_results.json",
+      "reason": "Output of feigenbaum_renormalization.py.",
+      "repository_sha256": "28890b6f43208fafd2bace7d96a4ac3c776feda07d5083436babbe46fbdc46c0"
+    },
+    {
+      "path": "web/06_conformal_jewels.html",
+      "reason": "Two-plane conformal tiling explorer; embeds hat patches derived from the BSD-3-Clause hat source and this repository's pinwheel patches.",
+      "repository_sha256": "4c187d46ad5aa48df7160b09d474fbe86cba09669ef793b391210b90ece88014"
+    },
+    {
+      "path": "docs/CALLBACKS_AND_NEXT_STEPS.md",
+      "reason": "Cross-field connections found while checking Experiment 04, with predictions.",
+      "repository_sha256": "f9939ddb57e95c515a2145665f63cd718829f10c6e4548fb5462638988c23d9a"
+    }
+  ]
 }

@@ -14,6 +14,8 @@ Open [web/index.html](web/index.html) in a browser. Everything runs locally, inc
 | [Quasicrystal lab](web/02_quasicrystal_lab.html) | Compare weight schedules and move a cut-and-project window. |
 | [Tiling lab](web/03_tiling_lab.html) | Refine actual hat and pinwheel patches, inspect adaptive penalties, and explore coprime lattice points. |
 | [Sweep results](web/04_sweep_results.html) | Compare constants and tilings on held-out formulas; inspect a fixed-weight trap and its adaptive escape. |
+| [Complex Julia-SAT lab](web/05_complex_julia_sat.html) | The delivered two-plane view of Experiment 04: phasor field, winding probe, Möbius zoom. |
+| [Conformal jewels](web/06_conformal_jewels.html) | Carry grids, hats, and pinwheels through eᶻ, z², tanh(z/2), or ℘; follow a tile between planes and apply Euler's identity. |
 
 ## Repository layout
 
@@ -22,17 +24,18 @@ experiments/
   01_initial_jewel/    First fixed-weight comparison and quasicrystal construction
   02_tiling_jewels/    Hat/pinwheel geometry and adaptive orientation weights
   03_golden_sweep/     Broad sweep, raw data, exact labels, audit, and toy obstruction
+  04_complex_spectre/  Two-plane phasor solver, recorded benchmark, independent audit, Feigenbaum check
 web/                  Standalone interactive explorers
 docs/                 Mathematical ideas, findings, and GitHub instructions
 provenance.json       Source archive hashes and consolidation checks
-requirements.txt      Python dependencies for the initial experiment
+requirements.txt      Python dependencies (NumPy, mpmath)
 ```
 
-Each experiment directory preserves its original scripts, data, and notes. The three stages are kept separately so the development of the ideas remains reproducible. Generated binaries and temporary files are ignored by Git.
+Each experiment directory preserves its original scripts, data, and notes. The four stages are kept separately so the development of the ideas remains reproducible. Later audits add files or opt-in switches beside the delivered code and say so; provenance.json records every change. Generated binaries and temporary files are ignored by Git.
 
 ## Reproduce the experiments
 
-Use Python 3.11 or newer. Only the initial experiment needs NumPy and mpmath:
+Use Python 3.11 or newer. The initial experiment and Experiment 04 need NumPy; their checks also use mpmath:
 
 ```sh
 python -m venv .venv
@@ -54,6 +57,15 @@ python experiments/03_golden_sweep/run_sweep.py
 python experiments/03_golden_sweep/permutation_stress.py
 python experiments/03_golden_sweep/audit_checks.py
 python experiments/03_golden_sweep/exhaustive_small.py
+```
+
+The complex-plane experiment, its audit, and the Feigenbaum check:
+
+```sh
+python experiments/04_complex_spectre/run_experiments.py
+python experiments/04_complex_spectre/holomorphic_spectre_solver.py experiments/03_golden_sweep/missed_sat_instance_35.cnf --steps 4000 --tiles 16
+python experiments/04_complex_spectre/audit_exp04.py
+python experiments/04_complex_spectre/feigenbaum_renormalization.py
 ```
 
 These commands regenerate results next to their scripts. To redraw the hat substitution from the retained authors' source, use Node.js:
@@ -81,6 +93,18 @@ Every reported solution was checked independently. Exact labeling found 89 SAT a
 The accompanying mathematical obstruction is narrower and exact: any fixed positive clause-position weights can be paired with seven three-variable clauses so strict one-bit descent stalls despite a unique solution. Adaptive weighting and escape moves are outside that obstruction.
 
 Read [the full sweep report](experiments/03_golden_sweep/START_HERE.md) and [the experimental protocol](experiments/03_golden_sweep/ENGINE_README.md) before interpreting the numerical rankings.
+
+## What the complex-plane experiment found
+
+Experiment 04 lifts each formula to a complex phasor field F_Φ on a plane, screens tiles by winding numbers, zooms with a Möbius lens, and adds a Feigenbaum logistic driver. Its recorded benchmark reproduces exactly. The independent audit found:
+
+* **Wrong instance size.** `missed_sat_instance_35.cnf` has 18 variables; the 35 is its instance id. The new solver and plain WalkSAT both solve it in all 100 seeds. It has exactly 9 solutions.
+* **Not holomorphic.** F_Φ depends on z̄, so a winding number counts vortices minus antivortices; Cauchy's argument principle does not apply. Its zeros are not solutions: none of 58 zeros found on 40 formulas rounded to one.
+* **A plane is a thin slice.** The disk shows 128 of the 262,144 assignments of the missed instance, and none of its solutions. In general, L lines make at most 1 + L + L(L−1)/2 cells, so seeing all 2^n assignments needs exponentially large frequencies.
+* **The geometry stages do not help.** Random starts are as good or better, and 3–4× faster. A plain PRNG works as well as the Feigenbaum driver. Step counts match WalkSAT's. The reported 5.3× permutation gain is the best of 20 formulas and not significant overall.
+* **The Feigenbaum numbers check out.** The quoted δ ratios are exactly those through period 512. δ, computed as the renormalization eigenvalue, is correct to 45 digits.
+
+See [the Experiment 04 report](experiments/04_complex_spectre/README.md), [the delivered notes with audit marks](docs/COMPLEX_SPECTRE_NOTES.md), and [callbacks and next steps](docs/CALLBACKS_AND_NEXT_STEPS.md).
 
 ## Related journey
 

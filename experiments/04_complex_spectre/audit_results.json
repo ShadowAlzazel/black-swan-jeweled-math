@@ -1,0 +1,2448 @@
+{
+  "audit": "Experiment 04 independent audit",
+  "python": "3.13.18",
+  "numpy": "2.5.3",
+  "quick_mode": false,
+  "0_reproduction": {
+    "non_timing_mismatches": [],
+    "exact_match_excluding_wall_clock": true,
+    "wall_clock_fields_recorded_vs_this_machine": [
+      [
+        "experiment_b_needle_stress_n35/solvers/golden_sweep/mean_elapsed_ms",
+        60.33,
+        27.1
+      ],
+      [
+        "experiment_b_needle_stress_n35/solvers/holomorphic_spectre/mean_elapsed_ms",
+        74.58,
+        33.06
+      ],
+      [
+        "experiment_b_needle_stress_n35/solvers/uniform_random_walk/mean_elapsed_ms",
+        28.75,
+        11.32
+      ]
+    ]
+  },
+  "1_constants": {
+    "constants": {
+      "PHI": {
+        "module": 1.618033988749895,
+        "reference": "1.618033988749894848204587",
+        "abs_error": 5.432115203682506e-17,
+        "ok_to_double_precision": true
+      },
+      "SILVER_RATIO": {
+        "module": 2.414213562373095,
+        "reference": "2.414213562373095048801689",
+        "abs_error": 1.2537167179050217e-16,
+        "ok_to_double_precision": true
+      },
+      "PLASTIC_RHO (real root of x^3-x-1)": {
+        "module": 1.324717957244746,
+        "reference": "1.324717957244746025960909",
+        "abs_error": 3.2304241313675826e-17,
+        "ok_to_double_precision": true
+      },
+      "PLASTIC_CONJ real part": {
+        "module": -0.662358978622373,
+        "reference": "-0.6623589786223730129804544",
+        "abs_error": 1.6152120656837913e-17,
+        "ok_to_double_precision": true
+      },
+      "PLASTIC_CONJ imag part": {
+        "module": 0.5622795120623013,
+        "reference": "0.5622795120623012438991821",
+        "abs_error": 6.819277873602512e-17,
+        "ok_to_double_precision": true
+      },
+      "FEIGENBAUM_DELTA": {
+        "module": 4.66920160910299,
+        "reference": "4.669201609102990671853204",
+        "abs_error": 2.4729302822256515e-16,
+        "ok_to_double_precision": true
+      },
+      "FEIGENBAUM_ALPHA (|alpha|)": {
+        "module": 2.5029078750958926,
+        "reference": "2.502907875095892822283903",
+        "abs_error": 1.9090535600352813e-16,
+        "ok_to_double_precision": true
+      },
+      "LOGISTIC_MU_INF": {
+        "module": 3.569945671870945,
+        "reference": "3.569945671870944901842005",
+        "abs_error": 9.85253442406686e-17,
+        "ok_to_double_precision": true
+      },
+      "MANDELBROT_C_INF = mu/2 - mu^2/4": {
+        "module": -1.4011551890920506,
+        "reference": "-1.401155189092050600523827",
+        "abs_error": 1.1963301305630969e-17,
+        "ok_to_double_precision": true
+      },
+      "PINWHEEL_ANGLE = atan(1/2)": {
+        "module": 0.4636476090008061,
+        "reference": "0.4636476090008061162142562",
+        "abs_error": 2.2698777452961687e-17,
+        "ok_to_double_precision": true
+      },
+      "GOLDEN_ANGLE = 2 pi / phi^2": {
+        "module": 2.399963229728653,
+        "reference": "2.399963229728653322231556",
+        "abs_error": 2.642277266603662e-16,
+        "ok_to_double_precision": true
+      }
+    },
+    "identities": {
+      "rho * |lambda|^2 = 1 (product of the three roots)": 0.0,
+      "|lambda| = rho^(-1/2)": 0.0,
+      "phi^2 - phi - 1": 0.0,
+      "golden angle in degrees": 137.50776405003785,
+      "pinwheel angle in degrees": 26.56505117707799
+    }
+  },
+  "2_geometry": {
+    "delivered_contour": {
+      "listed_unit_steps_used": 13,
+      "implicit_closing_edge_length": 2.645751,
+      "implicit_closing_edge_heading_deg": 10.893,
+      "intended_closing_edge": "length 1 at 270 deg (the unused last heading)",
+      "closing_edge_equals_sqrt7": true,
+      "area_unit_edges": 12.062178,
+      "self_intersections": 0
+    },
+    "tile_ab_family": {
+      "Tile(1, sqrt3) hat": {
+        "closure_gap": 1.0798491971559939e-15,
+        "area": 13.856406461,
+        "self_intersections": 0
+      },
+      "Tile(1, 1) spectre base": {
+        "closure_gap": 4.057416247971343e-16,
+        "area": 8.196152423,
+        "self_intersections": 0
+      },
+      "Tile(sqrt3, 1) turtle": {
+        "closure_gap": 6.336383091497824e-16,
+        "area": 17.320508076,
+        "self_intersections": 0
+      },
+      "hat area equals 8*sqrt(3) (8 kites)": true,
+      "Tile(1,1) area equals 3 + 3*sqrt(3)": true
+    },
+    "solver_mesh_coverage": {
+      "12 tiles, delivered 14-gon": {
+        "fraction_of_disk_covered": 0.457,
+        "fraction_of_disk_uncovered": 0.543,
+        "fraction_of_covered_area_overlapped": 0.025
+      },
+      "12 tiles, Tile(1,1)": {
+        "fraction_of_disk_covered": 0.399,
+        "fraction_of_disk_uncovered": 0.601,
+        "fraction_of_covered_area_overlapped": 0.041
+      },
+      "16 tiles, delivered 14-gon": {
+        "fraction_of_disk_covered": 0.444,
+        "fraction_of_disk_uncovered": 0.556,
+        "fraction_of_covered_area_overlapped": 0.046
+      },
+      "16 tiles, Tile(1,1)": {
+        "fraction_of_disk_covered": 0.392,
+        "fraction_of_disk_uncovered": 0.608,
+        "fraction_of_covered_area_overlapped": 0.06
+      }
+    }
+  },
+  "3_holomorphy": {
+    "missed_sat_instance_35 (n=18)": {
+      "median_|dF/dzbar|/|dF/dz|": 1.087,
+      "fraction_orientation_reversing (Jacobian < 0)": 0.555,
+      "holomorphic_would_give": "ratio 0 everywhere and Jacobian >= 0"
+    },
+    "Experiment B formula 0 (n=35)": {
+      "median_|dF/dzbar|/|dF/dz|": 0.833,
+      "fraction_orientation_reversing (Jacobian < 0)": 0.448,
+      "holomorphic_would_give": "ratio 0 everywhere and Jacobian >= 0"
+    }
+  },
+  "4_zeros": {
+    "missed_sat_instance_35 (n=18)": {
+      "instance": "missed_sat_instance_35 (n=18)",
+      "region": "square [-0.9, 0.9]^2",
+      "vortices(+1)": 0,
+      "antivortices(-1)": 0,
+      "higher_charge_cells": 0,
+      "coarse_grid_counts(+,-)": [
+        0,
+        0
+      ],
+      "max_edge_phase_step_rad_fine_grid": 0.021,
+      "dense_boundary_winding_of_square": -0.0,
+      "degree_identity_holds (W = N+ - N-)": true,
+      "jacobian_sign_matches_charge_fraction": 1.0,
+      "unsat_at_zeros": {
+        "min": null,
+        "mean": null,
+        "satisfying_zeros": 0
+      },
+      "unsat_over_region": {
+        "min": 2,
+        "mean": 8.47
+      },
+      "spearman(|F|, unsat count)": 0.042,
+      "spearman(E(theta(z)), unsat count)": 0.806,
+      "solver_tiles": [
+        {
+          "tile": 0,
+          "W_6_samples_per_edge": 0.0,
+          "W_dense": -0.0,
+          "vortices_inside": 0,
+          "antivortices_inside": 0
+        },
+        {
+          "tile": 1,
+          "W_6_samples_per_edge": 0.0,
+          "W_dense": 0.0,
+          "vortices_inside": 0,
+          "antivortices_inside": 0
+        },
+        {
+          "tile": 2,
+          "W_6_samples_per_edge": 0.0,
+          "W_dense": 0.0,
+          "vortices_inside": 0,
+          "antivortices_inside": 0
+        },
+        {
+          "tile": 3,
+          "W_6_samples_per_edge": 0.0,
+          "W_dense": -0.0,
+          "vortices_inside": 0,
+          "antivortices_inside": 0
+        },
+        {
+          "tile": 4,
+          "W_6_samples_per_edge": -0.0,
+          "W_dense": 0.0,
+          "vortices_inside": 0,
+          "antivortices_inside": 0
+        },
+        {
+          "tile": 5,
+          "W_6_samples_per_edge": 0.0,
+          "W_dense": -0.0,
+          "vortices_inside": 0,
+          "antivortices_inside": 0
+        },
+        {
+          "tile": 6,
+          "W_6_samples_per_edge": -0.0,
+          "W_dense": 0.0,
+          "vortices_inside": 0,
+          "antivortices_inside": 0
+        },
+        {
+          "tile": 7,
+          "W_6_samples_per_edge": -0.0,
+          "W_dense": -0.0,
+          "vortices_inside": 0,
+          "antivortices_inside": 0
+        },
+        {
+          "tile": 8,
+          "W_6_samples_per_edge": -0.0,
+          "W_dense": -0.0,
+          "vortices_inside": 0,
+          "antivortices_inside": 0
+        },
+        {
+          "tile": 9,
+          "W_6_samples_per_edge": 0.0,
+          "W_dense": -0.0,
+          "vortices_inside": 0,
+          "antivortices_inside": 0
+        },
+        {
+          "tile": 10,
+          "W_6_samples_per_edge": -0.0,
+          "W_dense": 0.0,
+          "vortices_inside": 0,
+          "antivortices_inside": 0
+        },
+        {
+          "tile": 11,
+          "W_6_samples_per_edge": -0.0,
+          "W_dense": 0.0,
+          "vortices_inside": 0,
+          "antivortices_inside": 0
+        },
+        {
+          "tile": 12,
+          "W_6_samples_per_edge": -0.0,
+          "W_dense": -0.0,
+          "vortices_inside": 0,
+          "antivortices_inside": 0
+        },
+        {
+          "tile": 13,
+          "W_6_samples_per_edge": 0.0,
+          "W_dense": 0.0,
+          "vortices_inside": 0,
+          "antivortices_inside": 0
+        },
+        {
+          "tile": 14,
+          "W_6_samples_per_edge": -0.0,
+          "W_dense": -0.0,
+          "vortices_inside": 0,
+          "antivortices_inside": 0
+        },
+        {
+          "tile": 15,
+          "W_6_samples_per_edge": 0.0,
+          "W_dense": -0.0,
+          "vortices_inside": 0,
+          "antivortices_inside": 0
+        }
+      ],
+      "tiles_with_W_0_that_contain_zeros": 0,
+      "tiles_with_nonzero_W_at_6_samples": 0
+    },
+    "Experiment B formula 0 (n=35)": {
+      "instance": "Experiment B formula 0 (n=35)",
+      "region": "square [-0.9, 0.9]^2",
+      "vortices(+1)": 1,
+      "antivortices(-1)": 1,
+      "higher_charge_cells": 0,
+      "coarse_grid_counts(+,-)": [
+        1,
+        1
+      ],
+      "max_edge_phase_step_rad_fine_grid": 2.772,
+      "dense_boundary_winding_of_square": 0.0,
+      "degree_identity_holds (W = N+ - N-)": true,
+      "jacobian_sign_matches_charge_fraction": 1.0,
+      "unsat_at_zeros": {
+        "min": 21,
+        "mean": 21.5,
+        "satisfying_zeros": 0
+      },
+      "unsat_over_region": {
+        "min": 12,
+        "mean": 20.65
+      },
+      "spearman(|F|, unsat count)": -0.016,
+      "spearman(E(theta(z)), unsat count)": 0.722,
+      "solver_tiles": [
+        {
+          "tile": 0,
+          "W_6_samples_per_edge": -0.0,
+          "W_dense": 0.0,
+          "vortices_inside": 0,
+          "antivortices_inside": 0
+        },
+        {
+          "tile": 1,
+          "W_6_samples_per_edge": -0.0,
+          "W_dense": -0.0,
+          "vortices_inside": 0,
+          "antivortices_inside": 0
+        },
+        {
+          "tile": 2,
+          "W_6_samples_per_edge": 0.0,
+          "W_dense": 0.0,
+          "vortices_inside": 0,
+          "antivortices_inside": 0
+        },
+        {
+          "tile": 3,
+          "W_6_samples_per_edge": -0.0,
+          "W_dense": -0.0,
+          "vortices_inside": 0,
+          "antivortices_inside": 0
+        },
+        {
+          "tile": 4,
+          "W_6_samples_per_edge": 0.0,
+          "W_dense": -0.0,
+          "vortices_inside": 0,
+          "antivortices_inside": 0
+        },
+        {
+          "tile": 5,
+          "W_6_samples_per_edge": 0.0,
+          "W_dense": -0.0,
+          "vortices_inside": 0,
+          "antivortices_inside": 0
+        },
+        {
+          "tile": 6,
+          "W_6_samples_per_edge": -0.0,
+          "W_dense": -0.0,
+          "vortices_inside": 0,
+          "antivortices_inside": 0
+        },
+        {
+          "tile": 7,
+          "W_6_samples_per_edge": 0.0,
+          "W_dense": 0.0,
+          "vortices_inside": 0,
+          "antivortices_inside": 0
+        },
+        {
+          "tile": 8,
+          "W_6_samples_per_edge": -0.0,
+          "W_dense": 0.0,
+          "vortices_inside": 0,
+          "antivortices_inside": 0
+        },
+        {
+          "tile": 9,
+          "W_6_samples_per_edge": -1.0,
+          "W_dense": -1.0,
+          "vortices_inside": 0,
+          "antivortices_inside": 1
+        },
+        {
+          "tile": 10,
+          "W_6_samples_per_edge": 0.0,
+          "W_dense": 0.0,
+          "vortices_inside": 0,
+          "antivortices_inside": 0
+        },
+        {
+          "tile": 11,
+          "W_6_samples_per_edge": -0.0,
+          "W_dense": 0.0,
+          "vortices_inside": 0,
+          "antivortices_inside": 0
+        },
+        {
+          "tile": 12,
+          "W_6_samples_per_edge": -0.0,
+          "W_dense": 0.0,
+          "vortices_inside": 0,
+          "antivortices_inside": 0
+        },
+        {
+          "tile": 13,
+          "W_6_samples_per_edge": 0.0,
+          "W_dense": 0.0,
+          "vortices_inside": 0,
+          "antivortices_inside": 0
+        },
+        {
+          "tile": 14,
+          "W_6_samples_per_edge": 0.0,
+          "W_dense": -0.0,
+          "vortices_inside": 0,
+          "antivortices_inside": 0
+        },
+        {
+          "tile": 15,
+          "W_6_samples_per_edge": -0.0,
+          "W_dense": -0.0,
+          "vortices_inside": 0,
+          "antivortices_inside": 0
+        }
+      ],
+      "tiles_with_W_0_that_contain_zeros": 0,
+      "tiles_with_nonzero_W_at_6_samples": 1
+    },
+    "across_exp04_formulas": {
+      "formulas": 40,
+      "field_setting": "solver setting: freq_scale=1, canonicalized, jitter seed = run seed",
+      "region": "disk |z| < 0.88 (where the solver's tiles live)",
+      "total_vortices": 27,
+      "total_antivortices": 31,
+      "formulas_without_any_zero": 7,
+      "mean_unsat_at_zeros": 19.26,
+      "mean_unsat_over_region": 18.58,
+      "mean_best_unsat_over_region": 10.07,
+      "satisfying_zeros": 0,
+      "per_formula": [
+        {
+          "formula": 0,
+          "vortices": 1,
+          "antivortices": 1
+        },
+        {
+          "formula": 1,
+          "vortices": 1,
+          "antivortices": 1
+        },
+        {
+          "formula": 2,
+          "vortices": 0,
+          "antivortices": 2
+        },
+        {
+          "formula": 3,
+          "vortices": 1,
+          "antivortices": 0
+        },
+        {
+          "formula": 4,
+          "vortices": 0,
+          "antivortices": 1
+        },
+        {
+          "formula": 5,
+          "vortices": 1,
+          "antivortices": 0
+        },
+        {
+          "formula": 6,
+          "vortices": 0,
+          "antivortices": 0
+        },
+        {
+          "formula": 7,
+          "vortices": 0,
+          "antivortices": 1
+        },
+        {
+          "formula": 8,
+          "vortices": 2,
+          "antivortices": 2
+        },
+        {
+          "formula": 9,
+          "vortices": 1,
+          "antivortices": 1
+        },
+        {
+          "formula": 10,
+          "vortices": 1,
+          "antivortices": 2
+        },
+        {
+          "formula": 11,
+          "vortices": 0,
+          "antivortices": 1
+        },
+        {
+          "formula": 12,
+          "vortices": 0,
+          "antivortices": 0
+        },
+        {
+          "formula": 13,
+          "vortices": 0,
+          "antivortices": 0
+        },
+        {
+          "formula": 14,
+          "vortices": 1,
+          "antivortices": 0
+        },
+        {
+          "formula": 15,
+          "vortices": 0,
+          "antivortices": 0
+        },
+        {
+          "formula": 16,
+          "vortices": 0,
+          "antivortices": 1
+        },
+        {
+          "formula": 17,
+          "vortices": 0,
+          "antivortices": 1
+        },
+        {
+          "formula": 18,
+          "vortices": 1,
+          "antivortices": 0
+        },
+        {
+          "formula": 19,
+          "vortices": 1,
+          "antivortices": 1
+        },
+        {
+          "formula": 20,
+          "vortices": 1,
+          "antivortices": 1
+        },
+        {
+          "formula": 21,
+          "vortices": 1,
+          "antivortices": 2
+        },
+        {
+          "formula": 22,
+          "vortices": 1,
+          "antivortices": 1
+        },
+        {
+          "formula": 23,
+          "vortices": 0,
+          "antivortices": 1
+        },
+        {
+          "formula": 24,
+          "vortices": 0,
+          "antivortices": 0
+        },
+        {
+          "formula": 25,
+          "vortices": 1,
+          "antivortices": 1
+        },
+        {
+          "formula": 26,
+          "vortices": 0,
+          "antivortices": 0
+        },
+        {
+          "formula": 27,
+          "vortices": 1,
+          "antivortices": 0
+        },
+        {
+          "formula": 28,
+          "vortices": 2,
+          "antivortices": 1
+        },
+        {
+          "formula": 29,
+          "vortices": 1,
+          "antivortices": 0
+        },
+        {
+          "formula": 30,
+          "vortices": 1,
+          "antivortices": 1
+        },
+        {
+          "formula": 31,
+          "vortices": 1,
+          "antivortices": 0
+        },
+        {
+          "formula": 32,
+          "vortices": 1,
+          "antivortices": 0
+        },
+        {
+          "formula": 33,
+          "vortices": 1,
+          "antivortices": 1
+        },
+        {
+          "formula": 34,
+          "vortices": 0,
+          "antivortices": 3
+        },
+        {
+          "formula": 35,
+          "vortices": 0,
+          "antivortices": 1
+        },
+        {
+          "formula": 36,
+          "vortices": 0,
+          "antivortices": 0
+        },
+        {
+          "formula": 37,
+          "vortices": 2,
+          "antivortices": 1
+        },
+        {
+          "formula": 38,
+          "vortices": 1,
+          "antivortices": 1
+        },
+        {
+          "formula": 39,
+          "vortices": 1,
+          "antivortices": 1
+        }
+      ]
+    }
+  },
+  "5_reachability": {
+    "missed_instance_unit_disk": {
+      "n": 18,
+      "assignments_total": 262144,
+      "distinct_assignments_in_unit_disk": 128,
+      "line_arrangement_upper_bound": 211,
+      "lines_cos_theta_zero_in_disk": 20,
+      "satisfying_assignments_total": 9,
+      "satisfying_assignments_reachable_in_disk": 0,
+      "min_unsat_in_disk": 2
+    },
+    "scaling_planted_alpha_4.2": [
+      {
+        "n": 6,
+        "log2_assignments": 6,
+        "freq_scale_1": {
+          "distinct_in_disk": 16,
+          "upper_bound": 22,
+          "lines": 6
+        },
+        "freq_scale_sqrt_n_over_2.5": {
+          "distinct_in_disk": 15,
+          "upper_bound": 22,
+          "lines": 6
+        }
+      },
+      {
+        "n": 10,
+        "log2_assignments": 10,
+        "freq_scale_1": {
+          "distinct_in_disk": 38,
+          "upper_bound": 56,
+          "lines": 10
+        },
+        "freq_scale_sqrt_n_over_2.5": {
+          "distinct_in_disk": 64,
+          "upper_bound": 121,
+          "lines": 15
+        }
+      },
+      {
+        "n": 16,
+        "log2_assignments": 16,
+        "freq_scale_1": {
+          "distinct_in_disk": 98,
+          "upper_bound": 154,
+          "lines": 17
+        },
+        "freq_scale_sqrt_n_over_2.5": {
+          "distinct_in_disk": 246,
+          "upper_bound": 466,
+          "lines": 30
+        }
+      },
+      {
+        "n": 24,
+        "log2_assignments": 24,
+        "freq_scale_1": {
+          "distinct_in_disk": 249,
+          "upper_bound": 466,
+          "lines": 30
+        },
+        "freq_scale_sqrt_n_over_2.5": {
+          "distinct_in_disk": 967,
+          "upper_bound": 1892,
+          "lines": 61
+        }
+      },
+      {
+        "n": 35,
+        "log2_assignments": 35,
+        "freq_scale_1": {
+          "distinct_in_disk": 642,
+          "upper_bound": 1226,
+          "lines": 49
+        },
+        "freq_scale_sqrt_n_over_2.5": {
+          "distinct_in_disk": 3467,
+          "upper_bound": 7022,
+          "lines": 118
+        }
+      },
+      {
+        "n": 50,
+        "log2_assignments": 50,
+        "freq_scale_1": {
+          "distinct_in_disk": 1517,
+          "upper_bound": 3004,
+          "lines": 77
+        },
+        "freq_scale_sqrt_n_over_2.5": {
+          "distinct_in_disk": 11545,
+          "upper_bound": 24091,
+          "lines": 219
+        }
+      },
+      {
+        "n": 100,
+        "log2_assignments": 100,
+        "freq_scale_1": {
+          "distinct_in_disk": 9967,
+          "upper_bound": 20707,
+          "lines": 203
+        },
+        "freq_scale_sqrt_n_over_2.5": {
+          "distinct_in_disk": 128665,
+          "upper_bound": 345697,
+          "lines": 831
+        }
+      }
+    ],
+    "minimum_frequency_for_full_coverage": {
+      "18": {
+        "lines_needed_for_2^n_faces": 724,
+        "max_wavevector_needed_unit_disk": 61.61012259539983
+      },
+      "35": {
+        "lines_needed_for_2^n_faces": 262144,
+        "max_wavevector_needed_unit_disk": 11763.424411996672
+      },
+      "50": {
+        "lines_needed_for_2^n_faces": 47453133,
+        "max_wavevector_needed_unit_disk": 1490782.569429867
+      },
+      "100": {
+        "lines_needed_for_2^n_faces": 1592262918131443,
+        "max_wavevector_needed_unit_disk": 25011207430924.367
+      }
+    },
+    "note": "Faces of an arrangement of L lines number at most 1 + L + C(L,2), so a 2-D slice of the n-torus shows O(L^2) assignments."
+  },
+  "6_ablations": {
+    "exp03_sat_formulas_all": {
+      "formulas": 89,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "budget_steps": 1000,
+      "results": {
+        "holomorphic_spectre (delivered)": {
+          "solved": 262,
+          "runs": 267,
+          "solve_rate": 0.981,
+          "wilson_95": [
+            0.957,
+            0.992
+          ],
+          "median_steps_failures_as_budget+1": 20.0,
+          "mean_steps_when_solved": 74.9,
+          "mean_ms": 21.4,
+          "explicit_phase_flips_total": 26035,
+          "rounded_bit_changes_total": 25905,
+          "winding_hits_per_run": 0.652
+        },
+        "  ablation: random starts, no tiles/Mobius": {
+          "solved": 264,
+          "runs": 267,
+          "solve_rate": 0.989,
+          "wilson_95": [
+            0.967,
+            0.996
+          ],
+          "median_steps_failures_as_budget+1": 20.0,
+          "mean_steps_when_solved": 77.3,
+          "mean_ms": 5.32,
+          "vs_delivered": {
+            "solved_only_by_this": 3,
+            "solved_only_by_delivered": 1,
+            "runs_with_fewer_steps": 121,
+            "runs_with_more_steps": 132,
+            "sign_test_p_steps": 0.5296
+          },
+          "explicit_phase_flips_total": 24676,
+          "rounded_bit_changes_total": 24608,
+          "winding_hits_per_run": 0.0
+        },
+        "  ablation: no gradient steps": {
+          "solved": 262,
+          "runs": 267,
+          "solve_rate": 0.981,
+          "wilson_95": [
+            0.957,
+            0.992
+          ],
+          "median_steps_failures_as_budget+1": 39.0,
+          "mean_steps_when_solved": 94.8,
+          "mean_ms": 21.62,
+          "vs_delivered": {
+            "solved_only_by_this": 4,
+            "solved_only_by_delivered": 4,
+            "runs_with_fewer_steps": 75,
+            "runs_with_more_steps": 168,
+            "sign_test_p_steps": 0.0
+          },
+          "explicit_phase_flips_total": 31782,
+          "rounded_bit_changes_total": 30520,
+          "winding_hits_per_run": 0.652
+        },
+        "  ablation: PRNG instead of logistic map": {
+          "solved": 263,
+          "runs": 267,
+          "solve_rate": 0.985,
+          "wilson_95": [
+            0.962,
+            0.994
+          ],
+          "median_steps_failures_as_budget+1": 18.0,
+          "mean_steps_when_solved": 75.7,
+          "mean_ms": 21.91,
+          "vs_delivered": {
+            "solved_only_by_this": 4,
+            "solved_only_by_delivered": 3,
+            "runs_with_fewer_steps": 112,
+            "runs_with_more_steps": 131,
+            "sign_test_p_steps": 0.2482
+          },
+          "explicit_phase_flips_total": 25145,
+          "rounded_bit_changes_total": 25281,
+          "winding_hits_per_run": 0.652
+        },
+        "  variant: true Tile(1,1) contour": {
+          "solved": 261,
+          "runs": 267,
+          "solve_rate": 0.978,
+          "wilson_95": [
+            0.952,
+            0.99
+          ],
+          "median_steps_failures_as_budget+1": 17.0,
+          "mean_steps_when_solved": 72.5,
+          "mean_ms": 21.27,
+          "vs_delivered": {
+            "solved_only_by_this": 3,
+            "solved_only_by_delivered": 4,
+            "runs_with_fewer_steps": 81,
+            "runs_with_more_steps": 70,
+            "sign_test_p_steps": 0.4159
+          },
+          "explicit_phase_flips_total": 26384,
+          "rounded_bit_changes_total": 26264,
+          "winding_hits_per_run": 0.566
+        },
+        "  variant: no canonicalization": {
+          "solved": 265,
+          "runs": 267,
+          "solve_rate": 0.993,
+          "wilson_95": [
+            0.973,
+            0.998
+          ],
+          "median_steps_failures_as_budget+1": 18.0,
+          "mean_steps_when_solved": 78.2,
+          "mean_ms": 20.78,
+          "vs_delivered": {
+            "solved_only_by_this": 4,
+            "solved_only_by_delivered": 1,
+            "runs_with_fewer_steps": 126,
+            "runs_with_more_steps": 134,
+            "sign_test_p_steps": 0.6643
+          },
+          "explicit_phase_flips_total": 23987,
+          "rounded_bit_changes_total": 23941,
+          "winding_hits_per_run": 0.61
+        },
+        "golden_sweep (delivered control)": {
+          "solved": 193,
+          "runs": 267,
+          "solve_rate": 0.723,
+          "wilson_95": [
+            0.666,
+            0.773
+          ],
+          "median_steps_failures_as_budget+1": 144.0,
+          "mean_steps_when_solved": 149.9,
+          "mean_ms": 10.74,
+          "vs_delivered": {
+            "solved_only_by_this": 2,
+            "solved_only_by_delivered": 71,
+            "runs_with_fewer_steps": 55,
+            "runs_with_more_steps": 206,
+            "sign_test_p_steps": 0.0
+          }
+        },
+        "uniform_random_walk (delivered control)": {
+          "solved": 264,
+          "runs": 267,
+          "solve_rate": 0.989,
+          "wilson_95": [
+            0.967,
+            0.996
+          ],
+          "median_steps_failures_as_budget+1": 28.0,
+          "mean_steps_when_solved": 83.2,
+          "mean_ms": 3.34,
+          "vs_delivered": {
+            "solved_only_by_this": 5,
+            "solved_only_by_delivered": 3,
+            "runs_with_fewer_steps": 97,
+            "runs_with_more_steps": 162,
+            "sign_test_p_steps": 0.0001
+          }
+        },
+        "walksat p=0.5 (Exp 03 control rule)": {
+          "solved": 264,
+          "runs": 267,
+          "solve_rate": 0.989,
+          "wilson_95": [
+            0.967,
+            0.996
+          ],
+          "median_steps_failures_as_budget+1": 21.0,
+          "mean_steps_when_solved": 61.5,
+          "mean_ms": 6.34,
+          "vs_delivered": {
+            "solved_only_by_this": 5,
+            "solved_only_by_delivered": 3,
+            "runs_with_fewer_steps": 125,
+            "runs_with_more_steps": 134,
+            "sign_test_p_steps": 0.6192
+          }
+        }
+      },
+      "context": "Experiment 03 (held-out, 1000-flip cap): WalkSAT 129/129, frozen pinwheel 120/129, Breakout 116/129"
+    },
+    "exp03_sat_formulas_heldout_test": {
+      "budget_steps": 1000,
+      "results": {
+        "holomorphic_spectre (delivered)": {
+          "solved": 125,
+          "runs": 129,
+          "solve_rate": 0.969,
+          "wilson_95": [
+            0.923,
+            0.988
+          ],
+          "median_steps_failures_as_budget+1": 19.0,
+          "mean_steps_when_solved": 62.4,
+          "mean_ms": 21.25,
+          "explicit_phase_flips_total": 12531,
+          "rounded_bit_changes_total": 12478,
+          "winding_hits_per_run": 0.721
+        },
+        "  ablation: random starts, no tiles/Mobius": {
+          "solved": 126,
+          "runs": 129,
+          "solve_rate": 0.977,
+          "wilson_95": [
+            0.934,
+            0.992
+          ],
+          "median_steps_failures_as_budget+1": 17.0,
+          "mean_steps_when_solved": 61.3,
+          "mean_ms": 4.98,
+          "vs_delivered": {
+            "solved_only_by_this": 2,
+            "solved_only_by_delivered": 1,
+            "runs_with_fewer_steps": 54,
+            "runs_with_more_steps": 67,
+            "sign_test_p_steps": 0.2753
+          },
+          "explicit_phase_flips_total": 11312,
+          "rounded_bit_changes_total": 11299,
+          "winding_hits_per_run": 0.0
+        },
+        "  ablation: no gradient steps": {
+          "solved": 127,
+          "runs": 129,
+          "solve_rate": 0.984,
+          "wilson_95": [
+            0.945,
+            0.996
+          ],
+          "median_steps_failures_as_budget+1": 34.0,
+          "mean_steps_when_solved": 96.8,
+          "mean_ms": 21.6,
+          "vs_delivered": {
+            "solved_only_by_this": 3,
+            "solved_only_by_delivered": 1,
+            "runs_with_fewer_steps": 35,
+            "runs_with_more_steps": 80,
+            "sign_test_p_steps": 0.0
+          },
+          "explicit_phase_flips_total": 15220,
+          "rounded_bit_changes_total": 14659,
+          "winding_hits_per_run": 0.721
+        },
+        "  ablation: PRNG instead of logistic map": {
+          "solved": 129,
+          "runs": 129,
+          "solve_rate": 1.0,
+          "wilson_95": [
+            0.971,
+            1.0
+          ],
+          "median_steps_failures_as_budget+1": 18.0,
+          "mean_steps_when_solved": 85.8,
+          "mean_ms": 21.5,
+          "vs_delivered": {
+            "solved_only_by_this": 4,
+            "solved_only_by_delivered": 0,
+            "runs_with_fewer_steps": 58,
+            "runs_with_more_steps": 61,
+            "sign_test_p_steps": 0.8546
+          },
+          "explicit_phase_flips_total": 11672,
+          "rounded_bit_changes_total": 11734,
+          "winding_hits_per_run": 0.721
+        },
+        "  variant: true Tile(1,1) contour": {
+          "solved": 125,
+          "runs": 129,
+          "solve_rate": 0.969,
+          "wilson_95": [
+            0.923,
+            0.988
+          ],
+          "median_steps_failures_as_budget+1": 15.0,
+          "mean_steps_when_solved": 63.6,
+          "mean_ms": 21.31,
+          "vs_delivered": {
+            "solved_only_by_this": 2,
+            "solved_only_by_delivered": 2,
+            "runs_with_fewer_steps": 41,
+            "runs_with_more_steps": 32,
+            "sign_test_p_steps": 0.3492
+          },
+          "explicit_phase_flips_total": 12677,
+          "rounded_bit_changes_total": 12616,
+          "winding_hits_per_run": 0.574
+        },
+        "  variant: no canonicalization": {
+          "solved": 128,
+          "runs": 129,
+          "solve_rate": 0.992,
+          "wilson_95": [
+            0.957,
+            0.999
+          ],
+          "median_steps_failures_as_budget+1": 16.0,
+          "mean_steps_when_solved": 68.2,
+          "mean_ms": 20.26,
+          "vs_delivered": {
+            "solved_only_by_this": 3,
+            "solved_only_by_delivered": 0,
+            "runs_with_fewer_steps": 66,
+            "runs_with_more_steps": 59,
+            "sign_test_p_steps": 0.5917
+          },
+          "explicit_phase_flips_total": 10233,
+          "rounded_bit_changes_total": 10226,
+          "winding_hits_per_run": 0.574
+        },
+        "golden_sweep (delivered control)": {
+          "solved": 99,
+          "runs": 129,
+          "solve_rate": 0.767,
+          "wilson_95": [
+            0.687,
+            0.832
+          ],
+          "median_steps_failures_as_budget+1": 135.0,
+          "mean_steps_when_solved": 149.3,
+          "mean_ms": 9.64,
+          "vs_delivered": {
+            "solved_only_by_this": 2,
+            "solved_only_by_delivered": 28,
+            "runs_with_fewer_steps": 30,
+            "runs_with_more_steps": 96,
+            "sign_test_p_steps": 0.0
+          }
+        },
+        "uniform_random_walk (delivered control)": {
+          "solved": 128,
+          "runs": 129,
+          "solve_rate": 0.992,
+          "wilson_95": [
+            0.957,
+            0.999
+          ],
+          "median_steps_failures_as_budget+1": 24.0,
+          "mean_steps_when_solved": 72.6,
+          "mean_ms": 2.88,
+          "vs_delivered": {
+            "solved_only_by_this": 4,
+            "solved_only_by_delivered": 1,
+            "runs_with_fewer_steps": 49,
+            "runs_with_more_steps": 75,
+            "sign_test_p_steps": 0.0244
+          }
+        },
+        "walksat p=0.5 (Exp 03 control rule)": {
+          "solved": 127,
+          "runs": 129,
+          "solve_rate": 0.984,
+          "wilson_95": [
+            0.945,
+            0.996
+          ],
+          "median_steps_failures_as_budget+1": 19.0,
+          "mean_steps_when_solved": 58.5,
+          "mean_ms": 6.42,
+          "vs_delivered": {
+            "solved_only_by_this": 4,
+            "solved_only_by_delivered": 2,
+            "runs_with_fewer_steps": 62,
+            "runs_with_more_steps": 66,
+            "sign_test_p_steps": 0.791
+          }
+        }
+      }
+    },
+    "exp03_by_family": {
+      "planted": {
+        "holomorphic_spectre (delivered)": {
+          "solved": 96,
+          "runs": 96,
+          "solve_rate": 1.0,
+          "wilson_95": [
+            0.962,
+            1.0
+          ],
+          "median_steps_failures_as_budget+1": 13.5,
+          "mean_steps_when_solved": 65.8,
+          "mean_ms": 20.03,
+          "explicit_phase_flips_total": 6624,
+          "rounded_bit_changes_total": 6644,
+          "winding_hits_per_run": 0.635
+        },
+        "  ablation: random starts, no tiles/Mobius": {
+          "solved": 96,
+          "runs": 96,
+          "solve_rate": 1.0,
+          "wilson_95": [
+            0.962,
+            1.0
+          ],
+          "median_steps_failures_as_budget+1": 13.5,
+          "mean_steps_when_solved": 50.2,
+          "mean_ms": 3.48,
+          "vs_delivered": {
+            "solved_only_by_this": 0,
+            "solved_only_by_delivered": 0,
+            "runs_with_fewer_steps": 43,
+            "runs_with_more_steps": 46,
+            "sign_test_p_steps": 0.8323
+          },
+          "explicit_phase_flips_total": 4962,
+          "rounded_bit_changes_total": 5030,
+          "winding_hits_per_run": 0.0
+        },
+        "  ablation: no gradient steps": {
+          "solved": 96,
+          "runs": 96,
+          "solve_rate": 1.0,
+          "wilson_95": [
+            0.962,
+            1.0
+          ],
+          "median_steps_failures_as_budget+1": 22.0,
+          "mean_steps_when_solved": 83.6,
+          "mean_ms": 20.42,
+          "vs_delivered": {
+            "solved_only_by_this": 0,
+            "solved_only_by_delivered": 0,
+            "runs_with_fewer_steps": 32,
+            "runs_with_more_steps": 59,
+            "sign_test_p_steps": 0.0061
+          },
+          "explicit_phase_flips_total": 8467,
+          "rounded_bit_changes_total": 8185,
+          "winding_hits_per_run": 0.635
+        },
+        "  ablation: PRNG instead of logistic map": {
+          "solved": 95,
+          "runs": 96,
+          "solve_rate": 0.99,
+          "wilson_95": [
+            0.943,
+            0.998
+          ],
+          "median_steps_failures_as_budget+1": 13.0,
+          "mean_steps_when_solved": 52.6,
+          "mean_ms": 19.89,
+          "vs_delivered": {
+            "solved_only_by_this": 0,
+            "solved_only_by_delivered": 1,
+            "runs_with_fewer_steps": 42,
+            "runs_with_more_steps": 41,
+            "sign_test_p_steps": 1.0
+          },
+          "explicit_phase_flips_total": 6262,
+          "rounded_bit_changes_total": 6342,
+          "winding_hits_per_run": 0.635
+        },
+        "  variant: true Tile(1,1) contour": {
+          "solved": 96,
+          "runs": 96,
+          "solve_rate": 1.0,
+          "wilson_95": [
+            0.962,
+            1.0
+          ],
+          "median_steps_failures_as_budget+1": 10.5,
+          "mean_steps_when_solved": 56.7,
+          "mean_ms": 19.38,
+          "vs_delivered": {
+            "solved_only_by_this": 0,
+            "solved_only_by_delivered": 0,
+            "runs_with_fewer_steps": 34,
+            "runs_with_more_steps": 22,
+            "sign_test_p_steps": 0.1409
+          },
+          "explicit_phase_flips_total": 5670,
+          "rounded_bit_changes_total": 5703,
+          "winding_hits_per_run": 0.583
+        },
+        "  variant: no canonicalization": {
+          "solved": 96,
+          "runs": 96,
+          "solve_rate": 1.0,
+          "wilson_95": [
+            0.962,
+            1.0
+          ],
+          "median_steps_failures_as_budget+1": 16.0,
+          "mean_steps_when_solved": 62.2,
+          "mean_ms": 20.06,
+          "vs_delivered": {
+            "solved_only_by_this": 0,
+            "solved_only_by_delivered": 0,
+            "runs_with_fewer_steps": 42,
+            "runs_with_more_steps": 50,
+            "sign_test_p_steps": 0.4657
+          },
+          "explicit_phase_flips_total": 6140,
+          "rounded_bit_changes_total": 6230,
+          "winding_hits_per_run": 0.615
+        },
+        "golden_sweep (delivered control)": {
+          "solved": 76,
+          "runs": 96,
+          "solve_rate": 0.792,
+          "wilson_95": [
+            0.7,
+            0.861
+          ],
+          "median_steps_failures_as_budget+1": 134.0,
+          "mean_steps_when_solved": 137.9,
+          "mean_ms": 8.62,
+          "vs_delivered": {
+            "solved_only_by_this": 0,
+            "solved_only_by_delivered": 20,
+            "runs_with_fewer_steps": 20,
+            "runs_with_more_steps": 74,
+            "sign_test_p_steps": 0.0
+          }
+        },
+        "uniform_random_walk (delivered control)": {
+          "solved": 96,
+          "runs": 96,
+          "solve_rate": 1.0,
+          "wilson_95": [
+            0.962,
+            1.0
+          ],
+          "median_steps_failures_as_budget+1": 28.5,
+          "mean_steps_when_solved": 70.1,
+          "mean_ms": 2.51,
+          "vs_delivered": {
+            "solved_only_by_this": 0,
+            "solved_only_by_delivered": 0,
+            "runs_with_fewer_steps": 24,
+            "runs_with_more_steps": 68,
+            "sign_test_p_steps": 0.0
+          }
+        },
+        "walksat p=0.5 (Exp 03 control rule)": {
+          "solved": 96,
+          "runs": 96,
+          "solve_rate": 1.0,
+          "wilson_95": [
+            0.962,
+            1.0
+          ],
+          "median_steps_failures_as_budget+1": 18.5,
+          "mean_steps_when_solved": 45.3,
+          "mean_ms": 4.0,
+          "vs_delivered": {
+            "solved_only_by_this": 0,
+            "solved_only_by_delivered": 0,
+            "runs_with_fewer_steps": 42,
+            "runs_with_more_steps": 49,
+            "sign_test_p_steps": 0.5296
+          }
+        }
+      },
+      "random": {
+        "holomorphic_spectre (delivered)": {
+          "solved": 70,
+          "runs": 75,
+          "solve_rate": 0.933,
+          "wilson_95": [
+            0.853,
+            0.971
+          ],
+          "median_steps_failures_as_budget+1": 55.0,
+          "mean_steps_when_solved": 119.2,
+          "mean_ms": 25.83,
+          "explicit_phase_flips_total": 14241,
+          "rounded_bit_changes_total": 14071,
+          "winding_hits_per_run": 0.693
+        },
+        "  ablation: random starts, no tiles/Mobius": {
+          "solved": 72,
+          "runs": 75,
+          "solve_rate": 0.96,
+          "wilson_95": [
+            0.889,
+            0.986
+          ],
+          "median_steps_failures_as_budget+1": 82.0,
+          "mean_steps_when_solved": 149.8,
+          "mean_ms": 10.35,
+          "vs_delivered": {
+            "solved_only_by_this": 3,
+            "solved_only_by_delivered": 1,
+            "runs_with_fewer_steps": 32,
+            "runs_with_more_steps": 40,
+            "sign_test_p_steps": 0.4096
+          },
+          "explicit_phase_flips_total": 14713,
+          "rounded_bit_changes_total": 14538,
+          "winding_hits_per_run": 0.0
+        },
+        "  ablation: no gradient steps": {
+          "solved": 71,
+          "runs": 75,
+          "solve_rate": 0.947,
+          "wilson_95": [
+            0.871,
+            0.979
+          ],
+          "median_steps_failures_as_budget+1": 105.0,
+          "mean_steps_when_solved": 143.1,
+          "mean_ms": 24.93,
+          "vs_delivered": {
+            "solved_only_by_this": 4,
+            "solved_only_by_delivered": 3,
+            "runs_with_fewer_steps": 25,
+            "runs_with_more_steps": 47,
+            "sign_test_p_steps": 0.0128
+          },
+          "explicit_phase_flips_total": 15153,
+          "rounded_bit_changes_total": 14555,
+          "winding_hits_per_run": 0.693
+        },
+        "  ablation: PRNG instead of logistic map": {
+          "solved": 73,
+          "runs": 75,
+          "solve_rate": 0.973,
+          "wilson_95": [
+            0.908,
+            0.993
+          ],
+          "median_steps_failures_as_budget+1": 53.0,
+          "mean_steps_when_solved": 147.7,
+          "mean_ms": 26.75,
+          "vs_delivered": {
+            "solved_only_by_this": 4,
+            "solved_only_by_delivered": 1,
+            "runs_with_fewer_steps": 31,
+            "runs_with_more_steps": 41,
+            "sign_test_p_steps": 0.2888
+          },
+          "explicit_phase_flips_total": 13549,
+          "rounded_bit_changes_total": 13528,
+          "winding_hits_per_run": 0.693
+        },
+        "  variant: true Tile(1,1) contour": {
+          "solved": 69,
+          "runs": 75,
+          "solve_rate": 0.92,
+          "wilson_95": [
+            0.836,
+            0.963
+          ],
+          "median_steps_failures_as_budget+1": 62.0,
+          "mean_steps_when_solved": 118.6,
+          "mean_ms": 26.44,
+          "vs_delivered": {
+            "solved_only_by_this": 3,
+            "solved_only_by_delivered": 4,
+            "runs_with_fewer_steps": 21,
+            "runs_with_more_steps": 25,
+            "sign_test_p_steps": 0.6587
+          },
+          "explicit_phase_flips_total": 15166,
+          "rounded_bit_changes_total": 15023,
+          "winding_hits_per_run": 0.667
+        },
+        "  variant: no canonicalization": {
+          "solved": 73,
+          "runs": 75,
+          "solve_rate": 0.973,
+          "wilson_95": [
+            0.908,
+            0.993
+          ],
+          "median_steps_failures_as_budget+1": 71.0,
+          "mean_steps_when_solved": 143.1,
+          "mean_ms": 24.9,
+          "vs_delivered": {
+            "solved_only_by_this": 4,
+            "solved_only_by_delivered": 1,
+            "runs_with_fewer_steps": 38,
+            "runs_with_more_steps": 36,
+            "sign_test_p_steps": 0.9076
+          },
+          "explicit_phase_flips_total": 13373,
+          "rounded_bit_changes_total": 13223,
+          "winding_hits_per_run": 0.867
+        },
+        "golden_sweep (delivered control)": {
+          "solved": 44,
+          "runs": 75,
+          "solve_rate": 0.587,
+          "wilson_95": [
+            0.474,
+            0.691
+          ],
+          "median_steps_failures_as_budget+1": 387.0,
+          "mean_steps_when_solved": 183.2,
+          "mean_ms": 14.98,
+          "vs_delivered": {
+            "solved_only_by_this": 2,
+            "solved_only_by_delivered": 28,
+            "runs_with_fewer_steps": 17,
+            "runs_with_more_steps": 54,
+            "sign_test_p_steps": 0.0
+          }
+        },
+        "uniform_random_walk (delivered control)": {
+          "solved": 72,
+          "runs": 75,
+          "solve_rate": 0.96,
+          "wilson_95": [
+            0.889,
+            0.986
+          ],
+          "median_steps_failures_as_budget+1": 76.0,
+          "mean_steps_when_solved": 126.5,
+          "mean_ms": 5.69,
+          "vs_delivered": {
+            "solved_only_by_this": 5,
+            "solved_only_by_delivered": 3,
+            "runs_with_fewer_steps": 36,
+            "runs_with_more_steps": 39,
+            "sign_test_p_steps": 0.8176
+          }
+        },
+        "walksat p=0.5 (Exp 03 control rule)": {
+          "solved": 72,
+          "runs": 75,
+          "solve_rate": 0.96,
+          "wilson_95": [
+            0.889,
+            0.986
+          ],
+          "median_steps_failures_as_budget+1": 43.0,
+          "mean_steps_when_solved": 127.6,
+          "mean_ms": 14.04,
+          "vs_delivered": {
+            "solved_only_by_this": 5,
+            "solved_only_by_delivered": 3,
+            "runs_with_fewer_steps": 37,
+            "runs_with_more_steps": 37,
+            "sign_test_p_steps": 1.0
+          }
+        }
+      },
+      "geometric": {
+        "holomorphic_spectre (delivered)": {
+          "solved": 96,
+          "runs": 96,
+          "solve_rate": 1.0,
+          "wilson_95": [
+            0.962,
+            1.0
+          ],
+          "median_steps_failures_as_budget+1": 16.0,
+          "mean_steps_when_solved": 51.6,
+          "mean_ms": 19.32,
+          "explicit_phase_flips_total": 5170,
+          "rounded_bit_changes_total": 5190,
+          "winding_hits_per_run": 0.635
+        },
+        "  ablation: random starts, no tiles/Mobius": {
+          "solved": 96,
+          "runs": 96,
+          "solve_rate": 1.0,
+          "wilson_95": [
+            0.962,
+            1.0
+          ],
+          "median_steps_failures_as_budget+1": 10.5,
+          "mean_steps_when_solved": 50.1,
+          "mean_ms": 3.23,
+          "vs_delivered": {
+            "solved_only_by_this": 0,
+            "solved_only_by_delivered": 0,
+            "runs_with_fewer_steps": 46,
+            "runs_with_more_steps": 46,
+            "sign_test_p_steps": 1.0
+          },
+          "explicit_phase_flips_total": 5001,
+          "rounded_bit_changes_total": 5040,
+          "winding_hits_per_run": 0.0
+        },
+        "  ablation: no gradient steps": {
+          "solved": 95,
+          "runs": 96,
+          "solve_rate": 0.99,
+          "wilson_95": [
+            0.943,
+            0.998
+          ],
+          "median_steps_failures_as_budget+1": 32.0,
+          "mean_steps_when_solved": 70.1,
+          "mean_ms": 20.23,
+          "vs_delivered": {
+            "solved_only_by_this": 0,
+            "solved_only_by_delivered": 1,
+            "runs_with_fewer_steps": 18,
+            "runs_with_more_steps": 62,
+            "sign_test_p_steps": 0.0
+          },
+          "explicit_phase_flips_total": 8162,
+          "rounded_bit_changes_total": 7780,
+          "winding_hits_per_run": 0.635
+        },
+        "  ablation: PRNG instead of logistic map": {
+          "solved": 95,
+          "runs": 96,
+          "solve_rate": 0.99,
+          "wilson_95": [
+            0.943,
+            0.998
+          ],
+          "median_steps_failures_as_budget+1": 13.0,
+          "mean_steps_when_solved": 43.5,
+          "mean_ms": 20.13,
+          "vs_delivered": {
+            "solved_only_by_this": 0,
+            "solved_only_by_delivered": 1,
+            "runs_with_fewer_steps": 39,
+            "runs_with_more_steps": 49,
+            "sign_test_p_steps": 0.3374
+          },
+          "explicit_phase_flips_total": 5334,
+          "rounded_bit_changes_total": 5411,
+          "winding_hits_per_run": 0.635
+        },
+        "  variant: true Tile(1,1) contour": {
+          "solved": 96,
+          "runs": 96,
+          "solve_rate": 1.0,
+          "wilson_95": [
+            0.962,
+            1.0
+          ],
+          "median_steps_failures_as_budget+1": 14.0,
+          "mean_steps_when_solved": 55.1,
+          "mean_ms": 19.11,
+          "vs_delivered": {
+            "solved_only_by_this": 0,
+            "solved_only_by_delivered": 0,
+            "runs_with_fewer_steps": 26,
+            "runs_with_more_steps": 23,
+            "sign_test_p_steps": 0.7754
+          },
+          "explicit_phase_flips_total": 5548,
+          "rounded_bit_changes_total": 5538,
+          "winding_hits_per_run": 0.469
+        },
+        "  variant: no canonicalization": {
+          "solved": 96,
+          "runs": 96,
+          "solve_rate": 1.0,
+          "wilson_95": [
+            0.962,
+            1.0
+          ],
+          "median_steps_failures_as_budget+1": 9.0,
+          "mean_steps_when_solved": 44.8,
+          "mean_ms": 18.28,
+          "vs_delivered": {
+            "solved_only_by_this": 0,
+            "solved_only_by_delivered": 0,
+            "runs_with_fewer_steps": 46,
+            "runs_with_more_steps": 48,
+            "sign_test_p_steps": 0.9179
+          },
+          "explicit_phase_flips_total": 4474,
+          "rounded_bit_changes_total": 4488,
+          "winding_hits_per_run": 0.406
+        },
+        "golden_sweep (delivered control)": {
+          "solved": 73,
+          "runs": 96,
+          "solve_rate": 0.76,
+          "wilson_95": [
+            0.666,
+            0.835
+          ],
+          "median_steps_failures_as_budget+1": 135.0,
+          "mean_steps_when_solved": 142.3,
+          "mean_ms": 9.54,
+          "vs_delivered": {
+            "solved_only_by_this": 0,
+            "solved_only_by_delivered": 23,
+            "runs_with_fewer_steps": 18,
+            "runs_with_more_steps": 78,
+            "sign_test_p_steps": 0.0
+          }
+        },
+        "uniform_random_walk (delivered control)": {
+          "solved": 96,
+          "runs": 96,
+          "solve_rate": 1.0,
+          "wilson_95": [
+            0.962,
+            1.0
+          ],
+          "median_steps_failures_as_budget+1": 19.5,
+          "mean_steps_when_solved": 63.8,
+          "mean_ms": 2.33,
+          "vs_delivered": {
+            "solved_only_by_this": 0,
+            "solved_only_by_delivered": 0,
+            "runs_with_fewer_steps": 37,
+            "runs_with_more_steps": 55,
+            "sign_test_p_steps": 0.0758
+          }
+        },
+        "walksat p=0.5 (Exp 03 control rule)": {
+          "solved": 96,
+          "runs": 96,
+          "solve_rate": 1.0,
+          "wilson_95": [
+            0.962,
+            1.0
+          ],
+          "median_steps_failures_as_budget+1": 18.0,
+          "mean_steps_when_solved": 28.0,
+          "mean_ms": 2.66,
+          "vs_delivered": {
+            "solved_only_by_this": 0,
+            "solved_only_by_delivered": 0,
+            "runs_with_fewer_steps": 46,
+            "runs_with_more_steps": 48,
+            "sign_test_p_steps": 0.9179
+          }
+        }
+      }
+    },
+    "exp04_planted_n35_alpha4.26": {
+      "instances": 100,
+      "budget_steps": 1600,
+      "results": {
+        "holomorphic_spectre (delivered)": {
+          "solved": 97,
+          "runs": 100,
+          "solve_rate": 0.97,
+          "wilson_95": [
+            0.915,
+            0.99
+          ],
+          "median_steps_failures_as_budget+1": 130.5,
+          "mean_steps_when_solved": 235.5,
+          "mean_ms": 33.63,
+          "explicit_phase_flips_total": 30366,
+          "rounded_bit_changes_total": 29705,
+          "winding_hits_per_run": 0.82
+        },
+        "  ablation: random starts, no tiles/Mobius": {
+          "solved": 98,
+          "runs": 100,
+          "solve_rate": 0.98,
+          "wilson_95": [
+            0.93,
+            0.994
+          ],
+          "median_steps_failures_as_budget+1": 100.5,
+          "mean_steps_when_solved": 180.1,
+          "mean_ms": 11.21,
+          "vs_delivered": {
+            "solved_only_by_this": 2,
+            "solved_only_by_delivered": 1,
+            "runs_with_fewer_steps": 64,
+            "runs_with_more_steps": 35,
+            "sign_test_p_steps": 0.0046
+          },
+          "explicit_phase_flips_total": 23418,
+          "rounded_bit_changes_total": 22741,
+          "winding_hits_per_run": 0.0
+        },
+        "  ablation: no gradient steps": {
+          "solved": 95,
+          "runs": 100,
+          "solve_rate": 0.95,
+          "wilson_95": [
+            0.888,
+            0.978
+          ],
+          "median_steps_failures_as_budget+1": 159.5,
+          "mean_steps_when_solved": 252.6,
+          "mean_ms": 30.59,
+          "vs_delivered": {
+            "solved_only_by_this": 2,
+            "solved_only_by_delivered": 4,
+            "runs_with_fewer_steps": 43,
+            "runs_with_more_steps": 55,
+            "sign_test_p_steps": 0.2664
+          },
+          "explicit_phase_flips_total": 35173,
+          "rounded_bit_changes_total": 33151,
+          "winding_hits_per_run": 0.82
+        },
+        "  ablation: PRNG instead of logistic map": {
+          "solved": 98,
+          "runs": 100,
+          "solve_rate": 0.98,
+          "wilson_95": [
+            0.93,
+            0.994
+          ],
+          "median_steps_failures_as_budget+1": 121.0,
+          "mean_steps_when_solved": 225.3,
+          "mean_ms": 33.7,
+          "vs_delivered": {
+            "solved_only_by_this": 2,
+            "solved_only_by_delivered": 1,
+            "runs_with_fewer_steps": 52,
+            "runs_with_more_steps": 46,
+            "sign_test_p_steps": 0.6137
+          },
+          "explicit_phase_flips_total": 27320,
+          "rounded_bit_changes_total": 27175,
+          "winding_hits_per_run": 0.82
+        },
+        "  variant: true Tile(1,1) contour": {
+          "solved": 99,
+          "runs": 100,
+          "solve_rate": 0.99,
+          "wilson_95": [
+            0.946,
+            0.998
+          ],
+          "median_steps_failures_as_budget+1": 130.0,
+          "mean_steps_when_solved": 245.6,
+          "mean_ms": 37.76,
+          "vs_delivered": {
+            "solved_only_by_this": 3,
+            "solved_only_by_delivered": 1,
+            "runs_with_fewer_steps": 45,
+            "runs_with_more_steps": 42,
+            "sign_test_p_steps": 0.8304
+          },
+          "explicit_phase_flips_total": 28758,
+          "rounded_bit_changes_total": 28042,
+          "winding_hits_per_run": 0.65
+        },
+        "  variant: no canonicalization": {
+          "solved": 97,
+          "runs": 100,
+          "solve_rate": 0.97,
+          "wilson_95": [
+            0.915,
+            0.99
+          ],
+          "median_steps_failures_as_budget+1": 108.0,
+          "mean_steps_when_solved": 185.7,
+          "mean_ms": 34.99,
+          "vs_delivered": {
+            "solved_only_by_this": 2,
+            "solved_only_by_delivered": 2,
+            "runs_with_fewer_steps": 61,
+            "runs_with_more_steps": 38,
+            "sign_test_p_steps": 0.0265
+          },
+          "explicit_phase_flips_total": 25196,
+          "rounded_bit_changes_total": 24615,
+          "winding_hits_per_run": 0.85
+        },
+        "golden_sweep (delivered control)": {
+          "solved": 58,
+          "runs": 100,
+          "solve_rate": 0.58,
+          "wilson_95": [
+            0.482,
+            0.672
+          ],
+          "median_steps_failures_as_budget+1": 832.5,
+          "mean_steps_when_solved": 374.6,
+          "mean_ms": 31.07,
+          "vs_delivered": {
+            "solved_only_by_this": 1,
+            "solved_only_by_delivered": 40,
+            "runs_with_fewer_steps": 20,
+            "runs_with_more_steps": 78,
+            "sign_test_p_steps": 0.0
+          }
+        },
+        "uniform_random_walk (delivered control)": {
+          "solved": 99,
+          "runs": 100,
+          "solve_rate": 0.99,
+          "wilson_95": [
+            0.946,
+            0.998
+          ],
+          "median_steps_failures_as_budget+1": 192.0,
+          "mean_steps_when_solved": 258.9,
+          "mean_ms": 11.55,
+          "vs_delivered": {
+            "solved_only_by_this": 3,
+            "solved_only_by_delivered": 1,
+            "runs_with_fewer_steps": 47,
+            "runs_with_more_steps": 51,
+            "sign_test_p_steps": 0.762
+          }
+        },
+        "walksat p=0.5 (Exp 03 control rule)": {
+          "solved": 97,
+          "runs": 100,
+          "solve_rate": 0.97,
+          "wilson_95": [
+            0.915,
+            0.99
+          ],
+          "median_steps_failures_as_budget+1": 111.0,
+          "mean_steps_when_solved": 165.9,
+          "mean_ms": 23.03,
+          "vs_delivered": {
+            "solved_only_by_this": 2,
+            "solved_only_by_delivered": 2,
+            "runs_with_fewer_steps": 56,
+            "runs_with_more_steps": 43,
+            "sign_test_p_steps": 0.2276
+          }
+        }
+      },
+      "note": "Instances 0-11 are exactly Experiment B's twelve formulas."
+    },
+    "seconds": {
+      "exp03": 35.5,
+      "exp04_family": 25.1
+    }
+  },
+  "7_permutations": {
+    "base_formulas": 20,
+    "permutations_per_formula": 10,
+    "per_formula": [
+      {
+        "base_seed": 31415,
+        "mean_steps_raw": 123.7,
+        "mean_steps_canonical": 23.3,
+        "mean_steps_canonical_vars_and_clauses": 79.0,
+        "std_raw": 143.6,
+        "std_canonical": 31.4,
+        "std_canonical_vars_and_clauses": 0.0,
+        "distinct_canonical_step_counts": 6,
+        "distinct_step_counts_vars_and_clauses": 1,
+        "canonical_order_invariance_rate": 1.0
+      },
+      {
+        "base_seed": 31432,
+        "mean_steps_raw": 108.8,
+        "mean_steps_canonical": 104.5,
+        "mean_steps_canonical_vars_and_clauses": 73.0,
+        "std_raw": 84.5,
+        "std_canonical": 129.3,
+        "std_canonical_vars_and_clauses": 0.0,
+        "distinct_canonical_step_counts": 10,
+        "distinct_step_counts_vars_and_clauses": 1,
+        "canonical_order_invariance_rate": 1.0
+      },
+      {
+        "base_seed": 31449,
+        "mean_steps_raw": 51.1,
+        "mean_steps_canonical": 69.2,
+        "mean_steps_canonical_vars_and_clauses": 13.0,
+        "std_raw": 61.2,
+        "std_canonical": 53.1,
+        "std_canonical_vars_and_clauses": 0.0,
+        "distinct_canonical_step_counts": 9,
+        "distinct_step_counts_vars_and_clauses": 1,
+        "canonical_order_invariance_rate": 1.0
+      },
+      {
+        "base_seed": 31466,
+        "mean_steps_raw": 151.5,
+        "mean_steps_canonical": 211.4,
+        "mean_steps_canonical_vars_and_clauses": 193.0,
+        "std_raw": 147.0,
+        "std_canonical": 212.7,
+        "std_canonical_vars_and_clauses": 0.0,
+        "distinct_canonical_step_counts": 10,
+        "distinct_step_counts_vars_and_clauses": 1,
+        "canonical_order_invariance_rate": 1.0
+      },
+      {
+        "base_seed": 31483,
+        "mean_steps_raw": 44.3,
+        "mean_steps_canonical": 23.6,
+        "mean_steps_canonical_vars_and_clauses": 42.0,
+        "std_raw": 39.0,
+        "std_canonical": 21.3,
+        "std_canonical_vars_and_clauses": 0.0,
+        "distinct_canonical_step_counts": 7,
+        "distinct_step_counts_vars_and_clauses": 1,
+        "canonical_order_invariance_rate": 1.0
+      },
+      {
+        "base_seed": 31500,
+        "mean_steps_raw": 139.7,
+        "mean_steps_canonical": 103.4,
+        "mean_steps_canonical_vars_and_clauses": 103.0,
+        "std_raw": 160.3,
+        "std_canonical": 125.2,
+        "std_canonical_vars_and_clauses": 0.0,
+        "distinct_canonical_step_counts": 10,
+        "distinct_step_counts_vars_and_clauses": 1,
+        "canonical_order_invariance_rate": 1.0
+      },
+      {
+        "base_seed": 31517,
+        "mean_steps_raw": 277.2,
+        "mean_steps_canonical": 114.8,
+        "mean_steps_canonical_vars_and_clauses": 307.0,
+        "std_raw": 248.0,
+        "std_canonical": 132.7,
+        "std_canonical_vars_and_clauses": 0.0,
+        "distinct_canonical_step_counts": 9,
+        "distinct_step_counts_vars_and_clauses": 1,
+        "canonical_order_invariance_rate": 1.0
+      },
+      {
+        "base_seed": 31534,
+        "mean_steps_raw": 322.2,
+        "mean_steps_canonical": 173.9,
+        "mean_steps_canonical_vars_and_clauses": 129.0,
+        "std_raw": 284.6,
+        "std_canonical": 136.8,
+        "std_canonical_vars_and_clauses": 0.0,
+        "distinct_canonical_step_counts": 8,
+        "distinct_step_counts_vars_and_clauses": 1,
+        "canonical_order_invariance_rate": 1.0
+      },
+      {
+        "base_seed": 31551,
+        "mean_steps_raw": 40.3,
+        "mean_steps_canonical": 32.3,
+        "mean_steps_canonical_vars_and_clauses": 351.0,
+        "std_raw": 61.8,
+        "std_canonical": 33.4,
+        "std_canonical_vars_and_clauses": 0.0,
+        "distinct_canonical_step_counts": 7,
+        "distinct_step_counts_vars_and_clauses": 1,
+        "canonical_order_invariance_rate": 1.0
+      },
+      {
+        "base_seed": 31568,
+        "mean_steps_raw": 303.1,
+        "mean_steps_canonical": 235.5,
+        "mean_steps_canonical_vars_and_clauses": 167.0,
+        "std_raw": 332.2,
+        "std_canonical": 174.5,
+        "std_canonical_vars_and_clauses": 0.0,
+        "distinct_canonical_step_counts": 10,
+        "distinct_step_counts_vars_and_clauses": 1,
+        "canonical_order_invariance_rate": 1.0
+      },
+      {
+        "base_seed": 31585,
+        "mean_steps_raw": 49.9,
+        "mean_steps_canonical": 31.7,
+        "mean_steps_canonical_vars_and_clauses": 191.0,
+        "std_raw": 73.1,
+        "std_canonical": 56.0,
+        "std_canonical_vars_and_clauses": 0.0,
+        "distinct_canonical_step_counts": 7,
+        "distinct_step_counts_vars_and_clauses": 1,
+        "canonical_order_invariance_rate": 1.0
+      },
+      {
+        "base_seed": 31602,
+        "mean_steps_raw": 121.4,
+        "mean_steps_canonical": 55.4,
+        "mean_steps_canonical_vars_and_clauses": 8.0,
+        "std_raw": 114.4,
+        "std_canonical": 56.7,
+        "std_canonical_vars_and_clauses": 0.0,
+        "distinct_canonical_step_counts": 9,
+        "distinct_step_counts_vars_and_clauses": 1,
+        "canonical_order_invariance_rate": 1.0
+      },
+      {
+        "base_seed": 31619,
+        "mean_steps_raw": 78.5,
+        "mean_steps_canonical": 89.1,
+        "mean_steps_canonical_vars_and_clauses": 15.0,
+        "std_raw": 58.0,
+        "std_canonical": 106.5,
+        "std_canonical_vars_and_clauses": 0.0,
+        "distinct_canonical_step_counts": 10,
+        "distinct_step_counts_vars_and_clauses": 1,
+        "canonical_order_invariance_rate": 1.0
+      },
+      {
+        "base_seed": 31636,
+        "mean_steps_raw": 64.7,
+        "mean_steps_canonical": 75.3,
+        "mean_steps_canonical_vars_and_clauses": 57.0,
+        "std_raw": 62.3,
+        "std_canonical": 70.6,
+        "std_canonical_vars_and_clauses": 0.0,
+        "distinct_canonical_step_counts": 9,
+        "distinct_step_counts_vars_and_clauses": 1,
+        "canonical_order_invariance_rate": 1.0
+      },
+      {
+        "base_seed": 31653,
+        "mean_steps_raw": 90.0,
+        "mean_steps_canonical": 170.9,
+        "mean_steps_canonical_vars_and_clauses": 98.0,
+        "std_raw": 68.5,
+        "std_canonical": 93.9,
+        "std_canonical_vars_and_clauses": 0.0,
+        "distinct_canonical_step_counts": 10,
+        "distinct_step_counts_vars_and_clauses": 1,
+        "canonical_order_invariance_rate": 1.0
+      },
+      {
+        "base_seed": 31670,
+        "mean_steps_raw": 57.9,
+        "mean_steps_canonical": 16.3,
+        "mean_steps_canonical_vars_and_clauses": 5.0,
+        "std_raw": 55.0,
+        "std_canonical": 12.0,
+        "std_canonical_vars_and_clauses": 0.0,
+        "distinct_canonical_step_counts": 8,
+        "distinct_step_counts_vars_and_clauses": 1,
+        "canonical_order_invariance_rate": 1.0
+      },
+      {
+        "base_seed": 31687,
+        "mean_steps_raw": 19.7,
+        "mean_steps_canonical": 21.7,
+        "mean_steps_canonical_vars_and_clauses": 30.0,
+        "std_raw": 10.9,
+        "std_canonical": 26.6,
+        "std_canonical_vars_and_clauses": 0.0,
+        "distinct_canonical_step_counts": 7,
+        "distinct_step_counts_vars_and_clauses": 1,
+        "canonical_order_invariance_rate": 1.0
+      },
+      {
+        "base_seed": 31704,
+        "mean_steps_raw": 36.7,
+        "mean_steps_canonical": 111.7,
+        "mean_steps_canonical_vars_and_clauses": 10.0,
+        "std_raw": 53.4,
+        "std_canonical": 104.5,
+        "std_canonical_vars_and_clauses": 0.0,
+        "distinct_canonical_step_counts": 9,
+        "distinct_step_counts_vars_and_clauses": 1,
+        "canonical_order_invariance_rate": 1.0
+      },
+      {
+        "base_seed": 31721,
+        "mean_steps_raw": 321.8,
+        "mean_steps_canonical": 75.6,
+        "mean_steps_canonical_vars_and_clauses": 78.0,
+        "std_raw": 319.2,
+        "std_canonical": 110.7,
+        "std_canonical_vars_and_clauses": 0.0,
+        "distinct_canonical_step_counts": 8,
+        "distinct_step_counts_vars_and_clauses": 1,
+        "canonical_order_invariance_rate": 1.0
+      },
+      {
+        "base_seed": 31738,
+        "mean_steps_raw": 47.6,
+        "mean_steps_canonical": 45.0,
+        "mean_steps_canonical_vars_and_clauses": 6.0,
+        "std_raw": 70.0,
+        "std_canonical": 44.6,
+        "std_canonical_vars_and_clauses": 0.0,
+        "distinct_canonical_step_counts": 9,
+        "distinct_step_counts_vars_and_clauses": 1,
+        "canonical_order_invariance_rate": 1.0
+      }
+    ],
+    "pooled": {
+      "mean_raw": 122.5,
+      "mean_canonical": 89.2,
+      "median_raw": 49.0,
+      "median_canonical": 29.0,
+      "std_raw": 183.7,
+      "std_canonical": 120.0,
+      "mean_canonical_vars_and_clauses": 97.8,
+      "median_canonical_vars_and_clauses": 75.5
+    },
+    "formulas_fully_invariant_with_clause_canonicalization": 20,
+    "formulas_where_canonical_mean_is_lower": 13,
+    "formulas_where_canonical_mean_is_higher": 7,
+    "sign_test_p_mean": 0.2632,
+    "formulas_where_canonical_std_is_lower": 13,
+    "formulas_where_canonical_std_is_higher": 7,
+    "sign_test_p_std": 0.2632,
+    "mean_canonical_order_invariance_rate": 1.0
+  },
+  "8_missed_instance": {
+    "file": "experiments/03_golden_sweep/missed_sat_instance_35.cnf",
+    "n_vars": 18,
+    "m_clauses": 76,
+    "alpha": 4.2222,
+    "matches_exp03_dataset_instance": {
+      "id": 35,
+      "family": "random",
+      "split": "test",
+      "n": 18,
+      "m": 76,
+      "sat_label": "SAT"
+    },
+    "exact_satisfying_assignments": 9,
+    "solutions_x1_to_xn": [
+      "000000010000000000",
+      "000100010000000000",
+      "000010010000000000",
+      "000110010000000000",
+      "000100010000000100",
+      "000110010000000100",
+      "001000010100000110",
+      "001100010100000110",
+      "001110010100000110"
+    ],
+    "one_flip_clusters": [
+      [
+        "000000010000000000",
+        "000010010000000000",
+        "000100010000000000",
+        "000100010000000100",
+        "000110010000000000",
+        "000110010000000100"
+      ],
+      [
+        "001000010100000110",
+        "001100010100000110",
+        "001110010100000110"
+      ]
+    ],
+    "pairwise_hamming_min_max": [
+      1,
+      6
+    ],
+    "runs_budget_4000_tiles_16": {
+      "holomorphic_spectre (delivered)": {
+        "solved": 100,
+        "runs": 100,
+        "median_steps": 47.0,
+        "max_steps": 995,
+        "distinct_witnesses_found": 9
+      },
+      "  ablation: random starts, no tiles/Mobius": {
+        "solved": 100,
+        "runs": 100,
+        "median_steps": 57.5,
+        "max_steps": 738,
+        "distinct_witnesses_found": 9
+      },
+      "  ablation: no gradient steps": {
+        "solved": 100,
+        "runs": 100,
+        "median_steps": 84.5,
+        "max_steps": 869,
+        "distinct_witnesses_found": 9
+      },
+      "  ablation: PRNG instead of logistic map": {
+        "solved": 100,
+        "runs": 100,
+        "median_steps": 38.0,
+        "max_steps": 1370,
+        "distinct_witnesses_found": 9
+      },
+      "  variant: true Tile(1,1) contour": {
+        "solved": 100,
+        "runs": 100,
+        "median_steps": 55.0,
+        "max_steps": 781,
+        "distinct_witnesses_found": 9
+      },
+      "  variant: no canonicalization": {
+        "solved": 100,
+        "runs": 100,
+        "median_steps": 87.5,
+        "max_steps": 990,
+        "distinct_witnesses_found": 9
+      },
+      "golden_sweep (delivered control)": {
+        "solved": 46,
+        "runs": 100,
+        "median_steps": 4000.0,
+        "max_steps": 4000,
+        "distinct_witnesses_found": 8
+      },
+      "uniform_random_walk (delivered control)": {
+        "solved": 100,
+        "runs": 100,
+        "median_steps": 126.0,
+        "max_steps": 1544,
+        "distinct_witnesses_found": 9
+      },
+      "walksat p=0.5 (Exp 03 control rule)": {
+        "solved": 100,
+        "runs": 100,
+        "median_steps": 44.0,
+        "max_steps": 679,
+        "distinct_witnesses_found": 9
+      }
+    },
+    "note": "The file name's 35 is the Experiment 03 instance id; the formula has 18 variables, so Experiment B (n=35) does not mirror its size."
+  },
+  "9_nyquist_revisited": {
+    "trials_per_n": 30,
+    "rows": [
+      {
+        "n": 6,
+        "delivered freq sqrt(n)/2.5": {
+          "mean_max_step_jump_rad": 0.192,
+          "mean_total_phase_variation_rad": 2.77,
+          "aliasing_rate": 0.033,
+          "aliasing_wilson_95": [
+            0.006,
+            0.167
+          ],
+          "winding_wrong_at_12_samples": 0
+        },
+        "fixed freq 1.0": {
+          "mean_max_step_jump_rad": 0.164,
+          "mean_total_phase_variation_rad": 2.87,
+          "aliasing_rate": 0.0,
+          "aliasing_wilson_95": [
+            0.0,
+            0.114
+          ],
+          "winding_wrong_at_12_samples": 0
+        }
+      },
+      {
+        "n": 10,
+        "delivered freq sqrt(n)/2.5": {
+          "mean_max_step_jump_rad": 0.297,
+          "mean_total_phase_variation_rad": 4.36,
+          "aliasing_rate": 0.033,
+          "aliasing_wilson_95": [
+            0.006,
+            0.167
+          ],
+          "winding_wrong_at_12_samples": 0
+        },
+        "fixed freq 1.0": {
+          "mean_max_step_jump_rad": 0.173,
+          "mean_total_phase_variation_rad": 3.43,
+          "aliasing_rate": 0.0,
+          "aliasing_wilson_95": [
+            0.0,
+            0.114
+          ],
+          "winding_wrong_at_12_samples": 0
+        }
+      },
+      {
+        "n": 16,
+        "delivered freq sqrt(n)/2.5": {
+          "mean_max_step_jump_rad": 0.326,
+          "mean_total_phase_variation_rad": 5.3,
+          "aliasing_rate": 0.033,
+          "aliasing_wilson_95": [
+            0.006,
+            0.167
+          ],
+          "winding_wrong_at_12_samples": 0
+        },
+        "fixed freq 1.0": {
+          "mean_max_step_jump_rad": 0.147,
+          "mean_total_phase_variation_rad": 3.65,
+          "aliasing_rate": 0.0,
+          "aliasing_wilson_95": [
+            0.0,
+            0.114
+          ],
+          "winding_wrong_at_12_samples": 0
+        }
+      },
+      {
+        "n": 24,
+        "delivered freq sqrt(n)/2.5": {
+          "mean_max_step_jump_rad": 0.443,
+          "mean_total_phase_variation_rad": 6.16,
+          "aliasing_rate": 0.033,
+          "aliasing_wilson_95": [
+            0.006,
+            0.167
+          ],
+          "winding_wrong_at_12_samples": 0
+        },
+        "fixed freq 1.0": {
+          "mean_max_step_jump_rad": 0.144,
+          "mean_total_phase_variation_rad": 3.24,
+          "aliasing_rate": 0.0,
+          "aliasing_wilson_95": [
+            0.0,
+            0.114
+          ],
+          "winding_wrong_at_12_samples": 0
+        }
+      },
+      {
+        "n": 35,
+        "delivered freq sqrt(n)/2.5": {
+          "mean_max_step_jump_rad": 0.812,
+          "mean_total_phase_variation_rad": 9.92,
+          "aliasing_rate": 0.1,
+          "aliasing_wilson_95": [
+            0.035,
+            0.256
+          ],
+          "winding_wrong_at_12_samples": 0
+        },
+        "fixed freq 1.0": {
+          "mean_max_step_jump_rad": 0.331,
+          "mean_total_phase_variation_rad": 4.19,
+          "aliasing_rate": 0.067,
+          "aliasing_wilson_95": [
+            0.018,
+            0.213
+          ],
+          "winding_wrong_at_12_samples": 0
+        }
+      },
+      {
+        "n": 50,
+        "delivered freq sqrt(n)/2.5": {
+          "mean_max_step_jump_rad": 1.212,
+          "mean_total_phase_variation_rad": 12.57,
+          "aliasing_rate": 0.267,
+          "aliasing_wilson_95": [
+            0.142,
+            0.444
+          ],
+          "winding_wrong_at_12_samples": 0
+        },
+        "fixed freq 1.0": {
+          "mean_max_step_jump_rad": 0.405,
+          "mean_total_phase_variation_rad": 4.54,
+          "aliasing_rate": 0.067,
+          "aliasing_wilson_95": [
+            0.018,
+            0.213
+          ],
+          "winding_wrong_at_12_samples": 0
+        }
+      }
+    ]
+  },
+  "seconds_total": 160.9
+}
