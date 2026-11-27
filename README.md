@@ -8,6 +8,8 @@ The central question is visual and computational: **can we reshape an energy lan
 
 Open [web/index.html](web/index.html) in a browser. Everything runs locally, including the controls; no server, account, or API key is required.
 
+The same journey is also a web page: [`index.html`](index.html) at the repository root walks through all four experiments with pictures of each lab, every claim tagged proven, open, or observed. With GitHub Pages turned on for this repository (Settings → Pages → Deploy from a branch → `main`, `/ (root)`), it is served at https://shadowalzazel.github.io/black-swan-jeweled-math/ and the labs at `/web/`. `.nojekyll` keeps Pages from running Jekyll. `node make_site_images.js` redraws the page's screenshots and `images/social_card.png` (needs Playwright).
+
 | Explorer | What to try |
 | --- | --- |
 | [3SAT jewel](web/01_3sat_jewel.html) | Add clauses to a projected Boolean cube and compare solutions with a Hamiltonian walk. |
@@ -25,6 +27,8 @@ experiments/
   02_tiling_jewels/    Hat/pinwheel geometry and adaptive orientation weights
   03_golden_sweep/     Broad sweep, raw data, exact labels, audit, and toy obstruction
   04_complex_spectre/  Two-plane phasor solver, recorded benchmark, independent audit, Feigenbaum check
+index.html            GitHub Pages front page (the journey)
+images/               Lab screenshots and the social card used by index.html
 web/                  Standalone interactive explorers
 docs/                 Mathematical ideas, findings, and GitHub instructions
 provenance.json       Source archive hashes and consolidation checks

@@ -29,4 +29,10 @@ git push
 
 ## Optional web gallery
 
-The explorers are standalone HTML and can be opened from the web directory without publishing. GitHub Pages can serve the web directory after a separate Pages configuration; creating or pushing the repository does not itself publish that gallery.
+The explorers are standalone HTML and can be opened from the web directory without publishing. To publish the journey page and the labs:
+
+1. Open the repository's Settings → Pages.
+2. Under Build and deployment, choose Source: Deploy from a branch; Branch: `main`, folder `/ (root)`; Save.
+3. After the first deployment finishes (a minute or two), the journey is at https://shadowalzazel.github.io/black-swan-jeweled-math/ and the lab gallery at https://shadowalzazel.github.io/black-swan-jeweled-math/web/ .
+
+The root `index.html` is the front page, `.nojekyll` serves every file as-is, and link previews use `images/social_card.png`. Pushing alone does not publish anything until Pages is turned on.
