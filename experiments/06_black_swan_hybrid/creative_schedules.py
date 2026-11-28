@@ -133,6 +133,14 @@ def clause_graph(clauses, family, union_logical=False):
 def make_schedule(n, clauses, name, seed):
     if name not in NAMES:
         raise ValueError(name)
+    if n == 0 or any(len(clause) == 0 for clause in clauses):
+        # Integration fix (2026-11-28): the geometric features divide by n and by clause
+        # widths. Zero-variable inputs and empty clauses get a neutral schedule; the exact
+        # DPLL component already decides them (an empty clause is UNSAT).
+        return dict(variable_scores=[.5]*n, preferred_bits=[0]*n, clause_weights=[1.0]*len(clauses),
+                    boost_angles=[0.0]*len(clauses), phase_constant=1.0,
+                    clause_neighbors=[[] for _ in clauses], spectral_scores=[.5]*n,
+                    metadata=dict(name=name, seed=seed, degenerate_input=True))
     if name=='shuffled_all_ideas':
         base=make_schedule(n,clauses,'all_ideas',seed)
         rng=random.Random(keyed_seed(seed,'matched-shuffle'))

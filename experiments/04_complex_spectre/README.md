@@ -243,6 +243,7 @@ In all 360 trials, the 12-sample winding number agreed with a 1,500-sample one.
 * **"Compose twice and rescale" works.** The rescaled iterates h_k(x) = f^{2^k}(s_k x)/s_k of z² + c∞ converge to the fixed point g: max |h_k − g| on [−1, 1] falls from 0.034 at k = 0 to 1.7 × 10⁻⁹ at k = 9. The two-level error ratios 0.018, 0.021, 0.022, 0.023 approach α⁻⁴ ≈ 0.0255. The scale ratios s_k/s_{k+1} converge to α.
 * **The kneading sequence.** At the accumulation point it is RLRRRLRLRLRRRLRR…; for the first 1,023 symbols it equals the parity of the ruler function ν₂(j), the 2-adic valuation. The same function gives the Gray-code flip positions and Luby's restart runs (1, 2, …, 2^{ν₂(u)}). All three identities are checked in the script.
 * **The sign of α is Euler's half-turn.** log α = log|α| + iπ = 0.917453205977598 + iπ.
+* **An independent cross-check.** Superstable centers recovered on 2026-11-28 (`archive/recovered_2026-11-28/experiments/04_complex_maps/feigenbaum_centers.json`, bisection at 80 digits) agree with these Newton-method centers through period 512 to within 5 × 10⁻³⁰, the precision stored here (**observed**).
 
 ## What the experiment shows
 

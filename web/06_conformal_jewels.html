@@ -85,6 +85,7 @@
         <option value="square">Squaring w = z²</option>
         <option value="cube">Cubing w = z³</option>
         <option value="disk">Disk w = tanh(z/2)</option>
+        <option value="mobius">Möbius w = (z − 0.3)/(1 − 0.3z)</option>
         <option value="wpSquare">Weierstrass ℘, lattice 1, i</option>
         <option value="wpTri">Weierstrass ℘, lattice 1, e^(iπ/3)</option>
         <option value="identity">Identity w = z</option>
@@ -163,6 +164,7 @@
     <div>
       <h2>Folding and coverings</h2>
       <p>A nonlinear image need not remain a non-overlapping tiling. On one strip of height 2π, eᶻ keeps the tiles separate (multiplicity 1). Squaring a window symmetric about 0 folds z and −z together (multiplicity 2). Click a point of the output plane to count its preimages. Hat and pinwheel patches are aperiodic, so their eᶻ jewels show a seam along the negative real axis, where the top and bottom of the strip meet.</p>
+      <p>The Möbius map (z − 0.3)/(1 − 0.3z) is one-to-one and keeps the unit disk in place: the same square window that squaring folds twice stays a single layer, with multiplicity 1.00.</p>
       <p>The disk map tanh(z/2) sends the strip |Im z| &lt; π/2 onto the unit disk. Columns become hyperbolic geodesics, rows become curves ending at ±1, and a step of log c is a hyperbolic translation of length log c.</p>
     </div>
     <div>
@@ -247,6 +249,8 @@
     square: { kind: 'box', half: 1.5, f: (x, y) => [x * x - y * y, 2 * x * y], text: 'z²' },
     cube: { kind: 'box', half: 1.5, f: (x, y) => { const a = x * x - y * y, b = 2 * x * y; return [a * x - b * y, a * y + b * x]; }, text: 'z³' },
     disk: { kind: 'strip', height: PI, f: (x, y) => { const [u, v] = cexp(x, y); return cdiv(u - 1, v, u + 1, v); }, text: 'tanh(z/2)', unitCircle: true },
+    // Disk-preserving and injective; its pole at z = 10/3 lies outside the window.
+    mobius: { kind: 'box', half: 1.5, f: (x, y) => cdiv(x - 0.3, y, 1 - 0.3 * x, -0.3 * y), text: '(z − 0.3)/(1 − 0.3z)', unitCircle: true },
     wpSquare: { kind: 'lattice', w1: [1, 0], w2: [0, 1], text: '℘(z; 1, i)', lazy: true },
     wpTri: { kind: 'lattice', w1: [1, 0], w2: [0.5, SQ3 / 2], text: '℘(z; 1, e^(iπ/3))', lazy: true },
     identity: { kind: 'strip', height: TAU, f: (x, y) => [x, y], text: 'z', twist: true },

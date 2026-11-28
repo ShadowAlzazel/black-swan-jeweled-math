@@ -1,6 +1,6 @@
 # Roadmap
 
-Black Swan asks whether a satisfiability landscape can be reshaped so that its solutions stay fixed while the paths to them become easier to find. Five experiments in, this page says what we now know, and what to explore next. Every item has a question, a method that reuses code already here, a prediction, and a test that would tell us we were wrong.
+Black Swan asks whether a satisfiability landscape can be reshaped so that its solutions stay fixed while the paths to them become easier to find. Six experiments in, this page says what we now know, and what to explore next. Every item has a question, a method that reuses code already here, a prediction, and a test that would tell us we were wrong.
 
 Sizes: **S** is one sitting, **M** a few sessions, **L** a project. Tags follow the repository: **proven**, **open**, **observed**. If anything on this list ever looks like evidence that P = NP, the tripwire in [CLAUDE.md](CLAUDE.md) applies first.
 
@@ -13,6 +13,7 @@ Sizes: **S** is one sitting, **M** a few sessions, **L** a project. Tags follow 
 | 03 Golden sweep | 58,176 searches show no constant or tiling advantage (**observed**). Fixed clause-position weights can always be trapped by seven clauses (**proven**). |
 | 04 Complex Spectre | The two-plane solver's geometry adds nothing measurable. A plane slice sees only polynomially many assignments, so covering all 2^n needs exponentially large frequencies (**proven**). δ is the renormalization eigenvalue, computed to 45 digits (**observed**). |
 | 05 Counting jewels | Exact counting by contraction works, at about 2^width; width is ≈ 0.69 n for random formulas at the threshold (**observed**). Conditional-expectation starts cut search 2–9×. Count-preserving rewrites that add variables make search much harder. Every landscape method fails the XOR look-alike (**observed**). |
+| 06 Black swan hybrid | Exact XOR recognition inside CNF (Gaussian elimination, checkable 0 = 1 certificates) removes nearly all DPLL work on parity formulas. Every constant and tiling schedule matches a random order and its shuffled control (**observed**). Recovered and verified 2026-11-28. |
 
 The pattern so far: structure helps only when the formula itself has it (geometry, planted hints). Methods that read local hints fail on formulas without hints. Exact counting tells the truth about a landscape at a price set by its width.
 
@@ -61,6 +62,15 @@ Johnson's method fixes bits using the expected number of violated clauses (first
 * **Method:** test families of implied clauses (binary resolvents, failed-literal implications, clauses learned by a small CDCL run) as landscape reshapers on R1.
 * **Prediction:** modest constant-factor gains, no change in scaling.
 
+### R15. Fourier levels of a landscape (**S**)
+* **Background:** group the Walsh characters χ_S by level |S| = k. The level weights ‖P_k E‖²/‖E‖² of the energy form a probability distribution, by the mechanism of the Gelfand–Graev lemma ([docs/IDEMPOTENT_WEIGHTS.md](docs/IDEMPOTENT_WEIGHTS.md)).
+  * The XOR look-alike's energy lives on levels 0 and 3 only, so conditional expectations see nothing on it until an equation's last variable is fixed (**proven**). That explains why Johnson's starts gave no help on XOR in Experiment 05.
+  * A 3-SAT clause also has weight on levels 1 and 2.
+* **Method:** for n ≤ 24, compute these level weights by a fast Walsh–Hadamard transform, along with the agreement between the signs of the level-1 coefficients and the best-matching solution. Run planted and unplanted 3-SAT, the XOR look-alike and Experiment 05's rewrites.
+* **Prediction:** that agreement predicts the gain from conditional-expectation starts and WalkSAT's work. It is zero on XOR and small on unplanted formulas at the threshold.
+* **How we would know otherwise:** a family with no low-level signal that local search still solves quickly.
+* **Literature first:** the planted look-alike is gauge-equivalent to a diluted three-spin ferromagnet with a glass transition (Franz, Mézard, Ricci-Tersenghi, Weigt and Zecchina 2001).
+
 ## Later: geometry and pictures
 
 ### R9. Exact plane search (**M**)
@@ -79,7 +89,7 @@ Johnson's method fixes bits using the expected number of violated clauses (first
 
 ### R12. XOR-SAT and the sheaf obstruction (**S**)
 * **Background:** for XOR systems, an unsatisfiable core is a set of equations whose left sides cancel and whose right sides sum to 1. That is a first-cohomology obstruction, and Gaussian elimination finds it in polynomial time (**proven**). FURTHER_EXPLORATIONS #4 asks for the same thing in 3-SAT, where no such shortcut is known.
-* **Method:** draw the XOR obstruction on the look-alike instances, and show how the same picture fails for 3-SAT.
+* **Method:** draw the XOR obstruction on the look-alike instances, and show how the same picture fails for 3-SAT. Experiment 06's `xor_kernel.py` already computes the certificates (rows XOR-ing to 0 = 1); what remains is the picture and the 3-SAT contrast.
 
 ## Bridges to the Lemma Office
 
@@ -90,6 +100,7 @@ Candidates:
 * The Tovey cycle lemma: d implications around a cycle have exactly two solutions.
 * The face bound for L lines.
 * "Positive weights keep the zero set."
+* Lemma 14.33: the weights of a self-adjoint idempotent are non-negative and sum to 1 (short once written as squared norms).
 
 Each is short and has a picture. Check Left to Solve for matching targets first.
 
@@ -101,7 +112,8 @@ Each is short and has a picture. Check Left to Solve for matching targets first.
 
 * The honest SAT jewel: the energy polynomial and its zeros, Experiment 05 and `web/07`.
 * Counting instead of searching: Experiment 05.
-* The XOR look-alike: Experiment 05, now a required control (CLAUDE.md).
+* The XOR look-alike: Experiment 05, now a required control (CLAUDE.md), with its algebraic side in Experiment 06's kernel.
+* Exact XOR recognition with contradiction certificates: Experiment 06.
 
 Still open from [docs/FURTHER_EXPLORATIONS.md](docs/FURTHER_EXPLORATIONS.md): GUE-spaced samplers, 2-adic trees, plastic Rauzy fractals, survey propagation on Spectre factor graphs, and braid holonomy. They are not scheduled; each needs a falsifiable first test before it joins this list.
 
@@ -110,5 +122,5 @@ Still open from [docs/FURTHER_EXPLORATIONS.md](docs/FURTHER_EXPLORATIONS.md): GU
 1. R1, the tripwire harness and certified hard suite. Every later item is measured against it.
 2. R2 and R3: the energy jewels, as both picture and measurement.
 3. R4, R5 and R6, the search experiments, each run on R1 and the XOR look-alike.
-4. R7 and R8 are cheap and can run alongside.
+4. R7, R8 and R15 are cheap and can run alongside.
 5. R9–R14 as interest leads, with R13 coordinated with the Lemma Office.

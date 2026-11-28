@@ -1,7 +1,7 @@
 {
   "format_version": 1,
   "project": "Black Swan Jeweled Math",
-  "description": "Consolidation of four experiment deliverables. Archive members retain their experiment directories; any compatibility changes are recorded under modifications, and audit files added afterwards under additions.",
+  "description": "Consolidation of experiment deliverables and recovered material. Archive members keep their bytes; changes are recorded under modifications, and files added afterwards under additions.",
   "archives": [
     {
       "source_archive": "Black_Swan_Jewel_Lab.zip",
@@ -283,7 +283,7 @@
           "path": "experiments/04_complex_spectre/README.md",
           "size_bytes": 4631,
           "sha256": "6a014872758800bedf574c4d2f1cfc5089edb503999e35bf075600779af4341a",
-          "repository_sha256": "3d33399c5eb86142d2a709c99d874487df33a0506b7073345bb4ed8f0cf49937"
+          "repository_sha256": "d111d52f336fc31644bb74a56195dc053a76c5318889e88bdabb029fff013963"
         },
         {
           "path": "experiments/04_complex_spectre/constants_and_tilings.py",
@@ -313,7 +313,7 @@
           "path": "web/05_complex_julia_sat.html",
           "size_bytes": 27028,
           "sha256": "c9cbca9a620ddb0a602611b0eca8bd7c1933aa01d271aa873b1bf773c59e84b9",
-          "repository_sha256": "848a43c1bc9bc5d9426259fe6903ce13c063341587edc434674d3f95aa6fa886"
+          "repository_sha256": "50c837e333a57a7793657f5246a25b2ad072c1920d4c7a585edbf5959ad5d27c"
         }
       ],
       "not_copied": [
@@ -322,9 +322,187 @@
           "reason": "Installation instructions for the drop-in; they were carried out instead of committed."
         }
       ]
+    },
+    {
+      "source_archive": "black-swan-recovered-additions.zip",
+      "archive_sha256": "2507cd93ec9d548a7042a9cebd67b1252c5209946d57ab2ee2c92b2d82248ec7",
+      "destination": "experiments/06_black_swan_hybrid (renumbered from 05) and archive/recovered_2026-11-28 (original paths kept)",
+      "file_count": 20,
+      "files": [
+        {
+          "path": "archive/recovered_2026-11-28/experiments/04_complex_maps/README.md",
+          "original_path": "experiments/04_complex_maps/README.md",
+          "original_source": "black-swan-jeweled-math-updated.zip",
+          "size_bytes": 4309,
+          "sha256": "c2af7832d5d8c876ac411165ffbfc5cd795eab03c76ccaa1d99e72d58d49624c",
+          "repository_sha256": "c2af7832d5d8c876ac411165ffbfc5cd795eab03c76ccaa1d99e72d58d49624c"
+        },
+        {
+          "path": "archive/recovered_2026-11-28/experiments/04_complex_maps/feigenbaum_centers.json",
+          "original_path": "experiments/04_complex_maps/feigenbaum_centers.json",
+          "original_source": "black-swan-jeweled-math-updated.zip",
+          "size_bytes": 18758,
+          "sha256": "939320251340c84189d2beb7a02e7c219984845e555df67f61d2b59d58524211",
+          "repository_sha256": "939320251340c84189d2beb7a02e7c219984845e555df67f61d2b59d58524211"
+        },
+        {
+          "path": "archive/recovered_2026-11-28/experiments/04_complex_maps/feigenbaum_centers.py",
+          "original_path": "experiments/04_complex_maps/feigenbaum_centers.py",
+          "original_source": "black-swan-jeweled-math-updated.zip",
+          "size_bytes": 5942,
+          "sha256": "72e45f976bb5bc00a8fbadecf9567cb3f2745a746de0646fce08d908de4f1878",
+          "repository_sha256": "72e45f976bb5bc00a8fbadecf9567cb3f2745a746de0646fce08d908de4f1878"
+        },
+        {
+          "path": "archive/recovered_2026-11-28/experiments/04_complex_maps/map_validation.json",
+          "original_path": "experiments/04_complex_maps/map_validation.json",
+          "original_source": "black-swan-jeweled-math-updated.zip",
+          "size_bytes": 741,
+          "sha256": "0279472aeec7114cc286a2199a22fdc961cfa4fe6ce4f5fb8c19b0b6e050cf4c",
+          "repository_sha256": "0279472aeec7114cc286a2199a22fdc961cfa4fe6ce4f5fb8c19b0b6e050cf4c"
+        },
+        {
+          "path": "archive/recovered_2026-11-28/web/05_complex_maps.html",
+          "original_path": "web/05_complex_maps.html",
+          "original_source": "black-swan-jeweled-math-updated.zip",
+          "size_bytes": 63709,
+          "sha256": "8c5374469a5a03fba4802ac5c6c77538c566501b57f72950408a8089de46afc1",
+          "repository_sha256": "8c5374469a5a03fba4802ac5c6c77538c566501b57f72950408a8089de46afc1"
+        },
+        {
+          "path": "experiments/06_black_swan_hybrid/CALLBACKS.md",
+          "original_path": "experiments/05_black_swan_hybrid/CALLBACKS.md",
+          "original_source": "previous unfinished local experiment",
+          "size_bytes": 3327,
+          "sha256": "9fdafb339fc62cb2b0e396017b09434f3a57f06a47b844f9c591aefe7115943e",
+          "repository_sha256": "9fdafb339fc62cb2b0e396017b09434f3a57f06a47b844f9c591aefe7115943e"
+        },
+        {
+          "path": "experiments/06_black_swan_hybrid/PROOF_OBLIGATIONS.md",
+          "original_path": "experiments/05_black_swan_hybrid/PROOF_OBLIGATIONS.md",
+          "original_source": "previous unfinished local experiment",
+          "size_bytes": 6616,
+          "sha256": "b4a71ed4bac11fb24946aa8003f3aa6a0c4d0ce8ee62e5c1136141a56f6037e4",
+          "repository_sha256": "b4a71ed4bac11fb24946aa8003f3aa6a0c4d0ce8ee62e5c1136141a56f6037e4"
+        },
+        {
+          "path": "experiments/06_black_swan_hybrid/XOR_KERNEL.md",
+          "original_path": "experiments/05_black_swan_hybrid/XOR_KERNEL.md",
+          "original_source": "previous unfinished local experiment",
+          "size_bytes": 4657,
+          "sha256": "624d6adf8ac2b10130c572f0ef5567830bb37c2f04b18ec9321dcc4ebac4a2ce",
+          "repository_sha256": "624d6adf8ac2b10130c572f0ef5567830bb37c2f04b18ec9321dcc4ebac4a2ce"
+        },
+        {
+          "path": "experiments/06_black_swan_hybrid/audit_hybrid.py",
+          "original_path": "experiments/05_black_swan_hybrid/audit_hybrid.py",
+          "original_source": "previous unfinished local experiment",
+          "size_bytes": 21089,
+          "sha256": "21f0e1a313012ef96de1b3d1d1c3587c4f68a89b544f32ec67ef532dd225b7e2",
+          "repository_sha256": "21f0e1a313012ef96de1b3d1d1c3587c4f68a89b544f32ec67ef532dd225b7e2"
+        },
+        {
+          "path": "experiments/06_black_swan_hybrid/audit_results.json",
+          "original_path": "experiments/05_black_swan_hybrid/audit_results.json",
+          "original_source": "previous unfinished local experiment",
+          "size_bytes": 21608,
+          "sha256": "d375be7d5abda5bc7c64d67c766526d616cc22544dd01657139cc7f907a6b66a",
+          "repository_sha256": "d375be7d5abda5bc7c64d67c766526d616cc22544dd01657139cc7f907a6b66a"
+        },
+        {
+          "path": "experiments/06_black_swan_hybrid/creative_schedules.py",
+          "original_path": "experiments/05_black_swan_hybrid/creative_schedules.py",
+          "original_source": "previous unfinished local experiment",
+          "size_bytes": 9636,
+          "sha256": "a5a692ff61e52ea64792c85499f92f8f13818f1ded70a0259413cc7bae7cc96c",
+          "repository_sha256": "6371a4b87b753ebb741baf7d186e70b93dd910cd629e155ff3595cfe3bc5c277"
+        },
+        {
+          "path": "experiments/06_black_swan_hybrid/dataset.json",
+          "original_path": "experiments/05_black_swan_hybrid/dataset.json",
+          "original_source": "previous unfinished local experiment",
+          "size_bytes": 468411,
+          "sha256": "a86deabf5d95731b7fde0c12db72b91e558814303cdda9c9cb548503e50c299f",
+          "repository_sha256": "a86deabf5d95731b7fde0c12db72b91e558814303cdda9c9cb548503e50c299f"
+        },
+        {
+          "path": "experiments/06_black_swan_hybrid/pilot_results.json",
+          "original_path": "experiments/05_black_swan_hybrid/pilot_results.json",
+          "original_source": "previous unfinished local experiment",
+          "size_bytes": 90260,
+          "sha256": "35e8930de329c8f8cc7c7bda0094b3f418784d5155a2ad2b0530b48332764efe",
+          "repository_sha256": "35e8930de329c8f8cc7c7bda0094b3f418784d5155a2ad2b0530b48332764efe"
+        },
+        {
+          "path": "experiments/06_black_swan_hybrid/results.json",
+          "original_path": "experiments/05_black_swan_hybrid/results.json",
+          "original_source": "previous unfinished local experiment",
+          "size_bytes": 753261,
+          "sha256": "6f5d7e5df7b10c7de45d13808796f29da46446f01fe47d1ee1241dc4ef93bfe9",
+          "repository_sha256": "6f5d7e5df7b10c7de45d13808796f29da46446f01fe47d1ee1241dc4ef93bfe9"
+        },
+        {
+          "path": "experiments/06_black_swan_hybrid/run_hybrid.py",
+          "original_path": "experiments/05_black_swan_hybrid/run_hybrid.py",
+          "original_source": "previous unfinished local experiment",
+          "size_bytes": 21091,
+          "sha256": "007472f864a4e1927d2dd441f694b95be813f2cd2292c6c3ce7e816a861c58f3",
+          "repository_sha256": "007472f864a4e1927d2dd441f694b95be813f2cd2292c6c3ce7e816a861c58f3"
+        },
+        {
+          "path": "experiments/06_black_swan_hybrid/unresolved_cases.json",
+          "original_path": "experiments/05_black_swan_hybrid/unresolved_cases.json",
+          "original_source": "previous unfinished local experiment",
+          "size_bytes": 2341,
+          "sha256": "98906e7ad85f7502e6fdb7584d232fb544b9aad118e40cfb5d96bddeaf02ba81",
+          "repository_sha256": "98906e7ad85f7502e6fdb7584d232fb544b9aad118e40cfb5d96bddeaf02ba81"
+        },
+        {
+          "path": "experiments/06_black_swan_hybrid/xor_kernel.py",
+          "original_path": "experiments/05_black_swan_hybrid/xor_kernel.py",
+          "original_source": "previous unfinished local experiment",
+          "size_bytes": 12296,
+          "sha256": "32610b168433f6b77d0532b15fe48c31f32ac01763266b9e3f67764bdc8f0d6c",
+          "repository_sha256": "32610b168433f6b77d0532b15fe48c31f32ac01763266b9e3f67764bdc8f0d6c"
+        },
+        {
+          "path": "archive/recovered_2026-11-28/REVIEW.md",
+          "original_path": "REVIEW.md",
+          "original_source": "review package",
+          "size_bytes": 6515,
+          "sha256": "df20c61e0a4c344b982b8dfa055bc619f8b4459559c6e9986486e3292e77fa89",
+          "repository_sha256": "df20c61e0a4c344b982b8dfa055bc619f8b4459559c6e9986486e3292e77fa89"
+        },
+        {
+          "path": "archive/recovered_2026-11-28/audit/manifest.json",
+          "original_path": "audit/manifest.json",
+          "original_source": "review package",
+          "size_bytes": 5346,
+          "sha256": "41c7915563793c4bf5b4593aad9d225bdb9f4f4e56c98b9141b0ecffbb42f84e",
+          "repository_sha256": "41c7915563793c4bf5b4593aad9d225bdb9f4f4e56c98b9141b0ecffbb42f84e"
+        },
+        {
+          "path": "archive/recovered_2026-11-28/audit/archive_vs_remote_audit.json",
+          "original_path": "audit/archive_vs_remote_audit.json",
+          "original_source": "review package",
+          "size_bytes": 34151,
+          "sha256": "e5101858721f67752cbd1f7385410ba61a9001f87c4932cb33eb9754acc7caee",
+          "repository_sha256": "e5101858721f67752cbd1f7385410ba61a9001f87c4932cb33eb9754acc7caee"
+        }
+      ],
+      "not_copied": [
+        {
+          "path": "reference/HAT_SOURCE_LICENSE",
+          "reason": "Identical to experiments/03_golden_sweep/HAT_SOURCE_LICENSE."
+        },
+        {
+          "path": "reference/THIRD_PARTY_NOTICES.md",
+          "reason": "Identical to THIRD_PARTY_NOTICES.md."
+        }
+      ]
     }
   ],
-  "total_files": 46,
+  "total_files": 66,
   "modifications": [
     {
       "path": "experiments/03_golden_sweep/run_sweep.py",
@@ -348,7 +526,7 @@
       "path": "experiments/04_complex_spectre/README.md",
       "reason": "Rewritten as the experiment report: delivered tables kept verbatim with audit findings beside them.",
       "original_archive_sha256": "6a014872758800bedf574c4d2f1cfc5089edb503999e35bf075600779af4341a",
-      "repository_sha256": "3d33399c5eb86142d2a709c99d874487df33a0506b7073345bb4ed8f0cf49937"
+      "repository_sha256": "d111d52f336fc31644bb74a56195dc053a76c5318889e88bdabb029fff013963"
     },
     {
       "path": "experiments/04_complex_spectre/constants_and_tilings.py",
@@ -366,7 +544,13 @@
       "path": "web/05_complex_julia_sat.html",
       "reason": "Audit note and links added to the header; visualization unchanged.",
       "original_archive_sha256": "c9cbca9a620ddb0a602611b0eca8bd7c1933aa01d271aa873b1bf773c59e84b9",
-      "repository_sha256": "848a43c1bc9bc5d9426259fe6903ce13c063341587edc434674d3f95aa6fa886"
+      "repository_sha256": "50c837e333a57a7793657f5246a25b2ad072c1920d4c7a585edbf5959ad5d27c"
+    },
+    {
+      "path": "experiments/06_black_swan_hybrid/creative_schedules.py",
+      "reason": "Integration fix: neutral schedule for zero-variable inputs and empty clauses, which previously divided by zero. Results on the stored dataset are unchanged apart from timing fields.",
+      "original_archive_sha256": "a5a692ff61e52ea64792c85499f92f8f13818f1ded70a0259413cc7bae7cc96c",
+      "repository_sha256": "6371a4b87b753ebb741baf7d186e70b93dd910cd629e155ff3595cfe3bc5c277"
     }
   ],
   "verification": {
@@ -381,7 +565,11 @@
         "Golden sweep: relocated tiling cache loads all three templates. Full 58176-run sweep was intentionally not rerun.",
         "Golden sweep: removed the cache in isolation and rebuilt all three tiling templates exactly through the new child-directory fallback.",
         "Complex Spectre: run_experiments.py reproduced every recorded non-timing field exactly (Python 3.13 with NumPy 2.5.3 and with NumPy 2.3.5); recorded wall-clock times differ by machine.",
-        "Complex Spectre: every reported witness, including the CLI run on missed_sat_instance_35.cnf, rechecked by independent evaluators; exhaustive search finds exactly 9 solutions of that 18-variable instance."
+        "Complex Spectre: every reported witness, including the CLI run on missed_sat_instance_35.cnf, rechecked by independent evaluators; exhaustive search finds exactly 9 solutions of that 18-variable instance.",
+        "Recovered hybrid: run_hybrid.py and audit_hybrid.py regenerate every stored result file identically apart from timing fields (2026-11-28); the zero-variable guard leaves results unchanged.",
+        "Recovered hybrid: the XOR kernel solves Experiment 05's planted 3-XOR CNF instances 8/8 at every size to n = 400 with verified witnesses, and returns UNKNOWN on random 3-SAT.",
+        "Recovered Feigenbaum centers agree with Experiment 04's through period 512 to within 5e-30.",
+        "Gelfand-Graev weights (docs/gelfand_graev_check.py, about 1 s): Lemma 14.33 and Proposition 14.34 hold on GL_2(F_q) for q = 2, 3, 5, 7; the proof's degree formula fails exactly on labels (X - a)^2, and the corrected weights sum to 1 for N <= 16."
       ]
     }
   },
@@ -410,12 +598,32 @@
     {
       "path": "web/06_conformal_jewels.html",
       "reason": "Two-plane conformal tiling explorer; embeds hat patches derived from the BSD-3-Clause hat source and this repository's pinwheel patches.",
-      "repository_sha256": "4c187d46ad5aa48df7160b09d474fbe86cba09669ef793b391210b90ece88014"
+      "repository_sha256": "a6e19aa54b5c2b8897f51400c7e693c228aa011c3578717f91267319548fecff"
     },
     {
       "path": "docs/CALLBACKS_AND_NEXT_STEPS.md",
       "reason": "Cross-field connections found while checking Experiment 04, with predictions.",
-      "repository_sha256": "f9939ddb57e95c515a2145665f63cd718829f10c6e4548fb5462638988c23d9a"
+      "repository_sha256": "21411615f2cb54a98d54992f89dcb1972317f3403fc9980b2cba4dc9394ce976"
+    },
+    {
+      "path": "experiments/06_black_swan_hybrid/README.md",
+      "reason": "Experiment 06 report: verification, rerun, look-alike cross-check, results table.",
+      "repository_sha256": "48879fb900af607aa1d8d113ad49460d74d279af97f8ae46aa3a8b6ca44f8545"
+    },
+    {
+      "path": "archive/recovered_2026-11-28/README.md",
+      "reason": "Index of the recovered archive and what was integrated from it.",
+      "repository_sha256": "81df733142c0b340bd876bd6a92736661c8d0d20dbf010a4b0e10482a0b7d38f"
+    },
+    {
+      "path": "docs/gelfand_graev_check.py",
+      "reason": "Character-table check of the Gelfand-Graev weights on GL_2(F_q), q = 2, 3, 5, 7, and weight sums on GL_N(F_q) by enumeration (N <= 4) and generating function (N <= 16), behind docs/IDEMPOTENT_WEIGHTS.md.",
+      "repository_sha256": "1fd9ad208b3503baa670b749bcc6dd323c401419df211d533cb6e548552244f3"
+    },
+    {
+      "path": "docs/IDEMPOTENT_WEIGHTS.md",
+      "reason": "Check of the Gelfand-Graev weights lemma and proposition, with a correction, and the bridge to positive weights.",
+      "repository_sha256": "2d2101f5d978219d7982fc81301e442c59262def8ed45f0a95128bf8cef9a140"
     }
   ]
 }

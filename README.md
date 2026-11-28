@@ -29,6 +29,8 @@ experiments/
   03_golden_sweep/     Broad sweep, raw data, exact labels, audit, and toy obstruction
   04_complex_spectre/  Two-plane phasor solver, recorded benchmark, independent audit, Feigenbaum check
   05_counting_jewels/  Exact counting by contraction, deterministic starts, count-preserving rewrites, XOR look-alike
+  06_black_swan_hybrid/ Recovered hybrid: exact XOR recognition, creative guidance, complete DPLL
+archive/              Recovered material kept byte-for-byte, with its review
 index.html            GitHub Pages front page (the journey)
 images/               Lab screenshots and the social card used by index.html
 web/                  Standalone interactive explorers
@@ -74,6 +76,8 @@ python experiments/04_complex_spectre/audit_exp04.py
 python experiments/04_complex_spectre/feigenbaum_renormalization.py
 python experiments/05_counting_jewels/run_counting.py
 python experiments/05_counting_jewels/run_search.py
+python experiments/06_black_swan_hybrid/run_hybrid.py
+python experiments/06_black_swan_hybrid/audit_hybrid.py
 ```
 
 These commands regenerate results next to their scripts. To redraw the hat substitution from the retained authors' source, use Node.js:
@@ -117,6 +121,10 @@ See [the Experiment 04 report](experiments/04_complex_spectre/README.md), [the d
 ## Counting instead of searching
 
 Experiment 05 takes its methods from a November 2026 discrete-log paper ([angles and caveats](docs/ANGLES_FROM_THE_DISCRETE_LOG_PAPER.md)): count solutions exactly by tensor contraction, derandomize with conditional expectations, rewrite formulas without changing their solution count, and test every trick on XOR-SAT, the look-alike that algebra solves at once. Read [the Experiment 05 report](experiments/05_counting_jewels/README.md) for the results.
+
+Experiment 06, recovered from an unfinished run and verified on 2026-11-28, adds the algebraic side of that look-alike test. It recognizes XOR equations hidden inside CNF and solves them by Gaussian elimination with checkable contradiction certificates. Its DPLL savings come almost entirely from that polynomial island; the golden, tiling, zeta, Feigenbaum and Collatz schedules match a random variable order and their own shuffled control. Read [the Experiment 06 report](experiments/06_black_swan_hybrid/README.md).
+
+A representation-theory aside, [weights from idempotents](docs/IDEMPOTENT_WEIGHTS.md), checks a Gelfand–Graev weights lemma and proposition on GL₂(F_q). It corrects one degree formula in the proof and finds the same positivity in Experiment 05's energy distribution and in the Fourier levels of a landscape.
 
 ## Related journey
 
