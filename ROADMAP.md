@@ -1,6 +1,6 @@
 # Roadmap
 
-Black Swan asks whether a satisfiability landscape can be reshaped so that its solutions stay fixed while the paths to them become easier to find. Six experiments in, this page says what we now know, and what to explore next. Every item has a question, a method that reuses code already here, a prediction, and a test that would tell us we were wrong.
+Black Swan asks whether a satisfiability landscape can be reshaped so that its solutions stay fixed while the paths to them become easier to find. Seven experiments in, this page says what we now know, and what to explore next. Every item has a question, a method that reuses code already here, a prediction, and a test that would tell us we were wrong.
 
 Sizes: **S** is one sitting, **M** a few sessions, **L** a project. Tags follow the repository: **proven**, **open**, **observed**. If anything on this list ever looks like evidence that P = NP, the tripwire in [CLAUDE.md](CLAUDE.md) applies first.
 
@@ -14,6 +14,7 @@ Sizes: **S** is one sitting, **M** a few sessions, **L** a project. Tags follow 
 | 04 Complex Spectre | The two-plane solver's geometry adds nothing measurable. A plane slice sees only polynomially many assignments, so covering all 2^n needs exponentially large frequencies (**proven**). δ is the renormalization eigenvalue, computed to 45 digits (**observed**). |
 | 05 Counting jewels | Exact counting by contraction works, at about 2^width; width is ≈ 0.69 n for random formulas at the threshold (**observed**). Conditional-expectation starts cut search 2–9×. Count-preserving rewrites that add variables make search much harder. Every landscape method fails the XOR look-alike (**observed**). |
 | 06 Black swan hybrid | Exact XOR recognition inside CNF (Gaussian elimination, checkable 0 = 1 certificates) removes nearly all DPLL work on parity formulas. Every constant and tiling schedule matches a random order and its shuffled control (**observed**). Recovered and verified 2026-11-28. |
+| 07 Fourier levels | The look-alike's dip lies wholly on level 3, and no positive reweighting moves it (**proven**). Along a hint ladder (planted, two-hidden, deceptive, golden-hidden, XOR), Johnson's starts help only when level 1 carries a hint, and WalkSAT goes where the low levels point (**observed**). Tovey splitting pushes the hint to level 2. The golden ratio is the weighting that hides a planted solution from level 1 (**proven**). |
 
 The pattern so far: structure helps only when the formula itself has it (geometry, planted hints). Methods that read local hints fail on formulas without hints. Exact counting tells the truth about a landscape at a price set by its width.
 
@@ -70,6 +71,7 @@ Johnson's method fixes bits using the expected number of violated clauses (first
 * **Prediction:** that agreement predicts the gain from conditional-expectation starts and WalkSAT's work. It is zero on XOR and small on unplanted formulas at the threshold.
 * **How we would know otherwise:** a family with no low-level signal that local search still solves quickly.
 * **Literature first:** the planted look-alike is gauge-equivalent to a diluted three-spin ferromagnet with a glass transition (Franz, Mézard, Ricci-Tersenghi, Weigt and Zecchina 2001).
+* **Status:** the first pass is [Experiment 07](experiments/07_fourier_levels/README.md), with exact coefficients for any n and hints averaged over every solution. The prediction held for conditional-expectation starts along the ladder, but per formula on Experiment 03's set, h₁ tracks WalkSAT's work (ρ = −0.56) and not Johnson's gain. The definitional extension raises h₁ yet slows WalkSAT. What remains is the unplanted suite of R1: solution-averaged hints for unplanted formulas at the threshold.
 
 ## Later: geometry and pictures
 
@@ -114,6 +116,7 @@ Each is short and has a picture. Check Left to Solve for matching targets first.
 * Counting instead of searching: Experiment 05.
 * The XOR look-alike: Experiment 05, now a required control (CLAUDE.md), with its algebraic side in Experiment 06's kernel.
 * Exact XOR recognition with contradiction certificates: Experiment 06.
+* The look-alike's energy polynomial as a signed weight enumerator of its dependencies: Experiment 07.
 
 Still open from [docs/FURTHER_EXPLORATIONS.md](docs/FURTHER_EXPLORATIONS.md): GUE-spaced samplers, 2-adic trees, plastic Rauzy fractals, survey propagation on Spectre factor graphs, and braid holonomy. They are not scheduled; each needs a falsifiable first test before it joins this list.
 

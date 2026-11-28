@@ -569,6 +569,7 @@
         "Recovered hybrid: run_hybrid.py and audit_hybrid.py regenerate every stored result file identically apart from timing fields (2026-11-28); the zero-variable guard leaves results unchanged.",
         "Recovered hybrid: the XOR kernel solves Experiment 05's planted 3-XOR CNF instances 8/8 at every size to n = 400 with verified witnesses, and returns UNKNOWN on random 3-SAT.",
         "Recovered Feigenbaum centers agree with Experiment 04's through period 512 to within 5e-30.",
+        "Experiment 07: closed-form Walsh coefficients equal a Walsh-Hadamard transform exactly on 11 formula families and rewrites; sphere averages and the XOR energy polynomial equal enumeration; the XOR polynomial equals exact contraction on 32 systems; a clean rerun reproduces levels_results.json apart from timing fields.",
         "Gelfand-Graev weights (docs/gelfand_graev_check.py, about 1 s): Lemma 14.33 and Proposition 14.34 hold on GL_2(F_q) for q = 2, 3, 5, 7; the proof's degree formula fails exactly on labels (X - a)^2, and the corrected weights sum to 1 for N <= 16."
       ]
     }
@@ -623,7 +624,27 @@
     {
       "path": "docs/IDEMPOTENT_WEIGHTS.md",
       "reason": "Check of the Gelfand-Graev weights lemma and proposition, with a correction, and the bridge to positive weights.",
-      "repository_sha256": "2d2101f5d978219d7982fc81301e442c59262def8ed45f0a95128bf8cef9a140"
+      "repository_sha256": "04d8ef558d5001de740f22211fd2dccae3c84c43af690c5da44fa505a2d6dd59"
+    },
+    {
+      "path": "experiments/07_fourier_levels/README.md",
+      "reason": "Experiment 07 report: older experiments redone through the Fourier levels of the energy.",
+      "repository_sha256": "45371a2ee59f2c82a8f8cef52f8107bae938302c50870e619e26958f6fcaff24"
+    },
+    {
+      "path": "experiments/07_fourier_levels/levels.py",
+      "reason": "Exact Walsh coefficients of CNF energies, hint shares, sphere averages, hint-ladder generators, the XOR energy polynomial from dependencies, an all-solutions DPLL.",
+      "repository_sha256": "623e966bd43d063e2fd83d4c0d88927919e74a07c1ae64505c0ea3ef120464d4"
+    },
+    {
+      "path": "experiments/07_fourier_levels/run_levels.py",
+      "reason": "Experiment 07 sections F0-F4.",
+      "repository_sha256": "06ab083826b4c73b60e766c78aac500409340d7984f14bcdfc3bc0da9d96900b"
+    },
+    {
+      "path": "experiments/07_fourier_levels/levels_results.json",
+      "reason": "Experiment 07 results (seeded; only timing fields vary between runs).",
+      "repository_sha256": "c759ba5ac807a2d540da7c1da0075b54f604abfb65eee3ccb089747f5377b497"
     }
   ]
 }

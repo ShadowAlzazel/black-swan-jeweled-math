@@ -290,6 +290,7 @@ footer { font-family: var(--font-display); font-size: 0.85rem; color: var(--mute
   <li>Starting from Johnson's conditional-expectation assignment cuts WalkSAT's work 2–9× and solves 26 of 89 formulas outright; rewrites that keep the solution count but add variables make search much harder (<span class="tag tag-observed">Observed</span>).</li>
   <li>The look-alike test: planted XOR-SAT has the same sparse random structure, Gaussian elimination solves it in milliseconds, and every landscape method slows exponentially on it. Landscape methods read local hints; XOR has none (<span class="tag tag-observed">Observed</span>).</li>
   <li>A recovered hybrid solver (Experiment 06) recognizes XOR equations hidden inside CNF and solves them with checkable 0 = 1 certificates. That parity island accounts for nearly all of its savings; its golden, tiling, zeta and Feigenbaum schedules match a random order and their own shuffled control (<span class="tag tag-observed">Observed</span>).</li>
+  <li>Experiment 07 redoes these tests through the Fourier levels of the energy. The look-alike's whole dip lies on level 3, and no positive clause weighting can move it (<span class="tag tag-proven">Proven</span>). Johnson's starts help exactly when level 1 carries a hint, and WalkSAT goes where the low levels point: toward the planted solution, away from it, or nowhere (<span class="tag tag-observed">Observed</span>). The golden ratio appears as the clause weighting q = 1/φ that hides a planted solution from level 1 (<span class="tag tag-proven">Proven</span>).</li>
 </ul>
 
 <h2 id="where"><span class="num">10</span>Where this leaves us</h2>
@@ -321,6 +322,7 @@ footer { font-family: var(--font-display); font-size: 0.85rem; color: var(--mute
   <li><a href="https://github.com/ShadowAlzazel/black-swan-jeweled-math/blob/main/experiments/04_complex_spectre/README.md">Experiment 04: complex Spectre and its audit</a></li>
   <li><a href="https://github.com/ShadowAlzazel/black-swan-jeweled-math/blob/main/experiments/05_counting_jewels/README.md">Experiment 05: counting jewels</a></li>
   <li><a href="https://github.com/ShadowAlzazel/black-swan-jeweled-math/blob/main/experiments/06_black_swan_hybrid/README.md">Experiment 06: the black swan hybrid and the parity island</a></li>
+  <li><a href="https://github.com/ShadowAlzazel/black-swan-jeweled-math/blob/main/experiments/07_fourier_levels/README.md">Experiment 07: Fourier levels and the hint ladder</a></li>
   <li><a href="https://github.com/ShadowAlzazel/black-swan-jeweled-math/blob/main/docs/ANGLES_FROM_THE_DISCRETE_LOG_PAPER.md">Angles from the discrete-log paper</a></li>
   <li><a href="https://github.com/ShadowAlzazel/black-swan-jeweled-math/blob/main/docs/CALLBACKS_AND_NEXT_STEPS.md">Callbacks and next steps</a></li>
   <li><a href="https://github.com/ShadowAlzazel/black-swan-jeweled-math/blob/main/docs/IDEMPOTENT_WEIGHTS.md">Weights from idempotents: a Gelfand–Graev check</a></li>

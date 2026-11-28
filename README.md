@@ -30,6 +30,7 @@ experiments/
   04_complex_spectre/  Two-plane phasor solver, recorded benchmark, independent audit, Feigenbaum check
   05_counting_jewels/  Exact counting by contraction, deterministic starts, count-preserving rewrites, XOR look-alike
   06_black_swan_hybrid/ Recovered hybrid: exact XOR recognition, creative guidance, complete DPLL
+  07_fourier_levels/   Older experiments redone through the Fourier levels of the energy
 archive/              Recovered material kept byte-for-byte, with its review
 index.html            GitHub Pages front page (the journey)
 images/               Lab screenshots and the social card used by index.html
@@ -78,6 +79,7 @@ python experiments/05_counting_jewels/run_counting.py
 python experiments/05_counting_jewels/run_search.py
 python experiments/06_black_swan_hybrid/run_hybrid.py
 python experiments/06_black_swan_hybrid/audit_hybrid.py
+python experiments/07_fourier_levels/run_levels.py
 ```
 
 These commands regenerate results next to their scripts. To redraw the hat substitution from the retained authors' source, use Node.js:
@@ -125,6 +127,8 @@ Experiment 05 takes its methods from a November 2026 discrete-log paper ([angles
 Experiment 06, recovered from an unfinished run and verified on 2026-11-28, adds the algebraic side of that look-alike test. It recognizes XOR equations hidden inside CNF and solves them by Gaussian elimination with checkable contradiction certificates. Its DPLL savings come almost entirely from that polynomial island; the golden, tiling, zeta, Feigenbaum and Collatz schedules match a random variable order and their own shuffled control. Read [the Experiment 06 report](experiments/06_black_swan_hybrid/README.md).
 
 A representation-theory aside, [weights from idempotents](docs/IDEMPOTENT_WEIGHTS.md), checks a Gelfand–Graev weights lemma and proposition on GL₂(F_q). It corrects one degree formula in the proof and finds the same positivity in Experiment 05's energy distribution and in the Fourier levels of a landscape.
+
+Experiment 07 redoes the search and counting tests through those Fourier levels. The XOR look-alike's whole dip sits on level 3, where no clause weighting can move it. Johnson's starts help exactly when the level-1 hint is positive. WalkSAT goes where the low levels point. Tovey splitting pushes the hint up to level 2, and the golden ratio turns out to be the clause weighting that hides a planted solution from level 1. The look-alike's energy polynomial is an exact signed weight enumerator. Read [the Experiment 07 report](experiments/07_fourier_levels/README.md).
 
 ## Related journey
 
