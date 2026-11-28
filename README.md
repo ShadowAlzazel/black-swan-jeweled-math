@@ -2,7 +2,7 @@
 
 A mathematical playground for SAT landscapes, golden-ratio rotations, quasicrystals, aperiodic tilings, and solution-preserving transformations.
 
-The central question is visual and computational: **can we reshape an energy landscape so its satisfying points stay fixed while useful paths become easier to find?** This repository records the experiments, including failures, controls, and independent checks. It does not claim a proof of P=NP or RH. A standing tripwire in [CLAUDE.md](CLAUDE.md) says what to do if an experiment ever looks like evidence of P = NP: flag it at once, then run the controls.
+The central question is visual and computational: **can we reshape an energy landscape so its satisfying points stay fixed while useful paths become easier to find?** This repository records the experiments, including failures, controls, and independent checks. It does not claim a proof of P=NP or RH. A standing tripwire in [CLAUDE.md](CLAUDE.md) says what to do if an experiment ever looks like evidence of P = NP: flag it at once, then run the controls. What to explore next is in the [roadmap](ROADMAP.md).
 
 ## Start with the pictures
 
