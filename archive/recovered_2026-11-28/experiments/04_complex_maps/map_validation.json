@@ -1,0 +1,25 @@
+{
+  "ui_states": 540,
+  "widths": [
+    320,
+    352
+  ],
+  "patterns": 5,
+  "maps": 3,
+  "constants": 6,
+  "shears": [
+    -2,
+    0,
+    2
+  ],
+  "max_relative_exponential_area_error": 0.0000932787704817084,
+  "max_relative_derivative_error": 3.260365120920065e-10,
+  "checks": [
+    "All rectangular, triangulated, and clipped hexagonal patches cover their parameter rectangle by area.",
+    "Sampled exponential images reproduce the expected annulus area within .001 relative error.",
+    "All mapped coordinates are finite and inside their chart frames.",
+    "Analytic local stretches match independent central-difference estimates.",
+    "Selected tile identity is linked between input and output."
+  ],
+  "browser_rendered": false
+}

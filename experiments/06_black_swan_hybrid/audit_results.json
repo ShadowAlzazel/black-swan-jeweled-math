@@ -1,0 +1,1310 @@
+{
+  "foundational_checks": {
+    "independent_DPLL_vs_exhaustive": 56,
+    "variable_gauge_assignment_equivalences": 2032,
+    "fixed_weight_traps_checked": 32,
+    "complex_many_to_one_examples_checked": 2
+  },
+  "xor_blackbox": {
+    "available": true,
+    "all_256_three_variable_clause_subsets_checked": 256,
+    "random_parity_or_mixed_formulas": 384,
+    "source_CNF_equation_equivalences": 1202,
+    "contradiction_certificates": 123,
+    "complete_affine_sets": 161
+  },
+  "engine_blackbox": {
+    "available": true,
+    "general_CNF_edge_fixtures": 6,
+    "random_small_formulas_including_duplicates_tautologies_empty_clauses": 112,
+    "budget_status_checks": 2,
+    "existential_3CNF_reduction_assignments": 1952
+  },
+  "mismatches": [],
+  "interpretation": "Independent finite correctness audit; no polynomial worst-case conclusion.",
+  "independent_labels": {
+    "0": {
+      "status": "SAT",
+      "witness": 16,
+      "solution_count": 6,
+      "method": "exhaustive"
+    },
+    "1": {
+      "status": "SAT",
+      "witness": 1386,
+      "solution_count": 10,
+      "method": "exhaustive"
+    },
+    "2": {
+      "status": "SAT",
+      "witness": 60,
+      "solution_count": 4,
+      "method": "exhaustive"
+    },
+    "3": {
+      "status": "SAT",
+      "witness": 3546,
+      "solution_count": 8,
+      "method": "exhaustive"
+    },
+    "4": {
+      "status": "SAT",
+      "witness": 398,
+      "solution_count": 18,
+      "method": "exhaustive"
+    },
+    "5": {
+      "status": "SAT",
+      "witness": 25,
+      "solution_count": 15,
+      "method": "exhaustive"
+    },
+    "6": {
+      "status": "SAT",
+      "witness": 2371,
+      "solution_count": 13,
+      "method": "exhaustive"
+    },
+    "7": {
+      "status": "SAT",
+      "witness": 80,
+      "solution_count": 4,
+      "method": "exhaustive"
+    },
+    "8": {
+      "status": "SAT",
+      "witness": 1694,
+      "solution_count": 1,
+      "method": "exhaustive"
+    },
+    "9": {
+      "status": "SAT",
+      "witness": 1389,
+      "solution_count": 4,
+      "method": "exhaustive"
+    },
+    "10": {
+      "status": "UNSAT",
+      "witness": null,
+      "solution_count": 0,
+      "method": "exhaustive"
+    },
+    "11": {
+      "status": "SAT",
+      "witness": 3328,
+      "solution_count": 4,
+      "method": "exhaustive"
+    },
+    "12": {
+      "status": "SAT",
+      "witness": 84013,
+      "nodes": 7,
+      "cap": 500000,
+      "method": "independent_DPLL"
+    },
+    "13": {
+      "status": "SAT",
+      "witness": 56578,
+      "nodes": 16,
+      "cap": 500000,
+      "method": "independent_DPLL"
+    },
+    "14": {
+      "status": "SAT",
+      "witness": 215717,
+      "nodes": 9,
+      "cap": 500000,
+      "method": "independent_DPLL"
+    },
+    "15": {
+      "status": "SAT",
+      "witness": 246003,
+      "nodes": 5,
+      "cap": 500000,
+      "method": "independent_DPLL"
+    },
+    "16": {
+      "status": "SAT",
+      "witness": 185791,
+      "nodes": 7,
+      "cap": 500000,
+      "method": "independent_DPLL"
+    },
+    "17": {
+      "status": "SAT",
+      "witness": 51045,
+      "nodes": 7,
+      "cap": 500000,
+      "method": "independent_DPLL"
+    },
+    "18": {
+      "status": "UNSAT",
+      "witness": null,
+      "nodes": 11,
+      "cap": 500000,
+      "method": "independent_DPLL"
+    },
+    "19": {
+      "status": "SAT",
+      "witness": 220716,
+      "nodes": 17,
+      "cap": 500000,
+      "method": "independent_DPLL"
+    },
+    "20": {
+      "status": "UNSAT",
+      "witness": null,
+      "nodes": 21,
+      "cap": 500000,
+      "method": "independent_DPLL"
+    },
+    "21": {
+      "status": "SAT",
+      "witness": 132165,
+      "nodes": 12,
+      "cap": 500000,
+      "method": "independent_DPLL"
+    },
+    "22": {
+      "status": "SAT",
+      "witness": 124765,
+      "nodes": 12,
+      "cap": 500000,
+      "method": "independent_DPLL"
+    },
+    "23": {
+      "status": "SAT",
+      "witness": 107065,
+      "nodes": 3,
+      "cap": 500000,
+      "method": "independent_DPLL"
+    },
+    "24": {
+      "status": "SAT",
+      "witness": 414456,
+      "nodes": 24,
+      "cap": 500000,
+      "method": "independent_DPLL"
+    },
+    "25": {
+      "status": "SAT",
+      "witness": 5846348,
+      "nodes": 11,
+      "cap": 500000,
+      "method": "independent_DPLL"
+    },
+    "26": {
+      "status": "SAT",
+      "witness": 697780,
+      "nodes": 13,
+      "cap": 500000,
+      "method": "independent_DPLL"
+    },
+    "27": {
+      "status": "SAT",
+      "witness": 15196795,
+      "nodes": 9,
+      "cap": 500000,
+      "method": "independent_DPLL"
+    },
+    "28": {
+      "status": "SAT",
+      "witness": 1359119,
+      "nodes": 10,
+      "cap": 500000,
+      "method": "independent_DPLL"
+    },
+    "29": {
+      "status": "SAT",
+      "witness": 1927063,
+      "nodes": 15,
+      "cap": 500000,
+      "method": "independent_DPLL"
+    },
+    "30": {
+      "status": "UNSAT",
+      "witness": null,
+      "nodes": 17,
+      "cap": 500000,
+      "method": "independent_DPLL"
+    },
+    "31": {
+      "status": "UNSAT",
+      "witness": null,
+      "nodes": 19,
+      "cap": 500000,
+      "method": "independent_DPLL"
+    },
+    "32": {
+      "status": "SAT",
+      "witness": 16485268,
+      "nodes": 10,
+      "cap": 500000,
+      "method": "independent_DPLL"
+    },
+    "33": {
+      "status": "UNSAT",
+      "witness": null,
+      "nodes": 21,
+      "cap": 500000,
+      "method": "independent_DPLL"
+    },
+    "34": {
+      "status": "SAT",
+      "witness": 9519835,
+      "nodes": 14,
+      "cap": 500000,
+      "method": "independent_DPLL"
+    },
+    "35": {
+      "status": "SAT",
+      "witness": 6314391,
+      "nodes": 6,
+      "cap": 500000,
+      "method": "independent_DPLL"
+    },
+    "36": {
+      "status": "SAT",
+      "witness": 2745113064,
+      "nodes": 33,
+      "cap": 500000,
+      "method": "independent_DPLL"
+    },
+    "37": {
+      "status": "SAT",
+      "witness": 3806043535,
+      "nodes": 13,
+      "cap": 500000,
+      "method": "independent_DPLL"
+    },
+    "38": {
+      "status": "SAT",
+      "witness": 645145881,
+      "nodes": 21,
+      "cap": 500000,
+      "method": "independent_DPLL"
+    },
+    "39": {
+      "status": "SAT",
+      "witness": 2550083276,
+      "nodes": 15,
+      "cap": 500000,
+      "method": "independent_DPLL"
+    },
+    "40": {
+      "status": "SAT",
+      "witness": 1616625319,
+      "nodes": 30,
+      "cap": 500000,
+      "method": "independent_DPLL"
+    },
+    "41": {
+      "status": "SAT",
+      "witness": 29102996,
+      "nodes": 41,
+      "cap": 500000,
+      "method": "independent_DPLL"
+    },
+    "42": {
+      "status": "UNSAT",
+      "witness": null,
+      "nodes": 31,
+      "cap": 500000,
+      "method": "independent_DPLL"
+    },
+    "43": {
+      "status": "SAT",
+      "witness": 1511804659,
+      "nodes": 14,
+      "cap": 500000,
+      "method": "independent_DPLL"
+    },
+    "44": {
+      "status": "SAT",
+      "witness": 1890831132,
+      "nodes": 13,
+      "cap": 500000,
+      "method": "independent_DPLL"
+    },
+    "45": {
+      "status": "UNSAT",
+      "witness": null,
+      "nodes": 15,
+      "cap": 500000,
+      "method": "independent_DPLL"
+    },
+    "46": {
+      "status": "SAT",
+      "witness": 2284947262,
+      "nodes": 8,
+      "cap": 500000,
+      "method": "independent_DPLL"
+    },
+    "47": {
+      "status": "SAT",
+      "witness": 324752210,
+      "nodes": 10,
+      "cap": 500000,
+      "method": "independent_DPLL"
+    },
+    "48": {
+      "status": "SAT",
+      "witness": 52,
+      "solution_count": 16,
+      "method": "exhaustive"
+    },
+    "49": {
+      "status": "UNSAT",
+      "witness": null,
+      "solution_count": 0,
+      "method": "exhaustive"
+    },
+    "50": {
+      "status": "SAT",
+      "witness": 5,
+      "solution_count": 32,
+      "method": "exhaustive"
+    },
+    "51": {
+      "status": "UNSAT",
+      "witness": null,
+      "solution_count": 0,
+      "method": "exhaustive"
+    },
+    "52": {
+      "status": "SAT",
+      "rank": 9,
+      "nullity": 6,
+      "pure": true,
+      "witness": 20736,
+      "equations": [
+        [
+          104,
+          0
+        ],
+        [
+          7,
+          0
+        ],
+        [
+          3076,
+          0
+        ],
+        [
+          5136,
+          1
+        ],
+        [
+          642,
+          0
+        ],
+        [
+          24832,
+          0
+        ],
+        [
+          25,
+          0
+        ],
+        [
+          12352,
+          1
+        ],
+        [
+          416,
+          1
+        ],
+        [
+          18944,
+          1
+        ]
+      ],
+      "method": "independent_GF2"
+    },
+    "53": {
+      "status": "UNSAT",
+      "rank": 9,
+      "pure": true,
+      "equations": [
+        [
+          104,
+          0
+        ],
+        [
+          7,
+          1
+        ],
+        [
+          3076,
+          0
+        ],
+        [
+          5136,
+          1
+        ],
+        [
+          642,
+          0
+        ],
+        [
+          24832,
+          0
+        ],
+        [
+          25,
+          0
+        ],
+        [
+          12352,
+          1
+        ],
+        [
+          416,
+          1
+        ],
+        [
+          18944,
+          1
+        ]
+      ],
+      "method": "independent_GF2"
+    },
+    "54": {
+      "status": "SAT",
+      "rank": 11,
+      "nullity": 7,
+      "pure": true,
+      "witness": 156676,
+      "equations": [
+        [
+          49216,
+          1
+        ],
+        [
+          12292,
+          0
+        ],
+        [
+          2562,
+          0
+        ],
+        [
+          416,
+          0
+        ],
+        [
+          104,
+          0
+        ],
+        [
+          7,
+          1
+        ],
+        [
+          25,
+          0
+        ],
+        [
+          141312,
+          0
+        ],
+        [
+          98560,
+          0
+        ],
+        [
+          197632,
+          0
+        ],
+        [
+          20496,
+          1
+        ],
+        [
+          1664,
+          1
+        ]
+      ],
+      "method": "independent_GF2"
+    },
+    "55": {
+      "status": "UNSAT",
+      "rank": 11,
+      "pure": true,
+      "equations": [
+        [
+          49216,
+          1
+        ],
+        [
+          12292,
+          0
+        ],
+        [
+          2562,
+          0
+        ],
+        [
+          416,
+          0
+        ],
+        [
+          104,
+          0
+        ],
+        [
+          7,
+          0
+        ],
+        [
+          25,
+          0
+        ],
+        [
+          141312,
+          0
+        ],
+        [
+          98560,
+          0
+        ],
+        [
+          197632,
+          0
+        ],
+        [
+          20496,
+          1
+        ],
+        [
+          1664,
+          1
+        ]
+      ],
+      "method": "independent_GF2"
+    },
+    "56": {
+      "status": "SAT",
+      "rank": 15,
+      "nullity": 9,
+      "pure": true,
+      "witness": 14811156,
+      "equations": [
+        [
+          3584,
+          0
+        ],
+        [
+          25,
+          1
+        ],
+        [
+          98,
+          0
+        ],
+        [
+          7,
+          1
+        ],
+        [
+          784,
+          1
+        ],
+        [
+          8945664,
+          1
+        ],
+        [
+          13631488,
+          0
+        ],
+        [
+          327712,
+          0
+        ],
+        [
+          53248,
+          0
+        ],
+        [
+          2236416,
+          0
+        ],
+        [
+          1310784,
+          0
+        ],
+        [
+          197632,
+          1
+        ],
+        [
+          392,
+          0
+        ],
+        [
+          12416,
+          0
+        ],
+        [
+          542720,
+          0
+        ],
+        [
+          6291460,
+          1
+        ]
+      ],
+      "method": "independent_GF2"
+    },
+    "57": {
+      "status": "UNSAT",
+      "rank": 15,
+      "pure": true,
+      "equations": [
+        [
+          3584,
+          0
+        ],
+        [
+          25,
+          1
+        ],
+        [
+          98,
+          0
+        ],
+        [
+          7,
+          0
+        ],
+        [
+          784,
+          1
+        ],
+        [
+          8945664,
+          1
+        ],
+        [
+          13631488,
+          0
+        ],
+        [
+          327712,
+          0
+        ],
+        [
+          53248,
+          0
+        ],
+        [
+          2236416,
+          0
+        ],
+        [
+          1310784,
+          0
+        ],
+        [
+          197632,
+          1
+        ],
+        [
+          392,
+          0
+        ],
+        [
+          12416,
+          0
+        ],
+        [
+          542720,
+          0
+        ],
+        [
+          6291460,
+          1
+        ]
+      ],
+      "method": "independent_GF2"
+    },
+    "58": {
+      "status": "SAT",
+      "rank": 19,
+      "nullity": 11,
+      "pure": true,
+      "witness": 891322372,
+      "equations": [
+        [
+          56,
+          0
+        ],
+        [
+          76546048,
+          1
+        ],
+        [
+          448,
+          0
+        ],
+        [
+          7,
+          1
+        ],
+        [
+          12296,
+          0
+        ],
+        [
+          3670016,
+          1
+        ],
+        [
+          402661376,
+          1
+        ],
+        [
+          570556416,
+          1
+        ],
+        [
+          278532,
+          1
+        ],
+        [
+          4194464,
+          0
+        ],
+        [
+          4227136,
+          1
+        ],
+        [
+          25165840,
+          1
+        ],
+        [
+          553648384,
+          0
+        ],
+        [
+          266752,
+          0
+        ],
+        [
+          34144256,
+          0
+        ],
+        [
+          136315904,
+          1
+        ],
+        [
+          49153,
+          1
+        ],
+        [
+          335546368,
+          0
+        ],
+        [
+          3584,
+          0
+        ],
+        [
+          196610,
+          0
+        ]
+      ],
+      "method": "independent_GF2"
+    },
+    "59": {
+      "status": "UNSAT",
+      "rank": 19,
+      "pure": true,
+      "equations": [
+        [
+          56,
+          0
+        ],
+        [
+          76546048,
+          1
+        ],
+        [
+          448,
+          0
+        ],
+        [
+          7,
+          0
+        ],
+        [
+          12296,
+          0
+        ],
+        [
+          3670016,
+          1
+        ],
+        [
+          402661376,
+          1
+        ],
+        [
+          570556416,
+          1
+        ],
+        [
+          278532,
+          1
+        ],
+        [
+          4194464,
+          0
+        ],
+        [
+          4227136,
+          1
+        ],
+        [
+          25165840,
+          1
+        ],
+        [
+          553648384,
+          0
+        ],
+        [
+          266752,
+          0
+        ],
+        [
+          34144256,
+          0
+        ],
+        [
+          136315904,
+          1
+        ],
+        [
+          49153,
+          1
+        ],
+        [
+          335546368,
+          0
+        ],
+        [
+          3584,
+          0
+        ],
+        [
+          196610,
+          0
+        ]
+      ],
+      "method": "independent_GF2"
+    },
+    "60": {
+      "status": "SAT",
+      "rank": 23,
+      "nullity": 13,
+      "pure": true,
+      "witness": 35922478368,
+      "equations": [
+        [
+          56,
+          1
+        ],
+        [
+          41943168,
+          0
+        ],
+        [
+          49664,
+          1
+        ],
+        [
+          18270388224,
+          0
+        ],
+        [
+          14336,
+          0
+        ],
+        [
+          25427968,
+          0
+        ],
+        [
+          4327424,
+          0
+        ],
+        [
+          65546,
+          1
+        ],
+        [
+          269485056,
+          0
+        ],
+        [
+          1537,
+          1
+        ],
+        [
+          7,
+          0
+        ],
+        [
+          104857600,
+          1
+        ],
+        [
+          6442455040,
+          0
+        ],
+        [
+          448,
+          1
+        ],
+        [
+          2113600,
+          1
+        ],
+        [
+          469762048,
+          1
+        ],
+        [
+          25769803792,
+          0
+        ],
+        [
+          1611137024,
+          1
+        ],
+        [
+          42949672992,
+          0
+        ],
+        [
+          1638400,
+          1
+        ],
+        [
+          2105600,
+          0
+        ],
+        [
+          393220,
+          1
+        ],
+        [
+          4966055936,
+          1
+        ],
+        [
+          36507254784,
+          0
+        ]
+      ],
+      "method": "independent_GF2"
+    },
+    "61": {
+      "status": "UNSAT",
+      "rank": 23,
+      "pure": true,
+      "equations": [
+        [
+          56,
+          1
+        ],
+        [
+          41943168,
+          0
+        ],
+        [
+          49664,
+          1
+        ],
+        [
+          18270388224,
+          0
+        ],
+        [
+          14336,
+          0
+        ],
+        [
+          25427968,
+          0
+        ],
+        [
+          4327424,
+          0
+        ],
+        [
+          65546,
+          1
+        ],
+        [
+          269485056,
+          0
+        ],
+        [
+          1537,
+          1
+        ],
+        [
+          7,
+          1
+        ],
+        [
+          104857600,
+          1
+        ],
+        [
+          6442455040,
+          0
+        ],
+        [
+          448,
+          1
+        ],
+        [
+          2113600,
+          1
+        ],
+        [
+          469762048,
+          1
+        ],
+        [
+          25769803792,
+          0
+        ],
+        [
+          1611137024,
+          1
+        ],
+        [
+          42949672992,
+          0
+        ],
+        [
+          1638400,
+          1
+        ],
+        [
+          2105600,
+          0
+        ],
+        [
+          393220,
+          1
+        ],
+        [
+          4966055936,
+          1
+        ],
+        [
+          36507254784,
+          0
+        ]
+      ],
+      "method": "independent_GF2"
+    },
+    "62": {
+      "status": "SAT",
+      "witness": 84,
+      "solution_count": 6,
+      "method": "exhaustive"
+    },
+    "63": {
+      "status": "UNSAT",
+      "witness": null,
+      "solution_count": 0,
+      "method": "exhaustive"
+    },
+    "64": {
+      "status": "SAT",
+      "witness": 820257,
+      "nodes": 4,
+      "cap": 500000,
+      "method": "independent_DPLL"
+    },
+    "65": {
+      "status": "UNSAT",
+      "witness": null,
+      "nodes": 51,
+      "cap": 500000,
+      "method": "independent_DPLL"
+    },
+    "66": {
+      "status": "SAT",
+      "witness": 32766169153,
+      "nodes": 5,
+      "cap": 500000,
+      "method": "independent_DPLL"
+    },
+    "67": {
+      "status": "UNSAT",
+      "witness": null,
+      "nodes": 299,
+      "cap": 500000,
+      "method": "independent_DPLL"
+    },
+    "68": {
+      "status": "SAT",
+      "witness": 1644,
+      "solution_count": 6,
+      "method": "exhaustive"
+    },
+    "69": {
+      "status": "SAT",
+      "witness": 108274,
+      "nodes": 9,
+      "cap": 500000,
+      "method": "independent_DPLL"
+    },
+    "70": {
+      "status": "SAT",
+      "witness": 9070065,
+      "nodes": 18,
+      "cap": 500000,
+      "method": "independent_DPLL"
+    },
+    "71": {
+      "status": "SAT",
+      "witness": 3337612686,
+      "nodes": 12,
+      "cap": 500000,
+      "method": "independent_DPLL"
+    }
+  },
+  "instances_checked": 72,
+  "dataset_XOR_certificates_checked": 7,
+  "graph_cycle_kernel_checks": [
+    {
+      "instance": 48,
+      "vertices": 6,
+      "edges": 9,
+      "rank": 5,
+      "cycle_nullity": 4,
+      "status": "SAT"
+    },
+    {
+      "instance": 49,
+      "vertices": 6,
+      "edges": 9,
+      "rank": 5,
+      "cycle_nullity": 4,
+      "status": "UNSAT"
+    },
+    {
+      "instance": 50,
+      "vertices": 8,
+      "edges": 12,
+      "rank": 7,
+      "cycle_nullity": 5,
+      "status": "SAT"
+    },
+    {
+      "instance": 51,
+      "vertices": 8,
+      "edges": 12,
+      "rank": 7,
+      "cycle_nullity": 5,
+      "status": "UNSAT"
+    },
+    {
+      "instance": 52,
+      "vertices": 10,
+      "edges": 15,
+      "rank": 9,
+      "cycle_nullity": 6,
+      "status": "SAT"
+    },
+    {
+      "instance": 53,
+      "vertices": 10,
+      "edges": 15,
+      "rank": 9,
+      "cycle_nullity": 6,
+      "status": "UNSAT"
+    },
+    {
+      "instance": 54,
+      "vertices": 12,
+      "edges": 18,
+      "rank": 11,
+      "cycle_nullity": 7,
+      "status": "SAT"
+    },
+    {
+      "instance": 55,
+      "vertices": 12,
+      "edges": 18,
+      "rank": 11,
+      "cycle_nullity": 7,
+      "status": "UNSAT"
+    },
+    {
+      "instance": 56,
+      "vertices": 16,
+      "edges": 24,
+      "rank": 15,
+      "cycle_nullity": 9,
+      "status": "SAT"
+    },
+    {
+      "instance": 57,
+      "vertices": 16,
+      "edges": 24,
+      "rank": 15,
+      "cycle_nullity": 9,
+      "status": "UNSAT"
+    },
+    {
+      "instance": 58,
+      "vertices": 20,
+      "edges": 30,
+      "rank": 19,
+      "cycle_nullity": 11,
+      "status": "SAT"
+    },
+    {
+      "instance": 59,
+      "vertices": 20,
+      "edges": 30,
+      "rank": 19,
+      "cycle_nullity": 11,
+      "status": "UNSAT"
+    },
+    {
+      "instance": 60,
+      "vertices": 24,
+      "edges": 36,
+      "rank": 23,
+      "cycle_nullity": 13,
+      "status": "SAT"
+    },
+    {
+      "instance": 61,
+      "vertices": 24,
+      "edges": 36,
+      "rank": 23,
+      "cycle_nullity": 13,
+      "status": "UNSAT"
+    }
+  ],
+  "structured_affine_family_members_checked": 10992,
+  "runs_checked": 1584,
+  "SAT_witnesses_checked": 1188,
+  "UNSAT_answers_independently_checked": 390,
+  "UNKNOWN_answers": 6,
+  "elapsed_seconds": 1.0507
+}

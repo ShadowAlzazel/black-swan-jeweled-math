@@ -1,0 +1,806 @@
+{
+  "Black_Swan_Jewel_Lab.zip": {
+    "identical_same_path": [
+      {
+        "zip_path": "BLACK_SWAN_README.md",
+        "repo_path": "experiments/01_initial_jewel/BLACK_SWAN_README.md",
+        "sha": "82a4918675e47588abd50730be2e3968258156d4"
+      },
+      {
+        "zip_path": "black_swan_experiments.py",
+        "repo_path": "experiments/01_initial_jewel/black_swan_experiments.py",
+        "sha": "174638fc0b81f75629636f016b461a4277168aba"
+      },
+      {
+        "zip_path": "black_swan_results.json",
+        "repo_path": "experiments/01_initial_jewel/black_swan_results.json",
+        "sha": "c03d0f3dd0d3e69c6dbda0dc476f390d7d5dfa64"
+      },
+      {
+        "zip_path": "quasicrystal_geometry.py",
+        "repo_path": "experiments/01_initial_jewel/quasicrystal_geometry.py",
+        "sha": "c7acd3e5ca2b4d459870724ea618c04ba81487d5"
+      },
+      {
+        "zip_path": "jewel_geometry.json",
+        "repo_path": "experiments/01_initial_jewel/jewel_geometry.json",
+        "sha": "817ffba55052791d76e205f2a1435cc497e9ed02"
+      }
+    ],
+    "modified_same_path": [],
+    "identical_elsewhere": [],
+    "missing": []
+  },
+  "Fleurdelys_Tiling_Jewels.zip": {
+    "identical_same_path": [
+      {
+        "zip_path": "TILING_JEWELS_README.md",
+        "repo_path": "experiments/02_tiling_jewels/TILING_JEWELS_README.md",
+        "sha": "651c4c35cabe24fe4689a9194d876f627ccab1e4"
+      },
+      {
+        "zip_path": "tiling_adaptive.py",
+        "repo_path": "experiments/02_tiling_jewels/tiling_adaptive.py",
+        "sha": "b328014f513eb8f431968f97beeae1254e032702"
+      },
+      {
+        "zip_path": "tiling_adaptive_results.json",
+        "repo_path": "experiments/02_tiling_jewels/tiling_adaptive_results.json",
+        "sha": "206d01b3b7e15f79d2a8b5462863fa47c67bad8c"
+      },
+      {
+        "zip_path": "tiling_research/LICENSE",
+        "repo_path": "experiments/02_tiling_jewels/tiling_research/LICENSE",
+        "sha": "753f2c09b089aaa7f404825eaac06587f3188c82"
+      },
+      {
+        "zip_path": "tiling_research/README.md",
+        "repo_path": "experiments/02_tiling_jewels/tiling_research/README.md",
+        "sha": "e0c1955fb3911e9ae84cc93c2fedad26bc275350"
+      },
+      {
+        "zip_path": "tiling_research/generate_hat_patch.js",
+        "repo_path": "experiments/02_tiling_jewels/tiling_research/generate_hat_patch.js",
+        "sha": "18916ad9471977aa4a6b8127a1e60226e8338b3c"
+      },
+      {
+        "zip_path": "tiling_research/generate_pinwheel.py",
+        "repo_path": "experiments/02_tiling_jewels/tiling_research/generate_pinwheel.py",
+        "sha": "d121d04cc83d7528ea1193cb21697466870c74fa"
+      },
+      {
+        "zip_path": "tiling_research/geometry.js",
+        "repo_path": "experiments/02_tiling_jewels/tiling_research/geometry.js",
+        "sha": "379e8de4645e9422c9caa116852919d7fe0dd800"
+      },
+      {
+        "zip_path": "tiling_research/hat.js",
+        "repo_path": "experiments/02_tiling_jewels/tiling_research/hat.js",
+        "sha": "c46322882dfc8ff212e5e885585738053b4d0c92"
+      },
+      {
+        "zip_path": "tiling_research/hat_patches.json",
+        "repo_path": "experiments/02_tiling_jewels/tiling_research/hat_patches.json",
+        "sha": "800dfd9295a32da0408376ed2c60af213923b10b"
+      },
+      {
+        "zip_path": "tiling_research/pinwheel_patches.json",
+        "repo_path": "experiments/02_tiling_jewels/tiling_research/pinwheel_patches.json",
+        "sha": "9076a7fc4ea26d0f95d40856159dee103c178754"
+      },
+      {
+        "zip_path": "tiling_research/validate_hat_patches.py",
+        "repo_path": "experiments/02_tiling_jewels/tiling_research/validate_hat_patches.py",
+        "sha": "9dabb8f665c20852e70b389668247da9d46437fe"
+      }
+    ],
+    "modified_same_path": [],
+    "identical_elsewhere": [],
+    "missing": []
+  },
+  "Golden_Jewel_Sweep.zip": {
+    "identical_same_path": [
+      {
+        "zip_path": "START_HERE.md",
+        "repo_path": "experiments/03_golden_sweep/START_HERE.md",
+        "sha": "9db9893709f061b4ac18a37aab45b20c80fcc2de"
+      },
+      {
+        "zip_path": "ENGINE_README.md",
+        "repo_path": "experiments/03_golden_sweep/ENGINE_README.md",
+        "sha": "e772781d6c2e010b690e9f5e019a4b5306af0234"
+      },
+      {
+        "zip_path": "sweep_engine.cpp",
+        "repo_path": "experiments/03_golden_sweep/sweep_engine.cpp",
+        "sha": "f1185e0778c4905a4ccedefbf4d4b99fb86e0e96"
+      },
+      {
+        "zip_path": "permutation_stress.py",
+        "repo_path": "experiments/03_golden_sweep/permutation_stress.py",
+        "sha": "95f6b999de096c53facea045e7e94337cc3352ab"
+      },
+      {
+        "zip_path": "exhaustive_small.py",
+        "repo_path": "experiments/03_golden_sweep/exhaustive_small.py",
+        "sha": "a83ecaab523409f25600b7414ecc532abb5e00ee"
+      },
+      {
+        "zip_path": "audit_checks.py",
+        "repo_path": "experiments/03_golden_sweep/audit_checks.py",
+        "sha": "ec414f2302eaf9104b0bb8e778cb5b42a96afdca"
+      },
+      {
+        "zip_path": "dataset.json",
+        "repo_path": "experiments/03_golden_sweep/dataset.json",
+        "sha": "51ace4bafaa08528b62bb859a30a4a2749a930d2"
+      },
+      {
+        "zip_path": "tiling_templates.json",
+        "repo_path": "experiments/03_golden_sweep/tiling_templates.json",
+        "sha": "4fae704786f87f8ceef507b89ecdde8767785c7c"
+      },
+      {
+        "zip_path": "HAT_SOURCE_LICENSE",
+        "repo_path": "experiments/03_golden_sweep/HAT_SOURCE_LICENSE",
+        "sha": "753f2c09b089aaa7f404825eaac06587f3188c82"
+      },
+      {
+        "zip_path": "raw_runs.csv",
+        "repo_path": "experiments/03_golden_sweep/raw_runs.csv",
+        "sha": "7d6474fe28632effaf4635ca0727dea7c7be3ad6"
+      },
+      {
+        "zip_path": "summary.json",
+        "repo_path": "experiments/03_golden_sweep/summary.json",
+        "sha": "5789fe34c321e9d717b7aa53f8be18843e7715b2"
+      },
+      {
+        "zip_path": "permutation_stress_summary.json",
+        "repo_path": "experiments/03_golden_sweep/permutation_stress_summary.json",
+        "sha": "93b526b1cb0aca3a99e6249b4486412b007b8ca3"
+      },
+      {
+        "zip_path": "permutation_stress_runs.csv.gz",
+        "repo_path": "experiments/03_golden_sweep/permutation_stress_runs.csv.gz",
+        "sha": "d920713b1b99dc18550ef1fca126f9f110dc1a43"
+      },
+      {
+        "zip_path": "exhaustive_small.json",
+        "repo_path": "experiments/03_golden_sweep/exhaustive_small.json",
+        "sha": "f84a31631d18945d3f2c1fa53f563e0d62ec283a"
+      },
+      {
+        "zip_path": "audit_report.json",
+        "repo_path": "experiments/03_golden_sweep/audit_report.json",
+        "sha": "2141f47c253489a21a54fb8348ba0e7ff19f9788"
+      },
+      {
+        "zip_path": "missed_sat_instance_35.cnf",
+        "repo_path": "experiments/03_golden_sweep/missed_sat_instance_35.cnf",
+        "sha": "c8f1620aafd55d50f40ccef8ccdeadc1d880d8ad"
+      },
+      {
+        "zip_path": "missed_sat_instance_35.witness",
+        "repo_path": "experiments/03_golden_sweep/missed_sat_instance_35.witness",
+        "sha": "0f58c287d57a3c734dee0405aa0c1a07eb14b12b"
+      },
+      {
+        "zip_path": "tiling_research/hat_patches.json",
+        "repo_path": "experiments/03_golden_sweep/tiling_research/hat_patches.json",
+        "sha": "800dfd9295a32da0408376ed2c60af213923b10b"
+      },
+      {
+        "zip_path": "tiling_research/pinwheel_patches.json",
+        "repo_path": "experiments/03_golden_sweep/tiling_research/pinwheel_patches.json",
+        "sha": "9076a7fc4ea26d0f95d40856159dee103c178754"
+      },
+      {
+        "zip_path": "tiling_research/LICENSE",
+        "repo_path": "experiments/03_golden_sweep/tiling_research/LICENSE",
+        "sha": "753f2c09b089aaa7f404825eaac06587f3188c82"
+      }
+    ],
+    "modified_same_path": [
+      {
+        "zip_path": "run_sweep.py",
+        "repo_path": "experiments/03_golden_sweep/run_sweep.py",
+        "sha": "abea92cf5354014adaa8fd8bccf26852a3c9c90b"
+      }
+    ],
+    "identical_elsewhere": [],
+    "missing": []
+  },
+  "black-swan-jeweled-math.zip": {
+    "identical_same_path": [
+      {
+        "zip_path": "black-swan-jeweled-math/.gitignore",
+        "repo_path": ".gitignore",
+        "sha": "8af74fc88e380652d08eb7e1a7e9cfb54bd54143"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/THIRD_PARTY_NOTICES.md",
+        "repo_path": "THIRD_PARTY_NOTICES.md",
+        "sha": "03b09338eb72d2aa028bf0e728de89a1df211a2d"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/docs/IDEAS.md",
+        "repo_path": "docs/IDEAS.md",
+        "sha": "9ccd375d6db02f10e6a16178fdd01cf800ec4806"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/01_initial_jewel/BLACK_SWAN_README.md",
+        "repo_path": "experiments/01_initial_jewel/BLACK_SWAN_README.md",
+        "sha": "82a4918675e47588abd50730be2e3968258156d4"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/01_initial_jewel/black_swan_experiments.py",
+        "repo_path": "experiments/01_initial_jewel/black_swan_experiments.py",
+        "sha": "174638fc0b81f75629636f016b461a4277168aba"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/01_initial_jewel/black_swan_results.json",
+        "repo_path": "experiments/01_initial_jewel/black_swan_results.json",
+        "sha": "c03d0f3dd0d3e69c6dbda0dc476f390d7d5dfa64"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/01_initial_jewel/jewel_geometry.json",
+        "repo_path": "experiments/01_initial_jewel/jewel_geometry.json",
+        "sha": "817ffba55052791d76e205f2a1435cc497e9ed02"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/01_initial_jewel/quasicrystal_geometry.py",
+        "repo_path": "experiments/01_initial_jewel/quasicrystal_geometry.py",
+        "sha": "c7acd3e5ca2b4d459870724ea618c04ba81487d5"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/02_tiling_jewels/TILING_JEWELS_README.md",
+        "repo_path": "experiments/02_tiling_jewels/TILING_JEWELS_README.md",
+        "sha": "651c4c35cabe24fe4689a9194d876f627ccab1e4"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/02_tiling_jewels/tiling_adaptive.py",
+        "repo_path": "experiments/02_tiling_jewels/tiling_adaptive.py",
+        "sha": "b328014f513eb8f431968f97beeae1254e032702"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/02_tiling_jewels/tiling_adaptive_results.json",
+        "repo_path": "experiments/02_tiling_jewels/tiling_adaptive_results.json",
+        "sha": "206d01b3b7e15f79d2a8b5462863fa47c67bad8c"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/02_tiling_jewels/tiling_research/LICENSE",
+        "repo_path": "experiments/02_tiling_jewels/tiling_research/LICENSE",
+        "sha": "753f2c09b089aaa7f404825eaac06587f3188c82"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/02_tiling_jewels/tiling_research/README.md",
+        "repo_path": "experiments/02_tiling_jewels/tiling_research/README.md",
+        "sha": "e0c1955fb3911e9ae84cc93c2fedad26bc275350"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/02_tiling_jewels/tiling_research/generate_hat_patch.js",
+        "repo_path": "experiments/02_tiling_jewels/tiling_research/generate_hat_patch.js",
+        "sha": "18916ad9471977aa4a6b8127a1e60226e8338b3c"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/02_tiling_jewels/tiling_research/generate_pinwheel.py",
+        "repo_path": "experiments/02_tiling_jewels/tiling_research/generate_pinwheel.py",
+        "sha": "d121d04cc83d7528ea1193cb21697466870c74fa"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/02_tiling_jewels/tiling_research/geometry.js",
+        "repo_path": "experiments/02_tiling_jewels/tiling_research/geometry.js",
+        "sha": "379e8de4645e9422c9caa116852919d7fe0dd800"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/02_tiling_jewels/tiling_research/hat.js",
+        "repo_path": "experiments/02_tiling_jewels/tiling_research/hat.js",
+        "sha": "c46322882dfc8ff212e5e885585738053b4d0c92"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/02_tiling_jewels/tiling_research/hat_patches.json",
+        "repo_path": "experiments/02_tiling_jewels/tiling_research/hat_patches.json",
+        "sha": "800dfd9295a32da0408376ed2c60af213923b10b"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/02_tiling_jewels/tiling_research/pinwheel_patches.json",
+        "repo_path": "experiments/02_tiling_jewels/tiling_research/pinwheel_patches.json",
+        "sha": "9076a7fc4ea26d0f95d40856159dee103c178754"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/02_tiling_jewels/tiling_research/validate_hat_patches.py",
+        "repo_path": "experiments/02_tiling_jewels/tiling_research/validate_hat_patches.py",
+        "sha": "9dabb8f665c20852e70b389668247da9d46437fe"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/03_golden_sweep/ENGINE_README.md",
+        "repo_path": "experiments/03_golden_sweep/ENGINE_README.md",
+        "sha": "e772781d6c2e010b690e9f5e019a4b5306af0234"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/03_golden_sweep/HAT_SOURCE_LICENSE",
+        "repo_path": "experiments/03_golden_sweep/HAT_SOURCE_LICENSE",
+        "sha": "753f2c09b089aaa7f404825eaac06587f3188c82"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/03_golden_sweep/START_HERE.md",
+        "repo_path": "experiments/03_golden_sweep/START_HERE.md",
+        "sha": "9db9893709f061b4ac18a37aab45b20c80fcc2de"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/03_golden_sweep/audit_checks.py",
+        "repo_path": "experiments/03_golden_sweep/audit_checks.py",
+        "sha": "ec414f2302eaf9104b0bb8e778cb5b42a96afdca"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/03_golden_sweep/audit_report.json",
+        "repo_path": "experiments/03_golden_sweep/audit_report.json",
+        "sha": "2141f47c253489a21a54fb8348ba0e7ff19f9788"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/03_golden_sweep/dataset.json",
+        "repo_path": "experiments/03_golden_sweep/dataset.json",
+        "sha": "51ace4bafaa08528b62bb859a30a4a2749a930d2"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/03_golden_sweep/exhaustive_small.json",
+        "repo_path": "experiments/03_golden_sweep/exhaustive_small.json",
+        "sha": "f84a31631d18945d3f2c1fa53f563e0d62ec283a"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/03_golden_sweep/exhaustive_small.py",
+        "repo_path": "experiments/03_golden_sweep/exhaustive_small.py",
+        "sha": "a83ecaab523409f25600b7414ecc532abb5e00ee"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/03_golden_sweep/missed_sat_instance_35.cnf",
+        "repo_path": "experiments/03_golden_sweep/missed_sat_instance_35.cnf",
+        "sha": "c8f1620aafd55d50f40ccef8ccdeadc1d880d8ad"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/03_golden_sweep/missed_sat_instance_35.witness",
+        "repo_path": "experiments/03_golden_sweep/missed_sat_instance_35.witness",
+        "sha": "0f58c287d57a3c734dee0405aa0c1a07eb14b12b"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/03_golden_sweep/permutation_stress.py",
+        "repo_path": "experiments/03_golden_sweep/permutation_stress.py",
+        "sha": "95f6b999de096c53facea045e7e94337cc3352ab"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/03_golden_sweep/permutation_stress_runs.csv.gz",
+        "repo_path": "experiments/03_golden_sweep/permutation_stress_runs.csv.gz",
+        "sha": "d920713b1b99dc18550ef1fca126f9f110dc1a43"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/03_golden_sweep/permutation_stress_summary.json",
+        "repo_path": "experiments/03_golden_sweep/permutation_stress_summary.json",
+        "sha": "93b526b1cb0aca3a99e6249b4486412b007b8ca3"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/03_golden_sweep/raw_runs.csv",
+        "repo_path": "experiments/03_golden_sweep/raw_runs.csv",
+        "sha": "7d6474fe28632effaf4635ca0727dea7c7be3ad6"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/03_golden_sweep/run_sweep.py",
+        "repo_path": "experiments/03_golden_sweep/run_sweep.py",
+        "sha": "c6371d5671b4a6a1380ee024add413f38d8cfc94"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/03_golden_sweep/summary.json",
+        "repo_path": "experiments/03_golden_sweep/summary.json",
+        "sha": "5789fe34c321e9d717b7aa53f8be18843e7715b2"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/03_golden_sweep/sweep_engine.cpp",
+        "repo_path": "experiments/03_golden_sweep/sweep_engine.cpp",
+        "sha": "f1185e0778c4905a4ccedefbf4d4b99fb86e0e96"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/03_golden_sweep/tiling_research/LICENSE",
+        "repo_path": "experiments/03_golden_sweep/tiling_research/LICENSE",
+        "sha": "753f2c09b089aaa7f404825eaac06587f3188c82"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/03_golden_sweep/tiling_research/hat_patches.json",
+        "repo_path": "experiments/03_golden_sweep/tiling_research/hat_patches.json",
+        "sha": "800dfd9295a32da0408376ed2c60af213923b10b"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/03_golden_sweep/tiling_research/pinwheel_patches.json",
+        "repo_path": "experiments/03_golden_sweep/tiling_research/pinwheel_patches.json",
+        "sha": "9076a7fc4ea26d0f95d40856159dee103c178754"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/03_golden_sweep/tiling_templates.json",
+        "repo_path": "experiments/03_golden_sweep/tiling_templates.json",
+        "sha": "4fae704786f87f8ceef507b89ecdde8767785c7c"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/requirements.txt",
+        "repo_path": "requirements.txt",
+        "sha": "8638d30284458b2137b2bcb0c9ac44f73be2742e"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/web/01_3sat_jewel.html",
+        "repo_path": "web/01_3sat_jewel.html",
+        "sha": "8635118829bb2b79c5dcd81eca19f23bb0c99092"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/web/02_quasicrystal_lab.html",
+        "repo_path": "web/02_quasicrystal_lab.html",
+        "sha": "2dd17097cb18e4d68976ac0d2a6d5150b93d124d"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/web/03_tiling_lab.html",
+        "repo_path": "web/03_tiling_lab.html",
+        "sha": "79535b7e79715d5c52d9b697f114e8ef3ef4c62a"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/web/04_sweep_results.html",
+        "repo_path": "web/04_sweep_results.html",
+        "sha": "d36804f4e4ecf8098f083be2f851a1697e98944d"
+      }
+    ],
+    "modified_same_path": [
+      {
+        "zip_path": "black-swan-jeweled-math/README.md",
+        "repo_path": "README.md",
+        "sha": "037b2107273cf9a20a3c846a80f01b8ca9f8217a"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/docs/GITHUB.md",
+        "repo_path": "docs/GITHUB.md",
+        "sha": "bfaa6f9093e8c9c2fd3e9ff90f8193adcde92f18"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/provenance.json",
+        "repo_path": "provenance.json",
+        "sha": "afe155ddba735e085e6cbb9deea4309b8a520ce0"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/web/index.html",
+        "repo_path": "web/index.html",
+        "sha": "dbf4d7a2b53ae12d27111c2d91fc88e7aa3167f8"
+      }
+    ],
+    "identical_elsewhere": [],
+    "missing": []
+  },
+  "black-swan-jeweled-math-updated.zip": {
+    "identical_same_path": [
+      {
+        "zip_path": "black-swan-jeweled-math/.gitignore",
+        "repo_path": ".gitignore",
+        "sha": "8af74fc88e380652d08eb7e1a7e9cfb54bd54143"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/THIRD_PARTY_NOTICES.md",
+        "repo_path": "THIRD_PARTY_NOTICES.md",
+        "sha": "03b09338eb72d2aa028bf0e728de89a1df211a2d"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/docs/IDEAS.md",
+        "repo_path": "docs/IDEAS.md",
+        "sha": "9ccd375d6db02f10e6a16178fdd01cf800ec4806"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/01_initial_jewel/BLACK_SWAN_README.md",
+        "repo_path": "experiments/01_initial_jewel/BLACK_SWAN_README.md",
+        "sha": "82a4918675e47588abd50730be2e3968258156d4"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/01_initial_jewel/black_swan_experiments.py",
+        "repo_path": "experiments/01_initial_jewel/black_swan_experiments.py",
+        "sha": "174638fc0b81f75629636f016b461a4277168aba"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/01_initial_jewel/black_swan_results.json",
+        "repo_path": "experiments/01_initial_jewel/black_swan_results.json",
+        "sha": "c03d0f3dd0d3e69c6dbda0dc476f390d7d5dfa64"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/01_initial_jewel/jewel_geometry.json",
+        "repo_path": "experiments/01_initial_jewel/jewel_geometry.json",
+        "sha": "817ffba55052791d76e205f2a1435cc497e9ed02"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/01_initial_jewel/quasicrystal_geometry.py",
+        "repo_path": "experiments/01_initial_jewel/quasicrystal_geometry.py",
+        "sha": "c7acd3e5ca2b4d459870724ea618c04ba81487d5"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/02_tiling_jewels/TILING_JEWELS_README.md",
+        "repo_path": "experiments/02_tiling_jewels/TILING_JEWELS_README.md",
+        "sha": "651c4c35cabe24fe4689a9194d876f627ccab1e4"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/02_tiling_jewels/tiling_adaptive.py",
+        "repo_path": "experiments/02_tiling_jewels/tiling_adaptive.py",
+        "sha": "b328014f513eb8f431968f97beeae1254e032702"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/02_tiling_jewels/tiling_adaptive_results.json",
+        "repo_path": "experiments/02_tiling_jewels/tiling_adaptive_results.json",
+        "sha": "206d01b3b7e15f79d2a8b5462863fa47c67bad8c"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/02_tiling_jewels/tiling_research/LICENSE",
+        "repo_path": "experiments/02_tiling_jewels/tiling_research/LICENSE",
+        "sha": "753f2c09b089aaa7f404825eaac06587f3188c82"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/02_tiling_jewels/tiling_research/README.md",
+        "repo_path": "experiments/02_tiling_jewels/tiling_research/README.md",
+        "sha": "e0c1955fb3911e9ae84cc93c2fedad26bc275350"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/02_tiling_jewels/tiling_research/generate_hat_patch.js",
+        "repo_path": "experiments/02_tiling_jewels/tiling_research/generate_hat_patch.js",
+        "sha": "18916ad9471977aa4a6b8127a1e60226e8338b3c"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/02_tiling_jewels/tiling_research/generate_pinwheel.py",
+        "repo_path": "experiments/02_tiling_jewels/tiling_research/generate_pinwheel.py",
+        "sha": "d121d04cc83d7528ea1193cb21697466870c74fa"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/02_tiling_jewels/tiling_research/geometry.js",
+        "repo_path": "experiments/02_tiling_jewels/tiling_research/geometry.js",
+        "sha": "379e8de4645e9422c9caa116852919d7fe0dd800"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/02_tiling_jewels/tiling_research/hat.js",
+        "repo_path": "experiments/02_tiling_jewels/tiling_research/hat.js",
+        "sha": "c46322882dfc8ff212e5e885585738053b4d0c92"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/02_tiling_jewels/tiling_research/hat_patches.json",
+        "repo_path": "experiments/02_tiling_jewels/tiling_research/hat_patches.json",
+        "sha": "800dfd9295a32da0408376ed2c60af213923b10b"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/02_tiling_jewels/tiling_research/pinwheel_patches.json",
+        "repo_path": "experiments/02_tiling_jewels/tiling_research/pinwheel_patches.json",
+        "sha": "9076a7fc4ea26d0f95d40856159dee103c178754"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/02_tiling_jewels/tiling_research/validate_hat_patches.py",
+        "repo_path": "experiments/02_tiling_jewels/tiling_research/validate_hat_patches.py",
+        "sha": "9dabb8f665c20852e70b389668247da9d46437fe"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/03_golden_sweep/ENGINE_README.md",
+        "repo_path": "experiments/03_golden_sweep/ENGINE_README.md",
+        "sha": "e772781d6c2e010b690e9f5e019a4b5306af0234"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/03_golden_sweep/HAT_SOURCE_LICENSE",
+        "repo_path": "experiments/03_golden_sweep/HAT_SOURCE_LICENSE",
+        "sha": "753f2c09b089aaa7f404825eaac06587f3188c82"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/03_golden_sweep/START_HERE.md",
+        "repo_path": "experiments/03_golden_sweep/START_HERE.md",
+        "sha": "9db9893709f061b4ac18a37aab45b20c80fcc2de"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/03_golden_sweep/audit_checks.py",
+        "repo_path": "experiments/03_golden_sweep/audit_checks.py",
+        "sha": "ec414f2302eaf9104b0bb8e778cb5b42a96afdca"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/03_golden_sweep/audit_report.json",
+        "repo_path": "experiments/03_golden_sweep/audit_report.json",
+        "sha": "2141f47c253489a21a54fb8348ba0e7ff19f9788"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/03_golden_sweep/dataset.json",
+        "repo_path": "experiments/03_golden_sweep/dataset.json",
+        "sha": "51ace4bafaa08528b62bb859a30a4a2749a930d2"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/03_golden_sweep/exhaustive_small.json",
+        "repo_path": "experiments/03_golden_sweep/exhaustive_small.json",
+        "sha": "f84a31631d18945d3f2c1fa53f563e0d62ec283a"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/03_golden_sweep/exhaustive_small.py",
+        "repo_path": "experiments/03_golden_sweep/exhaustive_small.py",
+        "sha": "a83ecaab523409f25600b7414ecc532abb5e00ee"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/03_golden_sweep/missed_sat_instance_35.cnf",
+        "repo_path": "experiments/03_golden_sweep/missed_sat_instance_35.cnf",
+        "sha": "c8f1620aafd55d50f40ccef8ccdeadc1d880d8ad"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/03_golden_sweep/missed_sat_instance_35.witness",
+        "repo_path": "experiments/03_golden_sweep/missed_sat_instance_35.witness",
+        "sha": "0f58c287d57a3c734dee0405aa0c1a07eb14b12b"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/03_golden_sweep/permutation_stress.py",
+        "repo_path": "experiments/03_golden_sweep/permutation_stress.py",
+        "sha": "95f6b999de096c53facea045e7e94337cc3352ab"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/03_golden_sweep/permutation_stress_runs.csv.gz",
+        "repo_path": "experiments/03_golden_sweep/permutation_stress_runs.csv.gz",
+        "sha": "d920713b1b99dc18550ef1fca126f9f110dc1a43"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/03_golden_sweep/permutation_stress_summary.json",
+        "repo_path": "experiments/03_golden_sweep/permutation_stress_summary.json",
+        "sha": "93b526b1cb0aca3a99e6249b4486412b007b8ca3"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/03_golden_sweep/raw_runs.csv",
+        "repo_path": "experiments/03_golden_sweep/raw_runs.csv",
+        "sha": "7d6474fe28632effaf4635ca0727dea7c7be3ad6"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/03_golden_sweep/run_sweep.py",
+        "repo_path": "experiments/03_golden_sweep/run_sweep.py",
+        "sha": "c6371d5671b4a6a1380ee024add413f38d8cfc94"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/03_golden_sweep/summary.json",
+        "repo_path": "experiments/03_golden_sweep/summary.json",
+        "sha": "5789fe34c321e9d717b7aa53f8be18843e7715b2"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/03_golden_sweep/sweep_engine.cpp",
+        "repo_path": "experiments/03_golden_sweep/sweep_engine.cpp",
+        "sha": "f1185e0778c4905a4ccedefbf4d4b99fb86e0e96"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/03_golden_sweep/tiling_research/LICENSE",
+        "repo_path": "experiments/03_golden_sweep/tiling_research/LICENSE",
+        "sha": "753f2c09b089aaa7f404825eaac06587f3188c82"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/03_golden_sweep/tiling_research/hat_patches.json",
+        "repo_path": "experiments/03_golden_sweep/tiling_research/hat_patches.json",
+        "sha": "800dfd9295a32da0408376ed2c60af213923b10b"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/03_golden_sweep/tiling_research/pinwheel_patches.json",
+        "repo_path": "experiments/03_golden_sweep/tiling_research/pinwheel_patches.json",
+        "sha": "9076a7fc4ea26d0f95d40856159dee103c178754"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/03_golden_sweep/tiling_templates.json",
+        "repo_path": "experiments/03_golden_sweep/tiling_templates.json",
+        "sha": "4fae704786f87f8ceef507b89ecdde8767785c7c"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/requirements.txt",
+        "repo_path": "requirements.txt",
+        "sha": "8638d30284458b2137b2bcb0c9ac44f73be2742e"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/web/01_3sat_jewel.html",
+        "repo_path": "web/01_3sat_jewel.html",
+        "sha": "8635118829bb2b79c5dcd81eca19f23bb0c99092"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/web/02_quasicrystal_lab.html",
+        "repo_path": "web/02_quasicrystal_lab.html",
+        "sha": "2dd17097cb18e4d68976ac0d2a6d5150b93d124d"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/web/03_tiling_lab.html",
+        "repo_path": "web/03_tiling_lab.html",
+        "sha": "79535b7e79715d5c52d9b697f114e8ef3ef4c62a"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/web/04_sweep_results.html",
+        "repo_path": "web/04_sweep_results.html",
+        "sha": "d36804f4e4ecf8098f083be2f851a1697e98944d"
+      }
+    ],
+    "modified_same_path": [
+      {
+        "zip_path": "black-swan-jeweled-math/README.md",
+        "repo_path": "README.md",
+        "sha": "d55c5306396c56e92cd13c3a1335896cada6eb1d"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/docs/GITHUB.md",
+        "repo_path": "docs/GITHUB.md",
+        "sha": "bfaa6f9093e8c9c2fd3e9ff90f8193adcde92f18"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/provenance.json",
+        "repo_path": "provenance.json",
+        "sha": "afe155ddba735e085e6cbb9deea4309b8a520ce0"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/web/index.html",
+        "repo_path": "web/index.html",
+        "sha": "94f847938dfb4907e750bb753219a1a368803f74"
+      }
+    ],
+    "identical_elsewhere": [],
+    "missing": [
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/04_complex_maps/README.md",
+        "repo_path": "experiments/04_complex_maps/README.md",
+        "sha": "e199d7a2f557b849df8f492023a9391cebc542a6"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/04_complex_maps/feigenbaum_centers.json",
+        "repo_path": "experiments/04_complex_maps/feigenbaum_centers.json",
+        "sha": "4a95c4878e7ef17fba365cbe207ecdfcf6b2729d"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/04_complex_maps/feigenbaum_centers.py",
+        "repo_path": "experiments/04_complex_maps/feigenbaum_centers.py",
+        "sha": "aec0dbacb9f3ac055dfda8742d6759c4dd1d2aca"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/experiments/04_complex_maps/map_validation.json",
+        "repo_path": "experiments/04_complex_maps/map_validation.json",
+        "sha": "25aa87b4b22a34db4a03ce9cd05d5a6fee22eb58"
+      },
+      {
+        "zip_path": "black-swan-jeweled-math/web/05_complex_maps.html",
+        "repo_path": "web/05_complex_maps.html",
+        "sha": "728522315cfc0f5df7a9135978447d1a7d29d224"
+      }
+    ]
+  },
+  "local_hybrid": {
+    "xor_kernel.py": {
+      "bytes": 12296,
+      "identical_remote_paths": []
+    },
+    "CALLBACKS.md": {
+      "bytes": 3327,
+      "identical_remote_paths": []
+    },
+    "audit_results.json": {
+      "bytes": 21608,
+      "identical_remote_paths": []
+    },
+    "run_hybrid.py": {
+      "bytes": 21091,
+      "identical_remote_paths": []
+    },
+    "audit_hybrid.py": {
+      "bytes": 21089,
+      "identical_remote_paths": []
+    },
+    "unresolved_cases.json": {
+      "bytes": 2341,
+      "identical_remote_paths": []
+    },
+    "creative_schedules.py": {
+      "bytes": 9636,
+      "identical_remote_paths": []
+    },
+    "XOR_KERNEL.md": {
+      "bytes": 4657,
+      "identical_remote_paths": []
+    },
+    "PROOF_OBLIGATIONS.md": {
+      "bytes": 6616,
+      "identical_remote_paths": []
+    },
+    "results.json": {
+      "bytes": 753261,
+      "identical_remote_paths": []
+    },
+    "dataset.json": {
+      "bytes": 468411,
+      "identical_remote_paths": []
+    },
+    "pilot_results.json": {
+      "bytes": 90260,
+      "identical_remote_paths": []
+    }
+  }
+}

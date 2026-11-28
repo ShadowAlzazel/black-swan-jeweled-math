@@ -1,0 +1,135 @@
+{
+  "remote_commit": "626f565364cd3d9a6dd18c08349537f76a130276",
+  "remote_blob_count": 93,
+  "archives": [
+    {
+      "name": "Black_Swan_Jewel_Lab.zip",
+      "bytes": 162169,
+      "sha256": "bdbdc9e020eabe0df927e7b5727093a73a641e63c349d87a8e4bee50effffebe"
+    },
+    {
+      "name": "Fleurdelys_Tiling_Jewels.zip",
+      "bytes": 60665,
+      "sha256": "e983cb02c6d60d76e96b651b9bb19136d3a101bccca8d235b0cd185cbf1f59e1"
+    },
+    {
+      "name": "Golden_Jewel_Sweep.zip",
+      "bytes": 837010,
+      "sha256": "374adb2f518cac98560dcd572973aaaa120bb37bb94f56c56ec7885496eb46c4"
+    },
+    {
+      "name": "black-swan-jeweled-math-updated.zip",
+      "bytes": 2369625,
+      "sha256": "5c7c94091d69adfd7a938d1f0593bc8f425da42eb65878a76ec76540efa3614e"
+    },
+    {
+      "name": "black-swan-jeweled-math.zip",
+      "bytes": 2301298,
+      "sha256": "0da082b905f8b1c0cbf69ddf89744fbd73a5a9ad295ba144d6d1a7b4b4836e63"
+    }
+  ],
+  "recovered_files": [
+    {
+      "original_repository_path": "experiments/04_complex_maps/README.md",
+      "source": "black-swan-jeweled-math-updated.zip",
+      "bytes": 4309,
+      "sha256": "c2af7832d5d8c876ac411165ffbfc5cd795eab03c76ccaa1d99e72d58d49624c"
+    },
+    {
+      "original_repository_path": "experiments/04_complex_maps/feigenbaum_centers.json",
+      "source": "black-swan-jeweled-math-updated.zip",
+      "bytes": 18758,
+      "sha256": "939320251340c84189d2beb7a02e7c219984845e555df67f61d2b59d58524211"
+    },
+    {
+      "original_repository_path": "experiments/04_complex_maps/feigenbaum_centers.py",
+      "source": "black-swan-jeweled-math-updated.zip",
+      "bytes": 5942,
+      "sha256": "72e45f976bb5bc00a8fbadecf9567cb3f2745a746de0646fce08d908de4f1878"
+    },
+    {
+      "original_repository_path": "experiments/04_complex_maps/map_validation.json",
+      "source": "black-swan-jeweled-math-updated.zip",
+      "bytes": 741,
+      "sha256": "0279472aeec7114cc286a2199a22fdc961cfa4fe6ce4f5fb8c19b0b6e050cf4c"
+    },
+    {
+      "original_repository_path": "web/05_complex_maps.html",
+      "source": "black-swan-jeweled-math-updated.zip",
+      "bytes": 63709,
+      "sha256": "8c5374469a5a03fba4802ac5c6c77538c566501b57f72950408a8089de46afc1"
+    },
+    {
+      "original_repository_path": "experiments/05_black_swan_hybrid/CALLBACKS.md",
+      "source": "previous unfinished local experiment",
+      "bytes": 3327,
+      "sha256": "9fdafb339fc62cb2b0e396017b09434f3a57f06a47b844f9c591aefe7115943e"
+    },
+    {
+      "original_repository_path": "experiments/05_black_swan_hybrid/PROOF_OBLIGATIONS.md",
+      "source": "previous unfinished local experiment",
+      "bytes": 6616,
+      "sha256": "b4a71ed4bac11fb24946aa8003f3aa6a0c4d0ce8ee62e5c1136141a56f6037e4"
+    },
+    {
+      "original_repository_path": "experiments/05_black_swan_hybrid/XOR_KERNEL.md",
+      "source": "previous unfinished local experiment",
+      "bytes": 4657,
+      "sha256": "624d6adf8ac2b10130c572f0ef5567830bb37c2f04b18ec9321dcc4ebac4a2ce"
+    },
+    {
+      "original_repository_path": "experiments/05_black_swan_hybrid/audit_hybrid.py",
+      "source": "previous unfinished local experiment",
+      "bytes": 21089,
+      "sha256": "21f0e1a313012ef96de1b3d1d1c3587c4f68a89b544f32ec67ef532dd225b7e2"
+    },
+    {
+      "original_repository_path": "experiments/05_black_swan_hybrid/audit_results.json",
+      "source": "previous unfinished local experiment",
+      "bytes": 21608,
+      "sha256": "d375be7d5abda5bc7c64d67c766526d616cc22544dd01657139cc7f907a6b66a"
+    },
+    {
+      "original_repository_path": "experiments/05_black_swan_hybrid/creative_schedules.py",
+      "source": "previous unfinished local experiment",
+      "bytes": 9636,
+      "sha256": "a5a692ff61e52ea64792c85499f92f8f13818f1ded70a0259413cc7bae7cc96c"
+    },
+    {
+      "original_repository_path": "experiments/05_black_swan_hybrid/dataset.json",
+      "source": "previous unfinished local experiment",
+      "bytes": 468411,
+      "sha256": "a86deabf5d95731b7fde0c12db72b91e558814303cdda9c9cb548503e50c299f"
+    },
+    {
+      "original_repository_path": "experiments/05_black_swan_hybrid/pilot_results.json",
+      "source": "previous unfinished local experiment",
+      "bytes": 90260,
+      "sha256": "35e8930de329c8f8cc7c7bda0094b3f418784d5155a2ad2b0530b48332764efe"
+    },
+    {
+      "original_repository_path": "experiments/05_black_swan_hybrid/results.json",
+      "source": "previous unfinished local experiment",
+      "bytes": 753261,
+      "sha256": "6f5d7e5df7b10c7de45d13808796f29da46446f01fe47d1ee1241dc4ef93bfe9"
+    },
+    {
+      "original_repository_path": "experiments/05_black_swan_hybrid/run_hybrid.py",
+      "source": "previous unfinished local experiment",
+      "bytes": 21091,
+      "sha256": "007472f864a4e1927d2dd441f694b95be813f2cd2292c6c3ce7e816a861c58f3"
+    },
+    {
+      "original_repository_path": "experiments/05_black_swan_hybrid/unresolved_cases.json",
+      "source": "previous unfinished local experiment",
+      "bytes": 2341,
+      "sha256": "98906e7ad85f7502e6fdb7584d232fb544b9aad118e40cfb5d96bddeaf02ba81"
+    },
+    {
+      "original_repository_path": "experiments/05_black_swan_hybrid/xor_kernel.py",
+      "source": "previous unfinished local experiment",
+      "bytes": 12296,
+      "sha256": "32610b168433f6b77d0532b15fe48c31f32ac01763266b9e3f67764bdc8f0d6c"
+    }
+  ]
+}

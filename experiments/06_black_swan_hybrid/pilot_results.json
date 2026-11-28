@@ -1,0 +1,3877 @@
+{
+  "protocol": "Complete unit-propagation DPLL with bounded guidance. Caps yield UNKNOWN. Geometric maps and weights guide branching, never merge states or delete constraints.",
+  "prespecified_candidate": "all_ideas",
+  "configuration_count": 11,
+  "instance_count": 72,
+  "run_count": 132,
+  "trials": 2,
+  "node_cap": 20000,
+  "frontend_eval_cap": 256,
+  "dataset_counts": {
+    "SAT": 54,
+    "UNSAT": 18
+  },
+  "summary": {
+    "occurrence_dpll": {
+      "all": {
+        "runs": 12,
+        "statuses": {
+          "SAT": 8,
+          "UNSAT": 4
+        },
+        "stages": {
+          "dpll": 12
+        },
+        "nodes": 1768,
+        "median_nodes": 15.0,
+        "frontend_evaluations": 0,
+        "propagations": 7466,
+        "clause_visits": 105022
+      },
+      "train": {
+        "runs": 2,
+        "statuses": {
+          "SAT": 2
+        },
+        "stages": {
+          "dpll": 2
+        },
+        "nodes": 14,
+        "median_nodes": 7.0,
+        "frontend_evaluations": 0,
+        "propagations": 14,
+        "clause_visits": 516
+      },
+      "test": {
+        "runs": 10,
+        "statuses": {
+          "SAT": 6,
+          "UNSAT": 4
+        },
+        "stages": {
+          "dpll": 10
+        },
+        "nodes": 1754,
+        "median_nodes": 17.0,
+        "frontend_evaluations": 0,
+        "propagations": 7452,
+        "clause_visits": 104506
+      },
+      "components": {
+        "runs": 0,
+        "statuses": {},
+        "stages": {},
+        "nodes": 0,
+        "median_nodes": null,
+        "frontend_evaluations": 0,
+        "propagations": 0,
+        "clause_visits": 0
+      },
+      "pigeonhole": {
+        "runs": 4,
+        "statuses": {
+          "SAT": 2,
+          "UNSAT": 2
+        },
+        "stages": {
+          "dpll": 4
+        },
+        "nodes": 688,
+        "median_nodes": 172.0,
+        "frontend_evaluations": 0,
+        "propagations": 5604,
+        "clause_visits": 67902
+      },
+      "planted": {
+        "runs": 4,
+        "statuses": {
+          "SAT": 4
+        },
+        "stages": {
+          "dpll": 4
+        },
+        "nodes": 32,
+        "median_nodes": 8.0,
+        "frontend_evaluations": 0,
+        "propagations": 44,
+        "clause_visits": 1400
+      },
+      "random": {
+        "runs": 0,
+        "statuses": {},
+        "stages": {},
+        "nodes": 0,
+        "median_nodes": null,
+        "frontend_evaluations": 0,
+        "propagations": 0,
+        "clause_visits": 0
+      },
+      "xor_cubic": {
+        "runs": 0,
+        "statuses": {},
+        "stages": {},
+        "nodes": 0,
+        "median_nodes": null,
+        "frontend_evaluations": 0,
+        "propagations": 0,
+        "clause_visits": 0
+      },
+      "xor_prism": {
+        "runs": 4,
+        "statuses": {
+          "SAT": 2,
+          "UNSAT": 2
+        },
+        "stages": {
+          "dpll": 4
+        },
+        "nodes": 1048,
+        "median_nodes": 262.0,
+        "frontend_evaluations": 0,
+        "propagations": 1818,
+        "clause_visits": 35720
+      }
+    },
+    "random_order_dpll": {
+      "all": {
+        "runs": 12,
+        "statuses": {
+          "SAT": 8,
+          "UNSAT": 4
+        },
+        "stages": {
+          "dpll": 12
+        },
+        "nodes": 1315,
+        "median_nodes": 10.5,
+        "frontend_evaluations": 0,
+        "propagations": 7836,
+        "clause_visits": 131997
+      },
+      "train": {
+        "runs": 2,
+        "statuses": {
+          "SAT": 2
+        },
+        "stages": {
+          "dpll": 2
+        },
+        "nodes": 19,
+        "median_nodes": 9.5,
+        "frontend_evaluations": 0,
+        "propagations": 37,
+        "clause_visits": 1116
+      },
+      "test": {
+        "runs": 10,
+        "statuses": {
+          "SAT": 6,
+          "UNSAT": 4
+        },
+        "stages": {
+          "dpll": 10
+        },
+        "nodes": 1296,
+        "median_nodes": 12.0,
+        "frontend_evaluations": 0,
+        "propagations": 7799,
+        "clause_visits": 130881
+      },
+      "components": {
+        "runs": 0,
+        "statuses": {},
+        "stages": {},
+        "nodes": 0,
+        "median_nodes": null,
+        "frontend_evaluations": 0,
+        "propagations": 0,
+        "clause_visits": 0
+      },
+      "pigeonhole": {
+        "runs": 4,
+        "statuses": {
+          "SAT": 2,
+          "UNSAT": 2
+        },
+        "stages": {
+          "dpll": 4
+        },
+        "nodes": 755,
+        "median_nodes": 183.0,
+        "frontend_evaluations": 0,
+        "propagations": 5934,
+        "clause_visits": 101159
+      },
+      "planted": {
+        "runs": 4,
+        "statuses": {
+          "SAT": 4
+        },
+        "stages": {
+          "dpll": 4
+        },
+        "nodes": 34,
+        "median_nodes": 8.0,
+        "frontend_evaluations": 0,
+        "propagations": 64,
+        "clause_visits": 1928
+      },
+      "random": {
+        "runs": 0,
+        "statuses": {},
+        "stages": {},
+        "nodes": 0,
+        "median_nodes": null,
+        "frontend_evaluations": 0,
+        "propagations": 0,
+        "clause_visits": 0
+      },
+      "xor_cubic": {
+        "runs": 0,
+        "statuses": {},
+        "stages": {},
+        "nodes": 0,
+        "median_nodes": null,
+        "frontend_evaluations": 0,
+        "propagations": 0,
+        "clause_visits": 0
+      },
+      "xor_prism": {
+        "runs": 4,
+        "statuses": {
+          "SAT": 2,
+          "UNSAT": 2
+        },
+        "stages": {
+          "dpll": 4
+        },
+        "nodes": 526,
+        "median_nodes": 131.5,
+        "frontend_evaluations": 0,
+        "propagations": 1838,
+        "clause_visits": 28910
+      }
+    },
+    "walksat_then_dpll": {
+      "all": {
+        "runs": 12,
+        "statuses": {
+          "SAT": 8,
+          "UNSAT": 4
+        },
+        "stages": {
+          "frontend": 8,
+          "dpll": 4
+        },
+        "nodes": 1676,
+        "median_nodes": 0.0,
+        "frontend_evaluations": 1284,
+        "propagations": 7358,
+        "clause_visits": 99662
+      },
+      "train": {
+        "runs": 2,
+        "statuses": {
+          "SAT": 2
+        },
+        "stages": {
+          "frontend": 2
+        },
+        "nodes": 0,
+        "median_nodes": 0.0,
+        "frontend_evaluations": 50,
+        "propagations": 0,
+        "clause_visits": 0
+      },
+      "test": {
+        "runs": 10,
+        "statuses": {
+          "SAT": 6,
+          "UNSAT": 4
+        },
+        "stages": {
+          "frontend": 6,
+          "dpll": 4
+        },
+        "nodes": 1676,
+        "median_nodes": 0.0,
+        "frontend_evaluations": 1234,
+        "propagations": 7358,
+        "clause_visits": 99662
+      },
+      "components": {
+        "runs": 0,
+        "statuses": {},
+        "stages": {},
+        "nodes": 0,
+        "median_nodes": null,
+        "frontend_evaluations": 0,
+        "propagations": 0,
+        "clause_visits": 0
+      },
+      "pigeonhole": {
+        "runs": 4,
+        "statuses": {
+          "SAT": 2,
+          "UNSAT": 2
+        },
+        "stages": {
+          "frontend": 2,
+          "dpll": 2
+        },
+        "nodes": 654,
+        "median_nodes": 163.5,
+        "frontend_evaluations": 673,
+        "propagations": 5566,
+        "clause_visits": 64974
+      },
+      "planted": {
+        "runs": 4,
+        "statuses": {
+          "SAT": 4
+        },
+        "stages": {
+          "frontend": 4
+        },
+        "nodes": 0,
+        "median_nodes": 0.0,
+        "frontend_evaluations": 79,
+        "propagations": 0,
+        "clause_visits": 0
+      },
+      "random": {
+        "runs": 0,
+        "statuses": {},
+        "stages": {},
+        "nodes": 0,
+        "median_nodes": null,
+        "frontend_evaluations": 0,
+        "propagations": 0,
+        "clause_visits": 0
+      },
+      "xor_cubic": {
+        "runs": 0,
+        "statuses": {},
+        "stages": {},
+        "nodes": 0,
+        "median_nodes": null,
+        "frontend_evaluations": 0,
+        "propagations": 0,
+        "clause_visits": 0
+      },
+      "xor_prism": {
+        "runs": 4,
+        "statuses": {
+          "SAT": 2,
+          "UNSAT": 2
+        },
+        "stages": {
+          "frontend": 2,
+          "dpll": 2
+        },
+        "nodes": 1022,
+        "median_nodes": 255.5,
+        "frontend_evaluations": 532,
+        "propagations": 1792,
+        "clause_visits": 34688
+      }
+    },
+    "xor_then_dpll": {
+      "all": {
+        "runs": 12,
+        "statuses": {
+          "SAT": 8,
+          "UNSAT": 4
+        },
+        "stages": {
+          "dpll": 8,
+          "xor_kernel": 4
+        },
+        "nodes": 720,
+        "median_nodes": 8.0,
+        "frontend_evaluations": 0,
+        "propagations": 5648,
+        "clause_visits": 69302
+      },
+      "train": {
+        "runs": 2,
+        "statuses": {
+          "SAT": 2
+        },
+        "stages": {
+          "dpll": 2
+        },
+        "nodes": 14,
+        "median_nodes": 7.0,
+        "frontend_evaluations": 0,
+        "propagations": 14,
+        "clause_visits": 516
+      },
+      "test": {
+        "runs": 10,
+        "statuses": {
+          "SAT": 6,
+          "UNSAT": 4
+        },
+        "stages": {
+          "dpll": 6,
+          "xor_kernel": 4
+        },
+        "nodes": 706,
+        "median_nodes": 9.0,
+        "frontend_evaluations": 0,
+        "propagations": 5634,
+        "clause_visits": 68786
+      },
+      "components": {
+        "runs": 0,
+        "statuses": {},
+        "stages": {},
+        "nodes": 0,
+        "median_nodes": null,
+        "frontend_evaluations": 0,
+        "propagations": 0,
+        "clause_visits": 0
+      },
+      "pigeonhole": {
+        "runs": 4,
+        "statuses": {
+          "SAT": 2,
+          "UNSAT": 2
+        },
+        "stages": {
+          "dpll": 4
+        },
+        "nodes": 688,
+        "median_nodes": 172.0,
+        "frontend_evaluations": 0,
+        "propagations": 5604,
+        "clause_visits": 67902
+      },
+      "planted": {
+        "runs": 4,
+        "statuses": {
+          "SAT": 4
+        },
+        "stages": {
+          "dpll": 4
+        },
+        "nodes": 32,
+        "median_nodes": 8.0,
+        "frontend_evaluations": 0,
+        "propagations": 44,
+        "clause_visits": 1400
+      },
+      "random": {
+        "runs": 0,
+        "statuses": {},
+        "stages": {},
+        "nodes": 0,
+        "median_nodes": null,
+        "frontend_evaluations": 0,
+        "propagations": 0,
+        "clause_visits": 0
+      },
+      "xor_cubic": {
+        "runs": 0,
+        "statuses": {},
+        "stages": {},
+        "nodes": 0,
+        "median_nodes": null,
+        "frontend_evaluations": 0,
+        "propagations": 0,
+        "clause_visits": 0
+      },
+      "xor_prism": {
+        "runs": 4,
+        "statuses": {
+          "SAT": 2,
+          "UNSAT": 2
+        },
+        "stages": {
+          "xor_kernel": 4
+        },
+        "nodes": 0,
+        "median_nodes": 0.0,
+        "frontend_evaluations": 0,
+        "propagations": 0,
+        "clause_visits": 0
+      }
+    },
+    "golden_hat": {
+      "all": {
+        "runs": 12,
+        "statuses": {
+          "SAT": 8,
+          "UNSAT": 4
+        },
+        "stages": {
+          "frontend": 8,
+          "dpll": 4
+        },
+        "nodes": 1154,
+        "median_nodes": 0.0,
+        "frontend_evaluations": 1281,
+        "propagations": 7507,
+        "clause_visits": 100884
+      },
+      "train": {
+        "runs": 2,
+        "statuses": {
+          "SAT": 2
+        },
+        "stages": {
+          "frontend": 2
+        },
+        "nodes": 0,
+        "median_nodes": 0.0,
+        "frontend_evaluations": 38,
+        "propagations": 0,
+        "clause_visits": 0
+      },
+      "test": {
+        "runs": 10,
+        "statuses": {
+          "SAT": 6,
+          "UNSAT": 4
+        },
+        "stages": {
+          "frontend": 6,
+          "dpll": 4
+        },
+        "nodes": 1154,
+        "median_nodes": 0.0,
+        "frontend_evaluations": 1243,
+        "propagations": 7507,
+        "clause_visits": 100884
+      },
+      "components": {
+        "runs": 0,
+        "statuses": {},
+        "stages": {},
+        "nodes": 0,
+        "median_nodes": null,
+        "frontend_evaluations": 0,
+        "propagations": 0,
+        "clause_visits": 0
+      },
+      "pigeonhole": {
+        "runs": 4,
+        "statuses": {
+          "SAT": 2,
+          "UNSAT": 2
+        },
+        "stages": {
+          "frontend": 2,
+          "dpll": 2
+        },
+        "nodes": 644,
+        "median_nodes": 158.5,
+        "frontend_evaluations": 595,
+        "propagations": 5475,
+        "clause_visits": 70932
+      },
+      "planted": {
+        "runs": 4,
+        "statuses": {
+          "SAT": 4
+        },
+        "stages": {
+          "frontend": 4
+        },
+        "nodes": 0,
+        "median_nodes": 0.0,
+        "frontend_evaluations": 106,
+        "propagations": 0,
+        "clause_visits": 0
+      },
+      "random": {
+        "runs": 0,
+        "statuses": {},
+        "stages": {},
+        "nodes": 0,
+        "median_nodes": null,
+        "frontend_evaluations": 0,
+        "propagations": 0,
+        "clause_visits": 0
+      },
+      "xor_cubic": {
+        "runs": 0,
+        "statuses": {},
+        "stages": {},
+        "nodes": 0,
+        "median_nodes": null,
+        "frontend_evaluations": 0,
+        "propagations": 0,
+        "clause_visits": 0
+      },
+      "xor_prism": {
+        "runs": 4,
+        "statuses": {
+          "SAT": 2,
+          "UNSAT": 2
+        },
+        "stages": {
+          "frontend": 2,
+          "dpll": 2
+        },
+        "nodes": 510,
+        "median_nodes": 127.5,
+        "frontend_evaluations": 580,
+        "propagations": 2032,
+        "clause_visits": 29952
+      }
+    },
+    "silver_pinwheel": {
+      "all": {
+        "runs": 12,
+        "statuses": {
+          "SAT": 8,
+          "UNSAT": 4
+        },
+        "stages": {
+          "frontend": 8,
+          "dpll": 4
+        },
+        "nodes": 1104,
+        "median_nodes": 0.0,
+        "frontend_evaluations": 1258,
+        "propagations": 7455,
+        "clause_visits": 98017
+      },
+      "train": {
+        "runs": 2,
+        "statuses": {
+          "SAT": 2
+        },
+        "stages": {
+          "frontend": 2
+        },
+        "nodes": 0,
+        "median_nodes": 0.0,
+        "frontend_evaluations": 38,
+        "propagations": 0,
+        "clause_visits": 0
+      },
+      "test": {
+        "runs": 10,
+        "statuses": {
+          "SAT": 6,
+          "UNSAT": 4
+        },
+        "stages": {
+          "frontend": 6,
+          "dpll": 4
+        },
+        "nodes": 1104,
+        "median_nodes": 0.0,
+        "frontend_evaluations": 1220,
+        "propagations": 7455,
+        "clause_visits": 98017
+      },
+      "components": {
+        "runs": 0,
+        "statuses": {},
+        "stages": {},
+        "nodes": 0,
+        "median_nodes": null,
+        "frontend_evaluations": 0,
+        "propagations": 0,
+        "clause_visits": 0
+      },
+      "pigeonhole": {
+        "runs": 4,
+        "statuses": {
+          "SAT": 2,
+          "UNSAT": 2
+        },
+        "stages": {
+          "frontend": 2,
+          "dpll": 2
+        },
+        "nodes": 594,
+        "median_nodes": 148.5,
+        "frontend_evaluations": 608,
+        "propagations": 5151,
+        "clause_visits": 66401
+      },
+      "planted": {
+        "runs": 4,
+        "statuses": {
+          "SAT": 4
+        },
+        "stages": {
+          "frontend": 4
+        },
+        "nodes": 0,
+        "median_nodes": 0.0,
+        "frontend_evaluations": 106,
+        "propagations": 0,
+        "clause_visits": 0
+      },
+      "random": {
+        "runs": 0,
+        "statuses": {},
+        "stages": {},
+        "nodes": 0,
+        "median_nodes": null,
+        "frontend_evaluations": 0,
+        "propagations": 0,
+        "clause_visits": 0
+      },
+      "xor_cubic": {
+        "runs": 0,
+        "statuses": {},
+        "stages": {},
+        "nodes": 0,
+        "median_nodes": null,
+        "frontend_evaluations": 0,
+        "propagations": 0,
+        "clause_visits": 0
+      },
+      "xor_prism": {
+        "runs": 4,
+        "statuses": {
+          "SAT": 2,
+          "UNSAT": 2
+        },
+        "stages": {
+          "frontend": 2,
+          "dpll": 2
+        },
+        "nodes": 510,
+        "median_nodes": 127.5,
+        "frontend_evaluations": 544,
+        "propagations": 2304,
+        "clause_visits": 31616
+      }
+    },
+    "zeta_quasicrystal": {
+      "all": {
+        "runs": 12,
+        "statuses": {
+          "SAT": 8,
+          "UNSAT": 4
+        },
+        "stages": {
+          "frontend": 8,
+          "dpll": 4
+        },
+        "nodes": 1090,
+        "median_nodes": 0.0,
+        "frontend_evaluations": 1249,
+        "propagations": 7370,
+        "clause_visits": 95766
+      },
+      "train": {
+        "runs": 2,
+        "statuses": {
+          "SAT": 2
+        },
+        "stages": {
+          "frontend": 2
+        },
+        "nodes": 0,
+        "median_nodes": 0.0,
+        "frontend_evaluations": 32,
+        "propagations": 0,
+        "clause_visits": 0
+      },
+      "test": {
+        "runs": 10,
+        "statuses": {
+          "SAT": 6,
+          "UNSAT": 4
+        },
+        "stages": {
+          "frontend": 6,
+          "dpll": 4
+        },
+        "nodes": 1090,
+        "median_nodes": 0.0,
+        "frontend_evaluations": 1217,
+        "propagations": 7370,
+        "clause_visits": 95766
+      },
+      "components": {
+        "runs": 0,
+        "statuses": {},
+        "stages": {},
+        "nodes": 0,
+        "median_nodes": null,
+        "frontend_evaluations": 0,
+        "propagations": 0,
+        "clause_visits": 0
+      },
+      "pigeonhole": {
+        "runs": 4,
+        "statuses": {
+          "SAT": 2,
+          "UNSAT": 2
+        },
+        "stages": {
+          "frontend": 2,
+          "dpll": 2
+        },
+        "nodes": 580,
+        "median_nodes": 135.5,
+        "frontend_evaluations": 593,
+        "propagations": 4810,
+        "clause_visits": 63638
+      },
+      "planted": {
+        "runs": 4,
+        "statuses": {
+          "SAT": 4
+        },
+        "stages": {
+          "frontend": 4
+        },
+        "nodes": 0,
+        "median_nodes": 0.0,
+        "frontend_evaluations": 100,
+        "propagations": 0,
+        "clause_visits": 0
+      },
+      "random": {
+        "runs": 0,
+        "statuses": {},
+        "stages": {},
+        "nodes": 0,
+        "median_nodes": null,
+        "frontend_evaluations": 0,
+        "propagations": 0,
+        "clause_visits": 0
+      },
+      "xor_cubic": {
+        "runs": 0,
+        "statuses": {},
+        "stages": {},
+        "nodes": 0,
+        "median_nodes": null,
+        "frontend_evaluations": 0,
+        "propagations": 0,
+        "clause_visits": 0
+      },
+      "xor_prism": {
+        "runs": 4,
+        "statuses": {
+          "SAT": 2,
+          "UNSAT": 2
+        },
+        "stages": {
+          "frontend": 2,
+          "dpll": 2
+        },
+        "nodes": 510,
+        "median_nodes": 127.5,
+        "frontend_evaluations": 556,
+        "propagations": 2560,
+        "clause_visits": 32128
+      }
+    },
+    "feigenbaum_mobius": {
+      "all": {
+        "runs": 12,
+        "statuses": {
+          "SAT": 8,
+          "UNSAT": 4
+        },
+        "stages": {
+          "frontend": 8,
+          "dpll": 4
+        },
+        "nodes": 1140,
+        "median_nodes": 0.0,
+        "frontend_evaluations": 1262,
+        "propagations": 7876,
+        "clause_visits": 99887
+      },
+      "train": {
+        "runs": 2,
+        "statuses": {
+          "SAT": 2
+        },
+        "stages": {
+          "frontend": 2
+        },
+        "nodes": 0,
+        "median_nodes": 0.0,
+        "frontend_evaluations": 32,
+        "propagations": 0,
+        "clause_visits": 0
+      },
+      "test": {
+        "runs": 10,
+        "statuses": {
+          "SAT": 6,
+          "UNSAT": 4
+        },
+        "stages": {
+          "frontend": 6,
+          "dpll": 4
+        },
+        "nodes": 1140,
+        "median_nodes": 0.0,
+        "frontend_evaluations": 1230,
+        "propagations": 7876,
+        "clause_visits": 99887
+      },
+      "components": {
+        "runs": 0,
+        "statuses": {},
+        "stages": {},
+        "nodes": 0,
+        "median_nodes": null,
+        "frontend_evaluations": 0,
+        "propagations": 0,
+        "clause_visits": 0
+      },
+      "pigeonhole": {
+        "runs": 4,
+        "statuses": {
+          "SAT": 2,
+          "UNSAT": 2
+        },
+        "stages": {
+          "frontend": 2,
+          "dpll": 2
+        },
+        "nodes": 630,
+        "median_nodes": 152.5,
+        "frontend_evaluations": 588,
+        "propagations": 5316,
+        "clause_visits": 67759
+      },
+      "planted": {
+        "runs": 4,
+        "statuses": {
+          "SAT": 4
+        },
+        "stages": {
+          "frontend": 4
+        },
+        "nodes": 0,
+        "median_nodes": 0.0,
+        "frontend_evaluations": 118,
+        "propagations": 0,
+        "clause_visits": 0
+      },
+      "random": {
+        "runs": 0,
+        "statuses": {},
+        "stages": {},
+        "nodes": 0,
+        "median_nodes": null,
+        "frontend_evaluations": 0,
+        "propagations": 0,
+        "clause_visits": 0
+      },
+      "xor_cubic": {
+        "runs": 0,
+        "statuses": {},
+        "stages": {},
+        "nodes": 0,
+        "median_nodes": null,
+        "frontend_evaluations": 0,
+        "propagations": 0,
+        "clause_visits": 0
+      },
+      "xor_prism": {
+        "runs": 4,
+        "statuses": {
+          "SAT": 2,
+          "UNSAT": 2
+        },
+        "stages": {
+          "frontend": 2,
+          "dpll": 2
+        },
+        "nodes": 510,
+        "median_nodes": 127.5,
+        "frontend_evaluations": 556,
+        "propagations": 2560,
+        "clause_visits": 32128
+      }
+    },
+    "collatz_fourier": {
+      "all": {
+        "runs": 12,
+        "statuses": {
+          "SAT": 8,
+          "UNSAT": 4
+        },
+        "stages": {
+          "frontend": 8,
+          "dpll": 4
+        },
+        "nodes": 1288,
+        "median_nodes": 0.0,
+        "frontend_evaluations": 1245,
+        "propagations": 7554,
+        "clause_visits": 104166
+      },
+      "train": {
+        "runs": 2,
+        "statuses": {
+          "SAT": 2
+        },
+        "stages": {
+          "frontend": 2
+        },
+        "nodes": 0,
+        "median_nodes": 0.0,
+        "frontend_evaluations": 32,
+        "propagations": 0,
+        "clause_visits": 0
+      },
+      "test": {
+        "runs": 10,
+        "statuses": {
+          "SAT": 6,
+          "UNSAT": 4
+        },
+        "stages": {
+          "frontend": 6,
+          "dpll": 4
+        },
+        "nodes": 1288,
+        "median_nodes": 0.0,
+        "frontend_evaluations": 1213,
+        "propagations": 7554,
+        "clause_visits": 104166
+      },
+      "components": {
+        "runs": 0,
+        "statuses": {},
+        "stages": {},
+        "nodes": 0,
+        "median_nodes": null,
+        "frontend_evaluations": 0,
+        "propagations": 0,
+        "clause_visits": 0
+      },
+      "pigeonhole": {
+        "runs": 4,
+        "statuses": {
+          "SAT": 2,
+          "UNSAT": 2
+        },
+        "stages": {
+          "frontend": 2,
+          "dpll": 2
+        },
+        "nodes": 650,
+        "median_nodes": 153.5,
+        "frontend_evaluations": 595,
+        "propagations": 5570,
+        "clause_visits": 72230
+      },
+      "planted": {
+        "runs": 4,
+        "statuses": {
+          "SAT": 4
+        },
+        "stages": {
+          "frontend": 4
+        },
+        "nodes": 0,
+        "median_nodes": 0.0,
+        "frontend_evaluations": 100,
+        "propagations": 0,
+        "clause_visits": 0
+      },
+      "random": {
+        "runs": 0,
+        "statuses": {},
+        "stages": {},
+        "nodes": 0,
+        "median_nodes": null,
+        "frontend_evaluations": 0,
+        "propagations": 0,
+        "clause_visits": 0
+      },
+      "xor_cubic": {
+        "runs": 0,
+        "statuses": {},
+        "stages": {},
+        "nodes": 0,
+        "median_nodes": null,
+        "frontend_evaluations": 0,
+        "propagations": 0,
+        "clause_visits": 0
+      },
+      "xor_prism": {
+        "runs": 4,
+        "statuses": {
+          "SAT": 2,
+          "UNSAT": 2
+        },
+        "stages": {
+          "frontend": 2,
+          "dpll": 2
+        },
+        "nodes": 638,
+        "median_nodes": 127.5,
+        "frontend_evaluations": 550,
+        "propagations": 1984,
+        "clause_visits": 31936
+      }
+    },
+    "all_ideas": {
+      "all": {
+        "runs": 12,
+        "statuses": {
+          "SAT": 8,
+          "UNSAT": 4
+        },
+        "stages": {
+          "frontend": 6,
+          "xor_kernel": 4,
+          "dpll": 2
+        },
+        "nodes": 654,
+        "median_nodes": 0.0,
+        "frontend_evaluations": 822,
+        "propagations": 5558,
+        "clause_visits": 68364
+      },
+      "train": {
+        "runs": 2,
+        "statuses": {
+          "SAT": 2
+        },
+        "stages": {
+          "frontend": 2
+        },
+        "nodes": 0,
+        "median_nodes": 0.0,
+        "frontend_evaluations": 32,
+        "propagations": 0,
+        "clause_visits": 0
+      },
+      "test": {
+        "runs": 10,
+        "statuses": {
+          "SAT": 6,
+          "UNSAT": 4
+        },
+        "stages": {
+          "frontend": 4,
+          "xor_kernel": 4,
+          "dpll": 2
+        },
+        "nodes": 654,
+        "median_nodes": 0.0,
+        "frontend_evaluations": 790,
+        "propagations": 5558,
+        "clause_visits": 68364
+      },
+      "components": {
+        "runs": 0,
+        "statuses": {},
+        "stages": {},
+        "nodes": 0,
+        "median_nodes": null,
+        "frontend_evaluations": 0,
+        "propagations": 0,
+        "clause_visits": 0
+      },
+      "pigeonhole": {
+        "runs": 4,
+        "statuses": {
+          "SAT": 2,
+          "UNSAT": 2
+        },
+        "stages": {
+          "frontend": 2,
+          "dpll": 2
+        },
+        "nodes": 654,
+        "median_nodes": 159.5,
+        "frontend_evaluations": 593,
+        "propagations": 5558,
+        "clause_visits": 68364
+      },
+      "planted": {
+        "runs": 4,
+        "statuses": {
+          "SAT": 4
+        },
+        "stages": {
+          "frontend": 4
+        },
+        "nodes": 0,
+        "median_nodes": 0.0,
+        "frontend_evaluations": 229,
+        "propagations": 0,
+        "clause_visits": 0
+      },
+      "random": {
+        "runs": 0,
+        "statuses": {},
+        "stages": {},
+        "nodes": 0,
+        "median_nodes": null,
+        "frontend_evaluations": 0,
+        "propagations": 0,
+        "clause_visits": 0
+      },
+      "xor_cubic": {
+        "runs": 0,
+        "statuses": {},
+        "stages": {},
+        "nodes": 0,
+        "median_nodes": null,
+        "frontend_evaluations": 0,
+        "propagations": 0,
+        "clause_visits": 0
+      },
+      "xor_prism": {
+        "runs": 4,
+        "statuses": {
+          "SAT": 2,
+          "UNSAT": 2
+        },
+        "stages": {
+          "xor_kernel": 4
+        },
+        "nodes": 0,
+        "median_nodes": 0.0,
+        "frontend_evaluations": 0,
+        "propagations": 0,
+        "clause_visits": 0
+      }
+    },
+    "shuffled_all_ideas": {
+      "all": {
+        "runs": 12,
+        "statuses": {
+          "SAT": 8,
+          "UNSAT": 4
+        },
+        "stages": {
+          "frontend": 6,
+          "xor_kernel": 4,
+          "dpll": 2
+        },
+        "nodes": 650,
+        "median_nodes": 0.0,
+        "frontend_evaluations": 840,
+        "propagations": 5608,
+        "clause_visits": 67976
+      },
+      "train": {
+        "runs": 2,
+        "statuses": {
+          "SAT": 2
+        },
+        "stages": {
+          "frontend": 2
+        },
+        "nodes": 0,
+        "median_nodes": 0.0,
+        "frontend_evaluations": 32,
+        "propagations": 0,
+        "clause_visits": 0
+      },
+      "test": {
+        "runs": 10,
+        "statuses": {
+          "SAT": 6,
+          "UNSAT": 4
+        },
+        "stages": {
+          "frontend": 4,
+          "xor_kernel": 4,
+          "dpll": 2
+        },
+        "nodes": 650,
+        "median_nodes": 0.0,
+        "frontend_evaluations": 808,
+        "propagations": 5608,
+        "clause_visits": 67976
+      },
+      "components": {
+        "runs": 0,
+        "statuses": {},
+        "stages": {},
+        "nodes": 0,
+        "median_nodes": null,
+        "frontend_evaluations": 0,
+        "propagations": 0,
+        "clause_visits": 0
+      },
+      "pigeonhole": {
+        "runs": 4,
+        "statuses": {
+          "SAT": 2,
+          "UNSAT": 2
+        },
+        "stages": {
+          "frontend": 2,
+          "dpll": 2
+        },
+        "nodes": 650,
+        "median_nodes": 158.5,
+        "frontend_evaluations": 593,
+        "propagations": 5608,
+        "clause_visits": 67976
+      },
+      "planted": {
+        "runs": 4,
+        "statuses": {
+          "SAT": 4
+        },
+        "stages": {
+          "frontend": 4
+        },
+        "nodes": 0,
+        "median_nodes": 0.0,
+        "frontend_evaluations": 247,
+        "propagations": 0,
+        "clause_visits": 0
+      },
+      "random": {
+        "runs": 0,
+        "statuses": {},
+        "stages": {},
+        "nodes": 0,
+        "median_nodes": null,
+        "frontend_evaluations": 0,
+        "propagations": 0,
+        "clause_visits": 0
+      },
+      "xor_cubic": {
+        "runs": 0,
+        "statuses": {},
+        "stages": {},
+        "nodes": 0,
+        "median_nodes": null,
+        "frontend_evaluations": 0,
+        "propagations": 0,
+        "clause_visits": 0
+      },
+      "xor_prism": {
+        "runs": 4,
+        "statuses": {
+          "SAT": 2,
+          "UNSAT": 2
+        },
+        "stages": {
+          "xor_kernel": 4
+        },
+        "nodes": 0,
+        "median_nodes": 0.0,
+        "frontend_evaluations": 0,
+        "propagations": 0,
+        "clause_visits": 0
+      }
+    }
+  },
+  "runs": [
+    {
+      "instance": 0,
+      "config": "occurrence_dpll",
+      "trial": 0,
+      "status": "SAT",
+      "witness": 18,
+      "stage": "dpll",
+      "frontend_evaluations": 0,
+      "frontend_flips": 0,
+      "weight_updates": 0,
+      "frontend_clause_checks": 0,
+      "dpll_nodes": 7,
+      "propagations": 7,
+      "clause_visits": 258,
+      "conflicts": 1,
+      "kernel": null
+    },
+    {
+      "instance": 0,
+      "config": "occurrence_dpll",
+      "trial": 1,
+      "status": "SAT",
+      "witness": 18,
+      "stage": "dpll",
+      "frontend_evaluations": 0,
+      "frontend_flips": 0,
+      "weight_updates": 0,
+      "frontend_clause_checks": 0,
+      "dpll_nodes": 7,
+      "propagations": 7,
+      "clause_visits": 258,
+      "conflicts": 1,
+      "kernel": null
+    },
+    {
+      "instance": 1,
+      "config": "occurrence_dpll",
+      "trial": 0,
+      "status": "SAT",
+      "witness": 1386,
+      "stage": "dpll",
+      "frontend_evaluations": 0,
+      "frontend_flips": 0,
+      "weight_updates": 0,
+      "frontend_clause_checks": 0,
+      "dpll_nodes": 9,
+      "propagations": 15,
+      "clause_visits": 442,
+      "conflicts": 2,
+      "kernel": null
+    },
+    {
+      "instance": 1,
+      "config": "occurrence_dpll",
+      "trial": 1,
+      "status": "SAT",
+      "witness": 1386,
+      "stage": "dpll",
+      "frontend_evaluations": 0,
+      "frontend_flips": 0,
+      "weight_updates": 0,
+      "frontend_clause_checks": 0,
+      "dpll_nodes": 9,
+      "propagations": 15,
+      "clause_visits": 442,
+      "conflicts": 2,
+      "kernel": null
+    },
+    {
+      "instance": 54,
+      "config": "occurrence_dpll",
+      "trial": 0,
+      "status": "SAT",
+      "witness": 104111,
+      "stage": "dpll",
+      "frontend_evaluations": 0,
+      "frontend_flips": 0,
+      "weight_updates": 0,
+      "frontend_clause_checks": 0,
+      "dpll_nodes": 13,
+      "propagations": 13,
+      "clause_visits": 516,
+      "conflicts": 2,
+      "kernel": null
+    },
+    {
+      "instance": 54,
+      "config": "occurrence_dpll",
+      "trial": 1,
+      "status": "SAT",
+      "witness": 104111,
+      "stage": "dpll",
+      "frontend_evaluations": 0,
+      "frontend_flips": 0,
+      "weight_updates": 0,
+      "frontend_clause_checks": 0,
+      "dpll_nodes": 13,
+      "propagations": 13,
+      "clause_visits": 516,
+      "conflicts": 2,
+      "kernel": null
+    },
+    {
+      "instance": 55,
+      "config": "occurrence_dpll",
+      "trial": 0,
+      "status": "UNSAT",
+      "witness": null,
+      "stage": "dpll",
+      "frontend_evaluations": 0,
+      "frontend_flips": 0,
+      "weight_updates": 0,
+      "frontend_clause_checks": 0,
+      "dpll_nodes": 511,
+      "propagations": 896,
+      "clause_visits": 17344,
+      "conflicts": 256,
+      "kernel": null
+    },
+    {
+      "instance": 55,
+      "config": "occurrence_dpll",
+      "trial": 1,
+      "status": "UNSAT",
+      "witness": null,
+      "stage": "dpll",
+      "frontend_evaluations": 0,
+      "frontend_flips": 0,
+      "weight_updates": 0,
+      "frontend_clause_checks": 0,
+      "dpll_nodes": 511,
+      "propagations": 896,
+      "clause_visits": 17344,
+      "conflicts": 256,
+      "kernel": null
+    },
+    {
+      "instance": 66,
+      "config": "occurrence_dpll",
+      "trial": 0,
+      "status": "SAT",
+      "witness": 9097512456,
+      "stage": "dpll",
+      "frontend_evaluations": 0,
+      "frontend_flips": 0,
+      "weight_updates": 0,
+      "frontend_clause_checks": 0,
+      "dpll_nodes": 17,
+      "propagations": 19,
+      "clause_visits": 1464,
+      "conflicts": 0,
+      "kernel": null
+    },
+    {
+      "instance": 66,
+      "config": "occurrence_dpll",
+      "trial": 1,
+      "status": "SAT",
+      "witness": 9097512456,
+      "stage": "dpll",
+      "frontend_evaluations": 0,
+      "frontend_flips": 0,
+      "weight_updates": 0,
+      "frontend_clause_checks": 0,
+      "dpll_nodes": 17,
+      "propagations": 19,
+      "clause_visits": 1464,
+      "conflicts": 0,
+      "kernel": null
+    },
+    {
+      "instance": 67,
+      "config": "occurrence_dpll",
+      "trial": 0,
+      "status": "UNSAT",
+      "witness": null,
+      "stage": "dpll",
+      "frontend_evaluations": 0,
+      "frontend_flips": 0,
+      "weight_updates": 0,
+      "frontend_clause_checks": 0,
+      "dpll_nodes": 327,
+      "propagations": 2783,
+      "clause_visits": 32487,
+      "conflicts": 164,
+      "kernel": null
+    },
+    {
+      "instance": 67,
+      "config": "occurrence_dpll",
+      "trial": 1,
+      "status": "UNSAT",
+      "witness": null,
+      "stage": "dpll",
+      "frontend_evaluations": 0,
+      "frontend_flips": 0,
+      "weight_updates": 0,
+      "frontend_clause_checks": 0,
+      "dpll_nodes": 327,
+      "propagations": 2783,
+      "clause_visits": 32487,
+      "conflicts": 164,
+      "kernel": null
+    },
+    {
+      "instance": 0,
+      "config": "random_order_dpll",
+      "trial": 0,
+      "status": "SAT",
+      "witness": 3479,
+      "stage": "dpll",
+      "frontend_evaluations": 0,
+      "frontend_flips": 0,
+      "weight_updates": 0,
+      "frontend_clause_checks": 0,
+      "dpll_nodes": 12,
+      "propagations": 31,
+      "clause_visits": 821,
+      "conflicts": 4,
+      "kernel": null
+    },
+    {
+      "instance": 0,
+      "config": "random_order_dpll",
+      "trial": 1,
+      "status": "SAT",
+      "witness": 49,
+      "stage": "dpll",
+      "frontend_evaluations": 0,
+      "frontend_flips": 0,
+      "weight_updates": 0,
+      "frontend_clause_checks": 0,
+      "dpll_nodes": 7,
+      "propagations": 6,
+      "clause_visits": 295,
+      "conflicts": 0,
+      "kernel": null
+    },
+    {
+      "instance": 1,
+      "config": "random_order_dpll",
+      "trial": 0,
+      "status": "SAT",
+      "witness": 3344,
+      "stage": "dpll",
+      "frontend_evaluations": 0,
+      "frontend_flips": 0,
+      "weight_updates": 0,
+      "frontend_clause_checks": 0,
+      "dpll_nodes": 9,
+      "propagations": 12,
+      "clause_visits": 414,
+      "conflicts": 2,
+      "kernel": null
+    },
+    {
+      "instance": 1,
+      "config": "random_order_dpll",
+      "trial": 1,
+      "status": "SAT",
+      "witness": 1394,
+      "stage": "dpll",
+      "frontend_evaluations": 0,
+      "frontend_flips": 0,
+      "weight_updates": 0,
+      "frontend_clause_checks": 0,
+      "dpll_nodes": 6,
+      "propagations": 15,
+      "clause_visits": 398,
+      "conflicts": 1,
+      "kernel": null
+    },
+    {
+      "instance": 54,
+      "config": "random_order_dpll",
+      "trial": 0,
+      "status": "SAT",
+      "witness": 231953,
+      "stage": "dpll",
+      "frontend_evaluations": 0,
+      "frontend_flips": 0,
+      "weight_updates": 0,
+      "frontend_clause_checks": 0,
+      "dpll_nodes": 8,
+      "propagations": 11,
+      "clause_visits": 440,
+      "conflicts": 0,
+      "kernel": null
+    },
+    {
+      "instance": 54,
+      "config": "random_order_dpll",
+      "trial": 1,
+      "status": "SAT",
+      "witness": 81865,
+      "stage": "dpll",
+      "frontend_evaluations": 0,
+      "frontend_flips": 0,
+      "weight_updates": 0,
+      "frontend_clause_checks": 0,
+      "dpll_nodes": 8,
+      "propagations": 11,
+      "clause_visits": 414,
+      "conflicts": 0,
+      "kernel": null
+    },
+    {
+      "instance": 55,
+      "config": "random_order_dpll",
+      "trial": 0,
+      "status": "UNSAT",
+      "witness": null,
+      "stage": "dpll",
+      "frontend_evaluations": 0,
+      "frontend_flips": 0,
+      "weight_updates": 0,
+      "frontend_clause_checks": 0,
+      "dpll_nodes": 255,
+      "propagations": 848,
+      "clause_visits": 14032,
+      "conflicts": 128,
+      "kernel": null
+    },
+    {
+      "instance": 55,
+      "config": "random_order_dpll",
+      "trial": 1,
+      "status": "UNSAT",
+      "witness": null,
+      "stage": "dpll",
+      "frontend_evaluations": 0,
+      "frontend_flips": 0,
+      "weight_updates": 0,
+      "frontend_clause_checks": 0,
+      "dpll_nodes": 255,
+      "propagations": 968,
+      "clause_visits": 14024,
+      "conflicts": 128,
+      "kernel": null
+    },
+    {
+      "instance": 66,
+      "config": "random_order_dpll",
+      "trial": 0,
+      "status": "SAT",
+      "witness": 9097512456,
+      "stage": "dpll",
+      "frontend_evaluations": 0,
+      "frontend_flips": 0,
+      "weight_updates": 0,
+      "frontend_clause_checks": 0,
+      "dpll_nodes": 15,
+      "propagations": 78,
+      "clause_visits": 2561,
+      "conflicts": 4,
+      "kernel": null
+    },
+    {
+      "instance": 66,
+      "config": "random_order_dpll",
+      "trial": 1,
+      "status": "SAT",
+      "witness": 27523104897,
+      "stage": "dpll",
+      "frontend_evaluations": 0,
+      "frontend_flips": 0,
+      "weight_updates": 0,
+      "frontend_clause_checks": 0,
+      "dpll_nodes": 8,
+      "propagations": 28,
+      "clause_visits": 1054,
+      "conflicts": 0,
+      "kernel": null
+    },
+    {
+      "instance": 67,
+      "config": "random_order_dpll",
+      "trial": 0,
+      "status": "UNSAT",
+      "witness": null,
+      "stage": "dpll",
+      "frontend_evaluations": 0,
+      "frontend_flips": 0,
+      "weight_updates": 0,
+      "frontend_clause_checks": 0,
+      "dpll_nodes": 381,
+      "propagations": 2886,
+      "clause_visits": 52949,
+      "conflicts": 191,
+      "kernel": null
+    },
+    {
+      "instance": 67,
+      "config": "random_order_dpll",
+      "trial": 1,
+      "status": "UNSAT",
+      "witness": null,
+      "stage": "dpll",
+      "frontend_evaluations": 0,
+      "frontend_flips": 0,
+      "weight_updates": 0,
+      "frontend_clause_checks": 0,
+      "dpll_nodes": 351,
+      "propagations": 2942,
+      "clause_visits": 44595,
+      "conflicts": 176,
+      "kernel": null
+    },
+    {
+      "instance": 0,
+      "config": "walksat_then_dpll",
+      "trial": 0,
+      "status": "SAT",
+      "witness": 18,
+      "stage": "frontend",
+      "frontend_evaluations": 28,
+      "frontend_flips": 9,
+      "weight_updates": 0,
+      "frontend_clause_checks": 1400,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": null
+    },
+    {
+      "instance": 0,
+      "config": "walksat_then_dpll",
+      "trial": 1,
+      "status": "SAT",
+      "witness": 48,
+      "stage": "frontend",
+      "frontend_evaluations": 22,
+      "frontend_flips": 7,
+      "weight_updates": 0,
+      "frontend_clause_checks": 1100,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": null
+    },
+    {
+      "instance": 1,
+      "config": "walksat_then_dpll",
+      "trial": 0,
+      "status": "SAT",
+      "witness": 2320,
+      "stage": "frontend",
+      "frontend_evaluations": 7,
+      "frontend_flips": 2,
+      "weight_updates": 0,
+      "frontend_clause_checks": 350,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": null
+    },
+    {
+      "instance": 1,
+      "config": "walksat_then_dpll",
+      "trial": 1,
+      "status": "SAT",
+      "witness": 3344,
+      "stage": "frontend",
+      "frontend_evaluations": 22,
+      "frontend_flips": 7,
+      "weight_updates": 0,
+      "frontend_clause_checks": 1100,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": null
+    },
+    {
+      "instance": 54,
+      "config": "walksat_then_dpll",
+      "trial": 0,
+      "status": "SAT",
+      "witness": 225681,
+      "stage": "frontend",
+      "frontend_evaluations": 10,
+      "frontend_flips": 3,
+      "weight_updates": 0,
+      "frontend_clause_checks": 480,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": null
+    },
+    {
+      "instance": 54,
+      "config": "walksat_then_dpll",
+      "trial": 1,
+      "status": "SAT",
+      "witness": 141047,
+      "stage": "frontend",
+      "frontend_evaluations": 10,
+      "frontend_flips": 3,
+      "weight_updates": 0,
+      "frontend_clause_checks": 480,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": null
+    },
+    {
+      "instance": 55,
+      "config": "walksat_then_dpll",
+      "trial": 0,
+      "status": "UNSAT",
+      "witness": null,
+      "stage": "dpll",
+      "frontend_evaluations": 256,
+      "frontend_flips": 85,
+      "weight_updates": 0,
+      "frontend_clause_checks": 12288,
+      "dpll_nodes": 511,
+      "propagations": 896,
+      "clause_visits": 17344,
+      "conflicts": 256,
+      "kernel": null
+    },
+    {
+      "instance": 55,
+      "config": "walksat_then_dpll",
+      "trial": 1,
+      "status": "UNSAT",
+      "witness": null,
+      "stage": "dpll",
+      "frontend_evaluations": 256,
+      "frontend_flips": 85,
+      "weight_updates": 0,
+      "frontend_clause_checks": 12288,
+      "dpll_nodes": 511,
+      "propagations": 896,
+      "clause_visits": 17344,
+      "conflicts": 256,
+      "kernel": null
+    },
+    {
+      "instance": 66,
+      "config": "walksat_then_dpll",
+      "trial": 0,
+      "status": "SAT",
+      "witness": 26415796272,
+      "stage": "frontend",
+      "frontend_evaluations": 35,
+      "frontend_flips": 15,
+      "weight_updates": 0,
+      "frontend_clause_checks": 4025,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": null
+    },
+    {
+      "instance": 66,
+      "config": "walksat_then_dpll",
+      "trial": 1,
+      "status": "SAT",
+      "witness": 26717753858,
+      "stage": "frontend",
+      "frontend_evaluations": 129,
+      "frontend_flips": 50,
+      "weight_updates": 0,
+      "frontend_clause_checks": 14835,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": null
+    },
+    {
+      "instance": 67,
+      "config": "walksat_then_dpll",
+      "trial": 0,
+      "status": "UNSAT",
+      "witness": null,
+      "stage": "dpll",
+      "frontend_evaluations": 255,
+      "frontend_flips": 99,
+      "weight_updates": 0,
+      "frontend_clause_checks": 39015,
+      "dpll_nodes": 327,
+      "propagations": 2783,
+      "clause_visits": 32487,
+      "conflicts": 164,
+      "kernel": null
+    },
+    {
+      "instance": 67,
+      "config": "walksat_then_dpll",
+      "trial": 1,
+      "status": "UNSAT",
+      "witness": null,
+      "stage": "dpll",
+      "frontend_evaluations": 254,
+      "frontend_flips": 99,
+      "weight_updates": 0,
+      "frontend_clause_checks": 38862,
+      "dpll_nodes": 327,
+      "propagations": 2783,
+      "clause_visits": 32487,
+      "conflicts": 164,
+      "kernel": null
+    },
+    {
+      "instance": 0,
+      "config": "xor_then_dpll",
+      "trial": 0,
+      "status": "SAT",
+      "witness": 18,
+      "stage": "dpll",
+      "frontend_evaluations": 0,
+      "frontend_flips": 0,
+      "weight_updates": 0,
+      "frontend_clause_checks": 0,
+      "dpll_nodes": 7,
+      "propagations": 7,
+      "clause_visits": 258,
+      "conflicts": 1,
+      "kernel": {
+        "status": "UNKNOWN",
+        "pure": false,
+        "rank": 0,
+        "nullity": 12,
+        "contradiction_combination": null,
+        "equation_count": 0
+      }
+    },
+    {
+      "instance": 0,
+      "config": "xor_then_dpll",
+      "trial": 1,
+      "status": "SAT",
+      "witness": 18,
+      "stage": "dpll",
+      "frontend_evaluations": 0,
+      "frontend_flips": 0,
+      "weight_updates": 0,
+      "frontend_clause_checks": 0,
+      "dpll_nodes": 7,
+      "propagations": 7,
+      "clause_visits": 258,
+      "conflicts": 1,
+      "kernel": {
+        "status": "UNKNOWN",
+        "pure": false,
+        "rank": 0,
+        "nullity": 12,
+        "contradiction_combination": null,
+        "equation_count": 0
+      }
+    },
+    {
+      "instance": 1,
+      "config": "xor_then_dpll",
+      "trial": 0,
+      "status": "SAT",
+      "witness": 1386,
+      "stage": "dpll",
+      "frontend_evaluations": 0,
+      "frontend_flips": 0,
+      "weight_updates": 0,
+      "frontend_clause_checks": 0,
+      "dpll_nodes": 9,
+      "propagations": 15,
+      "clause_visits": 442,
+      "conflicts": 2,
+      "kernel": {
+        "status": "UNKNOWN",
+        "pure": false,
+        "rank": 0,
+        "nullity": 12,
+        "contradiction_combination": null,
+        "equation_count": 0
+      }
+    },
+    {
+      "instance": 1,
+      "config": "xor_then_dpll",
+      "trial": 1,
+      "status": "SAT",
+      "witness": 1386,
+      "stage": "dpll",
+      "frontend_evaluations": 0,
+      "frontend_flips": 0,
+      "weight_updates": 0,
+      "frontend_clause_checks": 0,
+      "dpll_nodes": 9,
+      "propagations": 15,
+      "clause_visits": 442,
+      "conflicts": 2,
+      "kernel": {
+        "status": "UNKNOWN",
+        "pure": false,
+        "rank": 0,
+        "nullity": 12,
+        "contradiction_combination": null,
+        "equation_count": 0
+      }
+    },
+    {
+      "instance": 54,
+      "config": "xor_then_dpll",
+      "trial": 0,
+      "status": "SAT",
+      "witness": 156676,
+      "stage": "xor_kernel",
+      "frontend_evaluations": 0,
+      "frontend_flips": 0,
+      "weight_updates": 0,
+      "frontend_clause_checks": 0,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": {
+        "status": "SAT",
+        "pure": true,
+        "rank": 11,
+        "nullity": 7,
+        "contradiction_combination": null,
+        "equation_count": 12
+      }
+    },
+    {
+      "instance": 54,
+      "config": "xor_then_dpll",
+      "trial": 1,
+      "status": "SAT",
+      "witness": 156676,
+      "stage": "xor_kernel",
+      "frontend_evaluations": 0,
+      "frontend_flips": 0,
+      "weight_updates": 0,
+      "frontend_clause_checks": 0,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": {
+        "status": "SAT",
+        "pure": true,
+        "rank": 11,
+        "nullity": 7,
+        "contradiction_combination": null,
+        "equation_count": 12
+      }
+    },
+    {
+      "instance": 55,
+      "config": "xor_then_dpll",
+      "trial": 0,
+      "status": "UNSAT",
+      "witness": null,
+      "stage": "xor_kernel",
+      "frontend_evaluations": 0,
+      "frontend_flips": 0,
+      "weight_updates": 0,
+      "frontend_clause_checks": 0,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": {
+        "status": "UNSAT",
+        "pure": true,
+        "rank": 11,
+        "nullity": 7,
+        "contradiction_combination": 4095,
+        "equation_count": 12
+      }
+    },
+    {
+      "instance": 55,
+      "config": "xor_then_dpll",
+      "trial": 1,
+      "status": "UNSAT",
+      "witness": null,
+      "stage": "xor_kernel",
+      "frontend_evaluations": 0,
+      "frontend_flips": 0,
+      "weight_updates": 0,
+      "frontend_clause_checks": 0,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": {
+        "status": "UNSAT",
+        "pure": true,
+        "rank": 11,
+        "nullity": 7,
+        "contradiction_combination": 4095,
+        "equation_count": 12
+      }
+    },
+    {
+      "instance": 66,
+      "config": "xor_then_dpll",
+      "trial": 0,
+      "status": "SAT",
+      "witness": 9097512456,
+      "stage": "dpll",
+      "frontend_evaluations": 0,
+      "frontend_flips": 0,
+      "weight_updates": 0,
+      "frontend_clause_checks": 0,
+      "dpll_nodes": 17,
+      "propagations": 19,
+      "clause_visits": 1464,
+      "conflicts": 0,
+      "kernel": {
+        "status": "UNKNOWN",
+        "pure": false,
+        "rank": 0,
+        "nullity": 35,
+        "contradiction_combination": null,
+        "equation_count": 0
+      }
+    },
+    {
+      "instance": 66,
+      "config": "xor_then_dpll",
+      "trial": 1,
+      "status": "SAT",
+      "witness": 9097512456,
+      "stage": "dpll",
+      "frontend_evaluations": 0,
+      "frontend_flips": 0,
+      "weight_updates": 0,
+      "frontend_clause_checks": 0,
+      "dpll_nodes": 17,
+      "propagations": 19,
+      "clause_visits": 1464,
+      "conflicts": 0,
+      "kernel": {
+        "status": "UNKNOWN",
+        "pure": false,
+        "rank": 0,
+        "nullity": 35,
+        "contradiction_combination": null,
+        "equation_count": 0
+      }
+    },
+    {
+      "instance": 67,
+      "config": "xor_then_dpll",
+      "trial": 0,
+      "status": "UNSAT",
+      "witness": null,
+      "stage": "dpll",
+      "frontend_evaluations": 0,
+      "frontend_flips": 0,
+      "weight_updates": 0,
+      "frontend_clause_checks": 0,
+      "dpll_nodes": 327,
+      "propagations": 2783,
+      "clause_visits": 32487,
+      "conflicts": 164,
+      "kernel": {
+        "status": "UNKNOWN",
+        "pure": false,
+        "rank": 0,
+        "nullity": 42,
+        "contradiction_combination": null,
+        "equation_count": 0
+      }
+    },
+    {
+      "instance": 67,
+      "config": "xor_then_dpll",
+      "trial": 1,
+      "status": "UNSAT",
+      "witness": null,
+      "stage": "dpll",
+      "frontend_evaluations": 0,
+      "frontend_flips": 0,
+      "weight_updates": 0,
+      "frontend_clause_checks": 0,
+      "dpll_nodes": 327,
+      "propagations": 2783,
+      "clause_visits": 32487,
+      "conflicts": 164,
+      "kernel": {
+        "status": "UNKNOWN",
+        "pure": false,
+        "rank": 0,
+        "nullity": 42,
+        "contradiction_combination": null,
+        "equation_count": 0
+      }
+    },
+    {
+      "instance": 0,
+      "config": "golden_hat",
+      "trial": 0,
+      "status": "SAT",
+      "witness": 3479,
+      "stage": "frontend",
+      "frontend_evaluations": 10,
+      "frontend_flips": 3,
+      "weight_updates": 0,
+      "frontend_clause_checks": 500,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": null
+    },
+    {
+      "instance": 0,
+      "config": "golden_hat",
+      "trial": 1,
+      "status": "SAT",
+      "witness": 48,
+      "stage": "frontend",
+      "frontend_evaluations": 28,
+      "frontend_flips": 9,
+      "weight_updates": 3,
+      "frontend_clause_checks": 1400,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": null
+    },
+    {
+      "instance": 1,
+      "config": "golden_hat",
+      "trial": 0,
+      "status": "SAT",
+      "witness": 2320,
+      "stage": "frontend",
+      "frontend_evaluations": 7,
+      "frontend_flips": 2,
+      "weight_updates": 0,
+      "frontend_clause_checks": 350,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": null
+    },
+    {
+      "instance": 1,
+      "config": "golden_hat",
+      "trial": 1,
+      "status": "SAT",
+      "witness": 2320,
+      "stage": "frontend",
+      "frontend_evaluations": 61,
+      "frontend_flips": 20,
+      "weight_updates": 3,
+      "frontend_clause_checks": 3050,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": null
+    },
+    {
+      "instance": 54,
+      "config": "golden_hat",
+      "trial": 0,
+      "status": "SAT",
+      "witness": 33169,
+      "stage": "frontend",
+      "frontend_evaluations": 28,
+      "frontend_flips": 9,
+      "weight_updates": 2,
+      "frontend_clause_checks": 1344,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": null
+    },
+    {
+      "instance": 54,
+      "config": "golden_hat",
+      "trial": 1,
+      "status": "SAT",
+      "witness": 141047,
+      "stage": "frontend",
+      "frontend_evaluations": 40,
+      "frontend_flips": 13,
+      "weight_updates": 3,
+      "frontend_clause_checks": 1920,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": null
+    },
+    {
+      "instance": 55,
+      "config": "golden_hat",
+      "trial": 0,
+      "status": "UNSAT",
+      "witness": null,
+      "stage": "dpll",
+      "frontend_evaluations": 256,
+      "frontend_flips": 85,
+      "weight_updates": 33,
+      "frontend_clause_checks": 12288,
+      "dpll_nodes": 255,
+      "propagations": 928,
+      "clause_visits": 15360,
+      "conflicts": 128,
+      "kernel": null
+    },
+    {
+      "instance": 55,
+      "config": "golden_hat",
+      "trial": 1,
+      "status": "UNSAT",
+      "witness": null,
+      "stage": "dpll",
+      "frontend_evaluations": 256,
+      "frontend_flips": 85,
+      "weight_updates": 32,
+      "frontend_clause_checks": 12288,
+      "dpll_nodes": 255,
+      "propagations": 1104,
+      "clause_visits": 14592,
+      "conflicts": 128,
+      "kernel": null
+    },
+    {
+      "instance": 66,
+      "config": "golden_hat",
+      "trial": 0,
+      "status": "SAT",
+      "witness": 28026472496,
+      "stage": "frontend",
+      "frontend_evaluations": 36,
+      "frontend_flips": 15,
+      "weight_updates": 0,
+      "frontend_clause_checks": 4140,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": null
+    },
+    {
+      "instance": 66,
+      "config": "golden_hat",
+      "trial": 1,
+      "status": "SAT",
+      "witness": 26013108368,
+      "stage": "frontend",
+      "frontend_evaluations": 47,
+      "frontend_flips": 20,
+      "weight_updates": 1,
+      "frontend_clause_checks": 5405,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": null
+    },
+    {
+      "instance": 67,
+      "config": "golden_hat",
+      "trial": 0,
+      "status": "UNSAT",
+      "witness": null,
+      "stage": "dpll",
+      "frontend_evaluations": 256,
+      "frontend_flips": 98,
+      "weight_updates": 32,
+      "frontend_clause_checks": 39168,
+      "dpll_nodes": 317,
+      "propagations": 2667,
+      "clause_visits": 33907,
+      "conflicts": 159,
+      "kernel": null
+    },
+    {
+      "instance": 67,
+      "config": "golden_hat",
+      "trial": 1,
+      "status": "UNSAT",
+      "witness": null,
+      "stage": "dpll",
+      "frontend_evaluations": 256,
+      "frontend_flips": 99,
+      "weight_updates": 33,
+      "frontend_clause_checks": 39168,
+      "dpll_nodes": 327,
+      "propagations": 2808,
+      "clause_visits": 37025,
+      "conflicts": 164,
+      "kernel": null
+    },
+    {
+      "instance": 0,
+      "config": "silver_pinwheel",
+      "trial": 0,
+      "status": "SAT",
+      "witness": 3479,
+      "stage": "frontend",
+      "frontend_evaluations": 10,
+      "frontend_flips": 3,
+      "weight_updates": 0,
+      "frontend_clause_checks": 500,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": null
+    },
+    {
+      "instance": 0,
+      "config": "silver_pinwheel",
+      "trial": 1,
+      "status": "SAT",
+      "witness": 48,
+      "stage": "frontend",
+      "frontend_evaluations": 28,
+      "frontend_flips": 9,
+      "weight_updates": 4,
+      "frontend_clause_checks": 1400,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": null
+    },
+    {
+      "instance": 1,
+      "config": "silver_pinwheel",
+      "trial": 0,
+      "status": "SAT",
+      "witness": 2320,
+      "stage": "frontend",
+      "frontend_evaluations": 7,
+      "frontend_flips": 2,
+      "weight_updates": 0,
+      "frontend_clause_checks": 350,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": null
+    },
+    {
+      "instance": 1,
+      "config": "silver_pinwheel",
+      "trial": 1,
+      "status": "SAT",
+      "witness": 2320,
+      "stage": "frontend",
+      "frontend_evaluations": 61,
+      "frontend_flips": 20,
+      "weight_updates": 2,
+      "frontend_clause_checks": 3050,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": null
+    },
+    {
+      "instance": 54,
+      "config": "silver_pinwheel",
+      "trial": 0,
+      "status": "SAT",
+      "witness": 33169,
+      "stage": "frontend",
+      "frontend_evaluations": 16,
+      "frontend_flips": 5,
+      "weight_updates": 1,
+      "frontend_clause_checks": 768,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": null
+    },
+    {
+      "instance": 54,
+      "config": "silver_pinwheel",
+      "trial": 1,
+      "status": "SAT",
+      "witness": 134897,
+      "stage": "frontend",
+      "frontend_evaluations": 16,
+      "frontend_flips": 5,
+      "weight_updates": 1,
+      "frontend_clause_checks": 768,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": null
+    },
+    {
+      "instance": 55,
+      "config": "silver_pinwheel",
+      "trial": 0,
+      "status": "UNSAT",
+      "witness": null,
+      "stage": "dpll",
+      "frontend_evaluations": 256,
+      "frontend_flips": 85,
+      "weight_updates": 29,
+      "frontend_clause_checks": 12288,
+      "dpll_nodes": 255,
+      "propagations": 1280,
+      "clause_visits": 16064,
+      "conflicts": 128,
+      "kernel": null
+    },
+    {
+      "instance": 55,
+      "config": "silver_pinwheel",
+      "trial": 1,
+      "status": "UNSAT",
+      "witness": null,
+      "stage": "dpll",
+      "frontend_evaluations": 256,
+      "frontend_flips": 85,
+      "weight_updates": 35,
+      "frontend_clause_checks": 12288,
+      "dpll_nodes": 255,
+      "propagations": 1024,
+      "clause_visits": 15552,
+      "conflicts": 128,
+      "kernel": null
+    },
+    {
+      "instance": 66,
+      "config": "silver_pinwheel",
+      "trial": 0,
+      "status": "SAT",
+      "witness": 28026472496,
+      "stage": "frontend",
+      "frontend_evaluations": 36,
+      "frontend_flips": 15,
+      "weight_updates": 0,
+      "frontend_clause_checks": 4140,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": null
+    },
+    {
+      "instance": 66,
+      "config": "silver_pinwheel",
+      "trial": 1,
+      "status": "SAT",
+      "witness": 27523104897,
+      "stage": "frontend",
+      "frontend_evaluations": 63,
+      "frontend_flips": 26,
+      "weight_updates": 5,
+      "frontend_clause_checks": 7245,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": null
+    },
+    {
+      "instance": 67,
+      "config": "silver_pinwheel",
+      "trial": 0,
+      "status": "UNSAT",
+      "witness": null,
+      "stage": "dpll",
+      "frontend_evaluations": 254,
+      "frontend_flips": 98,
+      "weight_updates": 32,
+      "frontend_clause_checks": 38862,
+      "dpll_nodes": 297,
+      "propagations": 2665,
+      "clause_visits": 33924,
+      "conflicts": 149,
+      "kernel": null
+    },
+    {
+      "instance": 67,
+      "config": "silver_pinwheel",
+      "trial": 1,
+      "status": "UNSAT",
+      "witness": null,
+      "stage": "dpll",
+      "frontend_evaluations": 255,
+      "frontend_flips": 99,
+      "weight_updates": 33,
+      "frontend_clause_checks": 39015,
+      "dpll_nodes": 297,
+      "propagations": 2486,
+      "clause_visits": 32477,
+      "conflicts": 149,
+      "kernel": null
+    },
+    {
+      "instance": 0,
+      "config": "zeta_quasicrystal",
+      "trial": 0,
+      "status": "SAT",
+      "witness": 3479,
+      "stage": "frontend",
+      "frontend_evaluations": 10,
+      "frontend_flips": 3,
+      "weight_updates": 0,
+      "frontend_clause_checks": 500,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": null
+    },
+    {
+      "instance": 0,
+      "config": "zeta_quasicrystal",
+      "trial": 1,
+      "status": "SAT",
+      "witness": 18,
+      "stage": "frontend",
+      "frontend_evaluations": 22,
+      "frontend_flips": 7,
+      "weight_updates": 2,
+      "frontend_clause_checks": 1100,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": null
+    },
+    {
+      "instance": 1,
+      "config": "zeta_quasicrystal",
+      "trial": 0,
+      "status": "SAT",
+      "witness": 2320,
+      "stage": "frontend",
+      "frontend_evaluations": 7,
+      "frontend_flips": 2,
+      "weight_updates": 0,
+      "frontend_clause_checks": 350,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": null
+    },
+    {
+      "instance": 1,
+      "config": "zeta_quasicrystal",
+      "trial": 1,
+      "status": "SAT",
+      "witness": 2320,
+      "stage": "frontend",
+      "frontend_evaluations": 61,
+      "frontend_flips": 20,
+      "weight_updates": 2,
+      "frontend_clause_checks": 3050,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": null
+    },
+    {
+      "instance": 54,
+      "config": "zeta_quasicrystal",
+      "trial": 0,
+      "status": "SAT",
+      "witness": 225681,
+      "stage": "frontend",
+      "frontend_evaluations": 10,
+      "frontend_flips": 3,
+      "weight_updates": 0,
+      "frontend_clause_checks": 480,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": null
+    },
+    {
+      "instance": 54,
+      "config": "zeta_quasicrystal",
+      "trial": 1,
+      "status": "SAT",
+      "witness": 110268,
+      "stage": "frontend",
+      "frontend_evaluations": 34,
+      "frontend_flips": 11,
+      "weight_updates": 1,
+      "frontend_clause_checks": 1632,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": null
+    },
+    {
+      "instance": 55,
+      "config": "zeta_quasicrystal",
+      "trial": 0,
+      "status": "UNSAT",
+      "witness": null,
+      "stage": "dpll",
+      "frontend_evaluations": 256,
+      "frontend_flips": 85,
+      "weight_updates": 34,
+      "frontend_clause_checks": 12288,
+      "dpll_nodes": 255,
+      "propagations": 1280,
+      "clause_visits": 16064,
+      "conflicts": 128,
+      "kernel": null
+    },
+    {
+      "instance": 55,
+      "config": "zeta_quasicrystal",
+      "trial": 1,
+      "status": "UNSAT",
+      "witness": null,
+      "stage": "dpll",
+      "frontend_evaluations": 256,
+      "frontend_flips": 85,
+      "weight_updates": 35,
+      "frontend_clause_checks": 12288,
+      "dpll_nodes": 255,
+      "propagations": 1280,
+      "clause_visits": 16064,
+      "conflicts": 128,
+      "kernel": null
+    },
+    {
+      "instance": 66,
+      "config": "zeta_quasicrystal",
+      "trial": 0,
+      "status": "SAT",
+      "witness": 28026472496,
+      "stage": "frontend",
+      "frontend_evaluations": 36,
+      "frontend_flips": 15,
+      "weight_updates": 0,
+      "frontend_clause_checks": 4140,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": null
+    },
+    {
+      "instance": 66,
+      "config": "zeta_quasicrystal",
+      "trial": 1,
+      "status": "SAT",
+      "witness": 26013108368,
+      "stage": "frontend",
+      "frontend_evaluations": 48,
+      "frontend_flips": 20,
+      "weight_updates": 1,
+      "frontend_clause_checks": 5520,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": null
+    },
+    {
+      "instance": 67,
+      "config": "zeta_quasicrystal",
+      "trial": 0,
+      "status": "UNSAT",
+      "witness": null,
+      "stage": "dpll",
+      "frontend_evaluations": 254,
+      "frontend_flips": 97,
+      "weight_updates": 33,
+      "frontend_clause_checks": 38862,
+      "dpll_nodes": 271,
+      "propagations": 2215,
+      "clause_visits": 30854,
+      "conflicts": 136,
+      "kernel": null
+    },
+    {
+      "instance": 67,
+      "config": "zeta_quasicrystal",
+      "trial": 1,
+      "status": "UNSAT",
+      "witness": null,
+      "stage": "dpll",
+      "frontend_evaluations": 255,
+      "frontend_flips": 98,
+      "weight_updates": 30,
+      "frontend_clause_checks": 39015,
+      "dpll_nodes": 309,
+      "propagations": 2595,
+      "clause_visits": 32784,
+      "conflicts": 155,
+      "kernel": null
+    },
+    {
+      "instance": 0,
+      "config": "feigenbaum_mobius",
+      "trial": 0,
+      "status": "SAT",
+      "witness": 3479,
+      "stage": "frontend",
+      "frontend_evaluations": 10,
+      "frontend_flips": 3,
+      "weight_updates": 0,
+      "frontend_clause_checks": 500,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": null
+    },
+    {
+      "instance": 0,
+      "config": "feigenbaum_mobius",
+      "trial": 1,
+      "status": "SAT",
+      "witness": 18,
+      "stage": "frontend",
+      "frontend_evaluations": 22,
+      "frontend_flips": 7,
+      "weight_updates": 2,
+      "frontend_clause_checks": 1100,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": null
+    },
+    {
+      "instance": 1,
+      "config": "feigenbaum_mobius",
+      "trial": 0,
+      "status": "SAT",
+      "witness": 2320,
+      "stage": "frontend",
+      "frontend_evaluations": 7,
+      "frontend_flips": 2,
+      "weight_updates": 0,
+      "frontend_clause_checks": 350,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": null
+    },
+    {
+      "instance": 1,
+      "config": "feigenbaum_mobius",
+      "trial": 1,
+      "status": "SAT",
+      "witness": 2320,
+      "stage": "frontend",
+      "frontend_evaluations": 79,
+      "frontend_flips": 26,
+      "weight_updates": 6,
+      "frontend_clause_checks": 3950,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": null
+    },
+    {
+      "instance": 54,
+      "config": "feigenbaum_mobius",
+      "trial": 0,
+      "status": "SAT",
+      "witness": 225681,
+      "stage": "frontend",
+      "frontend_evaluations": 28,
+      "frontend_flips": 9,
+      "weight_updates": 4,
+      "frontend_clause_checks": 1344,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": null
+    },
+    {
+      "instance": 54,
+      "config": "feigenbaum_mobius",
+      "trial": 1,
+      "status": "SAT",
+      "witness": 134897,
+      "stage": "frontend",
+      "frontend_evaluations": 16,
+      "frontend_flips": 5,
+      "weight_updates": 1,
+      "frontend_clause_checks": 768,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": null
+    },
+    {
+      "instance": 55,
+      "config": "feigenbaum_mobius",
+      "trial": 0,
+      "status": "UNSAT",
+      "witness": null,
+      "stage": "dpll",
+      "frontend_evaluations": 256,
+      "frontend_flips": 85,
+      "weight_updates": 32,
+      "frontend_clause_checks": 12288,
+      "dpll_nodes": 255,
+      "propagations": 1280,
+      "clause_visits": 16064,
+      "conflicts": 128,
+      "kernel": null
+    },
+    {
+      "instance": 55,
+      "config": "feigenbaum_mobius",
+      "trial": 1,
+      "status": "UNSAT",
+      "witness": null,
+      "stage": "dpll",
+      "frontend_evaluations": 256,
+      "frontend_flips": 85,
+      "weight_updates": 29,
+      "frontend_clause_checks": 12288,
+      "dpll_nodes": 255,
+      "propagations": 1280,
+      "clause_visits": 16064,
+      "conflicts": 128,
+      "kernel": null
+    },
+    {
+      "instance": 66,
+      "config": "feigenbaum_mobius",
+      "trial": 0,
+      "status": "SAT",
+      "witness": 28026472496,
+      "stage": "frontend",
+      "frontend_evaluations": 36,
+      "frontend_flips": 15,
+      "weight_updates": 0,
+      "frontend_clause_checks": 4140,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": null
+    },
+    {
+      "instance": 66,
+      "config": "feigenbaum_mobius",
+      "trial": 1,
+      "status": "SAT",
+      "witness": 28328462849,
+      "stage": "frontend",
+      "frontend_evaluations": 42,
+      "frontend_flips": 18,
+      "weight_updates": 0,
+      "frontend_clause_checks": 4830,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": null
+    },
+    {
+      "instance": 67,
+      "config": "feigenbaum_mobius",
+      "trial": 0,
+      "status": "UNSAT",
+      "witness": null,
+      "stage": "dpll",
+      "frontend_evaluations": 254,
+      "frontend_flips": 98,
+      "weight_updates": 32,
+      "frontend_clause_checks": 38862,
+      "dpll_nodes": 305,
+      "propagations": 2593,
+      "clause_visits": 33260,
+      "conflicts": 153,
+      "kernel": null
+    },
+    {
+      "instance": 67,
+      "config": "feigenbaum_mobius",
+      "trial": 1,
+      "status": "UNSAT",
+      "witness": null,
+      "stage": "dpll",
+      "frontend_evaluations": 256,
+      "frontend_flips": 99,
+      "weight_updates": 32,
+      "frontend_clause_checks": 39168,
+      "dpll_nodes": 325,
+      "propagations": 2723,
+      "clause_visits": 34499,
+      "conflicts": 163,
+      "kernel": null
+    },
+    {
+      "instance": 0,
+      "config": "collatz_fourier",
+      "trial": 0,
+      "status": "SAT",
+      "witness": 3479,
+      "stage": "frontend",
+      "frontend_evaluations": 10,
+      "frontend_flips": 3,
+      "weight_updates": 0,
+      "frontend_clause_checks": 500,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": null
+    },
+    {
+      "instance": 0,
+      "config": "collatz_fourier",
+      "trial": 1,
+      "status": "SAT",
+      "witness": 18,
+      "stage": "frontend",
+      "frontend_evaluations": 22,
+      "frontend_flips": 7,
+      "weight_updates": 2,
+      "frontend_clause_checks": 1100,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": null
+    },
+    {
+      "instance": 1,
+      "config": "collatz_fourier",
+      "trial": 0,
+      "status": "SAT",
+      "witness": 2320,
+      "stage": "frontend",
+      "frontend_evaluations": 7,
+      "frontend_flips": 2,
+      "weight_updates": 0,
+      "frontend_clause_checks": 350,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": null
+    },
+    {
+      "instance": 1,
+      "config": "collatz_fourier",
+      "trial": 1,
+      "status": "SAT",
+      "witness": 2320,
+      "stage": "frontend",
+      "frontend_evaluations": 61,
+      "frontend_flips": 20,
+      "weight_updates": 2,
+      "frontend_clause_checks": 3050,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": null
+    },
+    {
+      "instance": 54,
+      "config": "collatz_fourier",
+      "trial": 0,
+      "status": "SAT",
+      "witness": 33169,
+      "stage": "frontend",
+      "frontend_evaluations": 10,
+      "frontend_flips": 3,
+      "weight_updates": 1,
+      "frontend_clause_checks": 480,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": null
+    },
+    {
+      "instance": 54,
+      "config": "collatz_fourier",
+      "trial": 1,
+      "status": "SAT",
+      "witness": 110268,
+      "stage": "frontend",
+      "frontend_evaluations": 28,
+      "frontend_flips": 9,
+      "weight_updates": 1,
+      "frontend_clause_checks": 1344,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": null
+    },
+    {
+      "instance": 55,
+      "config": "collatz_fourier",
+      "trial": 0,
+      "status": "UNSAT",
+      "witness": null,
+      "stage": "dpll",
+      "frontend_evaluations": 256,
+      "frontend_flips": 85,
+      "weight_updates": 31,
+      "frontend_clause_checks": 12288,
+      "dpll_nodes": 255,
+      "propagations": 896,
+      "clause_visits": 15296,
+      "conflicts": 128,
+      "kernel": null
+    },
+    {
+      "instance": 55,
+      "config": "collatz_fourier",
+      "trial": 1,
+      "status": "UNSAT",
+      "witness": null,
+      "stage": "dpll",
+      "frontend_evaluations": 256,
+      "frontend_flips": 85,
+      "weight_updates": 32,
+      "frontend_clause_checks": 12288,
+      "dpll_nodes": 383,
+      "propagations": 1088,
+      "clause_visits": 16640,
+      "conflicts": 192,
+      "kernel": null
+    },
+    {
+      "instance": 66,
+      "config": "collatz_fourier",
+      "trial": 0,
+      "status": "SAT",
+      "witness": 28026472496,
+      "stage": "frontend",
+      "frontend_evaluations": 36,
+      "frontend_flips": 15,
+      "weight_updates": 0,
+      "frontend_clause_checks": 4140,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": null
+    },
+    {
+      "instance": 66,
+      "config": "collatz_fourier",
+      "trial": 1,
+      "status": "SAT",
+      "witness": 26021496968,
+      "stage": "frontend",
+      "frontend_evaluations": 47,
+      "frontend_flips": 20,
+      "weight_updates": 0,
+      "frontend_clause_checks": 5405,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": null
+    },
+    {
+      "instance": 67,
+      "config": "collatz_fourier",
+      "trial": 0,
+      "status": "UNSAT",
+      "witness": null,
+      "stage": "dpll",
+      "frontend_evaluations": 256,
+      "frontend_flips": 99,
+      "weight_updates": 32,
+      "frontend_clause_checks": 39168,
+      "dpll_nodes": 343,
+      "propagations": 2958,
+      "clause_visits": 39040,
+      "conflicts": 172,
+      "kernel": null
+    },
+    {
+      "instance": 67,
+      "config": "collatz_fourier",
+      "trial": 1,
+      "status": "UNSAT",
+      "witness": null,
+      "stage": "dpll",
+      "frontend_evaluations": 256,
+      "frontend_flips": 100,
+      "weight_updates": 36,
+      "frontend_clause_checks": 39168,
+      "dpll_nodes": 307,
+      "propagations": 2612,
+      "clause_visits": 33190,
+      "conflicts": 154,
+      "kernel": null
+    },
+    {
+      "instance": 0,
+      "config": "all_ideas",
+      "trial": 0,
+      "status": "SAT",
+      "witness": 3479,
+      "stage": "frontend",
+      "frontend_evaluations": 10,
+      "frontend_flips": 3,
+      "weight_updates": 0,
+      "frontend_clause_checks": 500,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": {
+        "status": "UNKNOWN",
+        "pure": false,
+        "rank": 0,
+        "nullity": 12,
+        "contradiction_combination": null,
+        "equation_count": 0
+      }
+    },
+    {
+      "instance": 0,
+      "config": "all_ideas",
+      "trial": 1,
+      "status": "SAT",
+      "witness": 18,
+      "stage": "frontend",
+      "frontend_evaluations": 22,
+      "frontend_flips": 7,
+      "weight_updates": 2,
+      "frontend_clause_checks": 1100,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": {
+        "status": "UNKNOWN",
+        "pure": false,
+        "rank": 0,
+        "nullity": 12,
+        "contradiction_combination": null,
+        "equation_count": 0
+      }
+    },
+    {
+      "instance": 1,
+      "config": "all_ideas",
+      "trial": 0,
+      "status": "SAT",
+      "witness": 2320,
+      "stage": "frontend",
+      "frontend_evaluations": 7,
+      "frontend_flips": 2,
+      "weight_updates": 0,
+      "frontend_clause_checks": 350,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": {
+        "status": "UNKNOWN",
+        "pure": false,
+        "rank": 0,
+        "nullity": 12,
+        "contradiction_combination": null,
+        "equation_count": 0
+      }
+    },
+    {
+      "instance": 1,
+      "config": "all_ideas",
+      "trial": 1,
+      "status": "SAT",
+      "witness": 2352,
+      "stage": "frontend",
+      "frontend_evaluations": 190,
+      "frontend_flips": 63,
+      "weight_updates": 24,
+      "frontend_clause_checks": 9500,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": {
+        "status": "UNKNOWN",
+        "pure": false,
+        "rank": 0,
+        "nullity": 12,
+        "contradiction_combination": null,
+        "equation_count": 0
+      }
+    },
+    {
+      "instance": 54,
+      "config": "all_ideas",
+      "trial": 0,
+      "status": "SAT",
+      "witness": 156676,
+      "stage": "xor_kernel",
+      "frontend_evaluations": 0,
+      "frontend_flips": 0,
+      "weight_updates": 0,
+      "frontend_clause_checks": 0,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": {
+        "status": "SAT",
+        "pure": true,
+        "rank": 11,
+        "nullity": 7,
+        "contradiction_combination": null,
+        "equation_count": 12
+      }
+    },
+    {
+      "instance": 54,
+      "config": "all_ideas",
+      "trial": 1,
+      "status": "SAT",
+      "witness": 156676,
+      "stage": "xor_kernel",
+      "frontend_evaluations": 0,
+      "frontend_flips": 0,
+      "weight_updates": 0,
+      "frontend_clause_checks": 0,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": {
+        "status": "SAT",
+        "pure": true,
+        "rank": 11,
+        "nullity": 7,
+        "contradiction_combination": null,
+        "equation_count": 12
+      }
+    },
+    {
+      "instance": 55,
+      "config": "all_ideas",
+      "trial": 0,
+      "status": "UNSAT",
+      "witness": null,
+      "stage": "xor_kernel",
+      "frontend_evaluations": 0,
+      "frontend_flips": 0,
+      "weight_updates": 0,
+      "frontend_clause_checks": 0,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": {
+        "status": "UNSAT",
+        "pure": true,
+        "rank": 11,
+        "nullity": 7,
+        "contradiction_combination": 4095,
+        "equation_count": 12
+      }
+    },
+    {
+      "instance": 55,
+      "config": "all_ideas",
+      "trial": 1,
+      "status": "UNSAT",
+      "witness": null,
+      "stage": "xor_kernel",
+      "frontend_evaluations": 0,
+      "frontend_flips": 0,
+      "weight_updates": 0,
+      "frontend_clause_checks": 0,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": {
+        "status": "UNSAT",
+        "pure": true,
+        "rank": 11,
+        "nullity": 7,
+        "contradiction_combination": 4095,
+        "equation_count": 12
+      }
+    },
+    {
+      "instance": 66,
+      "config": "all_ideas",
+      "trial": 0,
+      "status": "SAT",
+      "witness": 28026472496,
+      "stage": "frontend",
+      "frontend_evaluations": 36,
+      "frontend_flips": 15,
+      "weight_updates": 0,
+      "frontend_clause_checks": 4140,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": {
+        "status": "UNKNOWN",
+        "pure": false,
+        "rank": 0,
+        "nullity": 35,
+        "contradiction_combination": null,
+        "equation_count": 0
+      }
+    },
+    {
+      "instance": 66,
+      "config": "all_ideas",
+      "trial": 1,
+      "status": "SAT",
+      "witness": 26021496968,
+      "stage": "frontend",
+      "frontend_evaluations": 47,
+      "frontend_flips": 20,
+      "weight_updates": 2,
+      "frontend_clause_checks": 5405,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": {
+        "status": "UNKNOWN",
+        "pure": false,
+        "rank": 0,
+        "nullity": 35,
+        "contradiction_combination": null,
+        "equation_count": 0
+      }
+    },
+    {
+      "instance": 67,
+      "config": "all_ideas",
+      "trial": 0,
+      "status": "UNSAT",
+      "witness": null,
+      "stage": "dpll",
+      "frontend_evaluations": 254,
+      "frontend_flips": 97,
+      "weight_updates": 29,
+      "frontend_clause_checks": 38862,
+      "dpll_nodes": 319,
+      "propagations": 2686,
+      "clause_visits": 33769,
+      "conflicts": 160,
+      "kernel": {
+        "status": "UNKNOWN",
+        "pure": false,
+        "rank": 0,
+        "nullity": 42,
+        "contradiction_combination": null,
+        "equation_count": 0
+      }
+    },
+    {
+      "instance": 67,
+      "config": "all_ideas",
+      "trial": 1,
+      "status": "UNSAT",
+      "witness": null,
+      "stage": "dpll",
+      "frontend_evaluations": 256,
+      "frontend_flips": 100,
+      "weight_updates": 37,
+      "frontend_clause_checks": 39168,
+      "dpll_nodes": 335,
+      "propagations": 2872,
+      "clause_visits": 34595,
+      "conflicts": 168,
+      "kernel": {
+        "status": "UNKNOWN",
+        "pure": false,
+        "rank": 0,
+        "nullity": 42,
+        "contradiction_combination": null,
+        "equation_count": 0
+      }
+    },
+    {
+      "instance": 0,
+      "config": "shuffled_all_ideas",
+      "trial": 0,
+      "status": "SAT",
+      "witness": 3479,
+      "stage": "frontend",
+      "frontend_evaluations": 10,
+      "frontend_flips": 3,
+      "weight_updates": 0,
+      "frontend_clause_checks": 500,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": {
+        "status": "UNKNOWN",
+        "pure": false,
+        "rank": 0,
+        "nullity": 12,
+        "contradiction_combination": null,
+        "equation_count": 0
+      }
+    },
+    {
+      "instance": 0,
+      "config": "shuffled_all_ideas",
+      "trial": 1,
+      "status": "SAT",
+      "witness": 18,
+      "stage": "frontend",
+      "frontend_evaluations": 22,
+      "frontend_flips": 7,
+      "weight_updates": 2,
+      "frontend_clause_checks": 1100,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": {
+        "status": "UNKNOWN",
+        "pure": false,
+        "rank": 0,
+        "nullity": 12,
+        "contradiction_combination": null,
+        "equation_count": 0
+      }
+    },
+    {
+      "instance": 1,
+      "config": "shuffled_all_ideas",
+      "trial": 0,
+      "status": "SAT",
+      "witness": 2320,
+      "stage": "frontend",
+      "frontend_evaluations": 7,
+      "frontend_flips": 2,
+      "weight_updates": 0,
+      "frontend_clause_checks": 350,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": {
+        "status": "UNKNOWN",
+        "pure": false,
+        "rank": 0,
+        "nullity": 12,
+        "contradiction_combination": null,
+        "equation_count": 0
+      }
+    },
+    {
+      "instance": 1,
+      "config": "shuffled_all_ideas",
+      "trial": 1,
+      "status": "SAT",
+      "witness": 1386,
+      "stage": "frontend",
+      "frontend_evaluations": 208,
+      "frontend_flips": 69,
+      "weight_updates": 29,
+      "frontend_clause_checks": 10400,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": {
+        "status": "UNKNOWN",
+        "pure": false,
+        "rank": 0,
+        "nullity": 12,
+        "contradiction_combination": null,
+        "equation_count": 0
+      }
+    },
+    {
+      "instance": 54,
+      "config": "shuffled_all_ideas",
+      "trial": 0,
+      "status": "SAT",
+      "witness": 156676,
+      "stage": "xor_kernel",
+      "frontend_evaluations": 0,
+      "frontend_flips": 0,
+      "weight_updates": 0,
+      "frontend_clause_checks": 0,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": {
+        "status": "SAT",
+        "pure": true,
+        "rank": 11,
+        "nullity": 7,
+        "contradiction_combination": null,
+        "equation_count": 12
+      }
+    },
+    {
+      "instance": 54,
+      "config": "shuffled_all_ideas",
+      "trial": 1,
+      "status": "SAT",
+      "witness": 156676,
+      "stage": "xor_kernel",
+      "frontend_evaluations": 0,
+      "frontend_flips": 0,
+      "weight_updates": 0,
+      "frontend_clause_checks": 0,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": {
+        "status": "SAT",
+        "pure": true,
+        "rank": 11,
+        "nullity": 7,
+        "contradiction_combination": null,
+        "equation_count": 12
+      }
+    },
+    {
+      "instance": 55,
+      "config": "shuffled_all_ideas",
+      "trial": 0,
+      "status": "UNSAT",
+      "witness": null,
+      "stage": "xor_kernel",
+      "frontend_evaluations": 0,
+      "frontend_flips": 0,
+      "weight_updates": 0,
+      "frontend_clause_checks": 0,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": {
+        "status": "UNSAT",
+        "pure": true,
+        "rank": 11,
+        "nullity": 7,
+        "contradiction_combination": 4095,
+        "equation_count": 12
+      }
+    },
+    {
+      "instance": 55,
+      "config": "shuffled_all_ideas",
+      "trial": 1,
+      "status": "UNSAT",
+      "witness": null,
+      "stage": "xor_kernel",
+      "frontend_evaluations": 0,
+      "frontend_flips": 0,
+      "weight_updates": 0,
+      "frontend_clause_checks": 0,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": {
+        "status": "UNSAT",
+        "pure": true,
+        "rank": 11,
+        "nullity": 7,
+        "contradiction_combination": 4095,
+        "equation_count": 12
+      }
+    },
+    {
+      "instance": 66,
+      "config": "shuffled_all_ideas",
+      "trial": 0,
+      "status": "SAT",
+      "witness": 28026472496,
+      "stage": "frontend",
+      "frontend_evaluations": 36,
+      "frontend_flips": 15,
+      "weight_updates": 0,
+      "frontend_clause_checks": 4140,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": {
+        "status": "UNKNOWN",
+        "pure": false,
+        "rank": 0,
+        "nullity": 35,
+        "contradiction_combination": null,
+        "equation_count": 0
+      }
+    },
+    {
+      "instance": 66,
+      "config": "shuffled_all_ideas",
+      "trial": 1,
+      "status": "SAT",
+      "witness": 26214435332,
+      "stage": "frontend",
+      "frontend_evaluations": 47,
+      "frontend_flips": 20,
+      "weight_updates": 1,
+      "frontend_clause_checks": 5405,
+      "dpll_nodes": 0,
+      "propagations": 0,
+      "clause_visits": 0,
+      "conflicts": 0,
+      "kernel": {
+        "status": "UNKNOWN",
+        "pure": false,
+        "rank": 0,
+        "nullity": 35,
+        "contradiction_combination": null,
+        "equation_count": 0
+      }
+    },
+    {
+      "instance": 67,
+      "config": "shuffled_all_ideas",
+      "trial": 0,
+      "status": "UNSAT",
+      "witness": null,
+      "stage": "dpll",
+      "frontend_evaluations": 254,
+      "frontend_flips": 97,
+      "weight_updates": 35,
+      "frontend_clause_checks": 38862,
+      "dpll_nodes": 333,
+      "propagations": 2937,
+      "clause_visits": 34758,
+      "conflicts": 167,
+      "kernel": {
+        "status": "UNKNOWN",
+        "pure": false,
+        "rank": 0,
+        "nullity": 42,
+        "contradiction_combination": null,
+        "equation_count": 0
+      }
+    },
+    {
+      "instance": 67,
+      "config": "shuffled_all_ideas",
+      "trial": 1,
+      "status": "UNSAT",
+      "witness": null,
+      "stage": "dpll",
+      "frontend_evaluations": 256,
+      "frontend_flips": 99,
+      "weight_updates": 32,
+      "frontend_clause_checks": 39168,
+      "dpll_nodes": 317,
+      "propagations": 2671,
+      "clause_visits": 33218,
+      "conflicts": 159,
+      "kernel": {
+        "status": "UNKNOWN",
+        "pure": false,
+        "rank": 0,
+        "nullity": 42,
+        "contradiction_combination": null,
+        "equation_count": 0
+      }
+    }
+  ],
+  "elapsed_seconds": 1.2901164439999775,
+  "interpretation": [
+    "No inference of a polynomial worst-case bound from finite tests.",
+    "Kernel fast paths exploit recognized parity structure; general formulas retain exact DPLL fallback.",
+    "Frontend candidate evaluations, exact nodes, clause visits, and kernel ranks are separate costs.",
+    "Randomness changes bounded guidance and branch order, not the logical correctness of complete search."
+  ]
+}
