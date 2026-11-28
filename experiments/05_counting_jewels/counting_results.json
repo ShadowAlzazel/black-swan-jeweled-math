@@ -1,0 +1,628 @@
+{
+  "C1_validation": {
+    "missed_instance_N_k": {
+      "0": 9,
+      "1": 94,
+      "2": 538,
+      "3": 2248,
+      "4": 5674,
+      "5": 11195,
+      "6": 18965,
+      "7": 26916,
+      "8": 33197,
+      "9": 35666,
+      "10": 34620,
+      "11": 29995,
+      "12": 23737,
+      "13": 16869,
+      "14": 10732,
+      "15": 6192,
+      "16": 3151,
+      "17": 1462,
+      "18": 589,
+      "19": 197,
+      "20": 80,
+      "21": 14,
+      "22": 4
+    },
+    "contraction_equals_brute_force": true,
+    "contraction_width": 13,
+    "sliced_contraction_equals_brute_force (width cap 8)": true,
+    "slices_pinned_variables": 5,
+    "seconds_brute_vs_contraction": [
+      0.06,
+      0.78
+    ],
+    "count_guided_witness": "000000010000000000",
+    "count_guided_witness_satisfies": true,
+    "count_guided_seconds": 0.023,
+    "exp03_labels_matched_by_exact_count": "96/96",
+    "exp03_counts_cross_checked_by_brute_force": 48,
+    "exp03_seconds": 34.0
+  },
+  "C2_widths": [
+    {
+      "family": "random 3-SAT, alpha 4.26",
+      "n": 20,
+      "mean_width": 14,
+      "width_over_n": 0.7
+    },
+    {
+      "family": "planted 3-SAT, alpha 4.26",
+      "n": 20,
+      "mean_width": 14,
+      "width_over_n": 0.7
+    },
+    {
+      "family": "planted 3-XOR-SAT, 1 equation per variable",
+      "n": 20,
+      "mean_width": 6,
+      "width_over_n": 0.3
+    },
+    {
+      "family": "random 3-SAT, alpha 4.26",
+      "n": 40,
+      "mean_width": 27,
+      "width_over_n": 0.675
+    },
+    {
+      "family": "planted 3-SAT, alpha 4.26",
+      "n": 40,
+      "mean_width": 27,
+      "width_over_n": 0.675
+    },
+    {
+      "family": "planted 3-XOR-SAT, 1 equation per variable",
+      "n": 40,
+      "mean_width": 10.7,
+      "width_over_n": 0.267
+    },
+    {
+      "family": "random 3-SAT, alpha 4.26",
+      "n": 60,
+      "mean_width": 41.7,
+      "width_over_n": 0.694
+    },
+    {
+      "family": "planted 3-SAT, alpha 4.26",
+      "n": 60,
+      "mean_width": 41.7,
+      "width_over_n": 0.694
+    },
+    {
+      "family": "planted 3-XOR-SAT, 1 equation per variable",
+      "n": 60,
+      "mean_width": 15.3,
+      "width_over_n": 0.256
+    },
+    {
+      "family": "random 3-SAT, alpha 4.26",
+      "n": 80,
+      "mean_width": 55,
+      "width_over_n": 0.688
+    },
+    {
+      "family": "planted 3-SAT, alpha 4.26",
+      "n": 80,
+      "mean_width": 54.3,
+      "width_over_n": 0.679
+    },
+    {
+      "family": "planted 3-XOR-SAT, 1 equation per variable",
+      "n": 80,
+      "mean_width": 20.3,
+      "width_over_n": 0.254
+    },
+    {
+      "family": "random 3-SAT, alpha 4.26",
+      "n": 100,
+      "mean_width": 67,
+      "width_over_n": 0.67
+    },
+    {
+      "family": "planted 3-SAT, alpha 4.26",
+      "n": 100,
+      "mean_width": 66.7,
+      "width_over_n": 0.667
+    },
+    {
+      "family": "planted 3-XOR-SAT, 1 equation per variable",
+      "n": 100,
+      "mean_width": 23.7,
+      "width_over_n": 0.237
+    },
+    {
+      "family": "random 3-SAT, alpha 4.26",
+      "n": 150,
+      "mean_width": 102.7,
+      "width_over_n": 0.684
+    },
+    {
+      "family": "planted 3-SAT, alpha 4.26",
+      "n": 150,
+      "mean_width": 104.3,
+      "width_over_n": 0.696
+    },
+    {
+      "family": "planted 3-XOR-SAT, 1 equation per variable",
+      "n": 150,
+      "mean_width": 38.3,
+      "width_over_n": 0.256
+    },
+    {
+      "family": "random 3-SAT, alpha 4.26",
+      "n": 200,
+      "mean_width": 138,
+      "width_over_n": 0.69
+    },
+    {
+      "family": "planted 3-SAT, alpha 4.26",
+      "n": 200,
+      "mean_width": 139,
+      "width_over_n": 0.695
+    },
+    {
+      "family": "planted 3-XOR-SAT, 1 equation per variable",
+      "n": 200,
+      "mean_width": 54,
+      "width_over_n": 0.27
+    },
+    {
+      "family": "square-grid geometric, alpha 4.2",
+      "n": 25,
+      "mean_width": 9.3,
+      "width_over_sqrt_n": 1.87
+    },
+    {
+      "family": "square-grid geometric, alpha 4.2",
+      "n": 49,
+      "mean_width": 13.7,
+      "width_over_sqrt_n": 1.95
+    },
+    {
+      "family": "square-grid geometric, alpha 4.2",
+      "n": 100,
+      "mean_width": 21.3,
+      "width_over_sqrt_n": 2.13
+    },
+    {
+      "family": "square-grid geometric, alpha 4.2",
+      "n": 169,
+      "mean_width": 29.3,
+      "width_over_sqrt_n": 2.26
+    },
+    {
+      "family": "square-grid geometric, alpha 4.2",
+      "n": 256,
+      "mean_width": 34.7,
+      "width_over_sqrt_n": 2.17
+    },
+    {
+      "family": "square-grid geometric, alpha 4.2",
+      "n": 400,
+      "mean_width": 49,
+      "width_over_sqrt_n": 2.45
+    },
+    {
+      "family": "hat-patch geometric (25 tiles), alpha 4.2",
+      "n": 25,
+      "mean_width": 8.3,
+      "width_over_sqrt_n": 1.67
+    },
+    {
+      "family": "hat-patch geometric (169 tiles), alpha 4.2",
+      "n": 169,
+      "mean_width": 25,
+      "width_over_sqrt_n": 1.92
+    }
+  ],
+  "C3_hat_orders": {
+    "formulas": 5,
+    "n": 169,
+    "mean_width": {
+      "hat substitution hierarchy (address order)": 72.8,
+      "hierarchy, reversed": 43.4,
+      "left-to-right sweep": 30,
+      "min-degree heuristic": 27,
+      "min-fill heuristic": 25.2,
+      "random order": 96
+    },
+    "all_widths": {
+      "hat substitution hierarchy (address order)": [
+        69,
+        76,
+        75,
+        76,
+        68
+      ],
+      "hierarchy, reversed": [
+        39,
+        44,
+        44,
+        45,
+        45
+      ],
+      "left-to-right sweep": [
+        29,
+        29,
+        32,
+        29,
+        31
+      ],
+      "min-degree heuristic": [
+        26,
+        27,
+        27,
+        27,
+        28
+      ],
+      "min-fill heuristic": [
+        27,
+        25,
+        24,
+        24,
+        26
+      ],
+      "random order": [
+        99,
+        102,
+        96,
+        89,
+        94
+      ]
+    }
+  },
+  "C4_energy_zeros": [
+    {
+      "n": 12,
+      "alpha": 2.0,
+      "formulas": 12,
+      "sat": 12,
+      "unsat_zero_at_origin": 0,
+      "median_solutions": 146.0,
+      "median_N0_over_N1": 0.2835,
+      "median_nearest_zero_modulus": 0.5896,
+      "nearest_zero_on_negative_real_axis": 3,
+      "median_zeros_inside_unit_disk": 2.0,
+      "median_degree": 8.5,
+      "median_smallest_angle_to_positive_axis_deg": 73.9
+    },
+    {
+      "n": 12,
+      "alpha": 3.0,
+      "formulas": 12,
+      "sat": 12,
+      "unsat_zero_at_origin": 0,
+      "median_solutions": 22.5,
+      "median_N0_over_N1": 0.1425,
+      "median_nearest_zero_modulus": 0.2619,
+      "nearest_zero_on_negative_real_axis": 11,
+      "median_zeros_inside_unit_disk": 3.0,
+      "median_degree": 12.0,
+      "median_smallest_angle_to_positive_axis_deg": 59.6
+    },
+    {
+      "n": 12,
+      "alpha": 3.5,
+      "formulas": 12,
+      "sat": 12,
+      "unsat_zero_at_origin": 0,
+      "median_solutions": 9.0,
+      "median_N0_over_N1": 0.1309,
+      "median_nearest_zero_modulus": 0.2361,
+      "nearest_zero_on_negative_real_axis": 8,
+      "median_zeros_inside_unit_disk": 5.0,
+      "median_degree": 13.0,
+      "median_smallest_angle_to_positive_axis_deg": 57.7
+    },
+    {
+      "n": 12,
+      "alpha": 4.0,
+      "formulas": 12,
+      "sat": 11,
+      "unsat_zero_at_origin": 1,
+      "median_solutions": 4,
+      "median_N0_over_N1": 0.0857,
+      "median_nearest_zero_modulus": 0.1793,
+      "nearest_zero_on_negative_real_axis": 7,
+      "median_zeros_inside_unit_disk": 6.0,
+      "median_degree": 14.5,
+      "median_smallest_angle_to_positive_axis_deg": 55.2
+    },
+    {
+      "n": 12,
+      "alpha": 4.25,
+      "formulas": 12,
+      "sat": 6,
+      "unsat_zero_at_origin": 6,
+      "median_solutions": 8.0,
+      "median_N0_over_N1": 0.1877,
+      "median_nearest_zero_modulus": 0.3944,
+      "nearest_zero_on_negative_real_axis": 1,
+      "median_zeros_inside_unit_disk": 6.0,
+      "median_degree": 14.5,
+      "median_smallest_angle_to_positive_axis_deg": 58.3
+    },
+    {
+      "n": 12,
+      "alpha": 4.5,
+      "formulas": 12,
+      "sat": 7,
+      "unsat_zero_at_origin": 5,
+      "median_solutions": 3,
+      "median_N0_over_N1": 0.1429,
+      "median_nearest_zero_modulus": 0.3028,
+      "nearest_zero_on_negative_real_axis": 5,
+      "median_zeros_inside_unit_disk": 7.0,
+      "median_degree": 15.5,
+      "median_smallest_angle_to_positive_axis_deg": 52.3
+    },
+    {
+      "n": 12,
+      "alpha": 5.0,
+      "formulas": 12,
+      "sat": 6,
+      "unsat_zero_at_origin": 6,
+      "median_solutions": 2.0,
+      "median_N0_over_N1": 0.0961,
+      "median_nearest_zero_modulus": 0.1707,
+      "nearest_zero_on_negative_real_axis": 5,
+      "median_zeros_inside_unit_disk": 6.0,
+      "median_degree": 16.5,
+      "median_smallest_angle_to_positive_axis_deg": 49.1
+    },
+    {
+      "n": 12,
+      "alpha": 6.0,
+      "formulas": 12,
+      "sat": 1,
+      "unsat_zero_at_origin": 11,
+      "median_solutions": 1,
+      "median_N0_over_N1": 0.25,
+      "median_nearest_zero_modulus": 0.422,
+      "nearest_zero_on_negative_real_axis": 0,
+      "median_zeros_inside_unit_disk": 8.0,
+      "median_degree": 19.0,
+      "median_smallest_angle_to_positive_axis_deg": 48.5
+    },
+    {
+      "n": 16,
+      "alpha": 2.0,
+      "formulas": 12,
+      "sat": 12,
+      "unsat_zero_at_origin": 0,
+      "median_solutions": 809.0,
+      "median_N0_over_N1": 0.1895,
+      "median_nearest_zero_modulus": 0.6288,
+      "nearest_zero_on_negative_real_axis": 5,
+      "median_zeros_inside_unit_disk": 3.0,
+      "median_degree": 12.0,
+      "median_smallest_angle_to_positive_axis_deg": 65.5
+    },
+    {
+      "n": 16,
+      "alpha": 3.0,
+      "formulas": 12,
+      "sat": 12,
+      "unsat_zero_at_origin": 0,
+      "median_solutions": 79.5,
+      "median_N0_over_N1": 0.127,
+      "median_nearest_zero_modulus": 0.3019,
+      "nearest_zero_on_negative_real_axis": 6,
+      "median_zeros_inside_unit_disk": 5.0,
+      "median_degree": 15.0,
+      "median_smallest_angle_to_positive_axis_deg": 63.1
+    },
+    {
+      "n": 16,
+      "alpha": 3.5,
+      "formulas": 12,
+      "sat": 11,
+      "unsat_zero_at_origin": 1,
+      "median_solutions": 44,
+      "median_N0_over_N1": 0.1109,
+      "median_nearest_zero_modulus": 0.319,
+      "nearest_zero_on_negative_real_axis": 4,
+      "median_zeros_inside_unit_disk": 6.5,
+      "median_degree": 17.0,
+      "median_smallest_angle_to_positive_axis_deg": 53.4
+    },
+    {
+      "n": 16,
+      "alpha": 4.0,
+      "formulas": 12,
+      "sat": 10,
+      "unsat_zero_at_origin": 2,
+      "median_solutions": 3.0,
+      "median_N0_over_N1": 0.0484,
+      "median_nearest_zero_modulus": 0.0634,
+      "nearest_zero_on_negative_real_axis": 7,
+      "median_zeros_inside_unit_disk": 8.0,
+      "median_degree": 19.0,
+      "median_smallest_angle_to_positive_axis_deg": 50.1
+    },
+    {
+      "n": 16,
+      "alpha": 4.25,
+      "formulas": 12,
+      "sat": 10,
+      "unsat_zero_at_origin": 2,
+      "median_solutions": 4.5,
+      "median_N0_over_N1": 0.1356,
+      "median_nearest_zero_modulus": 0.1884,
+      "nearest_zero_on_negative_real_axis": 4,
+      "median_zeros_inside_unit_disk": 8.0,
+      "median_degree": 19.0,
+      "median_smallest_angle_to_positive_axis_deg": 50.3
+    },
+    {
+      "n": 16,
+      "alpha": 4.5,
+      "formulas": 12,
+      "sat": 9,
+      "unsat_zero_at_origin": 3,
+      "median_solutions": 3,
+      "median_N0_over_N1": 0.0726,
+      "median_nearest_zero_modulus": 0.1004,
+      "nearest_zero_on_negative_real_axis": 7,
+      "median_zeros_inside_unit_disk": 9.0,
+      "median_degree": 21.0,
+      "median_smallest_angle_to_positive_axis_deg": 46.3
+    },
+    {
+      "n": 16,
+      "alpha": 5.0,
+      "formulas": 12,
+      "sat": 3,
+      "unsat_zero_at_origin": 9,
+      "median_solutions": 1,
+      "median_N0_over_N1": 0.0556,
+      "median_nearest_zero_modulus": 0.1027,
+      "nearest_zero_on_negative_real_axis": 2,
+      "median_zeros_inside_unit_disk": 9.0,
+      "median_degree": 22.0,
+      "median_smallest_angle_to_positive_axis_deg": 44.6
+    },
+    {
+      "n": 16,
+      "alpha": 6.0,
+      "formulas": 12,
+      "sat": 1,
+      "unsat_zero_at_origin": 11,
+      "median_solutions": 3,
+      "median_N0_over_N1": 0.0811,
+      "median_nearest_zero_modulus": 0.1193,
+      "nearest_zero_on_negative_real_axis": 1,
+      "median_zeros_inside_unit_disk": 11.0,
+      "median_degree": 25.0,
+      "median_smallest_angle_to_positive_axis_deg": 42.3
+    },
+    {
+      "n": 20,
+      "alpha": 2.0,
+      "formulas": 12,
+      "sat": 12,
+      "unsat_zero_at_origin": 0,
+      "median_solutions": 3808.5,
+      "median_N0_over_N1": 0.1557,
+      "median_nearest_zero_modulus": 0.4339,
+      "nearest_zero_on_negative_real_axis": 7,
+      "median_zeros_inside_unit_disk": 4.0,
+      "median_degree": 15.0,
+      "median_smallest_angle_to_positive_axis_deg": 63.8
+    },
+    {
+      "n": 20,
+      "alpha": 3.0,
+      "formulas": 12,
+      "sat": 12,
+      "unsat_zero_at_origin": 0,
+      "median_solutions": 207.0,
+      "median_N0_over_N1": 0.0867,
+      "median_nearest_zero_modulus": 0.1785,
+      "nearest_zero_on_negative_real_axis": 7,
+      "median_zeros_inside_unit_disk": 6.0,
+      "median_degree": 20.0,
+      "median_smallest_angle_to_positive_axis_deg": 54.5
+    },
+    {
+      "n": 20,
+      "alpha": 3.5,
+      "formulas": 12,
+      "sat": 12,
+      "unsat_zero_at_origin": 0,
+      "median_solutions": 67.5,
+      "median_N0_over_N1": 0.0865,
+      "median_nearest_zero_modulus": 0.1656,
+      "nearest_zero_on_negative_real_axis": 10,
+      "median_zeros_inside_unit_disk": 7.0,
+      "median_degree": 21.5,
+      "median_smallest_angle_to_positive_axis_deg": 50.2
+    },
+    {
+      "n": 20,
+      "alpha": 4.0,
+      "formulas": 12,
+      "sat": 9,
+      "unsat_zero_at_origin": 3,
+      "median_solutions": 15,
+      "median_N0_over_N1": 0.0636,
+      "median_nearest_zero_modulus": 0.1429,
+      "nearest_zero_on_negative_real_axis": 5,
+      "median_zeros_inside_unit_disk": 10.0,
+      "median_degree": 23.0,
+      "median_smallest_angle_to_positive_axis_deg": 47.4
+    },
+    {
+      "n": 20,
+      "alpha": 4.25,
+      "formulas": 12,
+      "sat": 7,
+      "unsat_zero_at_origin": 5,
+      "median_solutions": 10,
+      "median_N0_over_N1": 0.0526,
+      "median_nearest_zero_modulus": 0.0925,
+      "nearest_zero_on_negative_real_axis": 7,
+      "median_zeros_inside_unit_disk": 10.5,
+      "median_degree": 24.5,
+      "median_smallest_angle_to_positive_axis_deg": 51.7
+    },
+    {
+      "n": 20,
+      "alpha": 4.5,
+      "formulas": 12,
+      "sat": 8,
+      "unsat_zero_at_origin": 4,
+      "median_solutions": 5.0,
+      "median_N0_over_N1": 0.0554,
+      "median_nearest_zero_modulus": 0.1181,
+      "nearest_zero_on_negative_real_axis": 5,
+      "median_zeros_inside_unit_disk": 11.0,
+      "median_degree": 27.0,
+      "median_smallest_angle_to_positive_axis_deg": 43.3
+    },
+    {
+      "n": 20,
+      "alpha": 5.0,
+      "formulas": 12,
+      "sat": 4,
+      "unsat_zero_at_origin": 8,
+      "median_solutions": 2.0,
+      "median_N0_over_N1": 0.111,
+      "median_nearest_zero_modulus": 0.1812,
+      "nearest_zero_on_negative_real_axis": 1,
+      "median_zeros_inside_unit_disk": 11.5,
+      "median_degree": 27.5,
+      "median_smallest_angle_to_positive_axis_deg": 43.5
+    },
+    {
+      "n": 20,
+      "alpha": 6.0,
+      "formulas": 12,
+      "sat": 0,
+      "unsat_zero_at_origin": 12,
+      "median_solutions": 0,
+      "median_N0_over_N1": null,
+      "median_nearest_zero_modulus": null,
+      "nearest_zero_on_negative_real_axis": 0,
+      "median_zeros_inside_unit_disk": 14.0,
+      "median_degree": 32.0,
+      "median_smallest_angle_to_positive_axis_deg": 38.7
+    }
+  ],
+  "C5_hat169_exact": {
+    "n": 169,
+    "m": 710,
+    "planted": true,
+    "order_width": 25,
+    "pinned_variables": 4,
+    "sliced_width": 21,
+    "primes": 6,
+    "N0_solutions": "33639161723328",
+    "N1_one_violated": "2713059408490640",
+    "log2_N0": 44.935,
+    "planted_assignment_is_counted": true,
+    "seconds": 125.0
+  },
+  "seconds": 22.7
+}

@@ -18,6 +18,7 @@ The same journey is also a web page: [`index.html`](index.html) at the repositor
 | [Sweep results](web/04_sweep_results.html) | Compare constants and tilings on held-out formulas; inspect a fixed-weight trap and its adaptive escape. |
 | [Complex Julia-SAT lab](web/05_complex_julia_sat.html) | The delivered two-plane view of Experiment 04: phasor field, winding probe, Möbius zoom. |
 | [Conformal jewels](web/06_conformal_jewels.html) | Carry grids, hats, and pinwheels through eᶻ, z², tanh(z/2), or ℘; follow a tile between planes and apply Euler's identity. |
+| [Energy jewels](web/07_energy_jewels.html) | The energy polynomial of a formula: its zeros, the flower it draws on the unit circle, and Cauchy's count of the solutions. |
 
 ## Repository layout
 
@@ -27,6 +28,7 @@ experiments/
   02_tiling_jewels/    Hat/pinwheel geometry and adaptive orientation weights
   03_golden_sweep/     Broad sweep, raw data, exact labels, audit, and toy obstruction
   04_complex_spectre/  Two-plane phasor solver, recorded benchmark, independent audit, Feigenbaum check
+  05_counting_jewels/  Exact counting by contraction, deterministic starts, count-preserving rewrites, XOR look-alike
 index.html            GitHub Pages front page (the journey)
 images/               Lab screenshots and the social card used by index.html
 web/                  Standalone interactive explorers
@@ -35,7 +37,7 @@ provenance.json       Source archive hashes and consolidation checks
 requirements.txt      Python dependencies (NumPy, mpmath)
 ```
 
-Each experiment directory preserves its original scripts, data, and notes. The four stages are kept separately so the development of the ideas remains reproducible. Later audits add files or opt-in switches beside the delivered code and say so; provenance.json records every change. Generated binaries and temporary files are ignored by Git.
+Each experiment directory preserves its original scripts, data, and notes. The five stages are kept separately so the development of the ideas remains reproducible. Later audits add files or opt-in switches beside the delivered code and say so; provenance.json records every change. Generated binaries and temporary files are ignored by Git.
 
 ## Reproduce the experiments
 
@@ -70,6 +72,8 @@ python experiments/04_complex_spectre/run_experiments.py
 python experiments/04_complex_spectre/holomorphic_spectre_solver.py experiments/03_golden_sweep/missed_sat_instance_35.cnf --steps 4000 --tiles 16
 python experiments/04_complex_spectre/audit_exp04.py
 python experiments/04_complex_spectre/feigenbaum_renormalization.py
+python experiments/05_counting_jewels/run_counting.py
+python experiments/05_counting_jewels/run_search.py
 ```
 
 These commands regenerate results next to their scripts. To redraw the hat substitution from the retained authors' source, use Node.js:
@@ -109,6 +113,10 @@ Experiment 04 lifts each formula to a complex phasor field F_Φ on a plane, scre
 * **The Feigenbaum numbers check out.** The quoted δ ratios are exactly those through period 512. δ, computed as the renormalization eigenvalue, is correct to 45 digits.
 
 See [the Experiment 04 report](experiments/04_complex_spectre/README.md), [the delivered notes with audit marks](docs/COMPLEX_SPECTRE_NOTES.md), and [callbacks and next steps](docs/CALLBACKS_AND_NEXT_STEPS.md).
+
+## Counting instead of searching
+
+Experiment 05 takes its methods from a November 2026 discrete-log paper ([angles and caveats](docs/ANGLES_FROM_THE_DISCRETE_LOG_PAPER.md)): count solutions exactly by tensor contraction, derandomize with conditional expectations, rewrite formulas without changing their solution count, and test every trick on XOR-SAT, the look-alike that algebra solves at once. Read [the Experiment 05 report](experiments/05_counting_jewels/README.md) for the results.
 
 ## Related journey
 

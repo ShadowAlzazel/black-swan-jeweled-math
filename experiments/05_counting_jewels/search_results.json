@@ -1,0 +1,374 @@
+{
+  "S1_conditional_expectation_starts": {
+    "exp03_sat (89, n 12-32)": {
+      "random start": {
+        "solved": 267,
+        "runs": 267,
+        "median_flips": 28,
+        "mean_flips_solved": 72.1,
+        "mean_start_violated": 11.51,
+        "formulas_solved_by_start_alone": null
+      },
+      "conditional expectations, index order": {
+        "solved": 267,
+        "runs": 267,
+        "median_flips": 3,
+        "mean_flips_solved": 45.5,
+        "mean_start_violated": 1.4,
+        "formulas_solved_by_start_alone": 26
+      },
+      "conditional expectations, degree order": {
+        "solved": 267,
+        "runs": 267,
+        "median_flips": 6,
+        "mean_flips_solved": 52.8,
+        "mean_start_violated": 1.63,
+        "formulas_solved_by_start_alone": 20
+      },
+      "conditional expectations, golden order": {
+        "solved": 267,
+        "runs": 267,
+        "median_flips": 5,
+        "mean_flips_solved": 36.1,
+        "mean_start_violated": 1.57,
+        "formulas_solved_by_start_alone": 15
+      },
+      "conditional expectations, random order": {
+        "solved": 267,
+        "runs": 267,
+        "median_flips": 5,
+        "mean_flips_solved": 45.1,
+        "mean_start_violated": 1.8,
+        "formulas_solved_by_start_alone": 16
+      },
+      "budget_flips": 100000
+    },
+    "planted n=35 m=149 (100)": {
+      "random start": {
+        "solved": 300,
+        "runs": 300,
+        "median_flips": 48.0,
+        "mean_flips_solved": 96.5,
+        "mean_start_violated": 18.78,
+        "formulas_solved_by_start_alone": null
+      },
+      "conditional expectations, index order": {
+        "solved": 300,
+        "runs": 300,
+        "median_flips": 10.5,
+        "mean_flips_solved": 56.5,
+        "mean_start_violated": 2.73,
+        "formulas_solved_by_start_alone": 6
+      },
+      "conditional expectations, degree order": {
+        "solved": 300,
+        "runs": 300,
+        "median_flips": 13.0,
+        "mean_flips_solved": 71.5,
+        "mean_start_violated": 2.34,
+        "formulas_solved_by_start_alone": 7
+      },
+      "conditional expectations, golden order": {
+        "solved": 300,
+        "runs": 300,
+        "median_flips": 8.0,
+        "mean_flips_solved": 51.2,
+        "mean_start_violated": 2.62,
+        "formulas_solved_by_start_alone": 8
+      },
+      "conditional expectations, random order": {
+        "solved": 300,
+        "runs": 300,
+        "median_flips": 11.0,
+        "mean_flips_solved": 61.0,
+        "mean_start_violated": 2.56,
+        "formulas_solved_by_start_alone": 5
+      },
+      "budget_flips": 100000
+    },
+    "planted n=200 m=840 (20)": {
+      "random start": {
+        "solved": 60,
+        "runs": 60,
+        "median_flips": 535.0,
+        "mean_flips_solved": 709.4,
+        "mean_start_violated": 104.53,
+        "formulas_solved_by_start_alone": null
+      },
+      "conditional expectations, index order": {
+        "solved": 60,
+        "runs": 60,
+        "median_flips": 173.5,
+        "mean_flips_solved": 331.5,
+        "mean_start_violated": 13,
+        "formulas_solved_by_start_alone": 0
+      },
+      "conditional expectations, degree order": {
+        "solved": 60,
+        "runs": 60,
+        "median_flips": 234.0,
+        "mean_flips_solved": 383.6,
+        "mean_start_violated": 11.95,
+        "formulas_solved_by_start_alone": 0
+      },
+      "conditional expectations, golden order": {
+        "solved": 60,
+        "runs": 60,
+        "median_flips": 283.5,
+        "mean_flips_solved": 417.2,
+        "mean_start_violated": 15.1,
+        "formulas_solved_by_start_alone": 0
+      },
+      "conditional expectations, random order": {
+        "solved": 60,
+        "runs": 60,
+        "median_flips": 282.0,
+        "mean_flips_solved": 406.4,
+        "mean_start_violated": 14.65,
+        "formulas_solved_by_start_alone": 0
+      },
+      "budget_flips": 100000
+    }
+  },
+  "S3_xor_lookalike": {
+    "budget_flips": 300000,
+    "formulas_per_row": 8,
+    "rows": [
+      {
+        "n": 20,
+        "xor_equations": 20,
+        "cnf_clauses": 80,
+        "xor_walksat_random_start": {
+          "solved": 8,
+          "runs": 8,
+          "median_flips": 108.5,
+          "mean_flips_solved": 354.2
+        },
+        "xor_walksat_conditional_expectation_start": {
+          "solved": 8,
+          "runs": 8,
+          "median_flips": 287.0,
+          "mean_flips_solved": 399.4
+        },
+        "xor_gaussian_elimination_solved": 8,
+        "xor_gaussian_ms_total": 0.33,
+        "planted_3sat_same_size_walksat": {
+          "solved": 8,
+          "runs": 8,
+          "median_flips": 23.5,
+          "mean_flips_solved": 26.1
+        },
+        "exact_count_equals_2^(n-rank)": true
+      },
+      {
+        "n": 40,
+        "xor_equations": 40,
+        "cnf_clauses": 160,
+        "xor_walksat_random_start": {
+          "solved": 8,
+          "runs": 8,
+          "median_flips": 1652.0,
+          "mean_flips_solved": 3218.4
+        },
+        "xor_walksat_conditional_expectation_start": {
+          "solved": 8,
+          "runs": 8,
+          "median_flips": 3286.0,
+          "mean_flips_solved": 3894.8
+        },
+        "xor_gaussian_elimination_solved": 8,
+        "xor_gaussian_ms_total": 1.12,
+        "planted_3sat_same_size_walksat": {
+          "solved": 8,
+          "runs": 8,
+          "median_flips": 33.0,
+          "mean_flips_solved": 77
+        },
+        "exact_count_equals_2^(n-rank)": true
+      },
+      {
+        "n": 60,
+        "xor_equations": 60,
+        "cnf_clauses": 240,
+        "xor_walksat_random_start": {
+          "solved": 8,
+          "runs": 8,
+          "median_flips": 34806.0,
+          "mean_flips_solved": 46871.6
+        },
+        "xor_walksat_conditional_expectation_start": {
+          "solved": 8,
+          "runs": 8,
+          "median_flips": 18786.0,
+          "mean_flips_solved": 63085.4
+        },
+        "xor_gaussian_elimination_solved": 8,
+        "xor_gaussian_ms_total": 2.29,
+        "planted_3sat_same_size_walksat": {
+          "solved": 8,
+          "runs": 8,
+          "median_flips": 86.5,
+          "mean_flips_solved": 142.8
+        },
+        "exact_count_equals_2^(n-rank)": null
+      },
+      {
+        "n": 80,
+        "xor_equations": 80,
+        "cnf_clauses": 320,
+        "xor_walksat_random_start": {
+          "solved": 8,
+          "runs": 8,
+          "median_flips": 45998.0,
+          "mean_flips_solved": 64403.5
+        },
+        "xor_walksat_conditional_expectation_start": {
+          "solved": 6,
+          "runs": 8,
+          "median_flips": 92868.5,
+          "mean_flips_solved": 66026.2
+        },
+        "xor_gaussian_elimination_solved": 8,
+        "xor_gaussian_ms_total": 3.96,
+        "planted_3sat_same_size_walksat": {
+          "solved": 8,
+          "runs": 8,
+          "median_flips": 141.0,
+          "mean_flips_solved": 152
+        },
+        "exact_count_equals_2^(n-rank)": null
+      },
+      {
+        "n": 100,
+        "xor_equations": 100,
+        "cnf_clauses": 400,
+        "xor_walksat_random_start": {
+          "solved": 3,
+          "runs": 8,
+          "median_flips": 300001.0,
+          "mean_flips_solved": 178127
+        },
+        "xor_walksat_conditional_expectation_start": {
+          "solved": 4,
+          "runs": 8,
+          "median_flips": 295928.5,
+          "mean_flips_solved": 198945
+        },
+        "xor_gaussian_elimination_solved": 8,
+        "xor_gaussian_ms_total": 5.96,
+        "planted_3sat_same_size_walksat": {
+          "solved": 8,
+          "runs": 8,
+          "median_flips": 193.0,
+          "mean_flips_solved": 401.4
+        },
+        "exact_count_equals_2^(n-rank)": null
+      }
+    ]
+  },
+  "S2_transformations": {
+    "exp03_sat (89, n 12-32), seeds 0-1": {
+      "original": {
+        "solved": 178,
+        "runs": 178,
+        "median_flips": 29.5,
+        "mean_flips_solved": 74.3,
+        "mean_variables": 21.8,
+        "mean_clauses": 91.3
+      },
+      "gauge (complement half the variables)": {
+        "solved": 178,
+        "runs": 178,
+        "median_flips": 21.0,
+        "mean_flips_solved": 65.4,
+        "mean_variables": 21.8,
+        "mean_clauses": 91.3
+      },
+      "duplicate each clause 1-3 times": {
+        "solved": 178,
+        "runs": 178,
+        "median_flips": 28.5,
+        "mean_flips_solved": 71.3,
+        "mean_variables": 21.8,
+        "mean_clauses": 180.0
+      },
+      "add implied resolvents (length <= 3)": {
+        "solved": 178,
+        "runs": 178,
+        "median_flips": 17.0,
+        "mean_flips_solved": 52.5,
+        "mean_variables": 21.8,
+        "mean_clauses": 195.4
+      },
+      "Tovey split (count-preserving)": {
+        "solved": 157,
+        "runs": 178,
+        "median_flips": 7865.5,
+        "mean_flips_solved": 10160.1,
+        "mean_variables": 273.9,
+        "mean_clauses": 365.3
+      },
+      "definitional extension (count-preserving)": {
+        "solved": 178,
+        "runs": 178,
+        "median_flips": 391.5,
+        "mean_flips_solved": 951.4,
+        "mean_variables": 113.1,
+        "mean_clauses": 365.3
+      },
+      "budget_flips": 50000
+    },
+    "planted n=35 m=149 (100), seed 0": {
+      "original": {
+        "solved": 100,
+        "runs": 100,
+        "median_flips": 49.5,
+        "mean_flips_solved": 92.0,
+        "mean_variables": 35.0,
+        "mean_clauses": 149.0
+      },
+      "gauge (complement half the variables)": {
+        "solved": 100,
+        "runs": 100,
+        "median_flips": 38.0,
+        "mean_flips_solved": 62.4,
+        "mean_variables": 35.0,
+        "mean_clauses": 149.0
+      },
+      "duplicate each clause 1-3 times": {
+        "solved": 100,
+        "runs": 100,
+        "median_flips": 49.5,
+        "mean_flips_solved": 86.0,
+        "mean_variables": 35.0,
+        "mean_clauses": 304.0
+      },
+      "add implied resolvents (length <= 3)": {
+        "solved": 100,
+        "runs": 100,
+        "median_flips": 43.0,
+        "mean_flips_solved": 72.3,
+        "mean_variables": 35.0,
+        "mean_clauses": 228.3
+      },
+      "Tovey split (count-preserving)": {
+        "solved": 85,
+        "runs": 100,
+        "median_flips": 16350.5,
+        "mean_flips_solved": 16340.9,
+        "mean_variables": 447.0,
+        "mean_clauses": 596.0
+      },
+      "definitional extension (count-preserving)": {
+        "solved": 99,
+        "runs": 100,
+        "median_flips": 981.0,
+        "mean_flips_solved": 1312.5,
+        "mean_variables": 184.0,
+        "mean_clauses": 596.0
+      },
+      "budget_flips": 50000
+    }
+  },
+  "seconds": 46.6
+}

@@ -35,6 +35,16 @@ So FURTHER_EXPLORATIONS #3 (2-adic trees) and #8 (kneading restarts) share one o
 
 Experiment 04 folds a point into the modular fundamental domain as a "relabeling" diagnostic, and the solver never uses the result. SL(2, ℤ) acts naturally in the elliptic direction: a change of basis of the period lattice leaves ℘ unchanged, and the lattice shape τ = ω₂/ω₁ lives in the modular fundamental domain. The explorer's ℘ satisfies ℘′² = 4℘³ − g₂℘ − g₃ to about 10⁻⁶. For periods 1 and i, it gives ℘(1/2) = 6.875176, against Γ(1/4)⁴/(8π) = 6.875186. It covers its image twice, as an even function should: the measured multiplicity is 2.00.
 
+## Update: Experiment 05
+
+[Experiment 05](../experiments/05_counting_jewels/README.md) took up the counting angle with methods from a November 2026 discrete-log paper ([angles and caveats](ANGLES_FROM_THE_DISCRETE_LOG_PAPER.md)). It covers:
+
+* exact energy polynomials by contraction;
+* their zeros and Cauchy's count of solutions (proposal E below, in [web/07](../web/07_energy_jewels.html));
+* conditional-expectation starts;
+* count-preserving rewrites;
+* the XOR-SAT look-alike test.
+
 ## Proposals (not yet run)
 
 ### A. A field whose winding number does count zeros

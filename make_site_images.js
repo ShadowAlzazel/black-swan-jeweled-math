@@ -38,6 +38,7 @@ async function setLab06(page, cfg) {
     ['03_tiling_lab.html', 'lab03_tiling.jpg'],
     ['04_sweep_results.html', 'lab04_sweep_results.jpg'],
     ['05_complex_julia_sat.html', 'lab05_complex_julia_sat.jpg'],
+    ['07_energy_jewels.html', 'lab07_energy_jewels.jpg'],
   ];
   for (const [file, out] of labs) {
     await page.goto(url(file));
